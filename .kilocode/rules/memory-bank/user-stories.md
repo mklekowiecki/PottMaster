@@ -26,9 +26,9 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to create an account so that my projects are securely synchronized with the Supabase cloud.
 
 **Acceptance Criteria**:
-1. User can register via email
-2. One-Tap Sign-in (Google/Apple) option is available
-3. After logging in, profile data (initials) are retrieved from PostgreSQL
+1. ✅ User can register via email
+2. ✅ One-Tap Sign-in (Google/Apple) option is available
+3. ✅ After logging in, profile data (initials) are retrieved from PostgreSQL
 
 **Technical Notes**:
 - Use Supabase Auth SDK
@@ -190,7 +190,7 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user working in the basement, I want to have access to all application functions without reception.
 
 **Acceptance Criteria**:
-1. ✅ All queries are directed to SQLite via SQLDelight
+1. ✅ All queries are directed to SQLite via SQLite-net-pcl
 2. ✅ Application does not block the UI due to lack of network
 
 **Technical Notes**:

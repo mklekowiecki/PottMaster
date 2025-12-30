@@ -1,24 +1,16 @@
-﻿namespace PottMaster
+﻿using Microsoft.Extensions.DependencyInjection;
+using PottMaster.Services;
+using PottMaster.ViewModels;
+
+namespace PottMaster
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = App.Services.GetRequiredService<MainViewModel>();
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
-        {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
     }
 }

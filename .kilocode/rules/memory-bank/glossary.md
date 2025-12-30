@@ -90,14 +90,13 @@ This document defines domain-specific terminology, technical abbreviations, and 
 
 | Term | Definition | Technology |
 |------|------------|-----------|
-| **Composable** | Declarative UI component in Jetpack Compose | @Composable functions |
-| **Flow** | Kotlin coroutine stream for reactive data | StateFlow, SharedFlow |
-| **Coroutine** | Lightweight thread for async operations | suspend functions |
-| **DI** | Dependency Injection - providing dependencies to classes | Koin framework |
-| **i18n** | Internationalization - supporting multiple languages | String resources, localization |
-| **l10n** | Localization - adapting app for specific locale | Translations, date/number formats |
-| **Locale** | Regional settings for language, date, number formats | en_US, pl_PL, de_DE |
-
+| **ContentPage** | Basic page container in .NET MAUI | XAML pages |
+| **ObservableCollection** | Reactive collection for data binding | MVVM data binding |
+| **async/await** | Asynchronous programming model | Task-based async operations |
+| **DI** | Dependency Injection - providing dependencies to classes | CommunityToolkit.Mvvm |
+| **i18n** | Internationalization - supporting multiple languages | .NET MAUI Localization |
+| **l10n** | Localization - adapting app for specific locale | Resource files (.resx) |
+| **CultureInfo** | Regional settings for language, date, number formats | en-US, pl-PL, de-DE |
 ---
 
 ## Business Metrics
@@ -205,36 +204,29 @@ This document defines domain-specific terminology, technical abbreviations, and 
 ### Code Files
 
 ```
-WorkRepository.kt           // Repository interface/implementation
-CreateWorkUseCase.kt        // Use case
-WorkListViewModel.kt        // ViewModel
-WorkListScreen.kt           // Screen composable
-WorkCard.kt                 // UI component
-Work.kt                     // Domain model
-WorkDto.kt                  // Data transfer object
-WorkEntity.kt               // Database entity
+WorkRepository.cs           // Repository interface/implementation
+CreateWorkUseCase.cs        // Use case
+WorkListViewModel.cs        // ViewModel
+WorkListPage.xaml           // XAML page
+WorkCard.xaml               // UI component
+Work.cs                     // Domain model
+WorkDto.cs                  // Data transfer object
+WorkEntity.cs               // Database entity
 ```
-
 ### Database Files
 
-```
-works.sq                    // SQLDelight queries for works table
-glazes.sq                   // SQLDelight queries for glazes table
-1_initial_schema.sqm        // Migration file
-```
-
+No specific query files; uses SQLite-net-pcl attributes in C# models for ORM.
 ### Resource Files
 
 ```
-strings.xml                 // Localized strings (default Polish)
-strings.xml (values-en)     // English translations
-strings.xml (values-de)     // German translations
-strings.xml (values-es)     // Spanish translations
-strings.xml (values-fr)     // French translations
-colors.xml                  // Color definitions
-themes.xml                  // Theme definitions
+Colors.xaml                 // Color definitions
+Styles.xaml                 // Theme definitions
+AppResources.resx           // Localized strings (default English)
+AppResources.pl.resx        // Polish translations
+AppResources.de.resx        // German translations
+AppResources.es.resx        // Spanish translations
+AppResources.fr.resx        // French translations
 ```
-
 ### Supported Languages
 
 | Code | Language | Status |

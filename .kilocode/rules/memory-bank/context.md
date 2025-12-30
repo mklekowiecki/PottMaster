@@ -35,22 +35,20 @@ PottMaster addresses these challenges through:
 ### Completed
 - Project structure initialized (.NET MAUI template)
 - PRD documentation complete
-- Technology stack defined
+- Technology stack defined (.NET MAUI)
 - Supabase backend setup (initial schema, RLS policies, Edge functions for create-work and sync-batch)
-- Basic UI structure (placeholder screens for Auth and Main, Root navigation)
-### In Progress
-- Memory bank updates
-
+- Basic UI structure (MainPage and AppShell)
+- Authentication implementation (email/password login/register with Supabase .NET client)
+- Basic navigation with Shell (Login, Signup, Main pages)
+- Memory bank initialized and updated for .NET MAUI
 ### Upcoming
-- Authentication implementation (email/password login/register with Supabase)
-- SQLite/SQLDelight integration
+- SQLite/SQLite-net-pcl integration
 - Work registration implementation
 - Timer management for drying stages
 - Full offline support with local database
-- Supabase integration in Android code
+- Supabase integration in .NET MAUI code for data sync
 - Image handling and compression
 - Glaze inventory and Wiki features
-
 ## Project Boundaries
 
 ### Within MVP Scope ✅
@@ -82,12 +80,11 @@ PottMaster addresses these challenges through:
 - **Primary Users**: Individual ceramic artists
 - **Secondary Users**: Pottery studio managers
 - **Expert Reviewers**: Ceramics experts for Wiki verification
-- **Development Team**: Android developers, Backend engineers
-
+- **Development Team**: .NET MAUI developers, Backend engineers
 ## Technical Constraints
 
 1. **Offline-First Requirement**: Must work without internet in basement studios
-2. **Platform**: Android
+2. **Platform**: Cross-platform (.NET MAUI)
 3. **Data Security**: Row Level Security (RLS) for user data isolation
 4. **Image Storage**: Client-side compression required for bandwidth efficiency
 5. **Synchronization**: Background sync when network available

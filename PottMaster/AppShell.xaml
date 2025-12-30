@@ -7,6 +7,16 @@
     Title="PottMaster">
 
     <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage" />
+
+    <ShellContent
+        Title="Signup"
+        ContentTemplate="{DataTemplate local:SignupPage}"
+        Route="SignupPage" />
+
+    <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />

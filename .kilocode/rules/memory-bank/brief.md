@@ -21,9 +21,9 @@ The technology stack has been optimized for Time-to-Market and reliability in of
 
 
 
-* Mobile: Kotlin for Android.
+* Mobile: .NET MAUI (C# and XAML) – cross-platform support.
 
-* Local database: SQLite (SQLDelight) – offline-first support.
+* Local database: SQLite (SQLite-net-pcl) – offline-first support.
 
 * Backend as a Service (BaaS): Supabase.
 
@@ -271,7 +271,7 @@ The main challenges addressed by the application:
 
 
 
-1. All queries are directed to SQLite via SQLDelight.
+1. All queries are directed to SQLite via SQLite-net-pcl.
 
 2. The application does not block the UI due to lack of network.
 
