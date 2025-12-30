@@ -9,8 +9,7 @@ I have updated the PRD document, simplifying the technology stack. Removing the 
 ## 1. Product Overview
 
 
-
-PottMaster is a mobile application supporting ceramic artists in managing technological processes. The system uses Kotlin for Android, enabling precise tracking of drying stages and cataloging works based on unique identification codes.
+PottMaster is a cross-platform mobile application supporting ceramic artists in managing technological processes. The system uses .NET MAUI, enabling precise tracking of drying stages and cataloging works based on unique identification codes.
 
 
 

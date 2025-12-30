@@ -5,12 +5,11 @@
 **PottMaster** is a mobile application designed to support ceramic artists in managing technological processes. The app enables precise tracking of drying stages and cataloging of ceramic works using unique identification codes.
 
 ### Key Information
-- **Project Type**: Mobile Application (Android)
+- **Project Type**: Cross-platform Mobile Application (.NET MAUI)
 - **Target Users**: Ceramic artists, pottery studios
 - **Development Phase**: MVP Development
 - **Timeline Goal**: Under 3 months to v1.0
-- **Primary Language**: Kotlin
-
+- **Primary Language**: C#
 ## Problem Statement
 
 Ceramic artists face several critical challenges:
@@ -34,12 +33,11 @@ PottMaster addresses these challenges through:
 ## Current State
 
 ### Completed
-- Project structure initialized (Android template)
+- Project structure initialized (.NET MAUI template)
 - PRD documentation complete
 - Technology stack defined
 - Supabase backend setup (initial schema, RLS policies, Edge functions for create-work and sync-batch)
 - Basic UI structure (placeholder screens for Auth and Main, Root navigation)
-
 ### In Progress
 - Memory bank updates
 

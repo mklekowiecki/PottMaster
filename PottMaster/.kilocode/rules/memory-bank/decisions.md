@@ -127,7 +127,7 @@ Implement offline-first architecture using SQLite as local database, with backgr
 **Deciders**: Technical Lead
 
 **Context**:
-Need a database solution for Android that provides type safety and integrates well with Kotlin coroutines.
+Need a database solution for Android that provides type safety
 
 **Decision**:
 Use SQLDelight for type-safe SQL queries.
