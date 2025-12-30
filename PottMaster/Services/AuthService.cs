@@ -1,4 +1,5 @@
 using PottMaster;
+using PottMaster.Models;
 using Supabase;
 using System;
 
@@ -17,27 +18,39 @@ public class AuthService : IAuthService
 	}
 
 	public async Task SignUpAsync(string email, string password)
-    {
-        var session = await Client.Auth.SignUp(email, password);
-        if (session?.TokenType != null)
-        {
-            throw new Exception("Error");
-        }
-    }
-
-    public async Task SignInAsync(string email, string password)
-    {
-        var session = await Client.Auth.SignInWithPassword(email, password);
-        if (String.IsNullOrEmpty(session?.AccessToken))
-        {
-			throw new Exception("Error");
-		}
-    }
-
-    public async Task SignOutAsync()
-    {
-        await Client.Auth.SignOut();
-    }
-
-    public bool IsLoggedIn => Client.Auth.CurrentSession != null;
+	{
+	    var session = await Client.Auth.SignUp(email, password);
+	    if (session == null)
+	    {
+	        throw new Exception("Signup failed. Please try again.");
+	    }
+	}
+	
+	public async Task SignInAsync(string email, string password)
+	{
+	    var session = await Client.Auth.SignInWithPassword(email, password);
+	    if (String.IsNullOrEmpty(session?.AccessToken))
+	    {
+	        throw new Exception("Invalid email or password.");
+	    }
+	}
+	
+	public async Task SignOutAsync()
+	{
+	    await Client.Auth.SignOut();
+	}
+	
+	public async Task<UserProfile> GetUserProfileAsync()
+	{
+	    var response = await Client.From<UserProfile>()
+	        .Where(x => x.Id == Client.Auth.CurrentUser!.Id)
+	        .Single();
+	    if (response == null)
+	    {
+	        throw new Exception("User profile not found.");
+	    }
+	    return response;
+	}
+	
+	public bool IsLoggedIn => Client.Auth.CurrentSession != null;
 }

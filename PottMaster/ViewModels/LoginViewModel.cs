@@ -1,7 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PottMaster.Services;
-using System.ComponentModel;
 
 namespace PottMaster.ViewModels;
 
@@ -16,8 +15,12 @@ public partial class LoginViewModel : ObservableObject
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoginEnabled))]
     private string password = string.Empty;
-
-    public bool IsLoginEnabled => !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password);
+    
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsLoginEnabled))]
+    private bool isBusy;
+    
+    public bool IsLoginEnabled => !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && !IsBusy;
 
     public LoginViewModel(IAuthService authService)
     {
@@ -25,21 +28,28 @@ public partial class LoginViewModel : ObservableObject
     }
 
     [RelayCommand(CanExecute = nameof(IsLoginEnabled))]
-    private async Task LoginAsync()
+    private async Task Login()
     {
+        IsBusy = true;
         try
         {
             await _authService.SignInAsync(Email, Password);
+            var profile = await _authService.GetUserProfileAsync();
+            Preferences.Default.Set("UserInitials", profile.Initials);
             await Shell.Current.GoToAsync("//MainPage");
         }
         catch (Exception ex)
         {
             await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
         }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
     [RelayCommand]
-    private async Task NavigateToSignup()
+    private async Task Signup()
     {
         await Shell.Current.GoToAsync("//SignupPage");
     }

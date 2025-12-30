@@ -14,6 +14,7 @@
             <Entry Placeholder="Email" Text="{Binding Email, Mode=TwoWay}" TextColor="Black" />
             <Entry Placeholder="Password" Text="{Binding Password, Mode=TwoWay}" IsPassword="true" TextColor="Black" />
             <Button Text="Login" Command="{Binding LoginCommand}" IsEnabled="{Binding IsLoginEnabled}" SemanticProperties.Hint="Logs the user in" />
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="Gray" HorizontalOptions="Center" />
             <Label Text="Don't have an account? Sign up" 
                    HorizontalOptions="Center" Opacity="0.6" />
             <Button Text="Sign Up" Command="{Binding SignupCommand}" SemanticProperties.Hint="Redirects to sign up page" />
