@@ -4,19 +4,16 @@
              Title="Sign Up">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
-            <Image Source="dotnet_bot.png" SemanticProperties.Description="Cute dot net bot waving hi to you!" 
+            <Image Source="dotnet_bot.png" SemanticProperties.Description="Słodki bot .NET machający do Ciebie!" 
                    HeightRequest="200" HorizontalOptions="Center" />
-            <Label Text="Hello, World!" SemanticProperties.HeadingLevel="Level1" 
-                   FontSize="32" HorizontalOptions="Center" />
-            <Label Text="Create a new account" 
-                   SemanticProperties.HeadingLevel="Level2" 
-                   FontSize="18" HorizontalOptions="Center" Opacity="0.6" />
-            <Entry Placeholder="Email" Text="{Binding Email, Mode=TwoWay}" TextColor="Black" />
-            <Entry Placeholder="Password" Text="{Binding Password, Mode=TwoWay}" IsPassword="true" TextColor="Black" />
-            <Button Text="Sign Up" Command="{Binding SignupCommand}" IsEnabled="{Binding IsSignupEnabled}" SemanticProperties.Hint="Creates a new user account" />
-            <Label Text="Already have an account? Log in" 
+            <Label Text="Witaj, Świecie!" SemanticProperties.HeadingLevel="Level1" Style="{StaticResource HeadingLabel}" />
+            <Label Text="Utwórz nowe konto" SemanticProperties.HeadingLevel="Level2" Style="{StaticResource SubheadingLabel}" />
+            <Entry Placeholder="Email" Text="{Binding Email, Mode=TwoWay}" Style="{StaticResource ModernEntry}" />
+            <Entry Placeholder="Hasło" Text="{Binding Password, Mode=TwoWay}" IsPassword="true" Style="{StaticResource ModernEntry}" />
+            <Button Text="Zarejestruj się" Command="{Binding SignupCommand}" IsEnabled="{Binding IsSignupEnabled}" SemanticProperties.Hint="Tworzy nowe konto użytkownika" />
+            <Label Text="Masz już konto? Zaloguj się" 
                    HorizontalOptions="Center" Opacity="0.6" />
-            <Button Text="Log In" Command="{Binding NavigateToLoginCommand}" SemanticProperties.Hint="Redirects to login page" />
+            <Button Text="Zaloguj się" Command="{Binding NavigateToLoginCommand}" SemanticProperties.Hint="Przekierowuje do strony logowania" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

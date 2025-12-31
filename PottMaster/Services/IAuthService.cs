@@ -16,6 +16,6 @@ namespace PottMaster.Services
     
         bool IsLoggedIn { get; }
     
-        Task<UserProfile> GetUserProfileAsync();
+        Task<UserProfiles> GetUserProfileAsync();
     }
 }

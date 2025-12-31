@@ -1,13 +1,16 @@
+using Newtonsoft.Json;
+using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 using System.Text.Json.Serialization;
 
 namespace PottMaster.Models;
 
-public class UserProfile : BaseModel
+[Table("user_profiles")]
+public class UserProfiles : BaseModel
 {
-    [JsonPropertyName("id")]
+    [Column("id")]
     public string Id { get; set; } = string.Empty;
 
-    [JsonPropertyName("initials")]
+    [Column("initials")]
     public string Initials { get; set; } = string.Empty;
 }

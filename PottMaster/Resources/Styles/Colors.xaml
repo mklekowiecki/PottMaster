@@ -27,6 +27,9 @@
     <Color x:Key="Gray600">#404040</Color>
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
+    <Color x:Key="Gray700">#595959</Color>
+    <Color x:Key="Gray800">#2D2D2D</Color>
+    <Color x:Key="SecondaryDark">#B8A6E6</Color>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
@@ -42,4 +45,6 @@
     <SolidColorBrush x:Key="Gray600Brush" Color="{StaticResource Gray600}"/>
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
+    <SolidColorBrush x:Key="Gray700Brush" Color="{StaticResource Gray700}"/>
+    <SolidColorBrush x:Key="Gray800Brush" Color="{StaticResource Gray800}"/>
 </ResourceDictionary>
