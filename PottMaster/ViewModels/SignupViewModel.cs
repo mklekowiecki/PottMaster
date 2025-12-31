@@ -31,10 +31,10 @@ public partial class SignupViewModel : ObservableObject
         var signupResult = await _authService.SignUpAsync(Email, Password);
         if (signupResult.Result != AuthResult.Success)
         {
-            await Application.Current.MainPage.DisplayAlert(Resource.Error, Resource.SignUpError, Resource.Ok);
+            await Application.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.SignUpError, AppResources.Ok);
             return;
         }
-        await Application.Current.MainPage.DisplayAlert(Resource.Success, Resource.AccountCreatedPleaseLogin, Resource.Ok);
+        await Application.Current.MainPage.DisplayAlert(AppResources.Success, AppResources.AccountCreatedPleaseLogin, AppResources.Ok);
         await Shell.Current.GoToAsync("//LoginPage");
     }
 

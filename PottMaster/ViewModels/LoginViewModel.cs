@@ -37,13 +37,13 @@ public partial class LoginViewModel : ObservableObject
             var signInResult = await _authService.SignInAsync(Email, Password);
             if (signInResult.Result != AuthResult.Success)
             {
-                await Application.Current.MainPage.DisplayAlert(Resource.Error, signInResult.ErrorMessage ?? Resource.LoginFailed, Resource.Ok);
+                await Application.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.LoginFailed, AppResources.Ok);
                 return;
             }
             var profileResult = await _authService.GetUserProfileAsync();
             if (profileResult.Result != AuthResult.Success || profileResult.Data == null)
             {
-                await Application.Current.MainPage.DisplayAlert(Resource.Error, profileResult.ErrorMessage ?? Resource.ErrorLoadingProfile, Resource.Ok);
+                await Application.Current.MainPage.DisplayAlert(AppResources.Error, AppResources.ErrorLoadingProfile, AppResources.Ok);
                 return;
             }
             Preferences.Default.Set("UserInitials", profileResult.Data.Initials);
