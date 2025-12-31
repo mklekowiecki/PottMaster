@@ -141,4 +141,43 @@
   <data name="ErrorLoadingProfile" xml:space="preserve">
     <value>Błąd ładowania profilu</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Logowanie</value>
+  </data>
+  <data name="WelcomeBack" xml:space="preserve">
+    <value>Witamy ponownie!</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Nazwa użytkownika</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
+  <data name="LoginHint" xml:space="preserve">
+    <value>Zaloguj użytkownika</value>
+  </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>Nie masz konta?</value>
+  </data>
+  <data name="Signup" xml:space="preserve">
+    <value>Zarejestruj się</value>
+  </data>
+  <data name="BotDescription" xml:space="preserve">
+    <value>Słodki bot .NET machający do Ciebie!</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Witaj!</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Utwórz nowe konto</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="SignUpHint" xml:space="preserve">
+    <value>Tworzy nowe konto użytkownika</value>
+  </data>
+  <data name="AlreadyHaveAccount" xml:space="preserve">
+    <value>Masz już konto? Zaloguj się</value>
+  </data>
 </root>

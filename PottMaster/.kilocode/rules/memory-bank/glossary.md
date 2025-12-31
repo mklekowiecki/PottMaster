@@ -83,8 +83,8 @@ This document defines domain-specific terminology, technical abbreviations, and 
 | **Sync Status** | State of data synchronization with cloud | PENDING, SYNCING, SYNCED, ERROR |
 | **LWW** | Last-Write-Wins - conflict resolution strategy | Timestamp-based conflict resolution |
 | **DTO** | Data Transfer Object - data structure for API communication | Maps between domain models and API |
-| **Entity** | Database table representation | SQLDelight generated classes |
-| **Migration** | Database schema version update | SQLDelight migration files |
+| **Entity** | Database table representation | SQLite-net-pcl attribute-based models |
+| **Migration** | Database schema version update | Manual schema updates via SQLite commands |
 
 ### Mobile Development
 
@@ -302,8 +302,8 @@ Local Change → Mark PENDING → Queue for Sync → Network Available → Uploa
 ### External Resources
 
 - [Ceramic Arts Network](https://ceramicartsnetwork.org/) - Ceramic terminology
-- [Kotlin Documentation](https://kotlinlang.org/docs/) - Kotlin language
 - [Supabase Docs](https://supabase.com/docs) - Backend platform
+- [.NET MAUI Documentation](https://learn.microsoft.com/dotnet/maui/) - Mobile framework
 
 ### Internal Documents
 

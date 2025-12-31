@@ -70,6 +70,42 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Masz już konto? Zaloguj się.
+        /// </summary>
+        internal static string AlreadyHaveAccount {
+            get {
+                return ResourceManager.GetString("AlreadyHaveAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Słodki bot .NET machający do Ciebie!.
+        /// </summary>
+        internal static string BotDescription {
+            get {
+                return ResourceManager.GetString("BotDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Utwórz nowe konto.
+        /// </summary>
+        internal static string CreateAccount {
+            get {
+                return ResourceManager.GetString("CreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Błąd.
         /// </summary>
         internal static string Error {
@@ -88,11 +124,38 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logowanie.
+        /// </summary>
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Błąd logowania.
         /// </summary>
         internal static string LoginFailed {
             get {
                 return ResourceManager.GetString("LoginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaloguj użytkownika.
+        /// </summary>
+        internal static string LoginHint {
+            get {
+                return ResourceManager.GetString("LoginHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie masz konta?.
+        /// </summary>
+        internal static string NoAccount {
+            get {
+                return ResourceManager.GetString("NoAccount", resourceCulture);
             }
         }
         
@@ -106,6 +169,24 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hasło.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zarejestruj się.
+        /// </summary>
+        internal static string Signup {
+            get {
+                return ResourceManager.GetString("Signup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Błąd podczas rejestracji.
         /// </summary>
         internal static string SignUpError {
@@ -115,11 +196,47 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tworzy nowe konto użytkownika.
+        /// </summary>
+        internal static string SignUpHint {
+            get {
+                return ResourceManager.GetString("SignUpHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sukces.
         /// </summary>
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa użytkownika.
+        /// </summary>
+        internal static string Username {
+            get {
+                return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Witaj!.
+        /// </summary>
+        internal static string Welcome {
+            get {
+                return ResourceManager.GetString("Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Witamy ponownie!.
+        /// </summary>
+        internal static string WelcomeBack {
+            get {
+                return ResourceManager.GetString("WelcomeBack", resourceCulture);
             }
         }
     }

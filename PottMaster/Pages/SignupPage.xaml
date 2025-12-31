@@ -1,19 +1,20 @@
 <ContentPage x:Class="PottMaster.SignupPage"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Title="Sign Up">
+             xmlns:resx="clr-namespace:PottMaster.Resources"
+             Title="{x:Static resx:AppResources.Signup}">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
-            <Image Source="dotnet_bot.png" SemanticProperties.Description="Słodki bot .NET machający do Ciebie!" 
+            <Image Source="dotnet_bot.png" SemanticProperties.Description="{x:Static resx:AppResources.BotDescription}" 
                    HeightRequest="200" HorizontalOptions="Center" />
-            <Label Text="Witaj, Świecie!" SemanticProperties.HeadingLevel="Level1" Style="{StaticResource HeadingLabel}" />
-            <Label Text="Utwórz nowe konto" SemanticProperties.HeadingLevel="Level2" Style="{StaticResource SubheadingLabel}" />
-            <Entry Placeholder="Email" Text="{Binding Email, Mode=TwoWay}" Style="{StaticResource ModernEntry}" />
-            <Entry Placeholder="Hasło" Text="{Binding Password, Mode=TwoWay}" IsPassword="true" Style="{StaticResource ModernEntry}" />
-            <Button Text="Zarejestruj się" Command="{Binding SignupCommand}" IsEnabled="{Binding IsSignupEnabled}" SemanticProperties.Hint="Tworzy nowe konto użytkownika" />
-            <Label Text="Masz już konto? Zaloguj się" 
+            <Label Text="{x:Static resx:AppResources.Welcome}" SemanticProperties.HeadingLevel="Level1" Style="{StaticResource HeadingLabel}" />
+            <Label Text="{x:Static resx:AppResources.CreateAccount}" SemanticProperties.HeadingLevel="Level2" Style="{StaticResource SubheadingLabel}" />
+            <Entry Placeholder="{x:Static resx:AppResources.Email}" Text="{Binding Email, Mode=TwoWay}" Style="{StaticResource ModernEntry}" />
+            <Entry Placeholder="{x:Static resx:AppResources.Password}" Text="{Binding Password, Mode=TwoWay}" IsPassword="true" Style="{StaticResource ModernEntry}" />
+            <Button Text="{x:Static resx:AppResources.Signup}" Command="{Binding SignupCommand}" IsEnabled="{Binding IsSignupEnabled}" SemanticProperties.Hint="{x:Static resx:AppResources.SignUpHint}" />
+            <Label Text="{x:Static resx:AppResources.AlreadyHaveAccount}" 
                    HorizontalOptions="Center" Opacity="0.6" />
-            <Button Text="Zaloguj się" Command="{Binding NavigateToLoginCommand}" SemanticProperties.Hint="Przekierowuje do strony logowania" />
+            <Button Text="{x:Static resx:AppResources.Login}" Command="{Binding NavigateToLoginCommand}" SemanticProperties.Hint="{x:Static resx:AppResources.LoginHint}" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

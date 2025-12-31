@@ -109,9 +109,9 @@ This document provides a quick reference for all user stories in the PottMaster 
 | > 15mm         | 14 days     |
 
 **Technical Notes**:
-- Use `kotlinx-datetime` for time calculations
+- Use `DateTime` for time calculations
 - Display countdown in days, hours, minutes
-- Update UI every minute when app is active
+- Update UI every minute when app is active using `DispatcherTimer`
 
 **Dependencies**: US-002 (Work Registration)
 
@@ -315,7 +315,7 @@ This document provides a quick reference for all user stories in the PottMaster 
 
 **Technical Notes**:
 - Calculate from local SQLite data
-- Use Compose charts library
+- Use .NET MAUI Graphics for visualization
 - Generate monthly reports
 - Share functionality (image export)
 
@@ -390,7 +390,7 @@ WITH CHECK (auth.uid() = submitted_by);
 - English (en)
 
 **Technical Notes**:
-- Use Android resources for string localization
+- Use .NET MAUI RESX files for string localization
 - Store language preference in local database
 - Implement fallback to English for missing translations
 - Support RTL languages in future phases

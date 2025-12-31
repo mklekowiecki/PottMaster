@@ -120,7 +120,7 @@ For detailed setup instructions, see `.ai/supabase-connection-setup.md`.
 ## References
 
 - [Supabase Documentation](https://supabase.com/docs)
-- [SQLDelight Documentation](https://cashapp.github.io/sqldelight/)
+- [.NET MAUI Documentation](https://learn.microsoft.com/dotnet/maui/)
 
 ---
 
