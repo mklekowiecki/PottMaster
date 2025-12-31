@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PottMaster.Services;
 using System.ComponentModel;
+using PottMaster.Resources; // Add for localization
 
 namespace PottMaster.ViewModels;
 
@@ -30,10 +31,10 @@ public partial class SignupViewModel : ObservableObject
         var signupResult = await _authService.SignUpAsync(Email, Password);
         if (signupResult.Result != AuthResult.Success)
         {
-            await Application.Current.MainPage.DisplayAlert("Error", signupResult.ErrorMessage ?? "Signup failed.", "OK");
+            await Application.Current.MainPage.DisplayAlert(Resource.Error, Resource.SignUpError, Resource.Ok);
             return;
         }
-        await Application.Current.MainPage.DisplayAlert("Success", "Account created. Please log in.", "OK");
+        await Application.Current.MainPage.DisplayAlert(Resource.Success, Resource.AccountCreatedPleaseLogin, Resource.Ok);
         await Shell.Current.GoToAsync("//LoginPage");
     }
 
