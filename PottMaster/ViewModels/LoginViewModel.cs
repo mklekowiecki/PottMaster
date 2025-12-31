@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PottMaster.Services;
 
@@ -33,14 +33,20 @@ public partial class LoginViewModel : ObservableObject
         IsBusy = true;
         try
         {
-            await _authService.SignInAsync(Email, Password);
-            var profile = await _authService.GetUserProfileAsync();
-            Preferences.Default.Set("UserInitials", profile.Initials);
+            var signInResult = await _authService.SignInAsync(Email, Password);
+            if (signInResult.Result != AuthResult.Success)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Nieudane logowanie.", "OK");
+                return;
+            }
+            var profileResult = await _authService.GetUserProfileAsync();
+            if (profileResult.Result != AuthResult.Success || profileResult.Data == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Błąd ładowania profilu użytkownika!", "OK");
+                return;
+            }
+            Preferences.Default.Set("UserInitials", profileResult.Data.Initials);
             await Shell.Current.GoToAsync("//MainPage");
-        }
-        catch (Exception ex)
-        {
-            await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
         }
         finally
         {

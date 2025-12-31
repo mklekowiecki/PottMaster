@@ -60,6 +60,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Include=".ai\api-plan.md" />
+	  <None Include=".ai\db-plan.md" />
+	  <None Include=".github\copilot-instructions.md" />
+	  <None Include=".kilocodemodes\localization_mode.yaml" />
+	  <None Include=".kilocode\rules\maui-guidelines.md" />
+	  <None Include=".kilocode\rules\memory-bank-instructions.md" />
+	  <None Include=".kilocode\rules\memory-bank\architecture.md" />
+	  <None Include=".kilocode\rules\memory-bank\brief.md" />
+	  <None Include=".kilocode\rules\memory-bank\context.md" />
+	  <None Include=".kilocode\rules\memory-bank\glossary.md" />
+	  <None Include=".kilocode\rules\memory-bank\tech.md" />
+	  <None Include=".kilocode\rules\memory-bank\user-stories.md" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.8" />

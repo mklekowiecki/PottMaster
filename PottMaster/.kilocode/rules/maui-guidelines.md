@@ -13,6 +13,10 @@ PottMaster/
 ├── Converters/      # Value converters for XAML
 └── Helpers/         # Utility classes
 ```
+## Localization
+
+- Use RESX files for string localization.
+- As default support Polish for all labels/messages.
 
 ## Naming Conventions
 

@@ -27,16 +27,14 @@ public partial class SignupViewModel : ObservableObject
     [RelayCommand(CanExecute = nameof(IsSignupEnabled))]
     private async Task SignupAsync()
     {
-        try
+        var signupResult = await _authService.SignUpAsync(Email, Password);
+        if (signupResult.Result != AuthResult.Success)
         {
-            await _authService.SignUpAsync(Email, Password);
-            await Application.Current.MainPage.DisplayAlert("Success", "Account created. Please log in.", "OK");
-            await Shell.Current.GoToAsync("//LoginPage");
+            await Application.Current.MainPage.DisplayAlert("Error", signupResult.ErrorMessage ?? "Signup failed.", "OK");
+            return;
         }
-        catch (Exception ex)
-        {
-            await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-        }
+        await Application.Current.MainPage.DisplayAlert("Success", "Account created. Please log in.", "OK");
+        await Shell.Current.GoToAsync("//LoginPage");
     }
 
     [RelayCommand]
