@@ -61,6 +61,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Konto utworzone, możesz się zalogować..
+        /// </summary>
+        internal static string AccountCreatedPleaseLogin {
+            get {
+                return ResourceManager.GetString("AccountCreatedPleaseLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Błąd.
         /// </summary>
         internal static string Error {
@@ -70,11 +79,47 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Błąd ładowania profilu.
+        /// </summary>
+        internal static string ErrorLoadingProfile {
+            get {
+                return ResourceManager.GetString("ErrorLoadingProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd logowania.
+        /// </summary>
+        internal static string LoginFailed {
+            get {
+                return ResourceManager.GetString("LoginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string Ok {
             get {
                 return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd podczas rejestracji.
+        /// </summary>
+        internal static string SignUpError {
+            get {
+                return ResourceManager.GetString("SignUpError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sukces.
+        /// </summary>
+        internal static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
     }

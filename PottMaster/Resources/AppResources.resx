@@ -123,4 +123,22 @@
   <data name="Ok" xml:space="preserve">
     <value>Ok</value>
   </data>
+  <data name="SignUpError" xml:space="preserve">
+    <value>Błąd podczas rejestracji</value>
+    <comment>Displayed when signup fails</comment>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Sukces</value>
+    <comment>Displayed when signup succeeds</comment>
+  </data>
+  <data name="AccountCreatedPleaseLogin" xml:space="preserve">
+    <value>Konto utworzone, możesz się zalogować.</value>
+    <comment>Displayed after successful signup</comment>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Błąd logowania</value>
+  </data>
+  <data name="ErrorLoadingProfile" xml:space="preserve">
+    <value>Błąd ładowania profilu</value>
+  </data>
 </root>
