@@ -6,6 +6,7 @@
 	using PottMaster.ViewModels;
 	using PottMaster.Repositories;
 	using System.Globalization;
+	using Supabase;
 
 	public static class MauiProgram
 	{
@@ -20,6 +21,21 @@
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				});
 			
+			// Register Supabase Client as Singleton
+			builder.Services.AddSingleton<Supabase.Client>(sp =>
+			{
+				var client = new Supabase.Client(
+                    supabaseUrl: Constants.SupabaseBaseUrl,
+                    supabaseKey: Constants.SupabaseAnonKey,
+                    options: new SupabaseOptions
+                     {
+                         AutoRefreshToken = true,
+                         AutoConnectRealtime = true
+                     });
+                client.InitializeAsync().Wait(); // Ensure initialization is complete
+				return client;
+			});
+
 			// Infrastructure Services (Singleton - shared across app lifetime)
 			builder.Services.AddSingleton<IDbService, DbService>();
 			builder.Services.AddSingleton<IImageService, ImageService>();
@@ -80,3 +96,4 @@
 		}
 	}
 }
+

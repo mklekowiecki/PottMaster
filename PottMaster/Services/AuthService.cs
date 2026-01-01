@@ -9,43 +9,26 @@ namespace PottMaster.Services;
 
 public class AuthService : IAuthService
 {
-    private readonly Lazy<Task<Supabase.Client>> _clientTask;
+    private readonly Supabase.Client _client;
     private readonly IDbService _dbService;
     private readonly ILogger<AuthService> _logger;
 
-    public AuthService(IDbService dbService, ILogger<AuthService> logger)
+    public AuthService(Supabase.Client client, IDbService dbService, ILogger<AuthService> logger)
     {
+        _client = client;
         _dbService = dbService;
         _logger = logger;
-        _clientTask = new Lazy<Task<Supabase.Client>>(async () =>
-        {
-            try
-            {
-                var client = new Supabase.Client(Constants.SupabaseBaseUrl, Constants.SupabaseAnonKey);
-                await client.InitializeAsync();
-                _logger.LogInformation("Supabase client initialized successfully");
-                return client;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Failed to initialize Supabase client");
-                throw;
-            }
-        });
     }
 
-    private async Task<Supabase.Client> GetClientAsync() => await _clientTask.Value;
+    public Supabase.Client Client => _client;
 
-    public Supabase.Client Client => _clientTask.Value.Result;
-
-    public bool IsLoggedIn => Client.Auth.CurrentUser != null;
+    public bool IsLoggedIn => _client.Auth.CurrentUser != null;
 
     public async Task<AuthResponse<bool>> SignInAsync(string email, string password)
     {
         try
         {
-            var client = await GetClientAsync();
-            var session = await client.Auth.SignIn(email, password);
+            var session = await _client.Auth.SignIn(email, password);
 
             if (session?.User != null)
             {
@@ -74,8 +57,7 @@ public class AuthService : IAuthService
     {
         try
         {
-            var client = await GetClientAsync();
-            var session = await client.Auth.SignUp(email, password);
+            var session = await _client.Auth.SignUp(email, password);
 
             if (session?.User != null)
             {
@@ -108,9 +90,8 @@ public class AuthService : IAuthService
     {
         try
         {
-            var client = await GetClientAsync();
-            var userId = client.Auth.CurrentUser?.Id;
-            await client.Auth.SignOut();
+            var userId = _client.Auth.CurrentUser?.Id;
+            await _client.Auth.SignOut();
             _logger.LogInformation("User signed out: {UserId}", userId);
             return new AuthResponse<bool> { Result = AuthResult.Success, Data = true };
         }
@@ -125,11 +106,10 @@ public class AuthService : IAuthService
     {
         try
         {
-            var client = await GetClientAsync();
-            var userId = client.Auth.CurrentUser!.Id;
-            var email = client.Auth.CurrentUser!.Email;
+            var userId = _client.Auth.CurrentUser!.Id;
+            var email = _client.Auth.CurrentUser!.Email;
 
-            var response = await client
+            var response = await _client
                 .From<UserProfiles>()
                 .Where(x => x.Id == userId)
                 .Single();
@@ -144,16 +124,16 @@ public class AuthService : IAuthService
                     CreatedAt = DateTime.UtcNow
                 };
 
-                var insertResponse = await client.From<UserProfiles>().Insert(newProfile);
+                var insertResponse = await _client.From<UserProfiles>().Insert(newProfile);
                 if (insertResponse == null || insertResponse.Models.Count == 0)
                 {
                     return new AuthResponse<UserProfiles> { Result = AuthResult.ProfileCreationFailed, ErrorMessage = "Failed to create user profile." };
                 }
-                
+
                 _logger.LogInformation("User profile created for: {UserId}", userId);
                 return new AuthResponse<UserProfiles> { Result = AuthResult.Success, Data = insertResponse.Models.First() };
             }
-            
+
             return new AuthResponse<UserProfiles> { Result = AuthResult.Success, Data = response };
         }
         catch (Exception ex)
@@ -167,8 +147,7 @@ public class AuthService : IAuthService
     {
         try
         {
-            var client = await GetClientAsync();
-            return client.Auth.CurrentUser;
+            return _client.Auth.CurrentUser;
         }
         catch (Exception ex)
         {
@@ -181,8 +160,7 @@ public class AuthService : IAuthService
     {
         try
         {
-            var client = await GetClientAsync();
-            var response = await client.From<UserProfiles>()
+            var response = await _client.From<UserProfiles>()
                 .Where(x => x.Id == userId)
                 .Single();
 
