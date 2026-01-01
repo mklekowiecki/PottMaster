@@ -14,4 +14,6 @@ public interface IDbService
     Task<List<LocalWork>> GetWorksByUserIdAsync(string userId);
     Task<WorkCategory?> GetWorkCategoryByIdAsync(int categoryId);
     Task<WorkStatus?> GetWorkStatusByIdAsync(int statusId);
+    Task<LocalUserProfile?> GetUserProfileByIdAsync(string userId);
+    Task<int> UpsertUserProfileAsync(LocalUserProfile profile);
 }

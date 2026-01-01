@@ -64,7 +64,7 @@ public class WorkService : IWorkService
         work.Code = $"{userInitials}-{categoryCode}-{monthYear}-{counter:D3}";
 
         var localWork = MapToLocalWork(work);
-        localWork.Id = 0; // SQLite auto-increment
+        localWork.Id = Guid.NewGuid().ToString();
         localWork.StatusId = 1;
         localWork.CreatedAt = DateTime.UtcNow;
         localWork.UpdatedAt = DateTime.UtcNow;
@@ -106,7 +106,7 @@ public class WorkService : IWorkService
     {
         return new Work
         {
-            Id = localWork.Id.ToString(),
+            Id = localWork.Id,
             UserId = localWork.UserId,
             Code = localWork.Code,
             CategoryId = localWork.CategoryId,
@@ -127,7 +127,7 @@ public class WorkService : IWorkService
     {
         return new LocalWork
         {
-            Id = int.TryParse(work.Id, out var id) ? id : 0,
+            Id = work.Id,
             UserId = work.UserId,
             Code = work.Code,
             CategoryId = work.CategoryId,

@@ -30,6 +30,14 @@
 			builder.Services.AddSingleton<IAuthService, AuthService>();
 			builder.Services.AddSingleton<IDbService, DbService>();
 			builder.Services.AddSingleton<IWorkService, WorkService>();
+			builder.Services.AddSingleton<IImageService, ImageService>();
+			builder.Services.AddSingleton<ISyncService, SyncService>();
+			
+			builder.Services.AddSingleton(sp =>
+			{
+				var client = new Supabase.Client(Constants.SupabaseBaseUrl, Constants.SupabaseAnonKey);
+				return client;
+			});
 			
 			// ViewModels
 			builder.Services.AddTransient<LoginViewModel>();

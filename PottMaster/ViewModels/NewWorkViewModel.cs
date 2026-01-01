@@ -12,6 +12,7 @@ public partial class NewWorkViewModel : ObservableObject
     private readonly IWorkService _workService;
     private readonly IAuthService _authService;
     private readonly IDbService _dbService;
+    private readonly IImageService _imageService;
 
     [ObservableProperty]
     private ObservableCollection<WorkCategory> categories = [];
@@ -39,11 +40,12 @@ public partial class NewWorkViewModel : ObservableObject
 
     public bool IsSaveEnabled => !isSaving && !isLoading && selectedCategory != null && wallThickness >= 3 && wallThickness <= 50;
 
-    public NewWorkViewModel(IWorkService workService, IAuthService authService, IDbService dbService)
+    public NewWorkViewModel(IWorkService workService, IAuthService authService, IDbService dbService, IImageService imageService)
     {
         _workService = workService;
         _authService = authService;
         _dbService = dbService;
+        _imageService = imageService;
     }
 
     public async Task InitializeAsync()
@@ -113,11 +115,16 @@ public partial class NewWorkViewModel : ObservableObject
 
     private async Task SavePhotoAsync(FileResult photo)
     {
-        var localFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
-        using var stream = await photo.OpenReadAsync();
-        using var newStream = File.OpenWrite(localFilePath);
-        await stream.CopyToAsync(newStream);
-        PhotoPath = localFilePath;
+        try
+        {
+            using var stream = await photo.OpenReadAsync();
+            PhotoPath = await _imageService.CompressAndSaveImageAsync(stream, photo.FileName);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Failed to compress and save photo: {ex.Message}");
+            throw;
+        }
     }
 
     [RelayCommand(CanExecute = nameof(IsSaveEnabled))]
@@ -147,7 +154,7 @@ public partial class NewWorkViewModel : ObservableObject
                 return;
             }
 
-            var profile = await _dbService.GetByIdAsync<UserProfiles>(user.Id);
+            var profile = await _dbService.GetUserProfileByIdAsync(user.Id);
             if (profile == null)
             {
                 await Shell.Current.DisplayAlert(AppResources.Error, "Nie znaleziono profilu u?ytkownika", AppResources.Ok);

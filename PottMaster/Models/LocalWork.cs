@@ -5,8 +5,8 @@ namespace PottMaster.Models;
 [Table("works")]
 public class LocalWork
 {
-    [PrimaryKey, AutoIncrement]
-    public int Id { get; set; }
+    [PrimaryKey]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
 
     [Indexed]
     public string UserId { get; set; } = string.Empty;

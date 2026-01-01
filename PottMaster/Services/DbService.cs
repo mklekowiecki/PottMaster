@@ -21,6 +21,7 @@ public class DbService : IDbService
         _database = new SQLiteAsyncConnection(_dbPath);
 
         await _database.CreateTableAsync<LocalWork>();
+        await _database.CreateTableAsync<LocalUserProfile>();
         await _database.CreateTableAsync<WorkCategory>();
         await _database.CreateTableAsync<WorkStatus>();
 
@@ -132,5 +133,29 @@ public class DbService : IDbService
         return await _database!.Table<WorkStatus>()
             .Where(status => status.Id == statusId)
             .FirstOrDefaultAsync();
+    }
+
+    public async Task<LocalUserProfile?> GetUserProfileByIdAsync(string userId)
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        return await _database!.FindAsync<LocalUserProfile>(userId);
+    }
+
+    public async Task<int> UpsertUserProfileAsync(LocalUserProfile profile)
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        var existing = await GetUserProfileByIdAsync(profile.Id);
+        if (existing != null)
+        {
+            return await _database!.UpdateAsync(profile);
+        }
+        else
+        {
+            return await _database!.InsertAsync(profile);
+        }
     }
 }
