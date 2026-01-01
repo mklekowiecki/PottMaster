@@ -13,15 +13,17 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
 
 ### `public.work_categories`
 - **id**: SMALLINT (PRIMARY KEY)
-- **name**: VARCHAR(50) (UNIQUE, NOT NULL) - e.g., `CUP`, `BOWL`, `VASE`
+- **name**: VARCHAR(50) (UNIQUE, NOT NULL) - e.g., 'Cup', 'Bowl', 'Vase'
+- **code**: VARCHAR(50) (UNIQUE, NOT NULL) - e.g., 'CUP', 'BOWL', 'VASE'
 
 ### `public.work_statuses`
 - **id**: SMALLINT (PRIMARY KEY)
-- **name**: VARCHAR(50) (UNIQUE, NOT NULL) - e.g., `WET`, `LEATHER_HARD`, `BONE_DRY`
+- **name**: VARCHAR(50) (UNIQUE, NOT NULL) - e.g., 'Wet', 'Leather Hard', 'Bone Dry'
+- **code**: VARCHAR(50) (UNIQUE, NOT NULL) - e.g., 'WET', 'LEATHER_HARD', 'BONE_DRY'
 
 ### `public.wiki_material_types`
 - **id**: SMALLINT (PRIMARY KEY)
-- **name**: VARCHAR(50) (UNIQUE, NOT NULL) - e.g., `Clay`, `Glaze`, `Tool`
+- **name**: VARCHAR(50) (UNIQUE, NOT NULL) - e.g., 'Clay', 'Glaze', 'Tool'
 
 ### `public.works`
 - **id**: UUID (PRIMARY KEY, DEFAULT `uuid_generate_v4()`)
@@ -75,7 +77,42 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
 - **last_error**: TEXT
 - **created_at**: TIMESTAMPTZ (DEFAULT `now()`, NOT NULL)
 
-## 2. Relationships Between Tables
+## Dictionary Values
+
+### Work Categories
+
+| ID | Name    | Code      |
+|----|---------|-----------|
+| 1  | Cup     | CUP       |
+| 2  | Bowl    | BOWL      |
+| 3  | Vase    | VASE      |
+| 4  | Plate   | PLATE     |
+| 5  | Sculpture | SCULPTURE |
+| 6  | Tile    | TILE      |
+| 7  | Other   | OTHER     |
+
+### Work Statuses
+
+| ID | Name          | Code          |
+|----|---------------|---------------|
+| 1  | Wet           | WET           |
+| 2  | Leather Hard  | LEATHER_HARD  |
+| 3  | Bone Dry      | BONE_DRY      |
+| 4  | Bisque Fired  | BISQUE_FIRED  |
+| 5  | Glazed        | GLAZED        |
+| 6  | Glaze Fired   | GLAZE_FIRED   |
+| 7  | Completed     | COMPLETED     |
+| 8  | Discarded     | DISCARDED     |
+
+### Wiki Material Types
+
+| ID | Name  |
+|----|-------|
+| 1  | Clay  |
+| 2  | Glaze |
+| 3  | Tool  |
+
+## 3. Relationships Between Tables
 
 - `public.user_profiles` 1:N `public.works`: Each user can have multiple works.
 - `public.user_profiles` 1:N `public.glazes`: Each user can have multiple glazes.
@@ -85,7 +122,7 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
 - `public.work_statuses` 1:N `public.works`: Each work has a status.
 - `public.wiki_material_types` 1:N `public.wiki_materials`: Each wiki material has a type.
 
-## 3. Indexes
+## 4. Indexes
 
 - `idx_works_user_status` on `public.works(user_id, status_id)`: For efficient filtering of works by user and status.
 - `idx_works_sync_status` on `public.works(sync_status)`: For quick retrieval of works pending synchronization.
@@ -94,7 +131,7 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
 - `idx_glazes_name` on `public.glazes(name)`: For efficient searching in the glaze inventory by name.
 - `idx_wiki_materials_search` on `public.wiki_materials` using `GIN (to_tsvector('english', name || ' ' || COALESCE(manufacturer, '')))`: For full-text search on wiki material names and manufacturers.
 
-## 4. PostgreSQL Policies
+## 5. PostgreSQL Policies
 
 ### `public.user_profiles`
 - **"Users can view and update their own profile"**: Allows users to `SELECT`, `INSERT`, `UPDATE`, `DELETE` their own `user_profiles` record based on `auth.uid() = id`.
@@ -113,7 +150,7 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
 - **"Authenticated users can submit wiki entries"**: Allows authenticated users to `INSERT` new wiki entries, with a `CHECK` that `submitted_by` matches `auth.uid()`.
 - **"Experts/Admins can update wiki entries"**: (Placeholder) Allows users with specific roles (e.g., `ADMIN`, `EXPERT` based on `initials` in `user_profiles`) to `UPDATE` wiki entries.
 
-## 5. Additional Notes or Explanations about Design Decisions
+## 6. Additional Notes or Explanations about Design Decisions
 
 - **UUIDs for Primary Keys**: Used for distributed and offline-first environments, reducing conflicts during synchronization.
 - **`TIMESTAMPTZ` for Timestamps**: Ensures timezone awareness and consistency across different regions.

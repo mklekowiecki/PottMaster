@@ -16,4 +16,5 @@ public interface IDbService
     Task<WorkStatus?> GetWorkStatusByIdAsync(int statusId);
     Task<LocalUserProfile?> GetUserProfileByIdAsync(string userId);
     Task<int> UpsertUserProfileAsync(LocalUserProfile profile);
+    Task<int> UpsertAllAsync<T>(IEnumerable<T> entities) where T : new();
 }

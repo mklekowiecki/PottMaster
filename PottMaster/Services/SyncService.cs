@@ -1,5 +1,8 @@
 using PottMaster.Models;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace PottMaster.Services;
 
@@ -7,12 +10,14 @@ public class SyncService : ISyncService
 {
     private readonly IDbService _dbService;
     private readonly Supabase.Client _supabaseClient;
+    private readonly HttpClient _httpClient;
     private bool _isSyncing = false;
 
-    public SyncService(IDbService dbService, Supabase.Client supabaseClient)
+    public SyncService(IDbService dbService, Supabase.Client supabaseClient, HttpClient httpClient)
     {
         _dbService = dbService;
         _supabaseClient = supabaseClient;
+        _httpClient = httpClient;
     }
 
     public async Task<bool> IsOnlineAsync()
@@ -41,6 +46,43 @@ public class SyncService : ISyncService
         }
     }
 
+    public async Task SyncDictionariesAsync()
+    {
+        try
+        {
+            // Fetch work categories using HTTP client
+            var categoriesResponse = await _httpClient.GetStringAsync("https://your-supabase-url/rest/v1/work_categories");
+            var categories = JsonSerializer.Deserialize<List<WorkCategory>>(categoriesResponse);
+            if (categories != null)
+            {
+                await _dbService.UpsertAllAsync(categories);
+                Debug.WriteLine($"Synced {categories.Count} work categories.");
+            }
+
+            // Fetch work statuses using HTTP client
+            var statusesResponse = await _httpClient.GetStringAsync("https://your-supabase-url/rest/v1/work_statuses");
+            var statuses = JsonSerializer.Deserialize<List<WorkStatus>>(statusesResponse);
+            if (statuses != null)
+            {
+                await _dbService.UpsertAllAsync(statuses);
+                Debug.WriteLine($"Synced {statuses.Count} work statuses.");
+            }
+
+            // Fetch wiki material types using HTTP client
+            var materialTypesResponse = await _httpClient.GetStringAsync("https://your-supabase-url/rest/v1/wiki_material_types");
+            var materialTypes = JsonSerializer.Deserialize<List<WikiMaterialType>>(materialTypesResponse);
+            if (materialTypes != null)
+            {
+                await _dbService.UpsertAllAsync(materialTypes);
+                Debug.WriteLine($"Synced {materialTypes.Count} wiki material types.");
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Failed to sync dictionaries: {ex.Message}");
+        }
+    }
+
     public async Task SyncPendingChangesAsync()
     {
         if (_isSyncing)
@@ -59,6 +101,10 @@ public class SyncService : ISyncService
 
         try
         {
+            // Sync dictionaries first
+            await SyncDictionariesAsync();
+
+            // Sync pending works
             var pendingWorks = (await _dbService.GetAllAsync<LocalWork>())
                 .Where(w => w.SyncStatus == "PENDING" || w.SyncStatus == "ERROR")
                 .ToList();

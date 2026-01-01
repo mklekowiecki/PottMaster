@@ -1,16 +1,17 @@
-using SQLite;
+using Supabase.Postgrest;
+using Supabase.Postgrest.Attributes;
 
 namespace PottMaster.Models;
 
 [Table("work_statuses")]
 public class WorkStatus
 {
-    [PrimaryKey]
+    [PrimaryKey("id")]
     public int Id { get; set; }
 
-    [Unique]
+    [Column("name")]
     public string Name { get; set; } = string.Empty;
 
-    [Unique]
+    [Column("code")]
     public string Code { get; set; } = string.Empty;
 }

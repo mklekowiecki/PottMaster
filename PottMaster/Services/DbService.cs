@@ -158,4 +158,18 @@ public class DbService : IDbService
             return await _database!.InsertAsync(profile);
         }
     }
+
+    public async Task<int> UpsertAllAsync<T>(IEnumerable<T> entities) where T : new()
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        var rowsAffected = 0;
+        foreach (var entity in entities)
+        {
+            rowsAffected += await _database!.InsertOrReplaceAsync(entity);
+        }
+
+        return rowsAffected;
+    }
 }
