@@ -5,8 +5,6 @@
              Title="{x:Static resx:AppResources.Signup}">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
-            <Image Source="dotnet_bot.png" SemanticProperties.Description="{x:Static resx:AppResources.BotDescription}" 
-                   HeightRequest="200" HorizontalOptions="Center" />
             <Label Text="{x:Static resx:AppResources.Welcome}" SemanticProperties.HeadingLevel="Level1" Style="{StaticResource HeadingLabel}" />
             <Label Text="{x:Static resx:AppResources.CreateAccount}" SemanticProperties.HeadingLevel="Level2" Style="{StaticResource SubheadingLabel}" />
             <Entry Placeholder="{x:Static resx:AppResources.Email}" Text="{Binding Email, Mode=TwoWay}" Style="{StaticResource ModernEntry}" />

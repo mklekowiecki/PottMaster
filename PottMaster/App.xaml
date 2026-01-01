@@ -15,6 +15,7 @@
             <converters:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
             <converters:IsNullConverter x:Key="IsNullConverter"/>
             <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
+            <converters:WallThicknessToDaysConverter x:Key="WallThicknessToDaysConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

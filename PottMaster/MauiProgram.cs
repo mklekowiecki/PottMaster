@@ -1,6 +1,7 @@
 ﻿namespace PottMaster
 {
 	using Microsoft.Extensions.Logging;
+	using PottMaster.Pages;
 	using PottMaster.Services;
 	using PottMaster.ViewModels;
 	using System.Globalization;
@@ -36,6 +37,9 @@
 			builder.Services.AddTransient<MainViewModel>();
 			builder.Services.AddTransient<NewWorkViewModel>();
 			builder.Services.AddTransient<WorkDetailViewModel>();
+			
+			// Pages
+			builder.Services.AddTransient<NewWorkPage>();
 
 #if DEBUG
 			builder.Logging.AddDebug();

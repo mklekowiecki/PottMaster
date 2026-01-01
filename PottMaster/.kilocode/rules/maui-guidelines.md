@@ -31,6 +31,7 @@ PottMaster/
 ### XAML Files
 - Pages: PascalCase.xaml (e.g., WorkListPage.xaml)
 - Controls: PascalCase.xaml (e.g., WorkCardControl.xaml)
+- Do not use obsolete Frame, use Border instead.
 
 ## MVVM Pattern
 

@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PottMaster.Models;
 using PottMaster.Services;
+using PottMaster.Resources;
 using System.Collections.ObjectModel;
 
 namespace PottMaster.ViewModels;
@@ -16,16 +17,27 @@ public partial class NewWorkViewModel : ObservableObject
     private ObservableCollection<WorkCategory> categories = [];
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
     private WorkCategory? selectedCategory;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
     private double wallThickness = 5;
 
     [ObservableProperty]
     private string? photoPath;
 
     [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
     private bool isSaving;
+
+    [ObservableProperty]
+    private bool isLoading;
+
+    [ObservableProperty]
+    private string? errorMessage;
+
+    public bool IsSaveEnabled => !isSaving && !isLoading && selectedCategory != null && wallThickness >= 3 && wallThickness <= 50;
 
     public NewWorkViewModel(IWorkService workService, IAuthService authService, IDbService dbService)
     {
@@ -36,14 +48,31 @@ public partial class NewWorkViewModel : ObservableObject
 
     public async Task InitializeAsync()
     {
-        await _dbService.InitializeAsync();
-        var categoriesList = await _workService.GetCategoriesAsync();
-        Categories = new ObservableCollection<WorkCategory>(categoriesList);
+        IsLoading = true;
+        ErrorMessage = null;
+        
+        try
+        {
+            await _dbService.InitializeAsync();
+            var categoriesList = await _workService.GetCategoriesAsync();
+            Categories = new ObservableCollection<WorkCategory>(categoriesList);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = string.Format(AppResources.Error, ex.Message);
+            System.Diagnostics.Debug.WriteLine($"Failed to initialize NewWorkViewModel: {ex.Message}");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
     }
 
     [RelayCommand]
     private async Task TakePhotoAsync()
     {
+        ErrorMessage = null;
+        
         try
         {
             if (MediaPicker.Default.IsCaptureSupported)
@@ -51,70 +80,77 @@ public partial class NewWorkViewModel : ObservableObject
                 var photo = await MediaPicker.Default.CapturePhotoAsync();
                 if (photo != null)
                 {
-                    var localFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
-                    using var stream = await photo.OpenReadAsync();
-                    using var newStream = File.OpenWrite(localFilePath);
-                    await stream.CopyToAsync(newStream);
-                    PhotoPath = localFilePath;
+                    await SavePhotoAsync(photo);
                 }
             }
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to take photo: {ex.Message}", "OK");
+            ErrorMessage = $"{AppResources.Error}: {ex.Message}";
+            System.Diagnostics.Debug.WriteLine($"Failed to take photo: {ex.Message}");
         }
     }
 
     [RelayCommand]
     private async Task PickPhotoAsync()
     {
+        ErrorMessage = null;
+        
         try
         {
             var photo = await MediaPicker.Default.PickPhotoAsync();
             if (photo != null)
             {
-                var localFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
-                using var stream = await photo.OpenReadAsync();
-                using var newStream = File.OpenWrite(localFilePath);
-                await stream.CopyToAsync(newStream);
-                PhotoPath = localFilePath;
+                await SavePhotoAsync(photo);
             }
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to pick photo: {ex.Message}", "OK");
+            ErrorMessage = $"{AppResources.Error}: {ex.Message}";
+            System.Diagnostics.Debug.WriteLine($"Failed to pick photo: {ex.Message}");
         }
     }
 
-    [RelayCommand]
+    private async Task SavePhotoAsync(FileResult photo)
+    {
+        var localFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
+        using var stream = await photo.OpenReadAsync();
+        using var newStream = File.OpenWrite(localFilePath);
+        await stream.CopyToAsync(newStream);
+        PhotoPath = localFilePath;
+    }
+
+    [RelayCommand(CanExecute = nameof(IsSaveEnabled))]
     private async Task SaveWorkAsync()
     {
         if (SelectedCategory == null)
         {
-            await Shell.Current.DisplayAlert("Validation", "Please select a category", "OK");
+            await Shell.Current.DisplayAlert("Walidacja", "Prosz? wybra? kategori?", AppResources.Ok);
             return;
         }
 
         if (WallThickness < 3 || WallThickness > 50)
         {
-            await Shell.Current.DisplayAlert("Validation", "Wall thickness must be between 3 and 50 mm", "OK");
+            await Shell.Current.DisplayAlert("Walidacja", "Grubo?? ?cianki musi by? mi?dzy 3 a 50 mm", AppResources.Ok);
             return;
         }
 
         IsSaving = true;
+        ErrorMessage = null;
+        
         try
         {
             var user = await _authService.GetCurrentUserAsync();
             if (user?.Id == null)
             {
-                await Shell.Current.DisplayAlert("Error", "User not authenticated", "OK");
+                await Shell.Current.DisplayAlert(AppResources.Error, "U?ytkownik niezalogowany", AppResources.Ok);
                 return;
             }
 
             var profile = await _dbService.GetByIdAsync<UserProfiles>(user.Id);
             if (profile == null)
             {
-                await Shell.Current.DisplayAlert("Error", "User profile not found", "OK");
+                await Shell.Current.DisplayAlert(AppResources.Error, "Nie znaleziono profilu u?ytkownika", AppResources.Ok);
                 return;
             }
 
@@ -125,17 +161,21 @@ public partial class NewWorkViewModel : ObservableObject
                 UserId = user.Id,
                 CategoryId = SelectedCategory.Id,
                 WallThickness = (int)WallThickness,
-                PhotoPath = PhotoPath
+                PhotoPath = PhotoPath,
+                StatusId = 1,
+                DryingStartedAt = DateTime.UtcNow
             };
 
             var code = await _workService.CreateWorkAsync(work, userInitials);
 
-            await Shell.Current.DisplayAlert("Success", $"Work created with code: {code}", "OK");
+            await Shell.Current.DisplayAlert(AppResources.Success, $"Praca utworzona z kodem: {code}", AppResources.Ok);
             await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to create work: {ex.Message}", "OK");
+            ErrorMessage = $"{AppResources.Error}: {ex.Message}";
+            await Shell.Current.DisplayAlert(AppResources.Error, $"Nie uda?o si? utworzy? pracy: {ex.Message}", AppResources.Ok);
+            System.Diagnostics.Debug.WriteLine($"Failed to create work: {ex.Message}");
         }
         finally
         {
@@ -147,5 +187,15 @@ public partial class NewWorkViewModel : ObservableObject
     private async Task CancelAsync()
     {
         await Shell.Current.GoToAsync("..");
+    }
+
+    partial void OnSelectedCategoryChanged(WorkCategory? value)
+    {
+        SaveWorkCommand.NotifyCanExecuteChanged();
+    }
+
+    partial void OnWallThicknessChanged(double value)
+    {
+        SaveWorkCommand.NotifyCanExecuteChanged();
     }
 }

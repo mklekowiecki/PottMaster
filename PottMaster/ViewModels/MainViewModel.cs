@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PottMaster.Models;
 using PottMaster.Services;
+using PottMaster.Resources;
 using System.Collections.ObjectModel;
 
 namespace PottMaster.ViewModels;
@@ -50,7 +51,7 @@ public partial class MainViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to load works: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlert(AppResources.Error, string.Format(AppResources.FailedToLoadWorks, ex.Message), AppResources.Ok);
         }
         finally
         {
@@ -67,6 +68,13 @@ public partial class MainViewModel : ObservableObject
     [RelayCommand]
     private async Task ViewWorkDetailsAsync(Work work)
     {
-        await Shell.Current.GoToAsync($"WorkDetailPage?workId={work.Id}");
+        if (work?.Id != null)
+        {
+            var parameters = new Dictionary<string, object>
+            {
+                { "WorkId", work.Id }
+            };
+            await Shell.Current.GoToAsync("", parameters);
+        }
     }
 }

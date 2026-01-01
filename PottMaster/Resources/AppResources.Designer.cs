@@ -19,7 +19,7 @@ namespace PottMaster.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class AppResources {
@@ -70,20 +70,20 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodaj nową pracę.
+        /// </summary>
+        internal static string AddNewWork {
+            get {
+                return ResourceManager.GetString("AddNewWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Masz już konto? Zaloguj się.
         /// </summary>
         internal static string AlreadyHaveAccount {
             get {
                 return ResourceManager.GetString("AlreadyHaveAccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Słodki bot .NET machający do Ciebie!.
-        /// </summary>
-        internal static string BotDescription {
-            get {
-                return ResourceManager.GetString("BotDescription", resourceCulture);
             }
         }
         
@@ -124,6 +124,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nieudane ładowanie prac: {0}.
+        /// </summary>
+        internal static string FailedToLoadWorks {
+            get {
+                return ResourceManager.GetString("FailedToLoadWorks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logowanie.
         /// </summary>
         internal static string Login {
@@ -151,11 +160,38 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moje prace.
+        /// </summary>
+        internal static string MyWorks {
+            get {
+                return ResourceManager.GetString("MyWorks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nowa praca.
+        /// </summary>
+        internal static string NewWorkPage {
+            get {
+                return ResourceManager.GetString("NewWorkPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie masz konta?.
         /// </summary>
         internal static string NoAccount {
             get {
                 return ResourceManager.GetString("NoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brak prac.
+        /// </summary>
+        internal static string NoWorksYet {
+            get {
+                return ResourceManager.GetString("NoWorksYet", resourceCulture);
             }
         }
         
@@ -205,11 +241,29 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rozpocznij przez dodanie pracy.
+        /// </summary>
+        internal static string StartByAddingWork {
+            get {
+                return ResourceManager.GetString("StartByAddingWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sukces.
         /// </summary>
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pozostało: {0:d\d\ h\h\ m\m}.
+        /// </summary>
+        internal static string TimeLeft {
+            get {
+                return ResourceManager.GetString("TimeLeft", resourceCulture);
             }
         }
         

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PottMaster.Pages;
 using PottMaster.Services;
 
 namespace PottMaster
@@ -8,6 +9,8 @@ namespace PottMaster
         public AppShell()
         {
             InitializeComponent();
+            
+            Routing.RegisterRoute(nameof(NewWorkPage), typeof(NewWorkPage));
         }
 
         protected override async void OnNavigatedTo(NavigatedToEventArgs args)
