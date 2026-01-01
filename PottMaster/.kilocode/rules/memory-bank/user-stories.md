@@ -72,8 +72,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to receive a short code to physically apply it to wet clay.
 
 **Acceptance Criteria**:
-1. ✅ Code is generated locally (offline) according to the mask: `Initials-CatCode-MMYY-Counter`
-2. ✅ Code is visible immediately after saving the record in SQLite
+1. [ ] Code is generated locally (offline) according to the mask: `Initials-CatCode-MMYY-Counter`
+2. [ ] Code is visible immediately after saving the record in SQLite
 
 **Code Format Examples**:
 - `MK-CUP-1224-001` (Maria Klein, Cup, December 2024, 1st piece)
@@ -97,8 +97,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to see how much time is left until safe object processing.
 
 **Acceptance Criteria**:
-1. ✅ Application displays a real-time counter (Countdown)
-2. ✅ Algorithm adjusts the time based on the selected wall thickness
+1. [ ] Application displays a real-time counter (Countdown)
+2. [ ] Algorithm adjusts the time based on the selected wall thickness
 
 **Drying Time Algorithm**:
 | Wall Thickness | Drying Time |
@@ -126,8 +126,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to manually mark a stage as ready to move to the next firing phase.
 
 **Acceptance Criteria**:
-1. ✅ User can click the "Ready for Firing" button ahead of time
-2. ✅ System stops the timer and updates the status in the local database
+1. [ ] User can click the \"Ready for Firing\" button ahead of time
+2. [ ] System stops the timer and updates the status in the local database
 
 **Work Statuses**:
 - `WET` → Initial state
@@ -159,15 +159,15 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to maintain a list of my glazes to know what I have in the workshop.
 
 **Acceptance Criteria**:
-1. ✅ Ability to add name, manufacturer, and quantity description
-2. ✅ Ability to link glaze to a specific registered work
+1. [ ] Ability to add name, manufacturer, and quantity description
+2. [ ] Ability to link glaze to a specific registered work
 
 **Glaze Fields**:
 - Name (required)
 - Manufacturer (optional)
 - Color (optional)
-- Cone Rating (e.g., "Cone 6", "Cone 10")
-- Quantity (free text, e.g., "500g", "half jar")
+- Cone Rating (e.g., \"Cone 6\", \"Cone 10\")
+- Quantity (free text, e.g., \"500g\", \"half jar\")
 - Notes (optional)
 
 **Technical Notes**:
@@ -190,8 +190,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user working in the basement, I want to have access to all application functions without reception.
 
 **Acceptance Criteria**:
-1. ✅ All queries are directed to SQLite via SQLite-net-pcl
-2. ✅ Application does not block the UI due to lack of network
+1. [ ] All queries are directed to SQLite via SQLite-net-pcl
+2. [ ] Application does not block the UI due to lack of network
 
 **Technical Notes**:
 - All write operations go to local SQLite first
@@ -212,9 +212,9 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want my data to go to the cloud without my intervention after leaving the studio.
 
 **Acceptance Criteria**:
-1. ✅ Application sends new records from SQLite to PostgreSQL when a network is detected
-2. ✅ Photos are uploaded to Supabase Storage
-3. ✅ The "synchronized" flag is set to true after a successful operation
+1. [ ] Application sends new records from SQLite to PostgreSQL when a network is detected
+2. [ ] Photos are uploaded to Supabase Storage
+3. [ ] The \"synchronized\" flag is set to true after a successful operation
 
 **Sync Triggers**:
 - App comes to foreground
@@ -243,8 +243,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to check clay information in the public database.
 
 **Acceptance Criteria**:
-1. ✅ Full-text search in the public Supabase table
-2. ✅ Displaying trust tags for each entry
+1. [ ] Full-text search in the public Supabase table
+2. [ ] Displaying trust tags for each entry
 
 **Wiki Entry Fields**:
 - Material name
@@ -273,8 +273,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As an administrator/expert, I want to approve user entries so that the Wiki database is reliable.
 
 **Acceptance Criteria**:
-1. ✅ Expert sees a panel with unverified entries
-2. ✅ Ability to change the entry status to verified with one click
+1. [ ] Expert sees a panel with unverified entries
+2. [ ] Ability to change the entry status to verified with one click
 
 **Verification Levels**:
 - 🔴 Unverified (new submissions)
@@ -301,8 +301,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to see my successes visually at the end of the month.
 
 **Acceptance Criteria**:
-1. ✅ Displaying the number of successfully completed works
-2. ✅ Visualization of the Yield Rate on a pie chart
+1. [ ] Displaying the number of successfully completed works
+2. [ ] Visualization of the Yield Rate on a pie chart
 
 **Metrics to Display**:
 - Total works created
@@ -341,21 +341,21 @@ This document provides a quick reference for all user stories in the PottMaster 
 
 ```sql
 -- Works table
-CREATE POLICY "Users can only access their own works"
+CREATE POLICY \"Users can only access their own works\"
 ON works FOR ALL
 USING (auth.uid() = user_id);
 
 -- Glazes table
-CREATE POLICY "Users can only access their own glazes"
+CREATE POLICY \"Users can only access their own glazes\"
 ON glazes FOR ALL
 USING (auth.uid() = user_id);
 
 -- Wiki (public read, authenticated write)
-CREATE POLICY "Anyone can read verified wiki entries"
+CREATE POLICY \"Anyone can read verified wiki entries\"
 ON wiki_materials FOR SELECT
 USING (verified = true);
 
-CREATE POLICY "Authenticated users can submit wiki entries"
+CREATE POLICY \"Authenticated users can submit wiki entries\"
 ON wiki_materials FOR INSERT
 WITH CHECK (auth.uid() = submitted_by);
 ```
@@ -381,9 +381,9 @@ WITH CHECK (auth.uid() = submitted_by);
 
 **Acceptance Criteria**:
 1. ✅ User can select their preferred language from settings
-2. ✅ All UI text, labels, and messages are displayed in the selected language
-3. ✅ Language preference is persisted across app sessions
-4. ✅ App respects device language settings by default
+2. [ ] All UI text, labels, and messages are displayed in the selected language
+3. [ ] Language preference is persisted across app sessions
+4. [ ] App respects device language settings by default
 
 **Supported Languages (MVP)**:
 - Polish (pl) - Default
@@ -457,6 +457,6 @@ US-011 (Pottery Wrapped)
 
 ---
 
-**Last Updated**: 2025-12-30
+**Last Updated**: 2026-01-01
 **Document Owner**: Product Team
 **Review Cycle**: Sprint planning (bi-weekly)

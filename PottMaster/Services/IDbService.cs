@@ -1,4 +1,5 @@
 using SQLite;
+using PottMaster.Models;
 
 namespace PottMaster.Services;
 
@@ -10,5 +11,7 @@ public interface IDbService
     Task<int> InsertAsync<T>(T entity);
     Task<int> UpdateAsync<T>(T entity);
     Task<int> DeleteAsync<T>(T entity);
-    Task<List<T>> QueryAsync<T>(string query, params object[] args) where T : new();
+    Task<List<LocalWork>> GetWorksByUserIdAsync(string userId);
+    Task<WorkCategory?> GetWorkCategoryByIdAsync(int categoryId);
+    Task<WorkStatus?> GetWorkStatusByIdAsync(int statusId);
 }

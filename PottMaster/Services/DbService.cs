@@ -20,8 +20,7 @@ public class DbService : IDbService
 
         _database = new SQLiteAsyncConnection(_dbPath);
 
-        await _database.CreateTableAsync<UserProfiles>();
-        await _database.CreateTableAsync<Work>();
+        await _database.CreateTableAsync<LocalWork>();
         await _database.CreateTableAsync<WorkCategory>();
         await _database.CreateTableAsync<WorkStatus>();
 
@@ -104,11 +103,34 @@ public class DbService : IDbService
         return await _database!.DeleteAsync(entity);
     }
 
-    public async Task<List<T>> QueryAsync<T>(string query, params object[] args) where T : new()
+    public async Task<List<LocalWork>> GetWorksByUserIdAsync(string userId)
     {
         if (_database == null)
             await InitializeAsync();
 
-        return await _database!.QueryAsync<T>(query, args);
+        return await _database!.Table<LocalWork>()
+            .Where(work => work.UserId == userId)
+            .OrderByDescending(work => work.CreatedAt)
+            .ToListAsync();
+    }
+
+    public async Task<WorkCategory?> GetWorkCategoryByIdAsync(int categoryId)
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        return await _database!.Table<WorkCategory>()
+            .Where(category => category.Id == categoryId)
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task<WorkStatus?> GetWorkStatusByIdAsync(int statusId)
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        return await _database!.Table<WorkStatus>()
+            .Where(status => status.Id == statusId)
+            .FirstOrDefaultAsync();
     }
 }

@@ -111,9 +111,14 @@ public partial class NewWorkViewModel : ObservableObject
                 return;
             }
 
-            var profile = await _dbService.QueryAsync<UserProfiles>(
-                "SELECT * FROM user_profiles WHERE Id = ?", user.Id);
-            var userInitials = profile.FirstOrDefault()?.Initials ?? "XX";
+            var profile = await _dbService.GetByIdAsync<UserProfiles>(user.Id);
+            if (profile == null)
+            {
+                await Shell.Current.DisplayAlert("Error", "User profile not found", "OK");
+                return;
+            }
+
+            var userInitials = profile.Initials;
 
             var work = new Work
             {

@@ -10,6 +10,7 @@
 - **Development Phase**: MVP Development
 - **Timeline Goal**: Under 3 months to v1.0
 - **Primary Language**: C#
+
 ## Problem Statement
 
 Ceramic artists face several critical challenges:
@@ -28,7 +29,7 @@ PottMaster addresses these challenges through:
 - **Unique Coding System**: Automatic generation of identification codes (Initials-CatCode-MMYY-Counter)
 - **Material Cataloging**: Personal glaze inventory with stock control
 - **Knowledge Base**: Public Wiki with expert verification system
-- **Analytics**: Monthly performance reports ("Pottery Wrapped")
+- **Analytics**: Monthly performance reports (\"Pottery Wrapped\")
 
 ## Current State
 
@@ -37,18 +38,26 @@ PottMaster addresses these challenges through:
 - PRD documentation complete
 - Technology stack defined (.NET MAUI)
 - Supabase backend setup (initial schema, RLS policies, Edge functions for create-work and sync-batch)
-- Basic UI structure (MainPage and AppShell)
+- Basic UI structure (MainPage, AppShell, LoginPage, SignupPage)
 - Authentication implementation (email/password login/register with Supabase .NET client)
 - Basic navigation with Shell (Login, Signup, Main pages)
+- Domain models created (Work.cs, LocalWork.cs, UserProfiles.cs, LocalUserProfile.cs, WorkCategory.cs, WorkStatus.cs)
+- Services implemented (AuthService.cs, DbService.cs, WorkService.cs with interfaces IAuthService, IDbService, IWorkService)
+- ViewModels created (LoginViewModel.cs, SignupViewModel.cs, MainViewModel.cs, NewWorkViewModel.cs, WorkDetailViewModel.cs)
+- Localization resources initialized (AppResources.resx, AppResources.en.resx)
 - Memory bank initialized and updated for .NET MAUI
+
 ### Upcoming
-- SQLite/SQLite-net-pcl integration
-- Work registration implementation
-- Timer management for drying stages
-- Full offline support with local database
-- Supabase integration in .NET MAUI code for data sync
-- Image handling and compression
-- Glaze inventory and Wiki features
+- Full SQLite/SQLite-net-pcl integration and offline support via DbService
+- Complete work registration implementation (US-002) with photo compression and local storage
+- Unique identification code generation (US-003)
+- Process timer management (US-004)
+- Manual status correction (US-005)
+- Supabase data sync implementation (US-008)
+- Image handling and upload to Supabase Storage
+- Glaze inventory features (US-006)
+- Wiki browsing and submission (US-009)
+
 ## Project Boundaries
 
 ### Within MVP Scope ✅
@@ -81,6 +90,7 @@ PottMaster addresses these challenges through:
 - **Secondary Users**: Pottery studio managers
 - **Expert Reviewers**: Ceramics experts for Wiki verification
 - **Development Team**: .NET MAUI developers, Backend engineers
+
 ## Technical Constraints
 
 1. **Offline-First Requirement**: Must work without internet in basement studios
@@ -113,6 +123,6 @@ PottMaster addresses these challenges through:
 
 ---
 
-**Last Updated**: 2025-12-31
+**Last Updated**: 2026-01-01
 **Document Owner**: Development Team
 **Review Cycle**: Weekly during MVP phase
