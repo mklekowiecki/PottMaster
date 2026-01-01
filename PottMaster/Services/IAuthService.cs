@@ -33,7 +33,7 @@ namespace PottMaster.Services
 
         bool IsLoggedIn { get; }
 
-        Task<AuthResponse<UserProfiles>> GetUserProfileAsync();
+        Task<AuthResponse<LocalUserProfile>> GetUserProfileAsync();
         
         Task<Supabase.Gotrue.User?> GetCurrentUserAsync();
     }

@@ -118,144 +118,154 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Błąd</value>
   </data>
   <data name="Ok" xml:space="preserve">
-    <value>OK</value>
+    <value>Ok</value>
   </data>
   <data name="SignUpError" xml:space="preserve">
-    <value>Error while registering</value>
+    <value>Błąd podczas rejestracji</value>
+    <comment>Displayed when signup fails</comment>
   </data>
   <data name="Success" xml:space="preserve">
-    <value>Success</value>
+    <value>Sukces</value>
+    <comment>Displayed when signup succeeds</comment>
   </data>
   <data name="AccountCreatedPleaseLogin" xml:space="preserve">
-    <value>Account created, you can log in.</value>
+    <value>Konto utworzone, możesz się zalogować.</value>
+    <comment>Displayed after successful signup</comment>
   </data>
   <data name="LoginFailed" xml:space="preserve">
-    <value>Login failed</value>
+    <value>Błąd logowania</value>
   </data>
   <data name="ErrorLoadingProfile" xml:space="preserve">
-    <value>Error loading profile</value>
+    <value>Błąd ładowania profilu</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Loging</value>
+    <value>Logowanie</value>
   </data>
   <data name="WelcomeBack" xml:space="preserve">
-    <value>Welcome again!</value>
+    <value>Witamy ponownie!</value>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>User name</value>
+    <value>Nazwa użytkownika</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Hasło</value>
   </data>
   <data name="LoginHint" xml:space="preserve">
-    <value>Login user</value>
+    <value>Zaloguj użytkownika</value>
   </data>
   <data name="NoAccount" xml:space="preserve">
-    <value>No account yet?</value>
+    <value>Nie masz konta?</value>
   </data>
   <data name="Signup" xml:space="preserve">
-    <value>Register</value>
+    <value>Zarejestruj się</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome</value>
+    <value>Witaj!</value>
   </data>
   <data name="CreateAccount" xml:space="preserve">
-    <value>Create account</value>
+    <value>Utwórz nowe konto</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="SignUpHint" xml:space="preserve">
-    <value>Creates user account</value>
+    <value>Tworzy nowe konto użytkownika</value>
   </data>
   <data name="AlreadyHaveAccount" xml:space="preserve">
-    <value>Already have acccount? Log in</value>
+    <value>Masz już konto? Zaloguj się</value>
   </data>
   <data name="FailedToLoadWorks" xml:space="preserve">
-    <value>Failed to load works: {0}</value>
+    <value>Nieudane ładowanie prac: {0}</value>
   </data>
   <data name="NewWorkPage" xml:space="preserve">
-    <value>NewWorkPage</value>
+    <value>Nowa praca</value>
   </data>
   <data name="MyWorks" xml:space="preserve">
-    <value>My Works</value>
+    <value>Moje prace</value>
   </data>
   <data name="NoWorksYet" xml:space="preserve">
-    <value>No works yet</value>
+    <value>Brak prac</value>
   </data>
   <data name="StartByAddingWork" xml:space="preserve">
-    <value>Start by adding your first ceramic work</value>
+    <value>Rozpocznij przez dodanie pracy</value>
   </data>
   <data name="TimeLeft" xml:space="preserve">
-    <value>Time left: {0:d\d\ h\h\ m\m}</value>
+    <value>Pozostało: {0:d\d\ h\h\ m\m}</value>
   </data>
   <data name="AddNewWork" xml:space="preserve">
-    <value>Add New Work</value>
+    <value>Dodaj nową pracę</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Anuluj</value>
   </data>
   <data name="PhotoTitle" xml:space="preserve">
-    <value>Photo</value>
+    <value>Zdjęcie</value>
   </data>
   <data name="NoPhotoSelected" xml:space="preserve">
-    <value>No photo selected</value>
+    <value>Nie wybrano zdjęcia</value>
   </data>
   <data name="TakePhoto" xml:space="preserve">
-    <value>Take Photo</value>
+    <value>Zrób zdjęcie</value>
   </data>
   <data name="PickPhoto" xml:space="preserve">
-    <value>Pick Photo</value>
+    <value>Wybierz zdjęcie</value>
   </data>
   <data name="CategoryTitle" xml:space="preserve">
-    <value>Category</value>
+    <value>Kategoria</value>
   </data>
   <data name="SelectCategory" xml:space="preserve">
-    <value>Select a category</value>
+    <value>Wybierz kategorię</value>
   </data>
   <data name="WallThicknessTitle" xml:space="preserve">
-    <value>Wall Thickness</value>
+    <value>Grubość ścianki</value>
   </data>
   <data name="ThinWallLabel" xml:space="preserve">
-    <value>3mm (thin)</value>
+    <value>3 mm (cienka)</value>
   </data>
   <data name="MidWallLabel" xml:space="preserve">
-    <value>~25mm</value>
+    <value>~25 mm</value>
   </data>
   <data name="ThickWallLabel" xml:space="preserve">
-    <value>50mm (thick)</value>
+    <value>50 mm (gruba)</value>
   </data>
   <data name="EstimatedDryingTimeLabel" xml:space="preserve">
-    <value>Estimated Drying Time</value>
+    <value>Szacowany czas suszenia</value>
   </data>
   <data name="CreateWork" xml:space="preserve">
-    <value>Create Work</value>
+    <value>Utwórz pracę</value>
   </data>
   <data name="CreatingWork" xml:space="preserve">
-    <value>Creating...</value>
+    <value>Tworzenie...</value>
   </data>
-  <data name="SelectCategoryValidation" xml:space="preserve">
-    <value>Please select category</value>
+  <data name="Validation" d2p1:space="preserve" xmlns:d2p1="http://www.w3.org/XML/1998/namespace">
+    <value>Walidacja</value>
+    <comment>Validation dialog title</comment>
   </data>
-  <data name="UserNotLoggedIn" xml:space="preserve">
-    <value>User is not logged in</value>
+  <data name="SelectCategoryValidation" d2p1:space="preserve" xmlns:d2p1="http://www.w3.org/XML/1998/namespace">
+    <value>Proszę wybrać kategorię</value>
+    <comment>Validation message for category selection</comment>
   </data>
-  <data name="WorkCreated" xml:space="preserve">
-    <value>Work created with code:{0}</value>
+  <data name="WallThicknessValidation" d2p1:space="preserve" xmlns:d2p1="http://www.w3.org/XML/1998/namespace">
+    <value>Grubość ścianki musi być między 3 a 50 mm</value>
+    <comment>Validation message for wall thickness</comment>
   </data>
-  <data name="WorkCreationFailed" xml:space="preserve">
-    <value>Work creation failed: {0}</value>
+  <data name="UserNotLoggedIn" d2p1:space="preserve" xmlns:d2p1="http://www.w3.org/XML/1998/namespace">
+    <value>Użytkownik niezalogowany</value>
+    <comment>Error message when user is not authenticated</comment>
   </data>
-  <data name="Validation" xml:space="preserve">
-    <value>Validation</value>
+  <data name="UserProfileNotFound" d2p1:space="preserve" xmlns:d2p1="http://www.w3.org/XML/1998/namespace">
+    <value>Nie znaleziono profilu użytkownika</value>
+    <comment>Error message when user profile is not found</comment>
   </data>
-  <data name="WallThicknessValidation" xml:space="preserve">
-    <value>Incorrect wall thickness</value>
+  <data name="WorkCreated" d2p1:space="preserve" xmlns:d2p1="http://www.w3.org/XML/1998/namespace">
+    <value>Praca utworzona z kodem: {0}</value>
+    <comment>Success message for work creation with code</comment>
   </data>
-  <data name="UserProfileNotFound" xml:space="preserve">
-    <value>Profile not found</value>
+  <data name="WorkCreationFailed" d2p1:space="preserve" xmlns:d2p1="http://www.w3.org/XML/1998/namespace">
+    <value>Nie udało się utworzyć pracy: {0}</value>
+    <comment>Error message for work creation failure</comment>
   </data>
 </root>

@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
              xmlns:models="clr-namespace:PottMaster.Models"
+             xmlns:resources="clr-namespace:PottMaster.Resources;assembly=PottMaster"
              x:Class="PottMaster.Pages.NewWorkPage"
              x:DataType="vm:NewWorkViewModel"
-             Title="New Work">
+             Title="{x:Static resources:AppResources.NewWorkPage}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel"
+        <ToolbarItem Text="{x:Static resources:AppResources.Cancel}"
                      Command="{Binding CancelCommand}"/>
     </ContentPage.ToolbarItems>
 
@@ -28,7 +29,7 @@
 
             <!-- Photo Section -->
             <VerticalStackLayout Spacing="12">
-                <Label Text="Photo"
+                <Label Text="{x:Static resources:AppResources.PhotoTitle}"
                        FontSize="18"
                        FontAttributes="Bold"/>
                 
@@ -55,7 +56,7 @@
                         <Label Text="??"
                                FontSize="48"
                                HorizontalTextAlignment="Center"/>
-                        <Label Text="No photo selected"
+                        <Label Text="{x:Static resources:AppResources.NoPhotoSelected}"
                                FontSize="16"
                                TextColor="{StaticResource Gray600}"
                                HorizontalTextAlignment="Center"/>
@@ -65,12 +66,12 @@
                 <!-- Photo Buttons -->
                 <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
                     <Button Grid.Column="0"
-                            Text="Take Photo"
+                            Text="{x:Static resources:AppResources.TakePhoto}"
                             Command="{Binding TakePhotoCommand}"
                             BackgroundColor="{StaticResource Primary}"
                             TextColor="{StaticResource White}"/>
                     <Button Grid.Column="1"
-                            Text="Pick Photo"
+                            Text="{x:Static resources:AppResources.PickPhoto}"
                             Command="{Binding PickPhotoCommand}"
                             BackgroundColor="{StaticResource Secondary}"
                             TextColor="{StaticResource White}"/>
@@ -79,11 +80,11 @@
 
             <!-- Category Section -->
             <VerticalStackLayout Spacing="12">
-                <Label Text="Category"
+                <Label Text="{x:Static resources:AppResources.CategoryTitle}"
                        FontSize="18"
                        FontAttributes="Bold"/>
                 
-                <Picker Title="Select a category"
+                <Picker Title="{x:Static resources:AppResources.SelectCategory}"
                         ItemsSource="{Binding Categories}"
                         ItemDisplayBinding="{Binding Name}"
                         SelectedItem="{Binding SelectedCategory}"
@@ -94,7 +95,7 @@
             <!-- Wall Thickness Section -->
             <VerticalStackLayout Spacing="12">
                 <HorizontalStackLayout Spacing="8">
-                    <Label Text="Wall Thickness"
+                    <Label Text="{x:Static resources:AppResources.WallThicknessTitle}"
                            FontSize="18"
                            FontAttributes="Bold"
                            VerticalOptions="Center"/>
@@ -114,17 +115,17 @@
 
                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="4">
                     <Label Grid.Column="0"
-                           Text="3mm (thin)"
+                           Text="{x:Static resources:AppResources.ThinWallLabel}"
                            FontSize="12"
                            TextColor="{StaticResource Gray600}"
                            HorizontalOptions="Start"/>
                     <Label Grid.Column="1"
-                           Text="~25mm"
+                           Text="{x:Static resources:AppResources.MidWallLabel}"
                            FontSize="12"
                            TextColor="{StaticResource Gray600}"
                            HorizontalOptions="Center"/>
                     <Label Grid.Column="2"
-                           Text="50mm (thick)"
+                           Text="{x:Static resources:AppResources.ThickWallLabel}"
                            FontSize="12"
                            TextColor="{StaticResource Gray600}"
                            HorizontalOptions="End"/>
@@ -140,7 +141,7 @@
                                FontSize="20"
                                VerticalOptions="Center"/>
                         <VerticalStackLayout Spacing="2">
-                            <Label Text="Estimated Drying Time"
+                            <Label Text="{x:Static resources:AppResources.EstimatedDryingTimeLabel}"
                                    FontSize="12"
                                    TextColor="{StaticResource Gray600}"/>
                             <Label Text="{Binding WallThickness, Converter={StaticResource WallThicknessToDaysConverter}}"
@@ -153,9 +154,9 @@
             </VerticalStackLayout>
 
             <!-- Save Button -->
-            <Button Text="Create Work"
+            <Button Text="{x:Static resources:AppResources.CreateWork}"
                     Command="{Binding SaveWorkCommand}"
-                    IsEnabled="{Binding IsSaveEnabled}"
+                    IsEnabled="{Binding IsSaveEnabled, Mode=TwoWay}"
                     BackgroundColor="{StaticResource Primary}"
                     TextColor="{StaticResource White}"
                     HeightRequest="56"
@@ -167,7 +168,7 @@
                     <DataTrigger TargetType="Button"
                                 Binding="{Binding IsSaving}"
                                 Value="True">
-                        <Setter Property="Text" Value="Creating..."/>
+                        <Setter Property="Text" Value="{x:Static resources:AppResources.CreatingWork}"/>
                     </DataTrigger>
                 </Button.Triggers>
             </Button>

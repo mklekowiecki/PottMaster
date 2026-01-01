@@ -198,4 +198,71 @@
   <data name="AddNewWork" xml:space="preserve">
     <value>Dodaj nową pracę</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="PhotoTitle" xml:space="preserve">
+    <value>Zdjęcie</value>
+  </data>
+  <data name="NoPhotoSelected" xml:space="preserve">
+    <value>Nie wybrano zdjęcia</value>
+  </data>
+  <data name="TakePhoto" xml:space="preserve">
+    <value>Zrób zdjęcie</value>
+  </data>
+  <data name="PickPhoto" xml:space="preserve">
+    <value>Wybierz zdjęcie</value>
+  </data>
+  <data name="CategoryTitle" xml:space="preserve">
+    <value>Kategoria</value>
+  </data>
+  <data name="SelectCategory" xml:space="preserve">
+    <value>Wybierz kategorię</value>
+  </data>
+  <data name="WallThicknessTitle" xml:space="preserve">
+    <value>Grubość ścianki</value>
+  </data>
+  <data name="ThinWallLabel" xml:space="preserve">
+    <value>3 mm (cienka)</value>
+  </data>
+  <data name="MidWallLabel" xml:space="preserve">
+    <value>~25 mm</value>
+  </data>
+  <data name="ThickWallLabel" xml:space="preserve">
+    <value>50 mm (gruba)</value>
+  </data>
+  <data name="EstimatedDryingTimeLabel" xml:space="preserve">
+    <value>Szacowany czas suszenia</value>
+  </data>
+  <data name="CreateWork" xml:space="preserve">
+    <value>Utwórz pracę</value>
+  </data>
+  <data name="CreatingWork" xml:space="preserve">
+    <value>Tworzenie...</value>
+  </data>
+  <data name="SelectCategoryValidation" xml:space="preserve">
+    <value>Proszę wybrać kategorię</value>
+    <comment>Validation message for category selection</comment>
+  </data>
+  <data name="UserNotLoggedIn" xml:space="preserve">
+    <value>Użytkownik niezalogowany</value>
+    <comment>Error message when user is not authenticated</comment>
+  </data>
+  <data name="WorkCreated" xml:space="preserve">
+    <value>Praca utworzona z kodem: {0}</value>
+    <comment>Success message for work creation with code</comment>
+  </data>
+  <data name="WorkCreationFailed" xml:space="preserve">
+    <value>Nie udało się utworzyć pracy: {0}</value>
+    <comment>Error message for work creation failure</comment>
+  </data>
+  <data name="Validation" xml:space="preserve">
+    <value>Sprawdzanie</value>
+  </data>
+  <data name="WallThicknessValidation" xml:space="preserve">
+    <value>Nieprawidłowa grubość ścianki</value>
+  </data>
+  <data name="UserProfileNotFound" xml:space="preserve">
+    <value>Nie znaleziono profilu</value>
+  </data>
 </root>

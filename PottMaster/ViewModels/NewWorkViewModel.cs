@@ -132,13 +132,13 @@ public partial class NewWorkViewModel : ObservableObject
     {
         if (SelectedCategory == null)
         {
-            await Shell.Current.DisplayAlert("Walidacja", "Prosz? wybra? kategori?", AppResources.Ok);
+            await Shell.Current.DisplayAlert(AppResources.Validation, AppResources.SelectCategoryValidation, AppResources.Ok);
             return;
         }
 
         if (WallThickness < 3 || WallThickness > 50)
         {
-            await Shell.Current.DisplayAlert("Walidacja", "Grubo?? ?cianki musi by? mi?dzy 3 a 50 mm", AppResources.Ok);
+            await Shell.Current.DisplayAlert(AppResources.Validation, AppResources.WallThicknessValidation, AppResources.Ok);
             return;
         }
 
@@ -150,14 +150,14 @@ public partial class NewWorkViewModel : ObservableObject
             var user = await _authService.GetCurrentUserAsync();
             if (user?.Id == null)
             {
-                await Shell.Current.DisplayAlert(AppResources.Error, "U?ytkownik niezalogowany", AppResources.Ok);
+                await Shell.Current.DisplayAlert(AppResources.Error, AppResources.UserNotLoggedIn, AppResources.Ok);
                 return;
             }
 
             var profile = await _dbService.GetUserProfileByIdAsync(user.Id);
             if (profile == null)
             {
-                await Shell.Current.DisplayAlert(AppResources.Error, "Nie znaleziono profilu u?ytkownika", AppResources.Ok);
+                await Shell.Current.DisplayAlert(AppResources.Error, AppResources.UserProfileNotFound, AppResources.Ok);
                 return;
             }
 
@@ -175,13 +175,13 @@ public partial class NewWorkViewModel : ObservableObject
 
             var code = await _workService.CreateWorkAsync(work, userInitials);
 
-            await Shell.Current.DisplayAlert(AppResources.Success, $"Praca utworzona z kodem: {code}", AppResources.Ok);
+            await Shell.Current.DisplayAlert(AppResources.Success, string.Format(AppResources.WorkCreated, code), AppResources.Ok);
             await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {
-            ErrorMessage = $"{AppResources.Error}: {ex.Message}";
-            await Shell.Current.DisplayAlert(AppResources.Error, $"Nie uda?o si? utworzy? pracy: {ex.Message}", AppResources.Ok);
+            ErrorMessage = string.Format(AppResources.Error, ex.Message);
+            await Shell.Current.DisplayAlert(AppResources.Error, string.Format(AppResources.WorkCreationFailed, ex.Message), AppResources.Ok);
             System.Diagnostics.Debug.WriteLine($"Failed to create work: {ex.Message}");
         }
         finally

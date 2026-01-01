@@ -88,11 +88,47 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Anuluj.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kategoria.
+        /// </summary>
+        internal static string CategoryTitle {
+            get {
+                return ResourceManager.GetString("CategoryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Utwórz nowe konto.
         /// </summary>
         internal static string CreateAccount {
             get {
                 return ResourceManager.GetString("CreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Utwórz pracę.
+        /// </summary>
+        internal static string CreateWork {
+            get {
+                return ResourceManager.GetString("CreateWork", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tworzenie....
+        /// </summary>
+        internal static string CreatingWork {
+            get {
+                return ResourceManager.GetString("CreatingWork", resourceCulture);
             }
         }
         
@@ -120,6 +156,15 @@ namespace PottMaster.Resources {
         internal static string ErrorLoadingProfile {
             get {
                 return ResourceManager.GetString("ErrorLoadingProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Szacowany czas suszenia.
+        /// </summary>
+        internal static string EstimatedDryingTimeLabel {
+            get {
+                return ResourceManager.GetString("EstimatedDryingTimeLabel", resourceCulture);
             }
         }
         
@@ -160,6 +205,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ~25 mm.
+        /// </summary>
+        internal static string MidWallLabel {
+            get {
+                return ResourceManager.GetString("MidWallLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moje prace.
         /// </summary>
         internal static string MyWorks {
@@ -187,6 +241,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie wybrano zdjęcia.
+        /// </summary>
+        internal static string NoPhotoSelected {
+            get {
+                return ResourceManager.GetString("NoPhotoSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brak prac.
         /// </summary>
         internal static string NoWorksYet {
@@ -210,6 +273,42 @@ namespace PottMaster.Resources {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zdjęcie.
+        /// </summary>
+        internal static string PhotoTitle {
+            get {
+                return ResourceManager.GetString("PhotoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wybierz zdjęcie.
+        /// </summary>
+        internal static string PickPhoto {
+            get {
+                return ResourceManager.GetString("PickPhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wybierz kategorię.
+        /// </summary>
+        internal static string SelectCategory {
+            get {
+                return ResourceManager.GetString("SelectCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proszę wybrać kategorię.
+        /// </summary>
+        internal static string SelectCategoryValidation {
+            get {
+                return ResourceManager.GetString("SelectCategoryValidation", resourceCulture);
             }
         }
         
@@ -259,6 +358,33 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zrób zdjęcie.
+        /// </summary>
+        internal static string TakePhoto {
+            get {
+                return ResourceManager.GetString("TakePhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 50 mm (gruba).
+        /// </summary>
+        internal static string ThickWallLabel {
+            get {
+                return ResourceManager.GetString("ThickWallLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 mm (cienka).
+        /// </summary>
+        internal static string ThinWallLabel {
+            get {
+                return ResourceManager.GetString("ThinWallLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pozostało: {0:d\d\ h\h\ m\m}.
         /// </summary>
         internal static string TimeLeft {
@@ -277,6 +403,51 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Użytkownik niezalogowany.
+        /// </summary>
+        internal static string UserNotLoggedIn {
+            get {
+                return ResourceManager.GetString("UserNotLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie znaleziono profilu.
+        /// </summary>
+        internal static string UserProfileNotFound {
+            get {
+                return ResourceManager.GetString("UserProfileNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sprawdzanie.
+        /// </summary>
+        internal static string Validation {
+            get {
+                return ResourceManager.GetString("Validation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grubość ścianki.
+        /// </summary>
+        internal static string WallThicknessTitle {
+            get {
+                return ResourceManager.GetString("WallThicknessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nieprawidłowa grubość ścianki.
+        /// </summary>
+        internal static string WallThicknessValidation {
+            get {
+                return ResourceManager.GetString("WallThicknessValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Witaj!.
         /// </summary>
         internal static string Welcome {
@@ -291,6 +462,24 @@ namespace PottMaster.Resources {
         internal static string WelcomeBack {
             get {
                 return ResourceManager.GetString("WelcomeBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Praca utworzona z kodem: {0}.
+        /// </summary>
+        internal static string WorkCreated {
+            get {
+                return ResourceManager.GetString("WorkCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie udało się utworzyć pracy: {0}.
+        /// </summary>
+        internal static string WorkCreationFailed {
+            get {
+                return ResourceManager.GetString("WorkCreationFailed", resourceCulture);
             }
         }
     }

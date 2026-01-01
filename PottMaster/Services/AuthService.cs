@@ -32,7 +32,6 @@ public class AuthService : IAuthService
 
             if (session?.User != null)
             {
-                await CacheUserProfileAsync(session.User.Id);
                 _logger.LogInformation("User signed in: {Email}", email);
             }
 
@@ -102,21 +101,18 @@ public class AuthService : IAuthService
         }
     }
 
-    public async Task<AuthResponse<UserProfiles>> GetUserProfileAsync()
+    public async Task<AuthResponse<LocalUserProfile>> GetUserProfileAsync()
     {
         try
         {
             var userId = _client.Auth.CurrentUser!.Id;
             var email = _client.Auth.CurrentUser!.Email;
 
-            var response = await _client
-                .From<UserProfiles>()
-                .Where(x => x.Id == userId)
-                .Single();
+            var response = await _dbService.GetUserProfileByIdAsync(userId!);
 
             if (response == null)
             {
-                var newProfile = new UserProfiles
+                var newProfile = new LocalUserProfile
                 {
                     Id = userId,
                     Email = email!,
@@ -124,22 +120,22 @@ public class AuthService : IAuthService
                     CreatedAt = DateTime.UtcNow
                 };
 
-                var insertResponse = await _client.From<UserProfiles>().Insert(newProfile);
-                if (insertResponse == null || insertResponse.Models.Count == 0)
+                var insertResponse = await _dbService.UpsertUserProfileAsync(newProfile);
+                if (insertResponse <= 0)
                 {
-                    return new AuthResponse<UserProfiles> { Result = AuthResult.ProfileCreationFailed, ErrorMessage = "Failed to create user profile." };
+                    return new AuthResponse<LocalUserProfile> { Result = AuthResult.ProfileCreationFailed, ErrorMessage = "Failed to create user profile." };
                 }
 
                 _logger.LogInformation("User profile created for: {UserId}", userId);
-                return new AuthResponse<UserProfiles> { Result = AuthResult.Success, Data = insertResponse.Models.First() };
+                return new AuthResponse<LocalUserProfile> { Result = AuthResult.Success, Data = newProfile };
             }
 
-            return new AuthResponse<UserProfiles> { Result = AuthResult.Success, Data = response };
+            return new AuthResponse<LocalUserProfile> { Result = AuthResult.Success, Data = response };
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to get user profile");
-            return new AuthResponse<UserProfiles> { Result = AuthResult.UnknownError, ErrorMessage = ex.Message };
+            return new AuthResponse<LocalUserProfile> { Result = AuthResult.UnknownError, ErrorMessage = ex.Message };
         }
     }
 
@@ -156,33 +152,4 @@ public class AuthService : IAuthService
         }
     }
 
-    private async Task CacheUserProfileAsync(string userId)
-    {
-        try
-        {
-            var response = await _client.From<UserProfiles>()
-                .Where(x => x.Id == userId)
-                .Single();
-
-            if (response != null)
-            {
-                var localProfile = new LocalUserProfile
-                {
-                    Id = response.Id,
-                    Email = response.Email,
-                    Initials = response.Initials,
-                    CreatedAt = response.CreatedAt,
-                    Preferences = "{}",
-                    UpdatedAt = DateTime.UtcNow
-                };
-
-                await _dbService.UpsertUserProfileAsync(localProfile);
-                _logger.LogInformation("User profile cached for: {UserId}", userId);
-            }
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Failed to cache user profile: {UserId}", userId);
-        }
-    }
 }

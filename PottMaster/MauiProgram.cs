@@ -32,7 +32,7 @@
                          AutoRefreshToken = true,
                          AutoConnectRealtime = true
                      });
-                client.InitializeAsync().Wait(); // Ensure initialization is complete
+				client.InitializeAsync();
 				return client;
 			});
 
