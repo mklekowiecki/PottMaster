@@ -16,6 +16,8 @@
             <converters:IsNullConverter x:Key="IsNullConverter"/>
             <converters:IsNotNullConverter x:Key="IsNotNullConverter"/>
             <converters:WallThicknessToDaysConverter x:Key="WallThicknessToDaysConverter"/>
+            <converters:WorkCategoryCodeToLocalizedConverter x:Key="WorkCategoryCodeToLocalizedConverter"/>
+            <converters:WorkStatusCodeToLocalizedConverter x:Key="WorkStatusCodeToLocalizedConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

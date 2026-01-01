@@ -86,10 +86,13 @@
                 
                 <Picker Title="{x:Static resources:AppResources.SelectCategory}"
                         ItemsSource="{Binding Categories}"
-                        ItemDisplayBinding="{Binding Name}"
                         SelectedItem="{Binding SelectedCategory}"
                         FontSize="16"
-                        BackgroundColor="{StaticResource White}"/>
+                        BackgroundColor="{StaticResource White}">
+                    <Picker.ItemDisplayBinding>
+                        <Binding Path="Code" Converter="{StaticResource WorkCategoryCodeToLocalizedConverter}"/>
+                    </Picker.ItemDisplayBinding>
+                </Picker>
             </VerticalStackLayout>
 
             <!-- Wall Thickness Section -->
@@ -132,10 +135,8 @@
                 </Grid>
 
                 <!-- Drying Time Estimate -->
-                <Frame Padding="12"
-                       BackgroundColor="{StaticResource Gray100}"
-                       CornerRadius="8"
-                       BorderColor="{StaticResource Gray300}">
+                <Border Padding="12"
+                       BackgroundColor="{StaticResource Gray100}">
                     <HorizontalStackLayout Spacing="8">
                         <Label Text="??"
                                FontSize="20"
@@ -150,7 +151,7 @@
                                    TextColor="{StaticResource Primary}"/>
                         </VerticalStackLayout>
                     </HorizontalStackLayout>
-                </Frame>
+                </Border>
             </VerticalStackLayout>
 
             <!-- Save Button -->

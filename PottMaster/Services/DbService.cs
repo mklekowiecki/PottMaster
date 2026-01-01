@@ -51,14 +51,14 @@ public class DbService : IDbService
         {
             var statuses = new[]
             {
-                new WorkStatus { Id = 1, Name = "Wet" },
-                new WorkStatus { Id = 2, Name = "Leather Hard" },
-                new WorkStatus { Id = 3, Name = "Bone Dry" },
-                new WorkStatus { Id = 4, Name = "Bisque Fired" },
-                new WorkStatus { Id = 5, Name = "Glazed" },
-                new WorkStatus { Id = 6, Name = "Glaze Fired" },
-                new WorkStatus { Id = 7, Name = "Completed" },
-                new WorkStatus { Id = 8, Name = "Discarded" }
+                new WorkStatus { Id = 1, Code = "WET", Name = "Wet" },
+                new WorkStatus { Id = 2, Code = "LEATHER_HARD", Name = "Leather Hard" },
+                new WorkStatus { Id = 3, Code = "BONE_DRY", Name = "Bone Dry" },
+                new WorkStatus { Id = 4, Code = "BISQUE_FIRED", Name = "Bisque Fired" },
+                new WorkStatus { Id = 5, Code = "GLAZED", Name = "Glazed" },
+                new WorkStatus { Id = 6, Code = "GLAZE_FIRED", Name = "Glaze Fired" },
+                new WorkStatus { Id = 7, Code = "COMPLETED", Name = "Completed" },
+                new WorkStatus { Id = 8, Code = "DISCARDED", Name = "Discarded" }
             };
             await _database.InsertAllAsync(statuses);
         }

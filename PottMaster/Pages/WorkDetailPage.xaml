@@ -87,7 +87,7 @@
                             <Label Text="{x:Static resx:AppResources.Category}"
                                    FontSize="12"
                                    TextColor="{StaticResource Gray600}"/>
-                            <Label Text="{Binding CurrentWork.CategoryName}"
+                            <Label Text="{Binding CurrentWork.CategoryCode, Converter={StaticResource WorkCategoryCodeToLocalizedConverter}}"
                                    FontSize="16"
                                    FontAttributes="Bold"/>
                         </VerticalStackLayout>
@@ -103,7 +103,7 @@
                             <Label Text="{x:Static resx:AppResources.Status}"
                                    FontSize="12"
                                    TextColor="{StaticResource Gray600}"/>
-                            <Label Text="{Binding CurrentWork.StatusName}"
+                            <Label Text="{Binding CurrentWork.StatusCode, Converter={StaticResource WorkStatusCodeToLocalizedConverter}}"
                                    FontSize="16"
                                    FontAttributes="Bold"
                                    TextColor="{StaticResource Primary}"/>

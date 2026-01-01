@@ -52,6 +52,7 @@ public partial class WorkDetailViewModel : ObservableObject
             CurrentWork = await _workService.GetWorkByIdAsync(WorkId);
             var statusesList = await _workService.GetStatusesAsync();
             Statuses = new ObservableCollection<WorkStatus>(statusesList);
+            CurrentWork!.StatusCode = Statuses.Where(s=>s.Id == CurrentWork.StatusId).Select(s=>s.Code).FirstOrDefault() ?? string.Empty;
         }
         catch (Exception ex)
         {
@@ -81,7 +82,7 @@ public partial class WorkDetailViewModel : ObservableObject
             if (confirm)
             {
                 CurrentWork.StatusId = nextStatus.Id;
-                CurrentWork.StatusName = nextStatus.Name;
+                CurrentWork.StatusCode = nextStatus.Code;
 
                 if (nextStatus.Id == 3)
                 {

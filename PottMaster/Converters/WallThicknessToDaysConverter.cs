@@ -1,4 +1,6 @@
+using PottMaster.Resources;
 using System.Globalization;
+using System.Resources;
 
 namespace PottMaster.Converters;
 
@@ -15,8 +17,10 @@ public class WallThicknessToDaysConverter : IValueConverter
                 <= 15 => 10,
                 _ => 14
             };
-            
-            return $"{days} days";
+            var resourceManager = AppResources.ResourceManager;
+            var localizedValue = resourceManager.GetString("DryingDays", culture);
+
+            return $"{days} {localizedValue}";
         }
 
         return "0 days";

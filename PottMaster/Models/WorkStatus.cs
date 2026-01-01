@@ -10,4 +10,7 @@ public class WorkStatus
 
     [Unique]
     public string Name { get; set; } = string.Empty;
+
+    [Unique]
+    public string Code { get; set; } = string.Empty;
 }

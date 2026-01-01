@@ -33,10 +33,10 @@ public class Work
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     [Ignore]
-    public string CategoryName { get; set; } = string.Empty;
+    public string CategoryCode { get; set; } = string.Empty;
 
     [Ignore]
-    public string StatusName { get; set; } = string.Empty;
+    public string StatusCode { get; set; } = string.Empty;
 
     [Ignore]
     public TimeSpan? RemainingDryingTime

@@ -223,6 +223,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to dni.
+        /// </summary>
+        internal static string DryingDays {
+            get {
+                return ResourceManager.GetString("DryingDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rozpoczęto: {0:d\d\ h\h\ m\m}.
         /// </summary>
         internal static string DryingStartedFormat {
@@ -637,6 +646,69 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Miska.
+        /// </summary>
+        internal static string WorkCategory_BOWL {
+            get {
+                return ResourceManager.GetString("WorkCategory_BOWL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kubek.
+        /// </summary>
+        internal static string WorkCategory_CUP {
+            get {
+                return ResourceManager.GetString("WorkCategory_CUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inne.
+        /// </summary>
+        internal static string WorkCategory_OTHER {
+            get {
+                return ResourceManager.GetString("WorkCategory_OTHER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Talerz.
+        /// </summary>
+        internal static string WorkCategory_PLATE {
+            get {
+                return ResourceManager.GetString("WorkCategory_PLATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rzeźba.
+        /// </summary>
+        internal static string WorkCategory_SCULPTURE {
+            get {
+                return ResourceManager.GetString("WorkCategory_SCULPTURE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Płytka.
+        /// </summary>
+        internal static string WorkCategory_TILE {
+            get {
+                return ResourceManager.GetString("WorkCategory_TILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wazon.
+        /// </summary>
+        internal static string WorkCategory_VASE {
+            get {
+                return ResourceManager.GetString("WorkCategory_VASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kod pracy.
         /// </summary>
         internal static string WorkCode {
@@ -669,6 +741,78 @@ namespace PottMaster.Resources {
         internal static string WorkDetails {
             get {
                 return ResourceManager.GetString("WorkDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Biszkwit.
+        /// </summary>
+        internal static string WorkStatus_BISQUE_FIRED {
+            get {
+                return ResourceManager.GetString("WorkStatus_BISQUE_FIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Koścista sucha.
+        /// </summary>
+        internal static string WorkStatus_BONE_DRY {
+            get {
+                return ResourceManager.GetString("WorkStatus_BONE_DRY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ukończona.
+        /// </summary>
+        internal static string WorkStatus_COMPLETED {
+            get {
+                return ResourceManager.GetString("WorkStatus_COMPLETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odrzucona.
+        /// </summary>
+        internal static string WorkStatus_DISCARDED {
+            get {
+                return ResourceManager.GetString("WorkStatus_DISCARDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wypalona z glazurą.
+        /// </summary>
+        internal static string WorkStatus_GLAZE_FIRED {
+            get {
+                return ResourceManager.GetString("WorkStatus_GLAZE_FIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Glazurowana.
+        /// </summary>
+        internal static string WorkStatus_GLAZED {
+            get {
+                return ResourceManager.GetString("WorkStatus_GLAZED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skórzasta.
+        /// </summary>
+        internal static string WorkStatus_LEATHER_HARD {
+            get {
+                return ResourceManager.GetString("WorkStatus_LEATHER_HARD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mokra.
+        /// </summary>
+        internal static string WorkStatus_WET {
+            get {
+                return ResourceManager.GetString("WorkStatus_WET", resourceCulture);
             }
         }
         

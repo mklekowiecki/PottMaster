@@ -324,4 +324,67 @@
   <data name="DryingCompletedAtFormat" xml:space="preserve">
     <value>Completed at: {0:d\d\ h\h\ m\m}</value>
   </data>
+  <data name="WorkCategory_CUP" xml:space="preserve">
+    <value>Cup</value>
+    <comment>Work category: Cup</comment>
+  </data>
+  <data name="WorkCategory_BOWL" xml:space="preserve">
+    <value>Bowl</value>
+    <comment>Work category: Bowl</comment>
+  </data>
+  <data name="WorkCategory_VASE" xml:space="preserve">
+    <value>Vase</value>
+    <comment>Work category: Vase</comment>
+  </data>
+  <data name="WorkCategory_PLATE" xml:space="preserve">
+    <value>Plate</value>
+    <comment>Work category: Plate</comment>
+  </data>
+  <data name="WorkCategory_SCULPTURE" xml:space="preserve">
+    <value>Sculpture</value>
+    <comment>Work category: Sculpture</comment>
+  </data>
+  <data name="WorkCategory_TILE" xml:space="preserve">
+    <value>Tile</value>
+    <comment>Work category: Tile</comment>
+  </data>
+  <data name="WorkCategory_OTHER" xml:space="preserve">
+    <value>Other</value>
+    <comment>Work category: Other</comment>
+  </data>
+  <data name="WorkStatus_WET" xml:space="preserve">
+    <value>Wet</value>
+    <comment>Work status: Wet clay</comment>
+  </data>
+  <data name="WorkStatus_LEATHER_HARD" xml:space="preserve">
+    <value>Leather Hard</value>
+    <comment>Work status: Leather hard</comment>
+  </data>
+  <data name="WorkStatus_BONE_DRY" xml:space="preserve">
+    <value>Bone Dry</value>
+    <comment>Work status: Bone dry</comment>
+  </data>
+  <data name="WorkStatus_BISQUE_FIRED" xml:space="preserve">
+    <value>Bisque Fired</value>
+    <comment>Work status: Bisque fired</comment>
+  </data>
+  <data name="WorkStatus_GLAZED" xml:space="preserve">
+    <value>Glazed</value>
+    <comment>Work status: Glazed</comment>
+  </data>
+  <data name="WorkStatus_GLAZE_FIRED" xml:space="preserve">
+    <value>Glaze Fired</value>
+    <comment>Work status: Glaze fired</comment>
+  </data>
+  <data name="WorkStatus_COMPLETED" xml:space="preserve">
+    <value>Completed</value>
+    <comment>Work status: Completed</comment>
+  </data>
+  <data name="WorkStatus_DISCARDED" xml:space="preserve">
+    <value>Discarded</value>
+    <comment>Work status: Discarded</comment>
+  </data>
+  <data name="DryingDays" xml:space="preserve">
+    <value>days</value>
+  </data>
 </root>

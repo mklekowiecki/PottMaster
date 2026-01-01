@@ -25,10 +25,10 @@ public class LocalWorkRepository : IWorkRepository
             foreach (var localWork in localWorks)
             {
                 var category = await _dbService.GetWorkCategoryByIdAsync(localWork.CategoryId);
-                localWork.CategoryName = category?.Name ?? "Unknown";
+                localWork.CategoryCode = category?.Code ?? "";
                 
                 var status = await _dbService.GetWorkStatusByIdAsync(localWork.StatusId);
-                localWork.StatusName = status?.Name ?? "Unknown";
+                localWork.StatusCode = status?.Code ?? "";
                 
                 works.Add(MapToWork(localWork));
             }
@@ -54,10 +54,10 @@ public class LocalWorkRepository : IWorkRepository
             }
             
             var category = await _dbService.GetWorkCategoryByIdAsync(localWork.CategoryId);
-            localWork.CategoryName = category?.Name ?? "Unknown";
+            localWork.CategoryCode = category?.Code ?? "";
             
             var status = await _dbService.GetWorkStatusByIdAsync(localWork.StatusId);
-            localWork.StatusName = status?.Name ?? "Unknown";
+            localWork.StatusCode = status?.Code ?? "";
             
             return Result<Work>.Success(MapToWork(localWork));
         }
@@ -190,8 +190,8 @@ public class LocalWorkRepository : IWorkRepository
             DryingCompletedAt = localWork.DryingCompletedAt,
             SyncStatus = localWork.SyncStatus,
             UpdatedAt = localWork.UpdatedAt,
-            CategoryName = localWork.CategoryName,
-            StatusName = localWork.StatusName
+            CategoryCode = localWork.CategoryCode,
+            StatusCode = localWork.StatusCode
         };
     }
     
