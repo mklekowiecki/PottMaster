@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PottMaster.Models;
+using PottMaster.Resources;
 using PottMaster.Services;
 using System.Collections.ObjectModel;
 
@@ -10,6 +11,8 @@ namespace PottMaster.ViewModels;
 public partial class WorkDetailViewModel : ObservableObject
 {
     private readonly IWorkService _workService;
+    private readonly IErrorHandlingService _errorHandler;
+    private readonly IAlertService _alertService;
 
     [ObservableProperty]
     private string? workId;
@@ -23,9 +26,11 @@ public partial class WorkDetailViewModel : ObservableObject
     [ObservableProperty]
     private bool isLoading;
 
-    public WorkDetailViewModel(IWorkService workService)
+    public WorkDetailViewModel(IWorkService workService, IErrorHandlingService errorHandler, IAlertService alertService)
     {
         _workService = workService;
+        _errorHandler = errorHandler;
+        _alertService = alertService;
     }
 
     partial void OnWorkIdChanged(string? value)
@@ -50,7 +55,7 @@ public partial class WorkDetailViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to load work: {ex.Message}", "OK");
+            await _errorHandler.HandleErrorAsync(ex, nameof(LoadWorkAsync));
         }
         finally
         {
@@ -68,10 +73,10 @@ public partial class WorkDetailViewModel : ObservableObject
         if (currentStatusIndex >= 0 && currentStatusIndex < Statuses.Count - 1)
         {
             var nextStatus = Statuses[currentStatusIndex + 1];
-            var confirm = await Shell.Current.DisplayAlert(
-                "Change Status",
-                $"Move work to '{nextStatus.Name}' status?",
-                "Yes", "No");
+            var confirm = await _alertService.ShowConfirmationAsync(
+                AppResources.ChangeStatusTitle,
+                string.Format(AppResources.ConfirmChangeStatusMessage, nextStatus.Name),
+                AppResources.Yes, AppResources.No);
 
             if (confirm)
             {
@@ -95,15 +100,22 @@ public partial class WorkDetailViewModel : ObservableObject
         if (CurrentWork == null)
             return;
 
-        var confirm = await Shell.Current.DisplayAlert(
-            "Delete Work",
-            "Are you sure you want to delete this work?",
-            "Delete", "Cancel");
+        var confirm = await _alertService.ShowConfirmationAsync(
+            AppResources.DeleteWorkTitle,
+            AppResources.ConfirmDeleteWorkMessage,
+            AppResources.Delete, AppResources.Cancel);
 
         if (confirm)
         {
-            await _workService.DeleteWorkAsync(CurrentWork.Id);
-            await Shell.Current.GoToAsync("..");
+            try
+            {
+                await _workService.DeleteWorkAsync(CurrentWork.Id);
+                await Shell.Current.GoToAsync("..");
+            }
+            catch (Exception ex)
+            {
+                await _errorHandler.HandleErrorAsync(ex, nameof(DeleteWorkAsync));
+            }
         }
     }
 

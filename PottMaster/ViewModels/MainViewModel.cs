@@ -99,9 +99,9 @@ public partial class MainViewModel : ObservableObject
         {
             var parameters = new Dictionary<string, object>
             {
-                { "WorkId", work.Id }
+                { "workId", work.Id }
             };
-            await Shell.Current.GoToAsync("", parameters);
+            await Shell.Current.GoToAsync("WorkDetailPage", parameters);
         }
     }
 }

@@ -13,6 +13,7 @@ namespace PottMaster
             InitializeComponent();
             
             Routing.RegisterRoute(nameof(NewWorkPage), typeof(NewWorkPage));
+            Routing.RegisterRoute(nameof(WorkDetailPage), typeof(WorkDetailPage));
         }
         
         protected override void OnHandlerChanged()

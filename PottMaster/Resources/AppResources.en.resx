@@ -258,4 +258,70 @@
   <data name="UserProfileNotFound" xml:space="preserve">
     <value>Profile not found</value>
   </data>
+  <data name="ChangeStatusTitle" xml:space="preserve">
+    <value>Change status</value>
+  </data>
+  <data name="ConfirmChangeStatusMessage" xml:space="preserve">
+    <value>Do you confirm status change?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="DeleteWorkTitle" xml:space="preserve">
+    <value>Deletion</value>
+  </data>
+  <data name="ConfirmDeleteWorkMessage" xml:space="preserve">
+    <value>Do you really want to delete work?</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="WorkDetails" xml:space="preserve">
+    <value>Work details</value>
+  </data>
+  <data name="NoPhoto" xml:space="preserve">
+    <value>No photo</value>
+  </data>
+  <data name="WorkCode" xml:space="preserve">
+    <value>Work code</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="WallThickness" xml:space="preserve">
+    <value>Wall Thickness</value>
+  </data>
+  <data name="SyncStatus" xml:space="preserve">
+    <value>Sync status</value>
+  </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>Created at</value>
+  </data>
+  <data name="UpdatedAt" xml:space="preserve">
+    <value>Updated at</value>
+  </data>
+  <data name="DryingTime" xml:space="preserve">
+    <value>Drying time</value>
+  </data>
+  <data name="DryingStartedFormat" xml:space="preserve">
+    <value>Started: {0:d\d\ h\h\ m\m}</value>
+  </data>
+  <data name="DryingCompleted" xml:space="preserve">
+    <value>Drying completed</value>
+  </data>
+  <data name="ChangeStatus" xml:space="preserve">
+    <value>Change status</value>
+  </data>
+  <data name="GoBack" xml:space="preserve">
+    <value>Go back</value>
+  </data>
+  <data name="DryingCompletedAtFormat" xml:space="preserve">
+    <value>Completed at: {0:d\d\ h\h\ m\m}</value>
+  </data>
 </root>

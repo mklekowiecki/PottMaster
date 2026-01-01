@@ -20,7 +20,7 @@
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				});
-			
+
 			// Register Supabase Client as Singleton
 			builder.Services.AddSingleton<Supabase.Client>(sp =>
 			{
@@ -46,6 +46,9 @@
 			builder.Services.AddSingleton<IAuthService, AuthService>();
 			builder.Services.AddSingleton<IAuthStateService, AuthStateService>();
 			
+			// UI Services (Transient - per operation)
+			builder.Services.AddTransient<IAlertService, AlertService>();
+			
 			// Repository Pattern (Scoped - per operation context)
 			builder.Services.AddScoped<IWorkRepository, LocalWorkRepository>();
 			
@@ -64,6 +67,7 @@
 			builder.Services.AddTransient<NewWorkPage>();
 			builder.Services.AddTransient<LoginPage>();
 			builder.Services.AddTransient<SignupPage>();
+			builder.Services.AddTransient<WorkDetailPage>();
 
 #if DEBUG
 			builder.Logging.AddDebug();

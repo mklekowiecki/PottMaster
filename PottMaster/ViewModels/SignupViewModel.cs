@@ -10,6 +10,7 @@ public partial class SignupViewModel : ObservableObject
 {
     private readonly IAuthService _authService;
     private readonly IErrorHandlingService _errorHandler;
+    private readonly IAlertService _alertService;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsSignupEnabled))]
@@ -25,10 +26,11 @@ public partial class SignupViewModel : ObservableObject
 
     public bool IsSignupEnabled => !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && !IsBusy;
 
-    public SignupViewModel(IAuthService authService, IErrorHandlingService errorHandler)
+    public SignupViewModel(IAuthService authService, IErrorHandlingService errorHandler, IAlertService alertService)
     {
         _authService = authService;
         _errorHandler = errorHandler;
+        _alertService = alertService;
     }
 
     [RelayCommand(CanExecute = nameof(IsSignupEnabled))]
@@ -40,10 +42,10 @@ public partial class SignupViewModel : ObservableObject
             var signupResult = await _authService.SignUpAsync(Email, Password);
             if (signupResult.Result != AuthResult.Success)
             {
-                await Application.Current!.Windows[0].Page!.DisplayAlert(AppResources.Error, AppResources.SignUpError, AppResources.Ok);
+                await _alertService.ShowAlertAsync(AppResources.Error, AppResources.SignUpError);
                 return;
             }
-            await Application.Current!.Windows[0].Page!.DisplayAlert(AppResources.Success, AppResources.AccountCreatedPleaseLogin, AppResources.Ok);
+            await _alertService.ShowAlertAsync(AppResources.Success, AppResources.AccountCreatedPleaseLogin);
             await Shell.Current.GoToAsync("//LoginPage");
         }
         catch (Exception ex)

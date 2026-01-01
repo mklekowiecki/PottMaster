@@ -13,6 +13,7 @@ public partial class NewWorkViewModel : ObservableObject
     private readonly IAuthService _authService;
     private readonly IDbService _dbService;
     private readonly IImageService _imageService;
+    private readonly IAlertService _alertService;
 
     [ObservableProperty]
     private ObservableCollection<WorkCategory> categories = [];
@@ -40,12 +41,13 @@ public partial class NewWorkViewModel : ObservableObject
 
     public bool IsSaveEnabled => !isSaving && !isLoading && selectedCategory != null && wallThickness >= 3 && wallThickness <= 50;
 
-    public NewWorkViewModel(IWorkService workService, IAuthService authService, IDbService dbService, IImageService imageService)
+    public NewWorkViewModel(IWorkService workService, IAuthService authService, IDbService dbService, IImageService imageService, IAlertService alertService)
     {
         _workService = workService;
         _authService = authService;
         _dbService = dbService;
         _imageService = imageService;
+        _alertService = alertService;
     }
 
     public async Task InitializeAsync()
@@ -132,13 +134,13 @@ public partial class NewWorkViewModel : ObservableObject
     {
         if (SelectedCategory == null)
         {
-            await Shell.Current.DisplayAlert(AppResources.Validation, AppResources.SelectCategoryValidation, AppResources.Ok);
+            await _alertService.ShowAlertAsync(AppResources.Validation, AppResources.SelectCategoryValidation);
             return;
         }
 
         if (WallThickness < 3 || WallThickness > 50)
         {
-            await Shell.Current.DisplayAlert(AppResources.Validation, AppResources.WallThicknessValidation, AppResources.Ok);
+            await _alertService.ShowAlertAsync(AppResources.Validation, AppResources.WallThicknessValidation);
             return;
         }
 
@@ -150,14 +152,14 @@ public partial class NewWorkViewModel : ObservableObject
             var user = await _authService.GetCurrentUserAsync();
             if (user?.Id == null)
             {
-                await Shell.Current.DisplayAlert(AppResources.Error, AppResources.UserNotLoggedIn, AppResources.Ok);
+                await _alertService.ShowAlertAsync(AppResources.Error, AppResources.UserNotLoggedIn);
                 return;
             }
 
             var profile = await _dbService.GetUserProfileByIdAsync(user.Id);
             if (profile == null)
             {
-                await Shell.Current.DisplayAlert(AppResources.Error, AppResources.UserProfileNotFound, AppResources.Ok);
+                await _alertService.ShowAlertAsync(AppResources.Error, AppResources.UserProfileNotFound);
                 return;
             }
 
@@ -175,13 +177,13 @@ public partial class NewWorkViewModel : ObservableObject
 
             var code = await _workService.CreateWorkAsync(work, userInitials);
 
-            await Shell.Current.DisplayAlert(AppResources.Success, string.Format(AppResources.WorkCreated, code), AppResources.Ok);
+            await _alertService.ShowAlertAsync(AppResources.Success, string.Format(AppResources.WorkCreated, code));
             await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {
             ErrorMessage = string.Format(AppResources.Error, ex.Message);
-            await Shell.Current.DisplayAlert(AppResources.Error, string.Format(AppResources.WorkCreationFailed, ex.Message), AppResources.Ok);
+            await _alertService.ShowAlertAsync(AppResources.Error, string.Format(AppResources.WorkCreationFailed, ex.Message));
             System.Diagnostics.Debug.WriteLine($"Failed to create work: {ex.Message}");
         }
         finally
