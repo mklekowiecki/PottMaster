@@ -24,10 +24,18 @@
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				});
+			
+			// Services
 			builder.Services.AddSingleton<IAuthService, AuthService>();
+			builder.Services.AddSingleton<IDbService, DbService>();
+			builder.Services.AddSingleton<IWorkService, WorkService>();
+			
+			// ViewModels
 			builder.Services.AddTransient<LoginViewModel>();
 			builder.Services.AddTransient<SignupViewModel>();
 			builder.Services.AddTransient<MainViewModel>();
+			builder.Services.AddTransient<NewWorkViewModel>();
+			builder.Services.AddTransient<WorkDetailViewModel>();
 
 #if DEBUG
 			builder.Logging.AddDebug();

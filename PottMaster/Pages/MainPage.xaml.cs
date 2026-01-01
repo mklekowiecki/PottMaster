@@ -6,11 +6,19 @@ namespace PottMaster
 {
     public partial class MainPage : ContentPage
     {
+        private readonly MainViewModel _viewModel;
+
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = App.Services.GetRequiredService<MainViewModel>();
+            _viewModel = App.Services.GetRequiredService<MainViewModel>();
+            BindingContext = _viewModel;
         }
 
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await _viewModel.InitializeAsync();
+        }
     }
 }

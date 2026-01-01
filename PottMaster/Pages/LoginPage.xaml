@@ -2,17 +2,66 @@
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:PottMaster.Resources"
-             Title="{x:Static resx:AppResources.Login}">
+             Title="{x:Static resx:AppResources.Login}"
+             Shell.NavBarIsVisible="False">
     <ScrollView>
         <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
-            <Label Text="PottMaster" SemanticProperties.HeadingLevel="Level1" Style="{StaticResource HeadingLabel}" />
-            <Label Text="{x:Static resx:AppResources.WelcomeBack}" FontSize="32" HorizontalOptions="Center" />
-            <Entry Placeholder="{x:Static resx:AppResources.Username}" Text="{Binding Email, Mode=TwoWay}" Style="{StaticResource ModernEntry}" />
-            <Entry Placeholder="{x:Static resx:AppResources.Password}" Text="{Binding Password, Mode=TwoWay}" IsPassword="true" Style="{StaticResource ModernEntry}" />
-            <Button Text="{x:Static resx:AppResources.Login}" Command="{Binding LoginCommand}" IsEnabled="{Binding IsLoginEnabled}" SemanticProperties.Hint="{x:Static resx:AppResources.LoginHint}" />
-            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}" Color="Gray" HorizontalOptions="Center" />
-            <Label Text="{x:Static resx:AppResources.NoAccount}" HorizontalOptions="Center" Opacity="0.6" />
-            <Button Text="{x:Static resx:AppResources.Signup}" Command="{Binding SignupCommand}" SemanticProperties.Hint="{x:Static resx:AppResources.SignUpHint}" />
+            <Label Text="PottMaster" 
+                   SemanticProperties.HeadingLevel="Level1" 
+                   Style="{StaticResource HeadingLabel}" 
+                   Margin="0,40,0,0" />
+            
+            <Label Text="{x:Static resx:AppResources.WelcomeBack}" 
+                   FontSize="24" 
+                   HorizontalOptions="Center"
+                   Style="{StaticResource SubheadingLabel}" />
+            
+            <Entry Placeholder="{x:Static resx:AppResources.Username}" 
+                   Text="{Binding Email, Mode=TwoWay}" 
+                   Style="{StaticResource ModernEntry}"
+                   Keyboard="Email"
+                   AutomationId="EmailEntry"
+                   SemanticProperties.Description="{x:Static resx:AppResources.Username}" />
+            
+            <Entry Placeholder="{x:Static resx:AppResources.Password}" 
+                   Text="{Binding Password, Mode=TwoWay}" 
+                   IsPassword="true" 
+                   Style="{StaticResource ModernEntry}"
+                   AutomationId="PasswordEntry"
+                   SemanticProperties.Description="{x:Static resx:AppResources.Password}" />
+            
+            <Label Text="{Binding ErrorMessage}"
+                   IsVisible="{Binding HasError}"
+                   TextColor="Red"
+                   FontSize="12"
+                   HorizontalOptions="Center"
+                   Margin="0,-15,0,0" />
+            
+            <Button Text="{x:Static resx:AppResources.Login}" 
+                    Command="{Binding LoginCommand}" 
+                    IsEnabled="{Binding IsLoginEnabled}" 
+                    SemanticProperties.Hint="{x:Static resx:AppResources.LoginHint}"
+                    AutomationId="LoginButton"
+                    Margin="0,10,0,0" />
+            
+            <ActivityIndicator IsVisible="{Binding IsBusy}" 
+                              IsRunning="{Binding IsBusy}" 
+                              HorizontalOptions="Center"
+                              VerticalOptions="Center" />
+            
+            <Label Text="{x:Static resx:AppResources.NoAccount}" 
+                   HorizontalOptions="Center" 
+                   Opacity="0.6"
+                   Margin="0,20,0,0" />
+            
+            <Button Text="{x:Static resx:AppResources.Signup}" 
+                    Command="{Binding SignupCommand}" 
+                    SemanticProperties.Hint="{x:Static resx:AppResources.SignUpHint}"
+                    AutomationId="SignupButton"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    BorderColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    BorderWidth="1" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

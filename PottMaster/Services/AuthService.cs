@@ -99,5 +99,10 @@ public class AuthService : IAuthService
 		}
 	}
 
+	public async Task<Supabase.Gotrue.User?> GetCurrentUserAsync()
+	{
+		return await Task.FromResult(Client.Auth.CurrentUser);
+	}
+
 	public bool IsLoggedIn => Client.Auth.CurrentSession != null;
 }
