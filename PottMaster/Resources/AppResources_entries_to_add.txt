@@ -60,3 +60,18 @@
     <value>Odrzucona</value>
     <comment>Work status: Discarded</comment>
   </data>
+  <data name="SyncStatusPending" xml:space="preserve">
+    <value>Oczekuj?ce</value>
+  </data>
+  <data name="SyncStatusSyncing" xml:space="preserve">
+    <value>Synchronizowanie</value>
+  </data>
+  <data name="SyncStatusSynced" xml:space="preserve">
+    <value>Zsynchronizowane</value>
+  </data>
+  <data name="SyncStatusError" xml:space="preserve">
+    <value>B??d synchronizacji</value>
+  </data>
+  <data name="SyncStatusUnknown" xml:space="preserve">
+    <value>Nieznany</value>
+  </data>

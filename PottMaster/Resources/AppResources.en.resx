@@ -387,4 +387,19 @@
   <data name="DryingDays" xml:space="preserve">
     <value>days</value>
   </data>
+  <data name="SyncStatusPending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="SyncStatusSyncing" xml:space="preserve">
+    <value>Syncing</value>
+  </data>
+  <data name="SyncStatusSynced" xml:space="preserve">
+    <value>Synced</value>
+  </data>
+  <data name="SyncStatusError" xml:space="preserve">
+    <value>Sync error</value>
+  </data>
+  <data name="SyncStatusUnknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
 </root>

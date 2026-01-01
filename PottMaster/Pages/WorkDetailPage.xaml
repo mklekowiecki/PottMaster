@@ -4,8 +4,13 @@
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
              xmlns:models="clr-namespace:PottMaster.Models"
              xmlns:resx="clr-namespace:PottMaster.Resources"
+             xmlns:converters="clr-namespace:PottMaster.Converters"
              x:Class="PottMaster.Pages.WorkDetailPage"
              Title="{x:Static resx:AppResources.WorkDetails}">
+
+    <ContentPage.Resources>
+        <converters:SyncStatusCodeToLocalizedConverter x:Key="SyncStatusCodeToLocalizedConverter" />
+    </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{x:Static resx:AppResources.Delete}"
@@ -136,7 +141,7 @@
                             <Label Text="{x:Static resx:AppResources.SyncStatus}"
                                    FontSize="12"
                                    TextColor="{StaticResource Gray600}"/>
-                            <Label Text="{Binding CurrentWork.SyncStatus}"
+                            <Label Text="{Binding CurrentWork.SyncStatus, Converter={StaticResource SyncStatusCodeToLocalizedConverter}}"
                                    FontSize="16"
                                    FontAttributes="Bold"/>
                         </VerticalStackLayout>

@@ -394,4 +394,19 @@
   <data name="DryingDays" xml:space="preserve">
     <value>dni</value>
   </data>
+  <data name="SyncStatusPending" xml:space="preserve">
+    <value>Oczekujące</value>
+  </data>
+  <data name="SyncStatusSyncing" xml:space="preserve">
+    <value>Synchronizowanie</value>
+  </data>
+  <data name="SyncStatusSynced" xml:space="preserve">
+    <value>Zsynchronizowane</value>
+  </data>
+  <data name="SyncStatusError" xml:space="preserve">
+    <value>Błąd synchronizacji</value>
+  </data>
+  <data name="SyncStatusUnknown" xml:space="preserve">
+    <value>Nieznany</value>
+  </data>
 </root>

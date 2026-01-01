@@ -520,6 +520,51 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Błąd synchronizacji.
+        /// </summary>
+        internal static string SyncStatusError {
+            get {
+                return ResourceManager.GetString("SyncStatusError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oczekujące.
+        /// </summary>
+        internal static string SyncStatusPending {
+            get {
+                return ResourceManager.GetString("SyncStatusPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zsynchronizowane.
+        /// </summary>
+        internal static string SyncStatusSynced {
+            get {
+                return ResourceManager.GetString("SyncStatusSynced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Synchronizowanie.
+        /// </summary>
+        internal static string SyncStatusSyncing {
+            get {
+                return ResourceManager.GetString("SyncStatusSyncing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nieznany.
+        /// </summary>
+        internal static string SyncStatusUnknown {
+            get {
+                return ResourceManager.GetString("SyncStatusUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zrób zdjęcie.
         /// </summary>
         internal static string TakePhoto {
