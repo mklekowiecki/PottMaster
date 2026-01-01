@@ -1,13 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PottMaster.Services;
-using PottMaster.Resources; // Add for localization
+using PottMaster.Resources;
 
 namespace PottMaster.ViewModels;
 
 public partial class LoginViewModel : ObservableObject
 {
     private readonly IAuthService _authService;
+    private readonly IAuthStateService _authStateService;
+    private readonly IErrorHandlingService _errorHandler;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoginEnabled))]
@@ -29,9 +31,11 @@ public partial class LoginViewModel : ObservableObject
     
     public bool IsLoginEnabled => !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && !IsBusy;
 
-    public LoginViewModel(IAuthService authService)
+    public LoginViewModel(IAuthService authService, IAuthStateService authStateService, IErrorHandlingService errorHandler)
     {
         _authService = authService;
+        _authStateService = authStateService;
+        _errorHandler = errorHandler;
     }
 
     [RelayCommand(CanExecute = nameof(IsLoginEnabled))]
@@ -56,13 +60,18 @@ public partial class LoginViewModel : ObservableObject
                 return;
             }
             
-            Preferences.Default.Set("UserInitials", profileResult.Data.Initials);
+            // Update auth state
+            await _authStateService.SetAuthenticatedAsync(
+                profileResult.Data.Id, 
+                profileResult.Data.Email, 
+                profileResult.Data.Initials);
+            
             await Shell.Current.GoToAsync("//MainPage");
         }
         catch (Exception ex)
         {
-            ErrorMessage = AppResources.Error;
-            System.Diagnostics.Debug.WriteLine($"Login error: {ex.Message}");
+            await _errorHandler.HandleErrorAsync(ex, nameof(Login));
+            ErrorMessage = _errorHandler.GetUserFriendlyError(ex);
         }
         finally
         {

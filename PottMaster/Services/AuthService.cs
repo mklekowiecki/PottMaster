@@ -3,6 +3,7 @@ using PottMaster.Models;
 using Supabase;
 using Supabase.Gotrue;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace PottMaster.Services;
 
@@ -10,15 +11,26 @@ public class AuthService : IAuthService
 {
     private readonly Lazy<Task<Supabase.Client>> _clientTask;
     private readonly IDbService _dbService;
+    private readonly ILogger<AuthService> _logger;
 
-    public AuthService(IDbService dbService)
+    public AuthService(IDbService dbService, ILogger<AuthService> logger)
     {
         _dbService = dbService;
+        _logger = logger;
         _clientTask = new Lazy<Task<Supabase.Client>>(async () =>
         {
-            var client = new Supabase.Client(Constants.SupabaseBaseUrl, Constants.SupabaseAnonKey);
-            await client.InitializeAsync();
-            return client;
+            try
+            {
+                var client = new Supabase.Client(Constants.SupabaseBaseUrl, Constants.SupabaseAnonKey);
+                await client.InitializeAsync();
+                _logger.LogInformation("Supabase client initialized successfully");
+                return client;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to initialize Supabase client");
+                throw;
+            }
         });
     }
 
@@ -38,6 +50,7 @@ public class AuthService : IAuthService
             if (session?.User != null)
             {
                 await CacheUserProfileAsync(session.User.Id);
+                _logger.LogInformation("User signed in: {Email}", email);
             }
 
             return new AuthResponse<bool>
@@ -48,6 +61,7 @@ public class AuthService : IAuthService
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Sign in failed for email: {Email}", email);
             return new AuthResponse<bool>
             {
                 Result = AuthResult.InvalidCredentials,
@@ -65,6 +79,7 @@ public class AuthService : IAuthService
 
             if (session?.User != null)
             {
+                _logger.LogInformation("User signed up: {Email}", email);
                 return new AuthResponse<bool>
                 {
                     Result = AuthResult.Success,
@@ -80,6 +95,7 @@ public class AuthService : IAuthService
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Sign up failed for email: {Email}", email);
             return new AuthResponse<bool>
             {
                 Result = AuthResult.SignupFailed,
@@ -93,11 +109,14 @@ public class AuthService : IAuthService
         try
         {
             var client = await GetClientAsync();
+            var userId = client.Auth.CurrentUser?.Id;
             await client.Auth.SignOut();
+            _logger.LogInformation("User signed out: {UserId}", userId);
             return new AuthResponse<bool> { Result = AuthResult.Success, Data = true };
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Sign out failed");
             return new AuthResponse<bool> { Result = AuthResult.UnknownError, ErrorMessage = ex.Message };
         }
     }
@@ -130,12 +149,16 @@ public class AuthService : IAuthService
                 {
                     return new AuthResponse<UserProfiles> { Result = AuthResult.ProfileCreationFailed, ErrorMessage = "Failed to create user profile." };
                 }
+                
+                _logger.LogInformation("User profile created for: {UserId}", userId);
                 return new AuthResponse<UserProfiles> { Result = AuthResult.Success, Data = insertResponse.Models.First() };
             }
+            
             return new AuthResponse<UserProfiles> { Result = AuthResult.Success, Data = response };
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Failed to get user profile");
             return new AuthResponse<UserProfiles> { Result = AuthResult.UnknownError, ErrorMessage = ex.Message };
         }
     }
@@ -147,8 +170,9 @@ public class AuthService : IAuthService
             var client = await GetClientAsync();
             return client.Auth.CurrentUser;
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.LogError(ex, "Failed to get current user");
             return null;
         }
     }
@@ -175,11 +199,12 @@ public class AuthService : IAuthService
                 };
 
                 await _dbService.UpsertUserProfileAsync(localProfile);
+                _logger.LogInformation("User profile cached for: {UserId}", userId);
             }
         }
         catch (Exception ex)
         {
-            System.Diagnostics.Debug.WriteLine($"Failed to cache user profile: {ex.Message}");
+            _logger.LogError(ex, "Failed to cache user profile: {UserId}", userId);
         }
     }
 }

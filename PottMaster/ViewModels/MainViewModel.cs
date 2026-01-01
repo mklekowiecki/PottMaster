@@ -10,7 +10,8 @@ namespace PottMaster.ViewModels;
 public partial class MainViewModel : ObservableObject
 {
     private readonly IWorkService _workService;
-    private readonly IAuthService _authService;
+    private readonly IAuthStateService _authStateService;
+    private readonly IErrorHandlingService _errorHandler;
     private readonly IDbService _dbService;
 
     [ObservableProperty]
@@ -22,11 +23,32 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private bool isEmpty;
 
-    public MainViewModel(IWorkService workService, IAuthService authService, IDbService dbService)
+    public MainViewModel(
+        IWorkService workService, 
+        IAuthStateService authStateService,
+        IErrorHandlingService errorHandler,
+        IDbService dbService)
     {
         _workService = workService;
-        _authService = authService;
+        _authStateService = authStateService;
+        _errorHandler = errorHandler;
         _dbService = dbService;
+        
+        // Subscribe to auth state changes
+        _authStateService.AuthStateChanged += OnAuthStateChanged;
+    }
+    
+    private async void OnAuthStateChanged(object? sender, AuthStateChangedEventArgs e)
+    {
+        if (e.IsAuthenticated)
+        {
+            await LoadWorksAsync();
+        }
+        else
+        {
+            Works.Clear();
+            IsEmpty = true;
+        }
     }
 
     public async Task InitializeAsync()
@@ -41,17 +63,22 @@ public partial class MainViewModel : ObservableObject
         IsLoading = true;
         try
         {
-            var user = await _authService.GetCurrentUserAsync();
-            if (user?.Id != null)
+            var userId = _authStateService.CurrentUserId;
+            if (!string.IsNullOrEmpty(userId))
             {
-                var worksList = await _workService.GetUserWorksAsync(user.Id);
+                var worksList = await _workService.GetUserWorksAsync(userId);
                 Works = new ObservableCollection<Work>(worksList);
                 IsEmpty = Works.Count == 0;
+            }
+            else
+            {
+                Works.Clear();
+                IsEmpty = true;
             }
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert(AppResources.Error, string.Format(AppResources.FailedToLoadWorks, ex.Message), AppResources.Ok);
+            await _errorHandler.HandleErrorAsync(ex, nameof(LoadWorksAsync));
         }
         finally
         {

@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using PottMaster.Services;
-using PottMaster.ViewModels;
+﻿using PottMaster.ViewModels;
 
 namespace PottMaster
 {
@@ -8,10 +6,10 @@ namespace PottMaster
     {
         private readonly MainViewModel _viewModel;
 
-        public MainPage()
+        public MainPage(MainViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = App.Services.GetRequiredService<MainViewModel>();
+            _viewModel = viewModel;
             BindingContext = _viewModel;
         }
 

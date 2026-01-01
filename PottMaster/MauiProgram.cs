@@ -4,17 +4,11 @@
 	using PottMaster.Pages;
 	using PottMaster.Services;
 	using PottMaster.ViewModels;
+	using PottMaster.Repositories;
 	using System.Globalization;
 
-	/// <summary>
-	/// Defines the <see cref="MauiProgram" />
-	/// </summary>
 	public static class MauiProgram
 	{
-		/// <summary>
-		/// The CreateMauiApp
-		/// </summary>
-		/// <returns>The <see cref="MauiApp"/></returns>
 		public static MauiApp CreateMauiApp()
 		{
 			var builder = MauiApp.CreateBuilder();
@@ -26,38 +20,62 @@
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				});
 			
-			// Services
-			builder.Services.AddSingleton<IAuthService, AuthService>();
+			// Infrastructure Services (Singleton - shared across app lifetime)
 			builder.Services.AddSingleton<IDbService, DbService>();
-			builder.Services.AddSingleton<IWorkService, WorkService>();
 			builder.Services.AddSingleton<IImageService, ImageService>();
 			builder.Services.AddSingleton<ISyncService, SyncService>();
+			builder.Services.AddSingleton<IErrorHandlingService, ErrorHandlingService>();
 			
-			builder.Services.AddSingleton(sp =>
-			{
-				var client = new Supabase.Client(Constants.SupabaseBaseUrl, Constants.SupabaseAnonKey);
-				return client;
-			});
+			// Authentication Services (Singleton - maintains auth state)
+			builder.Services.AddSingleton<IAuthService, AuthService>();
+			builder.Services.AddSingleton<IAuthStateService, AuthStateService>();
 			
-			// ViewModels
+			// Repository Pattern (Scoped - per operation context)
+			builder.Services.AddScoped<IWorkRepository, LocalWorkRepository>();
+			
+			// Business Logic Services (Scoped - user-specific operations)
+			builder.Services.AddScoped<IWorkService, WorkService>();
+			
+			// ViewModels (Transient - new instance per navigation)
 			builder.Services.AddTransient<LoginViewModel>();
 			builder.Services.AddTransient<SignupViewModel>();
 			builder.Services.AddTransient<MainViewModel>();
 			builder.Services.AddTransient<NewWorkViewModel>();
 			builder.Services.AddTransient<WorkDetailViewModel>();
 			
-			// Pages
+			// Pages (Transient - new instance per navigation)
+			builder.Services.AddTransient<MainPage>();
 			builder.Services.AddTransient<NewWorkPage>();
+			builder.Services.AddTransient<LoginPage>();
+			builder.Services.AddTransient<SignupPage>();
 
 #if DEBUG
 			builder.Logging.AddDebug();
 #endif
-			CultureInfo culture = new CultureInfo("pl"); 
+
+			// Set culture but respect device settings
+			var deviceCulture = CultureInfo.CurrentUICulture;
+			var culture = new CultureInfo("pl"); 
+
+			// Only override if device is not already using Polish or English
+			if (deviceCulture.TwoLetterISOLanguageName != "pl" && deviceCulture.TwoLetterISOLanguageName != "en")
+			{
+				Thread.CurrentThread.CurrentCulture = culture;
+				Thread.CurrentThread.CurrentUICulture = culture;
+
+			}
+
+#if DEBUG
 			Thread.CurrentThread.CurrentCulture = culture;
 			Thread.CurrentThread.CurrentUICulture = culture;
+#endif
 
 			var mauiApp = builder.Build();
-			App.SetServiceProvider(mauiApp.Services);
+			
+			// Initialize auth state on startup
+			var authStateService = mauiApp.Services.GetRequiredService<IAuthStateService>();
+			_ = Task.Run(async () => await authStateService.InitializeAsync());
+			
 			return mauiApp;
 		}
 	}
