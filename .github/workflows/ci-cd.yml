@@ -2,6 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
+  pull_request:
     branches:
       - master
   workflow_dispatch:
@@ -53,7 +54,7 @@ jobs:
         run: dotnet publish PottMaster/PottMaster.csproj -c Release -o ./output
 
       - name: Upload Build Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: production-build
           path: ./output
