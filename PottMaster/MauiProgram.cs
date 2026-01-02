@@ -8,6 +8,7 @@
     using System.Globalization;
     using Supabase;
     using PottMasterLib.Services;
+    using CommunityToolkit.Maui;
 
     public static class MauiProgram
 	{
@@ -16,6 +17,7 @@
 			var builder = MauiApp.CreateBuilder();
 			builder
 				.UseMauiApp<App>()
+				.UseMauiCommunityToolkit()
 				.ConfigureFonts(fonts =>
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -42,13 +44,15 @@
 			builder.Services.AddSingleton<IImageService, ImageService>();
 			builder.Services.AddSingleton<ISyncService, SyncService>();
 			builder.Services.AddSingleton<IErrorHandlingService, ErrorHandlingService>();
-			
+			builder.Services.AddSingleton<IDryingMonitorService, DryingMonitorService>();
+
 			// Authentication Services (Singleton - maintains auth state)
 			builder.Services.AddSingleton<IAuthService, AuthService>();
 			builder.Services.AddSingleton<IAuthStateService, AuthStateService>();
-			
+
 			// UI Services (Transient - per operation)
 			builder.Services.AddTransient<IAlertService, AlertService>();
+			builder.Services.AddTransient<INotificationService, NotificationService>();
 			
 			// Repository Pattern (Scoped - per operation context)
 			builder.Services.AddScoped<IWorkRepository, LocalWorkRepository>();

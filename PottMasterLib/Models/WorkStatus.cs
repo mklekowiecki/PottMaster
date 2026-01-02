@@ -4,6 +4,18 @@ using Supabase.Postgrest.Models;
 
 namespace PottMasterLib.Models;
 
+public enum WorkStatusCode
+{
+    Wet = 1,
+    LeatherHard = 2,
+    BoneDry = 3,
+    BisqueFired = 4,
+    Glazed = 5,
+    GlazeFired = 6,
+    Completed = 7,
+    Discarded = 8
+}
+
 [Table("work_statuses")]
 public class WorkStatus : BaseModel
 {

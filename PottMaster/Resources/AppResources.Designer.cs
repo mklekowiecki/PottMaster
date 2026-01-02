@@ -223,6 +223,24 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Suszenie zakończone!.
+        /// </summary>
+        internal static string DryingCompleteInfo {
+            get {
+                return ResourceManager.GetString("DryingCompleteInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Praca {0} wyschła i jest gotowa na następny etap.
+        /// </summary>
+        internal static string DryingCompleteMessage {
+            get {
+                return ResourceManager.GetString("DryingCompleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to dni.
         /// </summary>
         internal static string DryingDays {

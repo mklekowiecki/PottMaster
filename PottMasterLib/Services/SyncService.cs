@@ -35,7 +35,7 @@ public class SyncService : ISyncService
         try
         {
             return (await _dbService.GetAllAsync<LocalWork>())
-                .Count(w => w.SyncStatus == "PENDING" || w.SyncStatus == "ERROR");
+                .Count(w => w.SyncStatus == SyncStatus.Pending.Code() || w.SyncStatus == SyncStatus.Error.Code());
         }
         catch
         {
@@ -109,7 +109,7 @@ public class SyncService : ISyncService
 
             // Sync pending works
             var pendingWorks = (await _dbService.GetAllAsync<LocalWork>())
-                .Where(w => w.SyncStatus == "PENDING" || w.SyncStatus == "ERROR")
+                .Where(w => w.SyncStatus == SyncStatus.Pending.Code() || w.SyncStatus == SyncStatus.Error.Code())
                 .ToList();
 
             foreach (var work in pendingWorks)
@@ -133,7 +133,7 @@ public class SyncService : ISyncService
     {
         try
         {
-            work.SyncStatus = "SYNCING";
+            work.SyncStatus = SyncStatus.Syncing.Code();
             await _dbService.UpdateAsync(work);
 
             var workToSync = MapLocalWorkToRemoteWork(work);
@@ -142,7 +142,7 @@ public class SyncService : ISyncService
                 .From<RemoteWork>()
                 .Upsert(workToSync);
 
-            work.SyncStatus = "SYNCED";
+            work.SyncStatus = SyncStatus.Synced.Code();
             await _dbService.UpdateAsync(work);
 
             Debug.WriteLine($"Successfully synced work: {work.Code}");
@@ -151,10 +151,10 @@ public class SyncService : ISyncService
         catch (Exception ex)
         {
             Debug.WriteLine($"Failed to sync work {work.Code}: {ex.Message}");
-            
-            work.SyncStatus = "ERROR";
+
+            work.SyncStatus = SyncStatus.Error.Code();
             await _dbService.UpdateAsync(work);
-            
+
             return false;
         }
     }
@@ -199,7 +199,7 @@ public class SyncService : ISyncService
             CreatedAt = localWork.CreatedAt,
             DryingStartedAt = localWork.DryingStartedAt,
             DryingCompletedAt = localWork.DryingCompletedAt,
-            SyncStatus = "SYNCED",
+            SyncStatus = SyncStatus.Synced.Code(),
             UpdatedAt = localWork.UpdatedAt
         };
     }

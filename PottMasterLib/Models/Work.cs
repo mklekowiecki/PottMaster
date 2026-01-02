@@ -43,7 +43,7 @@ public class Work
     {
         get
         {
-            if (StatusId >= 3) return TimeSpan.Zero;
+            if (StatusId >= (int)WorkStatusCode.BoneDry) return TimeSpan.Zero;
 
             var startTime = DryingStartedAt ?? CreatedAt;
             var dryingDays = WallThickness switch

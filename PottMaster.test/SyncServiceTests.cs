@@ -2,10 +2,10 @@ using NUnit.Framework;
 using Moq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using PottMaster.Services;
 using System.Linq;
 using PottMasterLib.Services;
 using PottMasterLib.Models;
+using static PottMasterLib.Models.SyncStatus;
 
 namespace PottMaster.Tests.Services
 {
@@ -30,91 +30,91 @@ namespace PottMaster.Tests.Services
         }
 
         [Test]
-        public void GetPendingSyncCount_ReturnsZeroWhenNoWorks()
+        public async Task GetPendingSyncCount_ReturnsZeroWhenNoWorks()
         {
             // Arrange
             _dbServiceMock.Setup(x => x.GetAllAsync<LocalWork>())
                 .ReturnsAsync(new List<LocalWork>());
 
             // Act
-            var count = _syncService.GetPendingSyncCount();
+            var count = await _syncService.GetPendingSyncCountAsync();
 
             // Assert
             Assert.That(count, Is.EqualTo(0));
         }
 
         [Test]
-        public void GetPendingSyncCount_CountsPendingWorks()
+        public async Task GetPendingSyncCount_CountsPendingWorks()
         {
             // Arrange
             var works = new List<LocalWork>
             {
-                new LocalWork { Id = "1", SyncStatus = "PENDING" },
-                new LocalWork { Id = "2", SyncStatus = "SYNCED" },
-                new LocalWork { Id = "3", SyncStatus = "PENDING" }
+                new LocalWork { Id = "1", SyncStatus = Pending.Code() },
+                new LocalWork { Id = "2", SyncStatus = Synced.Code() },
+                new LocalWork { Id = "3", SyncStatus = Pending.Code() }
             };
-            
+
             _dbServiceMock.Setup(x => x.GetAllAsync<LocalWork>())
                 .ReturnsAsync(works);
 
             // Act
-            var count = _syncService.GetPendingSyncCount();
+            var count = await _syncService.GetPendingSyncCountAsync();
 
             // Assert
             Assert.That(count, Is.EqualTo(2));
         }
 
         [Test]
-        public void GetPendingSyncCount_CountsErrorWorks()
+        public async Task GetPendingSyncCount_CountsErrorWorks()
         {
             // Arrange
             var works = new List<LocalWork>
             {
-                new LocalWork { Id = "1", SyncStatus = "ERROR" },
-                new LocalWork { Id = "2", SyncStatus = "SYNCED" }
+                new LocalWork { Id = "1", SyncStatus = Error.Code() },
+                new LocalWork { Id = "2", SyncStatus = Synced.Code() }
             };
-            
+
             _dbServiceMock.Setup(x => x.GetAllAsync<LocalWork>())
                 .ReturnsAsync(works);
 
             // Act
-            var count = _syncService.GetPendingSyncCount();
+            var count = await _syncService.GetPendingSyncCountAsync();
 
             // Assert
             Assert.That(count, Is.EqualTo(1));
         }
 
         [Test]
-        public void GetPendingSyncCount_CountsBothPendingAndErrorWorks()
+        public async Task GetPendingSyncCount_CountsBothPendingAndErrorWorks()
         {
             // Arrange
             var works = new List<LocalWork>
             {
-                new LocalWork { Id = "1", SyncStatus = "PENDING" },
-                new LocalWork { Id = "2", SyncStatus = "ERROR" },
-                new LocalWork { Id = "3", SyncStatus = "SYNCED" },
-                new LocalWork { Id = "4", SyncStatus = "SYNCING" }
+                new LocalWork { Id = "1", SyncStatus = Pending.Code() },
+                new LocalWork { Id = "2", SyncStatus = Error.Code() },
+                new LocalWork { Id = "3", SyncStatus = Synced.Code() },
+                new LocalWork { Id = "4", SyncStatus = Syncing.Code() }
             };
-            
+
             _dbServiceMock.Setup(x => x.GetAllAsync<LocalWork>())
                 .ReturnsAsync(works);
 
             // Act
-            var count = _syncService.GetPendingSyncCount();
+            var count = await _syncService.GetPendingSyncCountAsync();
 
             // Assert
             Assert.That(count, Is.EqualTo(2));
         }
 
         [Test]
-        public void GetPendingSyncCount_HandlesExceptionGracefully()
+        public async Task GetPendingSyncCount_HandlesExceptionGracefully()
         {
             // Arrange
             _dbServiceMock.Setup(x => x.GetAllAsync<LocalWork>())
                 .ThrowsAsync(new System.Exception("Database error"));
 
             // Act
-            var count = _syncService.GetPendingSyncCount();
+            var count = await _syncService.GetPendingSyncCountAsync();
 
             // Assert
             Assert.That(count, Is.EqualTo(0), "Should return 0 when an exception occurs");

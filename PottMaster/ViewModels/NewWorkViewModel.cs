@@ -172,7 +172,7 @@ public partial class NewWorkViewModel : ObservableObject
                 CategoryId = SelectedCategory.Id,
                 WallThickness = (int)WallThickness,
                 PhotoPath = PhotoPath,
-                StatusId = 1,
+                StatusId = (int)WorkStatusCode.Wet,
                 DryingStartedAt = DateTime.UtcNow
             };
 

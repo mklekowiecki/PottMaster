@@ -38,6 +38,8 @@
 
 - **Testing**: xUnit or NUnit for unit tests, MAUI UI Tests
 
+- **CI/CD**: GitHub Actions with MAUI workload installation
+
 ## Dependencies
 
 - CommunityToolkit.Mvvm

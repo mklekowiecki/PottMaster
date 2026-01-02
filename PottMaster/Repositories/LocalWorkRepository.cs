@@ -87,10 +87,10 @@ public class LocalWorkRepository : IWorkRepository
             
             var localWork = MapToLocalWork(work);
             localWork.Id = Guid.NewGuid().ToString();
-            localWork.StatusId = 1;
+            localWork.StatusId = (int)WorkStatusCode.Wet;
             localWork.CreatedAt = DateTime.UtcNow;
             localWork.UpdatedAt = DateTime.UtcNow;
-            localWork.SyncStatus = "PENDING";
+            localWork.SyncStatus = SyncStatus.Pending.Code();
             
             await _dbService.InsertAsync(localWork);
             
@@ -110,7 +110,7 @@ public class LocalWorkRepository : IWorkRepository
         {
             var localWork = MapToLocalWork(work);
             localWork.UpdatedAt = DateTime.UtcNow;
-            localWork.SyncStatus = "PENDING";
+            localWork.SyncStatus = SyncStatus.Pending.Code();
             
             await _dbService.UpdateAsync(localWork);
             

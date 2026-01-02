@@ -9,15 +9,17 @@ namespace PottMaster.Services;
 public class BackgroundSyncWorker : IAsyncDisposable
 {
     private readonly ISyncService _syncService;
+    private readonly IDryingMonitorService _dryingMonitor;
     private readonly ILogger<BackgroundSyncWorker> _logger;
     private readonly PeriodicTimer _timer;
     private readonly CancellationTokenSource _cts = new();
     private Task? _workerTask;
     private const int SyncIntervalMinutes = 15;
 
-    public BackgroundSyncWorker(ISyncService syncService, ILogger<BackgroundSyncWorker> logger)
+    public BackgroundSyncWorker(ISyncService syncService, IDryingMonitorService dryingMonitor, ILogger<BackgroundSyncWorker> logger)
     {
         _syncService = syncService;
+        _dryingMonitor = dryingMonitor;
         _logger = logger;
         _timer = new PeriodicTimer(TimeSpan.FromMinutes(SyncIntervalMinutes));
     }
@@ -38,7 +40,16 @@ public class BackgroundSyncWorker : IAsyncDisposable
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Background sync failed.");
+                _logger.LogError(ex, "Background sync of pending changes failed.");
+            }
+
+            try
+            {
+                await _dryingMonitor.CheckAndAdvanceCompletedWorksAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Background drying monitor check failed.");
             }
             await _timer.WaitForNextTickAsync(cancellationToken);
         }

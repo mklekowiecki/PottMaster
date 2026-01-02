@@ -409,4 +409,10 @@
   <data name="SyncStatusUnknown" xml:space="preserve">
     <value>Nieznany</value>
   </data>
+  <data name="DryingCompleteInfo" xml:space="preserve">
+    <value>Suszenie zakończone!</value>
+  </data>
+  <data name="DryingCompleteMessage" xml:space="preserve">
+    <value>Praca {0} wyschła i jest gotowa na następny etap</value>
+  </data>
 </root>

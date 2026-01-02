@@ -402,4 +402,10 @@
   <data name="SyncStatusUnknown" xml:space="preserve">
     <value>Unknown</value>
   </data>
+  <data name="DryingCompleteInfo" xml:space="preserve">
+    <value>Drying complete!</value>
+  </data>
+  <data name="DryingCompleteMessage" xml:space="preserve">
+    <value>Work {0} has finished drying and is ready for the next stage.</value>
+  </data>
 </root>
