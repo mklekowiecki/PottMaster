@@ -51,7 +51,7 @@ jobs:
         run: dotnet restore
 
       - name: Publish Application
-        run: dotnet publish PottMaster/PottMaster.csproj -c Release -o ./output
+        run: dotnet publish PottMaster/PottMaster.csproj -c Release -f net9.0-android -o ./output
 
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4

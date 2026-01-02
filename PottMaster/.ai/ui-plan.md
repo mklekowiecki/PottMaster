@@ -32,13 +32,13 @@ This plan outlines the step-by-step approach for implementing the PottMaster MVP
 
 ### 3.2 Work Lifecycle Management
 
-- **MainPage (Work List)** 
+- **MainPage (Work List)** *(Done)*
   - List of works with status, photo, countdown timer.
   - "Add New Work" FAB/button.
-- **NewWorkPage** *(Not Started)*
+- **NewWorkPage** *(Done)*
   - Photo capture/upload, category picker, wall thickness slider.
   - Save button, validation.
-- **WorkDetailPage** *(Not Started)*
+- **WorkDetailPage** *(Done)*
   - Show unique code, drying timer, status progression.
   - "Ready for Firing" button with confirmation dialog.
 
@@ -68,39 +68,89 @@ This plan outlines the step-by-step approach for implementing the PottMaster MVP
 
 ---
 
-## 4. Cross-Cutting Features (Status)
+## 4. Navigation Structure
+
+### 4.1 Main Navigation
+- **Bottom Tab Bar**: The app uses a bottom tab bar for main navigation, with icons for each section.
+  - **Work Tab**: Leads to MainPage (Work List).
+  - **Inventory Tab**: Leads to GlazeInventoryPage.
+  - **Wiki Tab**: Leads to WikiPage.
+  - **Analytics Tab**: Leads to AnalyticsPage.
+  - **Profile Tab**: Leads to Profile/Settings page.
+
+### 4.2 Page-Specific Navigation and Buttons
+- **LoginPage**: "Sign in with Google/Apple" buttons, link to SignupPage.
+- **SignupPage**: Back to LoginPage, save button.
+- **MainPage**: FAB "Add New Work" button, list items tap to navigate to WorkDetailPage.
+- **NewWorkPage**: Save button, back navigation.
+- **WorkDetailPage**: "Ready for Firing" button with confirmation dialog, back navigation.
+- **GlazeInventoryPage**: Add/Edit buttons, back navigation.
+- **WikiPage**: Search bar, list items tap to detail view.
+- **AnalyticsPage**: Share/Export buttons.
+- **Profile/Settings**: Logout button, language selector.
+
+### 4.3 Back Navigation
+- Use swipe gestures for back navigation on all pages.
+- Standard back button in navigation bar where applicable.
+
+### 4.4 Conditional Navigation
+- If user is not authenticated, redirect to LoginPage.
+- No role-based tab visibility; all tabs available to authenticated users.
+
+### 4.5 Navigation Flow Diagram
+```mermaid
+graph TD
+    A[App Start] --> B{Authenticated?}
+    B -->|No| C[LoginPage]
+    B -->|Yes| D[MainPage via Work Tab]
+    C --> D
+    D --> E[NewWorkPage via FAB]
+    D --> F[WorkDetailPage via list tap]
+    F --> G[Ready for Firing action]
+    D --> H[GlazeInventoryPage via Inventory Tab]
+    D --> I[WikiPage via Wiki Tab]
+    D --> J[AnalyticsPage via Analytics Tab]
+    D --> K[Profile/Settings via Profile Tab]
+    K --> L[Logout -> LoginPage]
+```
+
+---
+
+## 5. Cross-Cutting Features (Status)
 
 - **Localization** *(In Progress)*
   - All UI strings in `AppResources.resx` and `AppResources.en.resx`.
   - Language selector in settings. *(Not Started)*
 - **Theming** *(In Progress)*
   - Use `Styles.xaml` for colors, fonts, and spacing.
+  - Follow Material Design 3 guidelines for Android, with a style similar to the Reply app: clean, modern interface emphasizing typography, subtle shadows, and intuitive navigation. Ensure consistency across all pages and components.
 - **Dialogs & Toasts** *(Not Started)*
   - Use MAUI Community Toolkit for dialogs, confirmations, and error toasts.
 
 ---
 
-## 5. Implementation Sequence (with Status)
+## 6. Implementation Sequence (with Status)
 
 1. **Authentication UI**: LoginPage *(Done)*, SignupPage *(Done)*, Profile/Settings *(Not Started)*.
-2. **Work Management**: MainPage *(Done)*, NewWorkPage *(Not Started)*, WorkDetailPage *(Not Started)*.
-3. **Offline/Sync Indicator**: SyncStatusIndicator *(Not Started)*.
-4. **Glaze Inventory**: GlazeInventoryPage *(Not Started)*.
-5. **Wiki**: WikiPage *(Not Started)*.
-6. **Analytics**: AnalyticsPage *(Not Started)*.
-7. **Localization**: Integrate RESX *(In Progress)*, language selector *(Not Started)*.
-8. **Polish & Accessibility**: Theming *(In Progress)*, accessibility, responsive tweaks *(Not Started)*.
+2. **Work Management**: MainPage *(Done)*, NewWorkPage *(Done)*, WorkDetailPage *(Done)*.
+3. **Navigation Setup**: Implement bottom tab bar and navigation logic *(Not Started)*.
+4. **Offline/Sync Indicator**: SyncStatusIndicator *(Not Started)*.
+5. **Glaze Inventory**: GlazeInventoryPage *(Not Started)*.
+6. **Wiki**: WikiPage *(Not Started)*.
+7. **Analytics**: AnalyticsPage *(Not Started)*.
+8. **Localization**: Integrate RESX *(In Progress)*, language selector *(Not Started)*.
+9. **Polish & Accessibility**: Theming *(In Progress)*, accessibility, responsive tweaks *(Not Started)*.
 
 ---
 
-## 6. UI Component Reuse
+## 7. UI Component Reuse
 
 - **Custom Controls**: Status badge, countdown timer, photo thumbnail, sync indicator.
 - **Data Templates**: For lists (works, glazes, wiki entries).
 
 ---
 
-## 7. Testing & Review
+## 8. Testing & Review
 
 - **Manual UI walkthroughs** for each user story.
 - **Localization checks** for all supported languages.
@@ -109,7 +159,7 @@ This plan outlines the step-by-step approach for implementing the PottMaster MVP
 
 ---
 
-## 8. References
+## 9. References
 
 - [User Stories Reference](../.kilocode/rules/memory-bank/user-stories.md)
 - [MAUI UI Guidelines](../.kilocode/rules/maui-guidelines.md)
