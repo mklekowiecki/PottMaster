@@ -1,3 +1,4 @@
+using PottMasterLib.Logic;
 using SQLite;
 
 namespace PottMasterLib.Models;
@@ -46,13 +47,7 @@ public class Work
             if (StatusId >= (int)WorkStatusCode.BoneDry) return TimeSpan.Zero;
 
             var startTime = DryingStartedAt ?? CreatedAt;
-            var dryingDays = WallThickness switch
-            {
-                <= 5 => 4,
-                <= 10 => 7,
-                <= 15 => 10,
-                _ => 14
-            };
+            var dryingDays = CalculationLogic.CalculateDryingDays(WallThickness);
 
             var targetDate = startTime.AddDays(dryingDays);
             var remaining = targetDate - DateTime.UtcNow;

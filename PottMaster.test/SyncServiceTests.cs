@@ -6,6 +6,7 @@ using System.Linq;
 using PottMasterLib.Services;
 using PottMasterLib.Models;
 using static PottMasterLib.Models.SyncStatus;
+using Microsoft.Extensions.Logging;
 
 namespace PottMaster.Tests.Services
 {
@@ -20,12 +21,14 @@ namespace PottMaster.Tests.Services
     public class SyncServiceTests
     {
         private Mock<IDbService> _dbServiceMock;
+        private Mock<ILogger<SyncService>> _loggerMock;
         private ISyncService _syncService;
 
         [SetUp]
         public void SetUp()
         {
             _dbServiceMock = new Mock<IDbService>();
+            _loggerMock = new Mock<ILogger<SyncService>>();
             _syncService = CreateSyncServiceWithMockDb();
         }
 
@@ -138,7 +141,7 @@ namespace PottMaster.Tests.Services
             var supabaseKey = "test-anon-key";
             var supabaseClient = new Supabase.Client(supabaseUrl, supabaseKey);
             
-            return new SyncService(_dbServiceMock.Object, supabaseClient);
+            return new SyncService(_dbServiceMock.Object, supabaseClient, _loggerMock.Object);
         }
     }
 }

@@ -1,7 +1,7 @@
 using PottMasterLib.Models;
-using PottMasterLib.Services;
-using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
+using Nelibur.ObjectMapper;
 
 namespace PottMasterLib.Services;
 
@@ -9,12 +9,15 @@ public class SyncService : ISyncService
 {
     private readonly IDbService _dbService;
     private readonly Supabase.Client _supabaseClient;
+    private readonly ILogger<SyncService> _logger;
     private bool _isSyncing = false;
 
-    public SyncService(IDbService dbService, Supabase.Client supabaseClient)
+    public SyncService(IDbService dbService, Supabase.Client supabaseClient, ILogger<SyncService> logger)
     {
         _dbService = dbService;
         _supabaseClient = supabaseClient;
+        _logger = logger;
+        TinyMapper.Bind<LocalWork, RemoteWork>();
     }
 
     public async Task<bool> IsOnlineAsync()
@@ -82,7 +85,7 @@ public class SyncService : ISyncService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Failed to sync dictionaries: {ex.Message}");
+            _logger.LogError(ex, "Failed to sync dictionaries");
         }
     }
 
@@ -121,7 +124,7 @@ public class SyncService : ISyncService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Sync error: {ex.Message}");
+            _logger.LogError(ex, "Sync error");
         }
         finally
         {
@@ -136,7 +139,7 @@ public class SyncService : ISyncService
             work.SyncStatus = SyncStatus.Syncing.Code();
             await _dbService.UpdateAsync(work);
 
-            var workToSync = MapLocalWorkToRemoteWork(work);
+            var workToSync = TinyMapper.Map<RemoteWork>(work);
 
             await _supabaseClient
                 .From<RemoteWork>()
@@ -150,7 +153,7 @@ public class SyncService : ISyncService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Failed to sync work {work.Code}: {ex.Message}");
+            _logger.LogError(ex, "Failed to sync work {Code}", work.Code);
 
             work.SyncStatus = SyncStatus.Error.Code();
             await _dbService.UpdateAsync(work);
@@ -180,27 +183,8 @@ public class SyncService : ISyncService
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Failed to sync user profile: {ex.Message}");
+            _logger.LogError(ex, "Failed to sync user profile");
             return false;
         }
-    }
-
-    private RemoteWork MapLocalWorkToRemoteWork(LocalWork localWork)
-    {
-        return new RemoteWork
-        {
-            Id = localWork.Id,
-            UserId = localWork.UserId,
-            Code = localWork.Code,
-            CategoryId = localWork.CategoryId,
-            WallThickness = localWork.WallThickness,
-            PhotoPath = localWork.PhotoPath,
-            StatusId = localWork.StatusId,
-            CreatedAt = localWork.CreatedAt,
-            DryingStartedAt = localWork.DryingStartedAt,
-            DryingCompletedAt = localWork.DryingCompletedAt,
-            SyncStatus = SyncStatus.Synced.Code(),
-            UpdatedAt = localWork.UpdatedAt
-        };
     }
 }

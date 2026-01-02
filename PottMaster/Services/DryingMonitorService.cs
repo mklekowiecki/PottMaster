@@ -1,5 +1,6 @@
 using PottMasterLib.Services;
 using PottMasterLib.Models;
+using PottMasterLib.Logic;
 using static PottMasterLib.Models.WorkStatusCode;
 using static PottMasterLib.Models.SyncStatus;
 
@@ -54,13 +55,7 @@ public class DryingMonitorService : IDryingMonitorService
     private TimeSpan CalculateRemainingDryingTime(LocalWork work)
     {
         var startTime = work.DryingStartedAt ?? work.CreatedAt;
-        var dryingDays = work.WallThickness switch
-        {
-            <= 5 => 4,
-            <= 10 => 7,
-            <= 15 => 10,
-            _ => 14
-        };
+        var dryingDays = CalculationLogic.CalculateDryingDays(work.WallThickness);
 
         var targetDate = startTime.AddDays(dryingDays);
         return targetDate - DateTime.UtcNow;

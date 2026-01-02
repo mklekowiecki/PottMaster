@@ -1,5 +1,7 @@
 using SQLite;
 using PottMasterLib.Models;
+using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace PottMasterLib.Services;
 
@@ -7,60 +9,32 @@ public class DbService : IDbService
 {
     private SQLiteAsyncConnection? _database;
     private readonly string _dbPath;
+    private readonly ILogger<DbService> _logger;
 
-    public DbService()
+    public DbService(ILogger<DbService> logger)
     {
         _dbPath = Path.Combine(FileSystem.AppDataDirectory, "pottmaster.db3");
+        _logger = logger;
     }
 
     public async Task InitializeAsync()
     {
-        if (_database != null)
-            return;
-
-        _database = new SQLiteAsyncConnection(_dbPath);
-
-        await _database.CreateTableAsync<LocalWork>();
-        await _database.CreateTableAsync<LocalUserProfile>();
-        await _database.CreateTableAsync<WorkCategory>();
-        await _database.CreateTableAsync<WorkStatus>();
-
-        await SeedDataAsync();
-    }
-
-    private async Task SeedDataAsync()
-    {
-        var categoriesCount = await _database!.Table<WorkCategory>().CountAsync();
-        if (categoriesCount == 0)
+        try
         {
-            var categories = new[]
-            {
-                new WorkCategory { Id = 1, Name = "Cup", Code = "CUP" },
-                new WorkCategory { Id = 2, Name = "Bowl", Code = "BOWL" },
-                new WorkCategory { Id = 3, Name = "Vase", Code = "VASE" },
-                new WorkCategory { Id = 4, Name = "Plate", Code = "PLATE" },
-                new WorkCategory { Id = 5, Name = "Sculpture", Code = "SCULPTURE" },
-                new WorkCategory { Id = 6, Name = "Tile", Code = "TILE" },
-                new WorkCategory { Id = 7, Name = "Other", Code = "OTHER" }
-            };
-            await _database.InsertAllAsync(categories);
+            if (_database != null)
+                return;
+
+            _database = new SQLiteAsyncConnection(_dbPath);
+
+            await _database.CreateTableAsync<LocalWork>();
+            await _database.CreateTableAsync<LocalUserProfile>();
+            await _database.CreateTableAsync<WorkCategory>();
+            await _database.CreateTableAsync<WorkStatus>();
         }
-
-        var statusesCount = await _database.Table<WorkStatus>().CountAsync();
-        if (statusesCount == 0)
+        catch (Exception ex)
         {
-            var statuses = new[]
-            {
-                new WorkStatus { Id = 1, Code = "WET", Name = "Wet" },
-                new WorkStatus { Id = 2, Code = "LEATHER_HARD", Name = "Leather Hard" },
-                new WorkStatus { Id = 3, Code = "BONE_DRY", Name = "Bone Dry" },
-                new WorkStatus { Id = 4, Code = "BISQUE_FIRED", Name = "Bisque Fired" },
-                new WorkStatus { Id = 5, Code = "GLAZED", Name = "Glazed" },
-                new WorkStatus { Id = 6, Code = "GLAZE_FIRED", Name = "Glaze Fired" },
-                new WorkStatus { Id = 7, Code = "COMPLETED", Name = "Completed" },
-                new WorkStatus { Id = 8, Code = "DISCARDED", Name = "Discarded" }
-            };
-            await _database.InsertAllAsync(statuses);
+            _logger.LogError(ex, "Database initialization failed");
+            throw;
         }
     }
 

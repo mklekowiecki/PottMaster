@@ -1,4 +1,5 @@
 using PottMaster.Resources;
+using PottMasterLib.Logic;
 using System.Globalization;
 using System.Resources;
 
@@ -10,13 +11,7 @@ public class WallThicknessToDaysConverter : IValueConverter
     {
         if (value is double wallThickness)
         {
-            var days = wallThickness switch
-            {
-                <= 5 => 4,
-                <= 10 => 7,
-                <= 15 => 10,
-                _ => 14
-            };
+            var days = CalculationLogic.CalculateDryingDays((int)wallThickness);
             var resourceManager = AppResources.ResourceManager;
             var localizedValue = resourceManager.GetString("DryingDays", culture);
 
