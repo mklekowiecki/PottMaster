@@ -1,13 +1,14 @@
 using Supabase.Postgrest.Attributes;
+using Supabase.Postgrest.Models;
 
 namespace PottMaster.Models;
 
-[Supabase.Postgrest.Attributes.Table("wiki_material_types")]
-public class WikiMaterialType
+[Table("wiki_material_types")]
+public class WikiMaterialType : BaseModel
 {
-    [Supabase.Postgrest.Attributes.PrimaryKey("id")]
+    [PrimaryKey("id")]
     public int Id { get; set; }
 
-    [Supabase.Postgrest.Attributes.Column("name")]
+    [Column("name")]
     public string Name { get; set; } = string.Empty;
 }

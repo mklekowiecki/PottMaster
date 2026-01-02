@@ -111,6 +111,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Tests\" />
 	  <Folder Include="plans\" />
 	</ItemGroup>
 

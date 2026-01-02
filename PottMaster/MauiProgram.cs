@@ -69,6 +69,9 @@
 			builder.Services.AddTransient<SignupPage>();
 			builder.Services.AddTransient<WorkDetailPage>();
 
+			// Register BackgroundSyncWorker as singleton
+			builder.Services.AddSingleton<BackgroundSyncWorker>();
+
 #if DEBUG
 			builder.Logging.AddDebug();
 #endif
@@ -91,7 +94,11 @@
 #endif
 
 			var mauiApp = builder.Build();
-			
+
+			// Start background sync worker
+			var syncWorker = mauiApp.Services.GetRequiredService<BackgroundSyncWorker>();
+			syncWorker.Start();
+
 			// Initialize auth state on startup
 			var authStateService = mauiApp.Services.GetRequiredService<IAuthStateService>();
 			_ = Task.Run(async () => await authStateService.InitializeAsync());

@@ -1,8 +1,6 @@
 using PottMaster.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Text.Json;
 
 namespace PottMaster.Services;
 
@@ -10,14 +8,12 @@ public class SyncService : ISyncService
 {
     private readonly IDbService _dbService;
     private readonly Supabase.Client _supabaseClient;
-    private readonly HttpClient _httpClient;
     private bool _isSyncing = false;
 
-    public SyncService(IDbService dbService, Supabase.Client supabaseClient, HttpClient httpClient)
+    public SyncService(IDbService dbService, Supabase.Client supabaseClient)
     {
         _dbService = dbService;
         _supabaseClient = supabaseClient;
-        _httpClient = httpClient;
     }
 
     public async Task<bool> IsOnlineAsync()
@@ -50,27 +46,33 @@ public class SyncService : ISyncService
     {
         try
         {
-            // Fetch work categories using HTTP client
-            var categoriesResponse = await _httpClient.GetStringAsync("https://your-supabase-url/rest/v1/work_categories");
-            var categories = JsonSerializer.Deserialize<List<WorkCategory>>(categoriesResponse);
+            // Fetch work categories from Supabase
+            var categoriesResponse = await _supabaseClient
+                .From<WorkCategory>()
+                .Get();
+            var categories = categoriesResponse.Models;
             if (categories != null)
             {
                 await _dbService.UpsertAllAsync(categories);
                 Debug.WriteLine($"Synced {categories.Count} work categories.");
             }
 
-            // Fetch work statuses using HTTP client
-            var statusesResponse = await _httpClient.GetStringAsync("https://your-supabase-url/rest/v1/work_statuses");
-            var statuses = JsonSerializer.Deserialize<List<WorkStatus>>(statusesResponse);
+            // Fetch work statuses from Supabase
+            var statusesResponse = await _supabaseClient
+                .From<WorkStatus>()
+                .Get();
+            var statuses = statusesResponse.Models;
             if (statuses != null)
             {
                 await _dbService.UpsertAllAsync(statuses);
                 Debug.WriteLine($"Synced {statuses.Count} work statuses.");
             }
 
-            // Fetch wiki material types using HTTP client
-            var materialTypesResponse = await _httpClient.GetStringAsync("https://your-supabase-url/rest/v1/wiki_material_types");
-            var materialTypes = JsonSerializer.Deserialize<List<WikiMaterialType>>(materialTypesResponse);
+            // Fetch wiki material types from Supabase
+            var materialTypesResponse = await _supabaseClient
+                .From<WikiMaterialType>()
+                .Get();
+            var materialTypes = materialTypesResponse.Models;
             if (materialTypes != null)
             {
                 await _dbService.UpsertAllAsync(materialTypes);
