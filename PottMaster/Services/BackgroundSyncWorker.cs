@@ -14,14 +14,14 @@ public class BackgroundSyncWorker : IAsyncDisposable
     private readonly PeriodicTimer _timer;
     private readonly CancellationTokenSource _cts = new();
     private Task? _workerTask;
-    private const int SyncIntervalMinutes = 15;
+    private const int SyncIntervalSeconds = 300; // 5 minutes; adjust if configuration support is added
 
     public BackgroundSyncWorker(ISyncService syncService, IDryingMonitorService dryingMonitor, ILogger<BackgroundSyncWorker> logger)
     {
         _syncService = syncService;
         _dryingMonitor = dryingMonitor;
         _logger = logger;
-        _timer = new PeriodicTimer(TimeSpan.FromMinutes(SyncIntervalMinutes));
+        _timer = new PeriodicTimer(TimeSpan.FromSeconds(SyncIntervalSeconds));
     }
 
     public void Start()

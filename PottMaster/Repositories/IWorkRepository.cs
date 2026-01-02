@@ -9,6 +9,6 @@ public interface IWorkRepository
     Task<Result<string>> CreateAsync(Work work, string userInitials);
     Task<Result> UpdateAsync(Work work);
     Task<Result> DeleteAsync(string workId);
-    Task<Result<List<WorkCategory>>> GetCategoriesAsync();
-    Task<Result<List<WorkStatus>>> GetStatusesAsync();
+    Task<Result<List<LocalWorkCategory>>> GetCategoriesAsync();
+    Task<Result<List<LocalWorkStatus>>> GetStatusesAsync();
 }

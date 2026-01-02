@@ -36,8 +36,10 @@ public partial class LoginViewModel : ObservableObject
         _authService = authService;
         _authStateService = authStateService;
         _errorHandler = errorHandler;
+#if DEBUG
         Email = "mklekowiecki@gmail.com";
-        Password = "Tiamat1234!s";
+        Password = "Tiamat1234!";
+#endif
     }
 
     [RelayCommand(CanExecute = nameof(IsLoginEnabled))]

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Microsoft.Extensions.Logging;
 using Nelibur.ObjectMapper;
 
+
 namespace PottMasterLib.Services;
 
 public class SyncService : ISyncService
@@ -18,6 +19,8 @@ public class SyncService : ISyncService
         _supabaseClient = supabaseClient;
         _logger = logger;
         TinyMapper.Bind<LocalWork, RemoteWork>();
+        TinyMapper.Bind<WorkCategory, LocalWorkCategory>();
+        TinyMapper.Bind<WorkStatus, LocalWorkStatus>();
     }
 
     public async Task<bool> IsOnlineAsync()
@@ -51,36 +54,35 @@ public class SyncService : ISyncService
         try
         {
             // Fetch work categories from Supabase
-            var categoriesResponse = await _supabaseClient
-                .From<WorkCategory>()
-                .Get();
-            var categories = categoriesResponse.Models;
-            if (categories != null)
+            var localCategories = await _dbService.GetAllAsync<LocalWorkCategory>();
+            if (!localCategories.Any())
             {
-                await _dbService.UpsertAllAsync(categories);
-                Debug.WriteLine($"Synced {categories.Count} work categories.");
+                var categoriesResponse = await _supabaseClient
+                    .From<WorkCategory>()
+                    .Get();
+                var categories = categoriesResponse.Models;
+                if (categories != null)
+                {
+                    var localCategoriesToUpsert = categories.Select(c => TinyMapper.Map<LocalWorkCategory>(c)).ToList();
+                    await _dbService.UpsertAllAsync(localCategoriesToUpsert);
+                    Debug.WriteLine($"Synced {categories.Count} work categories.");
+                }
             }
 
             // Fetch work statuses from Supabase
-            var statusesResponse = await _supabaseClient
-                .From<WorkStatus>()
-                .Get();
-            var statuses = statusesResponse.Models;
-            if (statuses != null)
+            var localStatuses = await _dbService.GetAllAsync<LocalWorkStatus>();
+            if (!localStatuses.Any())
             {
-                await _dbService.UpsertAllAsync(statuses);
-                Debug.WriteLine($"Synced {statuses.Count} work statuses.");
-            }
-
-            // Fetch wiki material types from Supabase
-            var materialTypesResponse = await _supabaseClient
-                .From<WikiMaterialType>()
-                .Get();
-            var materialTypes = materialTypesResponse.Models;
-            if (materialTypes != null)
-            {
-                await _dbService.UpsertAllAsync(materialTypes);
-                Debug.WriteLine($"Synced {materialTypes.Count} wiki material types.");
+                var statusesResponse = await _supabaseClient
+                    .From<WorkStatus>()
+                    .Get();
+                var statuses = statusesResponse.Models;
+                if (statuses != null)
+                {
+                    var localStatusesToUpsert = statuses.Select(s => TinyMapper.Map<LocalWorkStatus>(s)).ToList();
+                    await _dbService.UpsertAllAsync(localStatusesToUpsert);
+                    Debug.WriteLine($"Synced {statuses.Count} work statuses.");
+                }
             }
         }
         catch (Exception ex)

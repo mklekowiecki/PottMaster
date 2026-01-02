@@ -9,6 +9,6 @@ public interface IWorkService
     Task<string> CreateWorkAsync(Work work, string userInitials);
     Task UpdateWorkAsync(Work work);
     Task DeleteWorkAsync(string workId);
-    Task<List<WorkCategory>> GetCategoriesAsync();
-    Task<List<WorkStatus>> GetStatusesAsync();
+    Task<List<LocalWorkCategory>> GetCategoriesAsync();
+    Task<List<LocalWorkStatus>> GetStatusesAsync();
 }

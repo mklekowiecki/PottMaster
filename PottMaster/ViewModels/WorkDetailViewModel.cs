@@ -21,7 +21,7 @@ public partial class WorkDetailViewModel : ObservableObject
     private Work? currentWork;
 
     [ObservableProperty]
-    private ObservableCollection<WorkStatus> statuses = [];
+    private ObservableCollection<LocalWorkStatus> statuses = [];
 
     [ObservableProperty]
     private bool isLoading;
@@ -51,7 +51,7 @@ public partial class WorkDetailViewModel : ObservableObject
         {
             CurrentWork = await _workService.GetWorkByIdAsync(WorkId);
             var statusesList = await _workService.GetStatusesAsync();
-            Statuses = new ObservableCollection<WorkStatus>(statusesList);
+            Statuses = new ObservableCollection<LocalWorkStatus>(statusesList);
             CurrentWork!.StatusCode = Statuses.Where(s=>s.Id == CurrentWork.StatusId).Select(s=>s.Code).FirstOrDefault() ?? string.Empty;
         }
         catch (Exception ex)

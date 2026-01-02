@@ -28,8 +28,8 @@ public class DbService : IDbService
 
             await _database.CreateTableAsync<LocalWork>();
             await _database.CreateTableAsync<LocalUserProfile>();
-            await _database.CreateTableAsync<WorkCategory>();
-            await _database.CreateTableAsync<WorkStatus>();
+            await _database.CreateTableAsync<LocalWorkCategory>();
+            await _database.CreateTableAsync<LocalWorkStatus>();
         }
         catch (Exception ex)
         {
@@ -89,22 +89,22 @@ public class DbService : IDbService
             .ToListAsync();
     }
 
-    public async Task<WorkCategory?> GetWorkCategoryByIdAsync(int categoryId)
+    public async Task<LocalWorkCategory?> GetWorkCategoryByIdAsync(int categoryId)
     {
         if (_database == null)
             await InitializeAsync();
 
-        return await _database!.Table<WorkCategory>()
+        return await _database!.Table<LocalWorkCategory>()
             .Where(category => category.Id == categoryId)
             .FirstOrDefaultAsync();
     }
 
-    public async Task<WorkStatus?> GetWorkStatusByIdAsync(int statusId)
+    public async Task<LocalWorkStatus?> GetWorkStatusByIdAsync(int statusId)
     {
         if (_database == null)
             await InitializeAsync();
 
-        return await _database!.Table<WorkStatus>()
+        return await _database!.Table<LocalWorkStatus>()
             .Where(status => status.Id == statusId)
             .FirstOrDefaultAsync();
     }

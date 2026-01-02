@@ -90,7 +90,7 @@ public class WorkService : IWorkService
         }
     }
 
-    public async Task<List<WorkCategory>> GetCategoriesAsync()
+    public async Task<List<LocalWorkCategory>> GetCategoriesAsync()
     {
         var result = await _workRepository.GetCategoriesAsync();
         
@@ -100,13 +100,13 @@ public class WorkService : IWorkService
             {
                 await _errorHandler.HandleErrorAsync(result.Exception, nameof(GetCategoriesAsync), false);
             }
-            return new List<WorkCategory>();
+            return new List<LocalWorkCategory>();
         }
         
-        return result.Value ?? new List<WorkCategory>();
+        return result.Value ?? new List<LocalWorkCategory>();
     }
 
-    public async Task<List<WorkStatus>> GetStatusesAsync()
+    public async Task<List<LocalWorkStatus>> GetStatusesAsync()
     {
         var result = await _workRepository.GetStatusesAsync();
         
@@ -116,9 +116,9 @@ public class WorkService : IWorkService
             {
                 await _errorHandler.HandleErrorAsync(result.Exception, nameof(GetStatusesAsync), false);
             }
-            return new List<WorkStatus>();
+            return new List<LocalWorkStatus>();
         }
         
-        return result.Value ?? new List<WorkStatus>();
+        return result.Value ?? new List<LocalWorkStatus>();
     }
 }

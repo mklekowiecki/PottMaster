@@ -146,31 +146,31 @@ public class LocalWorkRepository : IWorkRepository
         }
     }
     
-    public async Task<Result<List<WorkCategory>>> GetCategoriesAsync()
+    public async Task<Result<List<LocalWorkCategory>>> GetCategoriesAsync()
     {
         try
         {
-            var categories = await _dbService.GetAllAsync<WorkCategory>();
-            return Result<List<WorkCategory>>.Success(categories);
+            var categories = await _dbService.GetAllAsync<LocalWorkCategory>();
+            return Result<List<LocalWorkCategory>>.Success(categories);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to get categories");
-            return Result<List<WorkCategory>>.Failure("Failed to load categories", ex);
+            return Result<List<LocalWorkCategory>>.Failure("Failed to load categories", ex);
         }
     }
     
-    public async Task<Result<List<WorkStatus>>> GetStatusesAsync()
+    public async Task<Result<List<LocalWorkStatus>>> GetStatusesAsync()
     {
         try
         {
-            var statuses = await _dbService.GetAllAsync<WorkStatus>();
-            return Result<List<WorkStatus>>.Success(statuses);
+            var statuses = await _dbService.GetAllAsync<LocalWorkStatus>();
+            return Result<List<LocalWorkStatus>>.Success(statuses);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to get statuses");
-            return Result<List<WorkStatus>>.Failure("Failed to load statuses", ex);
+            return Result<List<LocalWorkStatus>>.Failure("Failed to load statuses", ex);
         }
     }
     

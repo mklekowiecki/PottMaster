@@ -12,8 +12,8 @@ public interface IDbService
     Task<int> UpdateAsync<T>(T entity);
     Task<int> DeleteAsync<T>(T entity);
     Task<List<LocalWork>> GetWorksByUserIdAsync(string userId);
-    Task<WorkCategory?> GetWorkCategoryByIdAsync(int categoryId);
-    Task<WorkStatus?> GetWorkStatusByIdAsync(int statusId);
+    Task<LocalWorkCategory?> GetWorkCategoryByIdAsync(int categoryId);
+    Task<LocalWorkStatus?> GetWorkStatusByIdAsync(int statusId);
     Task<LocalUserProfile?> GetUserProfileByIdAsync(string userId);
     Task<int> UpsertUserProfileAsync(LocalUserProfile profile);
     Task<int> UpsertAllAsync<T>(IEnumerable<T> entities) where T : new();

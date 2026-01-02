@@ -17,11 +17,11 @@ public partial class NewWorkViewModel : ObservableObject
     private readonly IAlertService _alertService;
 
     [ObservableProperty]
-    private ObservableCollection<WorkCategory> categories = [];
+    private ObservableCollection<LocalWorkCategory> categories = [];
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
-    private WorkCategory? selectedCategory;
+    private LocalWorkCategory? selectedCategory;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
@@ -60,7 +60,7 @@ public partial class NewWorkViewModel : ObservableObject
         {
             await _dbService.InitializeAsync();
             var categoriesList = await _workService.GetCategoriesAsync();
-            Categories = new ObservableCollection<WorkCategory>(categoriesList);
+            Categories = new ObservableCollection<LocalWorkCategory>(categoriesList);
         }
         catch (Exception ex)
         {
@@ -199,7 +199,7 @@ public partial class NewWorkViewModel : ObservableObject
         await Shell.Current.GoToAsync("..");
     }
 
-    partial void OnSelectedCategoryChanged(WorkCategory? value)
+    partial void OnSelectedCategoryChanged(LocalWorkCategory? value)
     {
         SaveWorkCommand.NotifyCanExecuteChanged();
     }
