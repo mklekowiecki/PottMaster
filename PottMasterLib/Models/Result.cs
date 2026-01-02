@@ -1,4 +1,4 @@
-namespace PottMaster.Models;
+namespace PottMasterLib.Models;
 
 public class Result<T>
 {

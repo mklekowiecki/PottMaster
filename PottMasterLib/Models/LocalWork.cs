@@ -1,9 +1,9 @@
 using SQLite;
 
-namespace PottMaster.Models;
+namespace PottMasterLib.Models;
 
 [Table("works")]
-public class Work
+public class LocalWork
 {
     [PrimaryKey]
     public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -32,32 +32,10 @@ public class Work
 
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
+    // Additional properties for mapping
     [Ignore]
     public string CategoryCode { get; set; } = string.Empty;
 
     [Ignore]
     public string StatusCode { get; set; } = string.Empty;
-
-    [Ignore]
-    public TimeSpan? RemainingDryingTime
-    {
-        get
-        {
-            if (StatusId >= 3) return TimeSpan.Zero;
-
-            var startTime = DryingStartedAt ?? CreatedAt;
-            var dryingDays = WallThickness switch
-            {
-                <= 5 => 4,
-                <= 10 => 7,
-                <= 15 => 10,
-                _ => 14
-            };
-
-            var targetDate = startTime.AddDays(dryingDays);
-            var remaining = targetDate - DateTime.UtcNow;
-
-            return remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero;
-        }
-    }
 }

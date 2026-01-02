@@ -1,6 +1,6 @@
-using PottMaster.Models;
-using PottMaster.Services;
 using Microsoft.Extensions.Logging;
+using PottMasterLib.Services;
+using PottMasterLib.Models;
 
 namespace PottMaster.Repositories;
 

@@ -1,8 +1,9 @@
-using PottMaster.Models;
+using PottMasterLib.Models;
+using PottMasterLib.Services;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace PottMaster.Services;
+namespace PottMasterLib.Services;
 
 public class SyncService : ISyncService
 {
@@ -29,11 +30,11 @@ public class SyncService : ISyncService
         }
     }
 
-    public int GetPendingSyncCount()
+    public async Task<int> GetPendingSyncCountAsync()
     {
         try
         {
-            return _dbService.GetAllAsync<LocalWork>().Result
+            return (await _dbService.GetAllAsync<LocalWork>())
                 .Count(w => w.SyncStatus == "PENDING" || w.SyncStatus == "ERROR");
         }
         catch

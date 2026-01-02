@@ -1,7 +1,7 @@
 using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 
-namespace PottMaster.Models;
+namespace PottMasterLib.Models;
 
 [Table("wiki_material_types")]
 public class WikiMaterialType : BaseModel

@@ -2,7 +2,7 @@ using Supabase.Postgrest;
 using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 
-namespace PottMaster.Models;
+namespace PottMasterLib.Models;
 
 [Table("work_statuses")]
 public class WorkStatus : BaseModel

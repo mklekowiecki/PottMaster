@@ -1,6 +1,6 @@
-using PottMaster.Models;
+using PottMasterLib.Models;
 
-namespace PottMaster.Services;
+namespace PottMasterLib.Services;
 
 public interface ISyncService
 {
@@ -8,5 +8,5 @@ public interface ISyncService
     Task SyncPendingChangesAsync();
     Task<bool> SyncWorkAsync(LocalWork work);
     Task<bool> SyncUserProfileAsync(LocalUserProfile profile);
-    int GetPendingSyncCount();
+    Task<int> GetPendingSyncCountAsync();
 }

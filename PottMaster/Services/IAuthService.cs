@@ -1,6 +1,6 @@
 using Supabase;
 using System.Threading.Tasks;
-using PottMaster.Models;
+using PottMasterLib.Models;
 
 namespace PottMaster.Services
 {

@@ -1,9 +1,10 @@
 using PottMaster;
-using PottMaster.Models;
 using Supabase;
 using Supabase.Gotrue;
 using System;
 using Microsoft.Extensions.Logging;
+using PottMasterLib.Services;
+using PottMasterLib.Models;
 
 namespace PottMaster.Services;
 
@@ -114,7 +115,7 @@ public class AuthService : IAuthService
             {
                 var newProfile = new LocalUserProfile
                 {
-                    Id = userId,
+                    Id = userId!,
                     Email = email!,
                     Initials = email!.Substring(0, 2).ToUpper(),
                     CreatedAt = DateTime.UtcNow

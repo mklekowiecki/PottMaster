@@ -1,14 +1,15 @@
 ﻿namespace PottMaster
 {
-	using Microsoft.Extensions.Logging;
-	using PottMaster.Pages;
-	using PottMaster.Services;
-	using PottMaster.ViewModels;
-	using PottMaster.Repositories;
-	using System.Globalization;
-	using Supabase;
+    using Microsoft.Extensions.Logging;
+    using PottMaster.Pages;
+    using PottMaster.Services;
+    using PottMaster.ViewModels;
+    using PottMaster.Repositories;
+    using System.Globalization;
+    using Supabase;
+    using PottMasterLib.Services;
 
-	public static class MauiProgram
+    public static class MauiProgram
 	{
 		public static MauiApp CreateMauiApp()
 		{

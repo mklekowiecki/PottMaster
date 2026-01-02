@@ -1,8 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PottMaster.Models;
 using PottMaster.Resources;
 using PottMaster.Services;
+using PottMasterLib.Models;
 using System.Collections.ObjectModel;
 
 namespace PottMaster.ViewModels;

@@ -52,10 +52,10 @@ public class ErrorHandlingService : IErrorHandlingService
     {
         LogError(exception, context);
         
-        if (showToUser && Application.Current?.MainPage != null)
+        if (showToUser && Application.Current?.Windows[0] != null)
         {
             var message = GetUserFriendlyError(exception);
-            await Application.Current.MainPage.DisplayAlert(
+            await Application.Current.Windows[0].Page!.DisplayAlert(
                 AppResources.Error ?? "Error", 
                 message, 
                 AppResources.Ok ?? "OK");

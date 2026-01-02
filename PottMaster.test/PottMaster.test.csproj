@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PottMaster\PottMaster.csproj" />
+    <ProjectReference Include="..\PottMasterLib\PottMasterLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

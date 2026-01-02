@@ -1,6 +1,6 @@
 using SQLite;
 
-namespace PottMaster.Models;
+namespace PottMasterLib.Models;
 
 [Table("user_profiles")]
 public class LocalUserProfile

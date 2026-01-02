@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
-             xmlns:models="clr-namespace:PottMaster.Models"
+             xmlns:models="clr-namespace:PottMasterLib.Models;assembly=PottMasterLib"
              xmlns:resx="clr-namespace:PottMaster.Resources"
              x:Class="PottMaster.MainPage"
              x:DataType="vm:MainViewModel"

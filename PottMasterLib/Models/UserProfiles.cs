@@ -3,7 +3,7 @@ using Supabase.Postgrest.Attributes;
 using Supabase.Postgrest.Models;
 using System.Text.Json.Serialization;
 
-namespace PottMaster.Models;
+namespace PottMasterLib.Models;
 
 [Table("user_profiles")]
 public class UserProfiles : BaseModel

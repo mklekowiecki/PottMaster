@@ -1,7 +1,7 @@
 using SQLite;
-using PottMaster.Models;
+using PottMasterLib.Models;
 
-namespace PottMaster.Services;
+namespace PottMasterLib.Services;
 
 public interface IDbService
 {

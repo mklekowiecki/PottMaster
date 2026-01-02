@@ -10,9 +10,9 @@ public class AlertService : IAlertService
         {
             await Shell.Current.DisplayAlert(title, message, ok);
         }
-        else if (Application.Current?.MainPage != null)
+        else if (Application.Current?.Windows[0] != null)
         {
-            await Application.Current.MainPage.DisplayAlert(title, message, ok);
+            await Application.Current.Windows[0].Page!.DisplayAlert(title, message, ok);
         }
     }
 
@@ -22,9 +22,9 @@ public class AlertService : IAlertService
         {
             return await Shell.Current.DisplayAlert(title, message, accept, cancel);
         }
-        else if (Application.Current?.MainPage != null)
+        else if (Application.Current?.Windows[0] != null)
         {
-            return await Application.Current.MainPage.DisplayAlert(title, message, accept, cancel);
+            return await Application.Current.Windows[0].Page!.DisplayAlert(title, message, accept, cancel);
         }
 
         // Default to false if no UI available

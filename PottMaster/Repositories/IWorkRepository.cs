@@ -1,4 +1,4 @@
-using PottMaster.Models;
+using PottMasterLib.Models;
 
 namespace PottMaster.Repositories;
 
