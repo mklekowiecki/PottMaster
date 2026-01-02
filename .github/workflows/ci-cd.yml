@@ -20,6 +20,9 @@ jobs:
         with:
           dotnet-version: 9.0
 
+      - name: Install MAUI Workloads
+        run: dotnet workload restore
+
       - name: Restore Dependencies
         run: dotnet restore
 
@@ -39,6 +42,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 9.0
+
+      - name: Install MAUI Workloads
+        run: dotnet workload restore
 
       - name: Restore Dependencies
         run: dotnet restore
