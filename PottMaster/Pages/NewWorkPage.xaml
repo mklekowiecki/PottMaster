@@ -44,7 +44,7 @@
                                    BackgroundColor="{StaticResource Gray200}"
                                    WidthRequest="100"
                                    HeightRequest="100">
-                                <Image Source="{Binding Path}"
+                                <Image Source="{Binding Path, Mode=TwoWay, Converter={StaticResource StringToImageSourceConverter}}"
                                         Aspect="AspectFill"/>
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding BindingContext.RemovePhotoCommand, Source={x:Reference NewWorkPage}}"
@@ -87,12 +87,6 @@
                             BackgroundColor="{StaticResource Secondary}"
                             TextColor="{StaticResource White}"
                             FontSize="12"/>
-                    <Button Grid.Column="2"
-                            Text="+"
-                            Command="{Binding AddPhotoCommand}"
-                            BackgroundColor="{StaticResource Gray300}"
-                            TextColor="{StaticResource White}"
-                            FontSize="16"/>
                 </Grid>
             </VerticalStackLayout>
 
@@ -115,12 +109,12 @@
 
             <!-- Work Code Section -->
             <VerticalStackLayout Spacing="12">
-                <Label Text="Work Code"
+                <Label Text="{x:Static resources:AppResources.WorkCode}"
                        FontSize="18"
                        FontAttributes="Bold"/>
 
                 <Entry Text="{Binding WorkCode}"
-                       Placeholder="Enter work code"
+                       Placeholder="{x:Static resources:AppResources.EnterWorkCode}"
                        FontSize="16"
                        BackgroundColor="{StaticResource White}"/>
             </VerticalStackLayout>

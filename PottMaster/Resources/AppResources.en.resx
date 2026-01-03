@@ -408,4 +408,13 @@
   <data name="DryingCompleteMessage" xml:space="preserve">
     <value>Work {0} has finished drying and is ready for the next stage.</value>
   </data>
+  <data name="EnterWorkCode" xml:space="preserve">
+    <value>Enter work code</value>
+  </data>
+  <data name="ConfirmDeletion" xml:space="preserve">
+    <value>Confirm deletion</value>
+  </data>
+  <data name="ConfirmDeletionMessage" xml:space="preserve">
+    <value>Do you really want to delete?</value>
+  </data>
 </root>

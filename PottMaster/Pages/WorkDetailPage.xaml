@@ -29,7 +29,7 @@
             <VerticalStackLayout Padding="16" Spacing="24">
 
                 <CarouselView ItemsSource="{Binding Photos}"
-                              IsVisible="{Binding Photos.Count, Converter={StaticResource IsNotNullConverter}}"
+                              IsVisible="{Binding HasPhotos}"
                               HeightRequest="300">
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
@@ -43,7 +43,7 @@
                 <Border Padding="32"
                         BackgroundColor="{StaticResource Gray100}"
                         HeightRequest="300"
-                        IsVisible="{Binding Photos.Count, Converter={StaticResource IsNullConverter}}">
+                        IsVisible="{Binding HasPhotos, Converter={StaticResource InvertedBoolConverter}}">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="12"/>
                     </Border.StrokeShape>

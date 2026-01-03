@@ -415,4 +415,13 @@
   <data name="DryingCompleteMessage" xml:space="preserve">
     <value>Praca {0} wyschła i jest gotowa na następny etap</value>
   </data>
+  <data name="EnterWorkCode" xml:space="preserve">
+    <value>Wprowadź kod pracy</value>
+  </data>
+  <data name="ConfirmDeletion" xml:space="preserve">
+    <value>Potwierdź usunięcie</value>
+  </data>
+  <data name="ConfirmDeletionMessage" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć?</value>
+  </data>
 </root>

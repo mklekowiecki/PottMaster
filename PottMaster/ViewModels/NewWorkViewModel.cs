@@ -62,7 +62,7 @@ public partial class NewWorkViewModel : ObservableObject
     {
         IsLoading = true;
         ErrorMessage = null;
-        
+
         try
         {
             await _dbService.InitializeAsync();
@@ -92,7 +92,7 @@ public partial class NewWorkViewModel : ObservableObject
     private async Task TakePhotoAsync()
     {
         ErrorMessage = null;
-        
+
         try
         {
             if (MediaPicker.Default.IsCaptureSupported)
@@ -115,7 +115,7 @@ public partial class NewWorkViewModel : ObservableObject
     private async Task PickPhotoAsync()
     {
         ErrorMessage = null;
-        
+
         try
         {
             var photo = await MediaPicker.Default.PickPhotoAsync();
@@ -168,7 +168,7 @@ public partial class NewWorkViewModel : ObservableObject
 
         IsSaving = true;
         ErrorMessage = null;
-        
+
         try
         {
             var user = await _authService.GetCurrentUserAsync();
@@ -194,7 +194,8 @@ public partial class NewWorkViewModel : ObservableObject
                 WallThickness = (int)WallThickness,
                 StatusId = (int)WorkStatusCode.Wet,
                 DryingStartedAt = DateTime.UtcNow,
-                Code = WorkCode
+                Code = WorkCode,
+                PhotoPath = Photos.FirstOrDefault()?.Path ?? ""
             };
 
             var createdWork = await _workService.CreateWorkAsync(work, userInitials);
@@ -219,13 +220,6 @@ public partial class NewWorkViewModel : ObservableObject
         {
             IsSaving = false;
         }
-    }
-
-    [RelayCommand]
-    private async Task AddPhotoAsync()
-    {
-        // For now, duplicate TakePhoto
-        await TakePhotoAsync();
     }
 
     [RelayCommand]

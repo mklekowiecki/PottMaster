@@ -18,6 +18,7 @@
             <converters:WallThicknessToDaysConverter x:Key="WallThicknessToDaysConverter"/>
             <converters:WorkCategoryCodeToLocalizedConverter x:Key="WorkCategoryCodeToLocalizedConverter"/>
             <converters:WorkStatusCodeToLocalizedConverter x:Key="WorkStatusCodeToLocalizedConverter"/>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

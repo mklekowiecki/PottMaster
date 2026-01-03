@@ -151,6 +151,24 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potwierdź usunięcie.
+        /// </summary>
+        internal static string ConfirmDeletion {
+            get {
+                return ResourceManager.GetString("ConfirmDeletion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czy na pewno chcesz usunąć?.
+        /// </summary>
+        internal static string ConfirmDeletionMessage {
+            get {
+                return ResourceManager.GetString("ConfirmDeletionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Utwórz nowe konto.
         /// </summary>
         internal static string CreateAccount {
@@ -273,6 +291,15 @@ namespace PottMaster.Resources {
         internal static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wprowadź kod pracy.
+        /// </summary>
+        internal static string EnterWorkCode {
+            get {
+                return ResourceManager.GetString("EnterWorkCode", resourceCulture);
             }
         }
         

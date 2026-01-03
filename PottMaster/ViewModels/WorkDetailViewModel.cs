@@ -31,6 +31,9 @@ public partial class WorkDetailViewModel : ObservableObject
     [ObservableProperty]
     private bool isLoading;
 
+    [ObservableProperty]
+    private bool hasPhotos;
+
     public WorkDetailViewModel(IWorkService workService, IErrorHandlingService errorHandler, IAlertService alertService, IDbService dbService)
     {
         _workService = workService;
@@ -63,6 +66,7 @@ public partial class WorkDetailViewModel : ObservableObject
             // Load photos
             var photosList = await _dbService.GetPhotosByWorkIdAsync(WorkId);
             Photos = new ObservableCollection<Photo>(photosList);
+            HasPhotos = Photos.Count > 0;
         }
         catch (Exception ex)
         {
