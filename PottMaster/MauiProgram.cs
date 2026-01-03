@@ -78,6 +78,9 @@
 			builder.Services.AddTransient<SignupPage>();
 			builder.Services.AddTransient<WorkDetailPage>();
 			builder.Services.AddTransient<ProfilePage>();
+			builder.Services.AddTransient<GlazeInventoryPage>();
+			builder.Services.AddTransient<WikiPage>();
+			builder.Services.AddTransient<AnalyticsPage>();
 			
 			// Register BackgroundSyncWorker as singleton
 			builder.Services.AddSingleton<BackgroundSyncWorker>();

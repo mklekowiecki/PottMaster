@@ -68,7 +68,7 @@
 	<ItemGroup>
 	  <None Include=".ai\api-plan.md" />
 	  <None Include=".ai\db-plan.md" />
-	  <None Include=".ai\global-exception-handler.md" />
+	  <None Include=".ai\phase3-navigation-summary.md" />
 	  <None Include=".ai\ui-plan.md" />
 	  <None Include=".ai\ui-refactor-plan.md" />
 	  <None Include=".github\copilot-instructions.md" />
@@ -109,10 +109,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\AnalyticsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\GlazeInventoryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\NewWorkPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\WikiPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\WorkDetailPage.xaml">

@@ -70,7 +70,7 @@ public partial class LoginViewModel : ObservableObject
                 profileResult.Data.Email, 
                 profileResult.Data.Initials);
             
-            await Shell.Current.GoToAsync("//MainPage");
+            await Shell.Current.GoToAsync("//main");
         }
         catch (Exception ex)
         {
