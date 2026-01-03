@@ -19,6 +19,7 @@
             <converters:WorkCategoryCodeToLocalizedConverter x:Key="WorkCategoryCodeToLocalizedConverter"/>
             <converters:WorkStatusCodeToLocalizedConverter x:Key="WorkStatusCodeToLocalizedConverter"/>
             <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
+            <converters:SyncStatusCodeToLocalizedConverter x:Key="SyncStatusCodeToLocalizedConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

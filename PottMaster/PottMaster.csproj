@@ -68,6 +68,7 @@
 	<ItemGroup>
 	  <None Include=".ai\api-plan.md" />
 	  <None Include=".ai\db-plan.md" />
+	  <None Include=".ai\global-exception-handler.md" />
 	  <None Include=".ai\ui-plan.md" />
 	  <None Include=".github\copilot-instructions.md" />
 	  <None Include=".kilocode\rules\maui-guidelines.md" />

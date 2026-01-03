@@ -201,7 +201,7 @@
                                    TextColor="{StaticResource White}"
                                    VerticalOptions="Center"/>
                         </HorizontalStackLayout>
-
+                        
                         <Label Text="{Binding CurrentWork.RemainingDryingTime, StringFormat={x:Static resx:AppResources.TimeLeft}}"
                                FontSize="20"
                                FontAttributes="Bold"
@@ -223,7 +223,7 @@
                     </Border.StrokeShape>
                     <VerticalStackLayout Spacing="8">
                         <HorizontalStackLayout Spacing="8">
-                            <Label Text="[Check]"
+                            <Label Text="✅"
                                    FontSize="24"
                                    TextColor="{StaticResource White}"
                                    VerticalOptions="Center"/>
@@ -243,6 +243,7 @@
 
                 <VerticalStackLayout Spacing="12">
                     <Button Text="{x:Static resx:AppResources.ChangeStatus}"
+                            IsVisible="{Binding CurrentWork.DryingCompletedAt, Converter={StaticResource IsNullConverter}}"
                             Command="{Binding ChangeStatusCommand}"
                             BackgroundColor="{StaticResource Primary}"
                             TextColor="{StaticResource White}"

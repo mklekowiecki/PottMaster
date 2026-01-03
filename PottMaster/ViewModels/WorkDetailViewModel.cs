@@ -42,11 +42,11 @@ public partial class WorkDetailViewModel : ObservableObject
         _dbService = dbService;
     }
 
-    partial void OnWorkIdChanged(string? value)
+    async partial void OnWorkIdChanged(string? value)
     {
         if (!string.IsNullOrEmpty(value))
         {
-            Task.Run(async () => await LoadWorkAsync());
+            await LoadWorkAsync();
         }
     }
 

@@ -94,7 +94,7 @@ public partial class MainViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task ViewWorkDetailsAsync(Work work)
+    private async Task ViewWorkDetailsAsync(LocalWork work)
     {
         if (work?.Id != null)
         {

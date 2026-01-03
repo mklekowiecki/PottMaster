@@ -46,6 +46,8 @@
 			builder.Services.AddSingleton<ISyncService, SyncService>();
 			builder.Services.AddSingleton<IErrorHandlingService, ErrorHandlingService>();
 			builder.Services.AddSingleton<IDryingMonitorService, DryingMonitorService>();
+			builder.Services.AddSingleton<GlobalExceptionHandler>();
+
 
 			// Authentication Services (Singleton - maintains auth state)
 			builder.Services.AddSingleton<IAuthService, AuthService>();
@@ -100,6 +102,10 @@
 #endif
 
 			var mauiApp = builder.Build();
+
+			// Initialize global exception handler early
+			var globalExceptionHandler = mauiApp.Services.GetRequiredService<GlobalExceptionHandler>();
+			globalExceptionHandler.Initialize();
 
 			// Force creation of BackgroundSyncWorker to ensure it subscribes to auth state changes early
 			_ = mauiApp.Services.GetRequiredService<BackgroundSyncWorker>();
