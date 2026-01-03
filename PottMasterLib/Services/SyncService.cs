@@ -187,17 +187,28 @@ public class SyncService : ISyncService
         }
     }
 
-    private async Task<bool> SyncPhotoAsync(Photo photo)
+    private async Task<bool> SyncPhotoAsync(LocalPhoto photo)
     {
         try
         {
-            // TODO: Implement photo upload to Supabase Storage
-            // For now, mark as synced
-            photo.SyncStatus = SyncStatus.Synced.Code();
-            await _dbService.UpdatePhotoAsync(photo);
+            // Upload to Supabase
+            var uploadResult = await _apiEndpoint.UploadPhotoAsync(photo);
+            if (uploadResult.IsSuccess)
+            {
+                photo.RemotePath = uploadResult.Value;
+                photo.SyncStatus = SyncStatus.Synced.Code();
+                await _dbService.UpdatePhotoAsync(photo);
 
-            Debug.WriteLine($"Successfully synced photo: {photo.Id}");
-            return true;
+                Debug.WriteLine($"Successfully synced photo: {photo.Id}");
+                return true;
+            }
+            else
+            {
+                _logger.LogError("Failed to upload photo {PhotoId}: {Error}", photo.Id, uploadResult.Error);
+                photo.SyncStatus = SyncStatus.Error.Code();
+                await _dbService.UpdatePhotoAsync(photo);
+                return false;
+            }
         }
         catch (Exception ex)
         {

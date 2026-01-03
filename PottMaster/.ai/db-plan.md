@@ -31,12 +31,20 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
 - **code**: VARCHAR(20) (UNIQUE, NOT NULL) - Unique identification code (e.g., `MK-CUP-1224-001`)
 - **category_id**: SMALLINT (NOT NULL, REFERENCES `public.work_categories(id)`)
 - **wall_thickness**: INTEGER (NOT NULL) - In mm
-- **photo_path**: TEXT - Path to the image (local or Supabase Storage)
+- **photo_path**: TEXT - Deprecated: Path to the primary image (kept for backward compatibility, use `photos` table instead)
 - **status_id**: SMALLINT (NOT NULL, REFERENCES `public.work_statuses(id)`)
 - **created_at**: TIMESTAMPTZ (DEFAULT `now()`, NOT NULL)
 - **drying_started_at**: TIMESTAMPTZ
 - **drying_completed_at**: TIMESTAMPTZ
 - **sync_status**: VARCHAR(20) (DEFAULT `PENDING`, NOT NULL) - `PENDING`, `SYNCING`, `SYNCED`, `CONFLICT`, `ERROR`
+- **updated_at**: TIMESTAMPTZ (DEFAULT `now()`, NOT NULL)
+
+### `public.photos`
+- **id**: UUID (PRIMARY KEY, DEFAULT `uuid_generate_v4()`)
+- **work_id**: UUID (NOT NULL, REFERENCES `public.works(id)` ON DELETE CASCADE)
+- **remote_path**: TEXT (NOT NULL) - Path to the image in Supabase Storage
+- **order**: INTEGER (NOT NULL, DEFAULT 0) - Display order of the photo
+- **created_at**: TIMESTAMPTZ (DEFAULT `now()`, NOT NULL)
 - **updated_at**: TIMESTAMPTZ (DEFAULT `now()`, NOT NULL)
 
 ### `public.glazes`
@@ -116,6 +124,7 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
 
 - `public.user_profiles` 1:N `public.works`: Each user can have multiple works.
 - `public.user_profiles` 1:N `public.glazes`: Each user can have multiple glazes.
+- `public.works` 1:N `public.photos`: Each work can have multiple photos.
 - `public.works` N:M `public.glazes`: A work can have multiple glazes, and a glaze can be used on multiple works. This is resolved by the `public.work_glazes` junction table.
 - `public.user_profiles` 1:N `public.wiki_materials`: Users can submit wiki entries.
 - `public.work_categories` 1:N `public.works`: Each work belongs to a category.
@@ -127,6 +136,8 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
 - `idx_works_user_status` on `public.works(user_id, status_id)`: For efficient filtering of works by user and status.
 - `idx_works_sync_status` on `public.works(sync_status)`: For quick retrieval of works pending synchronization.
 - `idx_works_code` on `public.works(code)`: Unique index to enforce uniqueness and speed up lookups by work code.
+- `idx_photos_work_id` on `public.photos(work_id)`: For efficient retrieval of all photos for a specific work.
+- `idx_photos_work_order` on `public.photos(work_id, order)`: For efficient retrieval of photos in display order.
 - `idx_glazes_user` on `public.glazes(user_id)`: For efficient filtering of glazes by user.
 - `idx_glazes_name` on `public.glazes(name)`: For efficient searching in the glaze inventory by name.
 - `idx_wiki_materials_search` on `public.wiki_materials` using `GIN (to_tsvector('english', name || ' ' || COALESCE(manufacturer, '')))`: For full-text search on wiki material names and manufacturers.
@@ -138,6 +149,9 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
 
 ### `public.works`
 - **"Users can only access their own works"**: Allows users to `SELECT`, `INSERT`, `UPDATE`, `DELETE` their own `works` records based on `auth.uid() = user_id`.
+
+### `public.photos`
+- **"Users can only access photos of their own works"**: Allows users to `SELECT`, `INSERT`, `UPDATE`, `DELETE` `photos` records that are linked to their own `works` (via join with `works.user_id`).
 
 ### `public.glazes`
 - **"Users can only access their own glazes"**: Allows users to `SELECT`, `INSERT`, `UPDATE`, `DELETE` their own `glazes` records based on `auth.uid() = user_id`.
@@ -162,6 +176,8 @@ This document outlines the PostgreSQL database schema, relationships, indexing s
     - **Performance**: Joins on `SMALLINT` are faster than string comparisons.
     - **Flexibility**: Easier to add, modify, or deprecate categories/statuses/types without altering main tables.
 - **`TEXT` for `photo_path` and `glaze.quantity`**: Provides flexibility for storing varying lengths of data. Application logic will handle interpretation of `photo_path` (local vs. cloud) and `glaze.quantity` (free text).
+- **`photos` Table**: Separate table for managing multiple photos per work, replacing the single `photo_path` field approach. The `photo_path` field in `works` table is kept for backward compatibility but should be considered deprecated.
+- **Photo Ordering**: The `order` field in `photos` table allows users to arrange photos in a specific sequence for display purposes.
 - **`sync_queue` Table**: Dedicated table for managing offline changes and ensuring reliable synchronization with the Supabase backend.
 - **Supabase `auth.users` Integration**: `user_profiles.id` is directly linked to `auth.users.id` to leverage Supabase's authentication system and ensure data integrity.
 - **RLS Implementation**: Policies are designed to enforce data isolation, ensuring users can only access and modify their own data, and controlling access to public wiki content.

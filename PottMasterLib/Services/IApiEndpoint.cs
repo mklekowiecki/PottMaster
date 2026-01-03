@@ -14,4 +14,6 @@ public interface IApiEndpoint
 
     Task<Result<IUserProfile>> GetUserProfileByIdAsync(string userId);
     Task<Result<IUserProfile>> UpsertUserProfileAsync(IUserProfile profile);
+
+    Task<Result<string>> UploadPhotoAsync(LocalPhoto photo);
 }

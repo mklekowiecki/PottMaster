@@ -1,25 +1,26 @@
-using SQLite;
+using Supabase.Postgrest.Attributes;
+using Supabase.Postgrest.Models;
 
 namespace PottMasterLib.Models;
 
 [Table("photos")]
-public class Photo
+public class Photo : BaseModel
 {
-    [PrimaryKey]
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [PrimaryKey("id")]
+    public string Id { get; set; } = string.Empty;
 
-    [Indexed]
+    [Column("work_id")]
     public string WorkId { get; set; } = string.Empty;
 
-    public string Path { get; set; } = string.Empty;
+    [Column("remote_path")]
+    public string RemotePath { get; set; } = string.Empty;
 
-    public string? RemotePath { get; set; }
-
+    [Column("order")]
     public int Order { get; set; }
 
-    public string SyncStatus { get; set; } = "PENDING";
+    [Column("created_at")]
+    public DateTime CreatedAt { get; set; }
 
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    [Column("updated_at")]
+    public DateTime UpdatedAt { get; set; }
 }

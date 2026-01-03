@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using PottMasterLib.Models;
 using Supabase.Postgrest;
+using System.IO;
 
 namespace PottMasterLib.Services;
 
@@ -201,6 +202,56 @@ public class SupabaseApi : IApiEndpoint
         {
             _logger.LogError(ex, "Failed to upsert user profile {UserId}", profile.Id);
             return Result<IUserProfile>.Failure("Failed to save user profile to server", ex);
+        }
+    }
+
+    public async Task<Result<string>> UploadPhotoAsync(LocalPhoto photo)
+    {
+        try
+        {
+            // Upload to storage
+            var fileName = $"{photo.WorkId}/{photo.Id}.jpg"; // Assuming jpg, adjust if needed
+            var fileBytes = await File.ReadAllBytesAsync(photo.Path);
+            var uploadResponse = await _supabaseClient.Storage
+                .From("photos")
+                .Upload(fileBytes, fileName);
+
+            if (uploadResponse == null)
+            {
+                return Result<string>.Failure("Failed to upload photo to storage");
+            }
+
+            // Get public URL
+            var publicUrl = _supabaseClient.Storage
+                .From("photos")
+                .GetPublicUrl(fileName);
+
+            // Insert into photos table
+            var remotePhoto = new Photo
+            {
+                Id = photo.Id,
+                WorkId = photo.WorkId,
+                RemotePath = publicUrl,
+                Order = photo.Order,
+                CreatedAt = photo.CreatedAt,
+                UpdatedAt = photo.UpdatedAt
+            };
+
+            var insertResponse = await _supabaseClient
+                .From<Photo>()
+                .Insert(remotePhoto);
+
+            if (insertResponse.Models.Count == 0)
+            {
+                return Result<string>.Failure("Failed to insert photo record");
+            }
+
+            return Result<string>.Success(publicUrl);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to upload photo {PhotoId}", photo.Id);
+            return Result<string>.Failure("Failed to upload photo", ex);
         }
     }
 }

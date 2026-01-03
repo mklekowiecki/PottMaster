@@ -30,7 +30,7 @@ public class DbService : IDbService
             await _database.CreateTableAsync<LocalUserProfile>();
             await _database.CreateTableAsync<LocalWorkCategory>();
             await _database.CreateTableAsync<LocalWorkStatus>();
-            await _database.CreateTableAsync<Photo>();
+            await _database.CreateTableAsync<LocalPhoto>();
         }
         catch (Exception ex)
         {
@@ -148,18 +148,18 @@ public class DbService : IDbService
         return rowsAffected;
     }
 
-    public async Task<List<Photo>> GetPhotosByWorkIdAsync(string workId)
+    public async Task<List<LocalPhoto>> GetPhotosByWorkIdAsync(string workId)
     {
         if (_database == null)
             await InitializeAsync();
 
-        return await _database!.Table<Photo>()
+        return await _database!.Table<LocalPhoto>()
             .Where(photo => photo.WorkId == workId)
             .OrderBy(photo => photo.Order)
             .ToListAsync();
     }
 
-    public async Task<int> InsertPhotoAsync(Photo photo)
+    public async Task<int> InsertPhotoAsync(LocalPhoto photo)
     {
         if (_database == null)
             await InitializeAsync();
@@ -167,7 +167,7 @@ public class DbService : IDbService
         return await _database!.InsertAsync(photo);
     }
 
-    public async Task<int> UpdatePhotoAsync(Photo photo)
+    public async Task<int> UpdatePhotoAsync(LocalPhoto photo)
     {
         if (_database == null)
             await InitializeAsync();
@@ -175,7 +175,7 @@ public class DbService : IDbService
         return await _database!.UpdateAsync(photo);
     }
 
-    public async Task<int> DeletePhotoAsync(Photo photo)
+    public async Task<int> DeletePhotoAsync(LocalPhoto photo)
     {
         if (_database == null)
             await InitializeAsync();

@@ -28,7 +28,7 @@ public partial class NewWorkViewModel : ObservableObject
     private double wallThickness = 5;
 
     [ObservableProperty]
-    private ObservableCollection<Photo> photos = [];
+    private ObservableCollection<LocalPhoto> photos = [];
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
@@ -137,7 +137,7 @@ public partial class NewWorkViewModel : ObservableObject
         {
             using var stream = await photo.OpenReadAsync();
             var path = await _imageService.CompressAndSaveImageAsync(stream, photo.FileName);
-            var newPhoto = new Photo
+            var newPhoto = new LocalPhoto
             {
                 Path = path,
                 Order = Photos.Count
@@ -223,7 +223,7 @@ public partial class NewWorkViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task RemovePhotoAsync(Photo photo)
+    private async Task RemovePhotoAsync(LocalPhoto photo)
     {
         Photos.Remove(photo);
         // Optionally delete the file
