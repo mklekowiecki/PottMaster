@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using PottMaster.Resources;
 using PottMaster.Services;
 using PottMasterLib.Models;
+using PottMasterLib.Services;
 using System.Collections.ObjectModel;
 
 namespace PottMaster.ViewModels;
@@ -13,6 +14,7 @@ public partial class WorkDetailViewModel : ObservableObject
     private readonly IWorkService _workService;
     private readonly IErrorHandlingService _errorHandler;
     private readonly IAlertService _alertService;
+    private readonly IDbService _dbService;
 
     [ObservableProperty]
     private string? workId;
@@ -24,13 +26,17 @@ public partial class WorkDetailViewModel : ObservableObject
     private ObservableCollection<LocalWorkStatus> statuses = [];
 
     [ObservableProperty]
+    private ObservableCollection<Photo> photos = [];
+
+    [ObservableProperty]
     private bool isLoading;
 
-    public WorkDetailViewModel(IWorkService workService, IErrorHandlingService errorHandler, IAlertService alertService)
+    public WorkDetailViewModel(IWorkService workService, IErrorHandlingService errorHandler, IAlertService alertService, IDbService dbService)
     {
         _workService = workService;
         _errorHandler = errorHandler;
         _alertService = alertService;
+        _dbService = dbService;
     }
 
     partial void OnWorkIdChanged(string? value)
@@ -53,6 +59,10 @@ public partial class WorkDetailViewModel : ObservableObject
             var statusesList = await _workService.GetStatusesAsync();
             Statuses = new ObservableCollection<LocalWorkStatus>(statusesList);
             CurrentWork!.StatusCode = Statuses.Where(s=>s.Id == CurrentWork.StatusId).Select(s=>s.Code).FirstOrDefault() ?? string.Empty;
+
+            // Load photos
+            var photosList = await _dbService.GetPhotosByWorkIdAsync(WorkId);
+            Photos = new ObservableCollection<Photo>(photosList);
         }
         catch (Exception ex)
         {

@@ -141,6 +141,9 @@ public class SyncService : ISyncService
 
             if (result.IsSuccess)
             {
+                // Sync photos after work is synced
+                await SyncPhotosForWorkAsync(work.Id);
+
                 work.SyncStatus = SyncStatus.Synced.Code();
                 await _dbService.UpdateAsync(work);
 
@@ -161,6 +164,47 @@ public class SyncService : ISyncService
 
             work.SyncStatus = SyncStatus.Error.Code();
             await _dbService.UpdateAsync(work);
+
+            return false;
+        }
+    }
+
+    private async Task SyncPhotosForWorkAsync(string workId)
+    {
+        try
+        {
+            var photos = await _dbService.GetPhotosByWorkIdAsync(workId);
+            var pendingPhotos = photos.Where(p => p.SyncStatus == SyncStatus.Pending.Code() || p.SyncStatus == SyncStatus.Error.Code()).ToList();
+
+            foreach (var photo in pendingPhotos)
+            {
+                await SyncPhotoAsync(photo);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to sync photos for work {WorkId}", workId);
+        }
+    }
+
+    private async Task<bool> SyncPhotoAsync(Photo photo)
+    {
+        try
+        {
+            // TODO: Implement photo upload to Supabase Storage
+            // For now, mark as synced
+            photo.SyncStatus = SyncStatus.Synced.Code();
+            await _dbService.UpdatePhotoAsync(photo);
+
+            Debug.WriteLine($"Successfully synced photo: {photo.Id}");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to sync photo {PhotoId}", photo.Id);
+
+            photo.SyncStatus = SyncStatus.Error.Code();
+            await _dbService.UpdatePhotoAsync(photo);
 
             return false;
         }

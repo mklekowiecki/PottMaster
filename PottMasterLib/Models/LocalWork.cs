@@ -38,4 +38,7 @@ public class LocalWork : IWork
 
     [Ignore]
     public string StatusCode { get; set; } = string.Empty;
+
+    [Ignore]
+    public List<Photo> Photos { get; set; } = new();
 }

@@ -46,10 +46,10 @@ public class WorkService : IWorkService
         return result.Value;
     }
 
-    public async Task<string> CreateWorkAsync(Work work, string userInitials)
+    public async Task<Work> CreateWorkAsync(Work work, string userInitials)
     {
         var result = await _workRepository.CreateAsync(work, userInitials);
-        
+
         if (!result.IsSuccess)
         {
             if (result.Exception != null)
@@ -58,8 +58,8 @@ public class WorkService : IWorkService
             }
             throw new InvalidOperationException(result.Error ?? "Failed to create work");
         }
-        
-        return result.Value ?? string.Empty;
+
+        return result.Value!;
     }
 
     public async Task UpdateWorkAsync(Work work)

@@ -17,4 +17,9 @@ public interface IDbService
     Task<LocalUserProfile?> GetUserProfileByIdAsync(string userId);
     Task<int> UpsertUserProfileAsync(LocalUserProfile profile);
     Task<int> UpsertAllAsync<T>(IEnumerable<T> entities) where T : new();
+    Task<List<Photo>> GetPhotosByWorkIdAsync(string workId);
+    Task<int> InsertPhotoAsync(Photo photo);
+    Task<int> UpdatePhotoAsync(Photo photo);
+    Task<int> DeletePhotoAsync(Photo photo);
+    Task<int> DeletePhotosByWorkIdAsync(string workId);
 }

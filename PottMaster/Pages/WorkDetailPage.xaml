@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
-             xmlns:models="clr-namespace:PottMaster.Models"
              xmlns:resx="clr-namespace:PottMaster.Resources"
              xmlns:converters="clr-namespace:PottMaster.Converters"
              x:Class="PottMaster.Pages.WorkDetailPage"
@@ -29,34 +28,35 @@
         <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
             <VerticalStackLayout Padding="16" Spacing="24">
 
-                <Border Padding="0"
-                        BackgroundColor="{StaticResource Gray200}"
-                        IsVisible="{Binding CurrentWork.PhotoPath, Converter={StaticResource IsNotNullConverter}}">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="12"/>
-                    </Border.StrokeShape>
-                    <Image Source="{Binding CurrentWork.PhotoPath}"
-                           Aspect="AspectFill"
-                           HeightRequest="300"/>
-                </Border>
+                <CarouselView ItemsSource="{Binding Photos}"
+                              IsVisible="{Binding Photos.Count, Converter={StaticResource IsNotNullConverter}}"
+                              HeightRequest="300">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="300"/>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
 
                 <Border Padding="32"
-                       BackgroundColor="{StaticResource Gray100}"
-                       HeightRequest="300"
-                       IsVisible="{Binding CurrentWork.PhotoPath, Converter={StaticResource IsNullConverter}}">
+                        BackgroundColor="{StaticResource Gray100}"
+                        HeightRequest="300"
+                        IsVisible="{Binding Photos.Count, Converter={StaticResource IsNullConverter}}">
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="12"/>
                     </Border.StrokeShape>
                     <VerticalStackLayout VerticalOptions="Center"
-                                       HorizontalOptions="Center"
-                                       Spacing="8">
+                                        HorizontalOptions="Center"
+                                        Spacing="8">
                         <Label Text="?"
-                               FontSize="48"
-                               HorizontalTextAlignment="Center"/>
+                                FontSize="48"
+                                HorizontalTextAlignment="Center"/>
                         <Label Text="{x:Static resx:AppResources.NoPhoto}"
-                               FontSize="16"
-                               TextColor="{StaticResource Gray600}"
-                               HorizontalTextAlignment="Center"/>
+                                FontSize="16"
+                                TextColor="{StaticResource Gray600}"
+                                HorizontalTextAlignment="Center"/>
                     </VerticalStackLayout>
                 </Border>
 

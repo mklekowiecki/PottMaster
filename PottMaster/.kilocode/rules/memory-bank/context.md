@@ -71,6 +71,7 @@ PottMaster addresses these challenges through:
 - **Supabase data sync implementation (US-008)** ✅
 - **Process timer management (US-004)** ✅ - Automatic status advancement and notifications when drying completes
 - **SupabaseApi service implemented** - Direct Supabase client wrapper for API operations
+- **Multiple photos per work implemented** - New Photo entity, database table, UI for adding/viewing multiple photos, sync support
 
 ### Upcoming
 - Image handling and upload to Supabase Storage

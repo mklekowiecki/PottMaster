@@ -11,7 +11,7 @@ public class WallThicknessToDaysConverter : IValueConverter
     {
         if (value is double wallThickness)
         {
-            var days = CalculationLogic.CalculateDryingDays((int)wallThickness);
+            var days = CommonLogic.CalculateDryingDays((int)wallThickness);
             var resourceManager = AppResources.ResourceManager;
             var localizedValue = resourceManager.GetString("DryingDays", culture);
 

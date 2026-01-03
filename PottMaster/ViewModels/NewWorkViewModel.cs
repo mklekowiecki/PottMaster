@@ -28,7 +28,7 @@ public partial class NewWorkViewModel : ObservableObject
     private double wallThickness = 5;
 
     [ObservableProperty]
-    private string? photoPath;
+    private ObservableCollection<Photo> photos = [];
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
@@ -40,7 +40,14 @@ public partial class NewWorkViewModel : ObservableObject
     [ObservableProperty]
     private string? errorMessage;
 
-    public bool IsSaveEnabled => !isSaving && !isLoading && selectedCategory != null && wallThickness >= 3 && wallThickness <= 50;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
+    private string? workCode;
+
+    private List<Work> existingWorks = [];
+    private string userInitials = "";
+
+    public bool IsSaveEnabled => !isSaving && !isLoading && selectedCategory != null && wallThickness >= 3 && wallThickness <= 50 && !string.IsNullOrWhiteSpace(WorkCode);
 
     public NewWorkViewModel(IWorkService workService, IAuthService authService, IDbService dbService, IImageService imageService, IAlertService alertService)
     {
@@ -61,6 +68,14 @@ public partial class NewWorkViewModel : ObservableObject
             await _dbService.InitializeAsync();
             var categoriesList = await _workService.GetCategoriesAsync();
             Categories = new ObservableCollection<LocalWorkCategory>(categoriesList);
+
+            var user = await _authService.GetCurrentUserAsync();
+            if (user?.Id != null)
+            {
+                var profile = await _dbService.GetUserProfileByIdAsync(user.Id);
+                userInitials = profile?.Initials ?? "";
+                existingWorks = await _workService.GetUserWorksAsync(user.Id);
+            }
         }
         catch (Exception ex)
         {
@@ -121,7 +136,13 @@ public partial class NewWorkViewModel : ObservableObject
         try
         {
             using var stream = await photo.OpenReadAsync();
-            PhotoPath = await _imageService.CompressAndSaveImageAsync(stream, photo.FileName);
+            var path = await _imageService.CompressAndSaveImageAsync(stream, photo.FileName);
+            var newPhoto = new Photo
+            {
+                Path = path,
+                Order = Photos.Count
+            };
+            Photos.Add(newPhoto);
         }
         catch (Exception ex)
         {
@@ -164,21 +185,28 @@ public partial class NewWorkViewModel : ObservableObject
                 return;
             }
 
-            var userInitials = profile.Initials;
+            userInitials = profile.Initials;
 
             var work = new Work
             {
                 UserId = user.Id,
                 CategoryId = SelectedCategory.Id,
                 WallThickness = (int)WallThickness,
-                PhotoPath = PhotoPath,
                 StatusId = (int)WorkStatusCode.Wet,
-                DryingStartedAt = DateTime.UtcNow
+                DryingStartedAt = DateTime.UtcNow,
+                Code = WorkCode
             };
 
-            var code = await _workService.CreateWorkAsync(work, userInitials);
+            var createdWork = await _workService.CreateWorkAsync(work, userInitials);
 
-            await _alertService.ShowAlertAsync(AppResources.Success, string.Format(AppResources.WorkCreated, code));
+            // Save photos
+            foreach (var photo in Photos)
+            {
+                photo.WorkId = createdWork.Id;
+                await _dbService.InsertPhotoAsync(photo);
+            }
+
+            await _alertService.ShowAlertAsync(AppResources.Success, string.Format(AppResources.WorkCreated, createdWork.Code));
             await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
@@ -194,6 +222,24 @@ public partial class NewWorkViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private async Task AddPhotoAsync()
+    {
+        // For now, duplicate TakePhoto
+        await TakePhotoAsync();
+    }
+
+    [RelayCommand]
+    private async Task RemovePhotoAsync(Photo photo)
+    {
+        Photos.Remove(photo);
+        // Optionally delete the file
+        if (!string.IsNullOrEmpty(photo.Path) && File.Exists(photo.Path))
+        {
+            File.Delete(photo.Path);
+        }
+    }
+
+    [RelayCommand]
     private async Task CancelAsync()
     {
         await Shell.Current.GoToAsync("..");
@@ -201,11 +247,27 @@ public partial class NewWorkViewModel : ObservableObject
 
     partial void OnSelectedCategoryChanged(LocalWorkCategory? value)
     {
+        if (value != null && !string.IsNullOrEmpty(userInitials))
+        {
+            WorkCode = GenerateWorkCode(userInitials, value.Code, existingWorks);
+        }
         SaveWorkCommand.NotifyCanExecuteChanged();
     }
 
     partial void OnWallThicknessChanged(double value)
     {
         SaveWorkCommand.NotifyCanExecuteChanged();
+    }
+
+    private string GenerateWorkCode(string userInitials, string categoryCode, IEnumerable<Work> existingWorks)
+    {
+        var monthYear = DateTime.UtcNow.ToString("MMyy");
+
+        var filteredWorks = existingWorks
+            .Where(w => w.Code.StartsWith($"{userInitials}-{categoryCode}-{monthYear}-"))
+            .ToList();
+
+        var counter = filteredWorks.Count + 1;
+        return $"{userInitials}-{categoryCode}-{monthYear}-{counter:D3}";
     }
 }

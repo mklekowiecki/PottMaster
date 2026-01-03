@@ -47,7 +47,7 @@ public class Work : IWork
             if (StatusId >= (int)WorkStatusCode.BoneDry) return TimeSpan.Zero;
 
             var startTime = DryingStartedAt ?? CreatedAt;
-            var dryingDays = CalculationLogic.CalculateDryingDays(WallThickness);
+            var dryingDays = CommonLogic.CalculateDryingDays(WallThickness);
 
             var targetDate = startTime.AddDays(dryingDays);
             var remaining = targetDate - DateTime.UtcNow;

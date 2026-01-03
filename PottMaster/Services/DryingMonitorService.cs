@@ -55,7 +55,7 @@ public class DryingMonitorService : IDryingMonitorService
     private TimeSpan CalculateRemainingDryingTime(LocalWork work)
     {
         var startTime = work.DryingStartedAt ?? work.CreatedAt;
-        var dryingDays = CalculationLogic.CalculateDryingDays(work.WallThickness);
+        var dryingDays = CommonLogic.CalculateDryingDays(work.WallThickness);
 
         var targetDate = startTime.AddDays(dryingDays);
         return targetDate - DateTime.UtcNow;

@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using PottMasterLib.Services;
 using PottMasterLib.Models;
+using PottMasterLib.Logic;
 
 namespace PottMaster.Repositories;
 
@@ -68,22 +69,18 @@ public class LocalWorkRepository : IWorkRepository
         }
     }
     
-    public async Task<Result<string>> CreateAsync(Work work, string userInitials)
+    public async Task<Result<Work>> CreateAsync(Work work, string userInitials)
     {
         try
         {
             var category = await _dbService.GetWorkCategoryByIdAsync(work.CategoryId);
             var categoryCode = category?.Code ?? "OTH";
             
-            var monthYear = DateTime.UtcNow.ToString("MMyy");
-            
             var existingWorks = await _dbService.GetWorksByUserIdAsync(work.UserId);
-            var filteredWorks = existingWorks
-                .Where(w => w.Code.StartsWith($"{userInitials}-{categoryCode}-{monthYear}-"))
-                .ToList();
-            
-            var counter = filteredWorks.Count + 1;
-            work.Code = $"{userInitials}-{categoryCode}-{monthYear}-{counter:D3}";
+            if (string.IsNullOrEmpty(work.Code))
+            {
+                work.Code = CommonLogic.GenerateWorkCode(userInitials, categoryCode, existingWorks);
+            }
             
             var localWork = MapToLocalWork(work);
             localWork.Id = Guid.NewGuid().ToString();
@@ -95,12 +92,12 @@ public class LocalWorkRepository : IWorkRepository
             await _dbService.InsertAsync(localWork);
             
             _logger.LogInformation("Work created with code: {WorkCode}", work.Code);
-            return Result<string>.Success(work.Code);
+            return Result<Work>.Success(work);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to create work");
-            return Result<string>.Failure("Failed to create work", ex);
+            return Result<Work>.Failure("Failed to create work", ex);
         }
     }
     

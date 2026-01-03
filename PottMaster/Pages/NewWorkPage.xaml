@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
-             xmlns:models="clr-namespace:PottMaster.Models"
              xmlns:resources="clr-namespace:PottMaster.Resources;assembly=PottMaster"
              x:Class="PottMaster.Pages.NewWorkPage"
              x:DataType="vm:NewWorkViewModel"
@@ -15,66 +14,85 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="24">
-            
+
             <!-- Error Message -->
-            <Frame IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}"
+            <Border IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}"
                    BackgroundColor="{StaticResource Secondary}"
                    Padding="12"
-                   CornerRadius="8"
-                   BorderColor="{StaticResource Primary}">
+                   >
                 <Label Text="{Binding ErrorMessage}"
                        TextColor="{StaticResource White}"
                        FontSize="14"/>
-            </Frame>
+            </Border>
 
             <!-- Photo Section -->
             <VerticalStackLayout Spacing="12">
                 <Label Text="{x:Static resources:AppResources.PhotoTitle}"
-                       FontSize="18"
-                       FontAttributes="Bold"/>
-                
-                <!-- Photo Preview -->
-                <Frame Padding="0"
-                       CornerRadius="12"
-                       IsClippedToBounds="True"
-                       BackgroundColor="{StaticResource Gray200}"
-                       HeightRequest="300"
-                       IsVisible="{Binding PhotoPath, Converter={StaticResource IsNotNullConverter}}">
-                    <Image Source="{Binding PhotoPath}"
-                           Aspect="AspectFill"/>
-                </Frame>
+                        FontSize="18"
+                        FontAttributes="Bold"/>
+
+                <!-- Photos Collection -->
+                <CollectionView ItemsSource="{Binding Photos}"
+                                HeightRequest="120"
+                                IsVisible="{Binding Photos.Count, Converter={StaticResource IsNotNullConverter}}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="4"
+                                   BackgroundColor="{StaticResource Gray200}"
+                                   WidthRequest="100"
+                                   HeightRequest="100">
+                                <Image Source="{Binding Path}"
+                                        Aspect="AspectFill"/>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.RemovePhotoCommand, Source={x:Reference NewWorkPage}}"
+                                                          CommandParameter="{Binding .}"/>
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
                 <!-- Empty State -->
-                <Frame Padding="32"
-                       CornerRadius="12"
-                       BackgroundColor="{StaticResource Gray100}"
-                       HeightRequest="300"
-                       IsVisible="{Binding PhotoPath, Converter={StaticResource IsNullConverter}}">
+                <Border Padding="32"
+                        BackgroundColor="{StaticResource Gray100}"
+                        HeightRequest="100"
+                        IsVisible="{Binding Photos.Count, Converter={StaticResource IsNullConverter}}">
                     <VerticalStackLayout VerticalOptions="Center"
-                                       HorizontalOptions="Center"
-                                       Spacing="8">
-                        <Label Text="??"
-                               FontSize="48"
-                               HorizontalTextAlignment="Center"/>
+                                        HorizontalOptions="Center"
+                                        Spacing="8">
+                        <Label Text="?"
+                                FontSize="24"
+                                HorizontalTextAlignment="Center"/>
                         <Label Text="{x:Static resources:AppResources.NoPhotoSelected}"
-                               FontSize="16"
-                               TextColor="{StaticResource Gray600}"
-                               HorizontalTextAlignment="Center"/>
+                                FontSize="14"
+                                TextColor="{StaticResource Gray600}"
+                                HorizontalTextAlignment="Center"/>
                     </VerticalStackLayout>
-                </Frame>
+                </Border>
 
                 <!-- Photo Buttons -->
-                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
                     <Button Grid.Column="0"
                             Text="{x:Static resources:AppResources.TakePhoto}"
                             Command="{Binding TakePhotoCommand}"
                             BackgroundColor="{StaticResource Primary}"
-                            TextColor="{StaticResource White}"/>
+                            TextColor="{StaticResource White}"
+                            FontSize="12"/>
                     <Button Grid.Column="1"
                             Text="{x:Static resources:AppResources.PickPhoto}"
                             Command="{Binding PickPhotoCommand}"
                             BackgroundColor="{StaticResource Secondary}"
-                            TextColor="{StaticResource White}"/>
+                            TextColor="{StaticResource White}"
+                            FontSize="12"/>
+                    <Button Grid.Column="2"
+                            Text="+"
+                            Command="{Binding AddPhotoCommand}"
+                            BackgroundColor="{StaticResource Gray300}"
+                            TextColor="{StaticResource White}"
+                            FontSize="16"/>
                 </Grid>
             </VerticalStackLayout>
 
@@ -83,7 +101,7 @@
                 <Label Text="{x:Static resources:AppResources.CategoryTitle}"
                        FontSize="18"
                        FontAttributes="Bold"/>
-                
+
                 <Picker Title="{x:Static resources:AppResources.SelectCategory}"
                         ItemsSource="{Binding Categories}"
                         SelectedItem="{Binding SelectedCategory}"
@@ -93,6 +111,18 @@
                         <Binding Path="Code" Converter="{StaticResource WorkCategoryCodeToLocalizedConverter}"/>
                     </Picker.ItemDisplayBinding>
                 </Picker>
+            </VerticalStackLayout>
+
+            <!-- Work Code Section -->
+            <VerticalStackLayout Spacing="12">
+                <Label Text="Work Code"
+                       FontSize="18"
+                       FontAttributes="Bold"/>
+
+                <Entry Text="{Binding WorkCode}"
+                       Placeholder="Enter work code"
+                       FontSize="16"
+                       BackgroundColor="{StaticResource White}"/>
             </VerticalStackLayout>
 
             <!-- Wall Thickness Section -->

@@ -68,7 +68,6 @@
 	  <None Include=".ai\db-plan.md" />
 	  <None Include=".ai\ui-plan.md" />
 	  <None Include=".github\copilot-instructions.md" />
-	  <None Include=".kilocodemodes\localization_mode.yaml" />
 	  <None Include=".kilocode\rules\maui-guidelines.md" />
 	  <None Include=".kilocode\rules\memory-bank-instructions.md" />
 	  <None Include=".kilocode\rules\memory-bank\architecture.md" />
@@ -115,7 +114,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Tests\" />
 	  <Folder Include="plans\" />
 	</ItemGroup>
 
