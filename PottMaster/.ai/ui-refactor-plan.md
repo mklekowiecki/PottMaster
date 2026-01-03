@@ -14,7 +14,7 @@ This document outlines a comprehensive plan to refactor the PottMaster UI to cre
 - ? **MainPage**: Work list with cards, uses Border components
 - ? **NewWorkPage**: Complex form with photos, picker, slider, and sections
 - ? **WorkDetailPage**: Detailed view with grid layout and info cards
-- ? **Profile/Settings**: Not yet implemented
+- ? **Profile/Settings**: User profile with logout functionality
 - ? **GlazeInventoryPage**: Not yet implemented
 - ? **WikiPage**: Not yet implemented
 - ? **AnalyticsPage**: Not yet implemented
@@ -487,19 +487,33 @@ Border (CardStyle)
 
 **Priority**: Medium
 
+**Status**: ? **COMPLETED**
+
+**Implementation Details**:
+- **ProfileViewModel.cs**: Full MVVM with CommunityToolkit.Mvvm
+  - Properties: UserEmail, UserInitials, IsLoading, AppVersion
+  - LogoutCommand with confirmation dialog
+  - Integrated with IAuthService, IAuthStateService, IAlertService, IErrorHandlingService
+- **ProfilePage.xaml**: Material Design 3 styled
+  - Circular avatar (100x100px) with user initials on Primary background
+  - Three main sections with SectionContainer styling
+  - Error color styling for logout button in Danger Zone
+  - Full light/dark theme support
+
 **Design**:
-1. Header with user initials/avatar (circular)
-2. User email/name
-3. Settings sections using `SectionContainer`:
+1. ? Header with user initials/avatar (circular)
+2. ? User email/name
+3. ? Settings sections using `SectionContainer`:
    - Account Settings
-     - Language Picker
-     - Theme Toggle (optional)
+     - Initials display
+     - Language Picker (future)
+     - Theme Toggle (future)
    - About
      - Version info
-     - Privacy Policy link
-     - Terms of Service link
+     - Privacy Policy link (future)
+     - Terms of Service link (future)
    - Danger Zone
-     - Logout Button (destructive style)
+     - Logout Button with confirmation (implemented)
      - Delete Account (future)
 
 ### 4.7 GlazeInventoryPage (Future)

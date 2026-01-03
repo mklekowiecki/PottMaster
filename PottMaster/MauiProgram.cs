@@ -69,6 +69,7 @@
 			builder.Services.AddTransient<MainViewModel>();
 			builder.Services.AddTransient<NewWorkViewModel>();
 			builder.Services.AddTransient<WorkDetailViewModel>();
+			builder.Services.AddTransient<ProfileViewModel>();
 			
 			// Pages (Transient - new instance per navigation)
 			builder.Services.AddTransient<MainPage>();
@@ -76,7 +77,8 @@
 			builder.Services.AddTransient<LoginPage>();
 			builder.Services.AddTransient<SignupPage>();
 			builder.Services.AddTransient<WorkDetailPage>();
-
+			builder.Services.AddTransient<ProfilePage>();
+			
 			// Register BackgroundSyncWorker as singleton
 			builder.Services.AddSingleton<BackgroundSyncWorker>();
 
