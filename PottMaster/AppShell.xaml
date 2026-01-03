@@ -6,7 +6,8 @@
     xmlns:local="clr-namespace:PottMaster"
     xmlns:pages="clr-namespace:PottMaster.Pages"
     xmlns:resx="clr-namespace:PottMaster.Resources"
-    Title="{x:Static resx:AppResources.AppTitle}">
+    Title="{x:Static resx:AppResources.AppTitle}"
+    TabBarIsVisible="False">
 
     <!-- Login/Signup Pages (Outside TabBar) -->
     <ShellContent
@@ -21,31 +22,31 @@
 
     <!-- Main App Navigation (Bottom Tab Bar) -->
     <TabBar Route="main" x:Name="MainTabBar">
-        <Tab Title="{x:Static resx:AppResources.TabWorksTitle}" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabWorksTitle}" Icon="vase.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate local:MainPage}" 
                 Route="MainPage" />
         </Tab>
         
-        <Tab Title="{x:Static resx:AppResources.TabInventoryTitle}" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabInventoryTitle}" Icon="brush_svgrepo_com.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate pages:GlazeInventoryPage}" 
                 Route="GlazeInventoryPage" />
         </Tab>
         
-        <Tab Title="{x:Static resx:AppResources.TabWikiTitle}" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabWikiTitle}" Icon="book_closed_svgrepo_com.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate pages:WikiPage}" 
                 Route="WikiPage" />
         </Tab>
         
-        <Tab Title="{x:Static resx:AppResources.TabAnalyticsTitle}" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabAnalyticsTitle}" Icon="chart_line_svgrepo_com.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate pages:AnalyticsPage}" 
                 Route="AnalyticsPage" />
         </Tab>
         
-        <Tab Title="{x:Static resx:AppResources.TabProfileTitle}" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabProfileTitle}" Icon="cog_svgrepo_com.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate pages:ProfilePage}" 
                 Route="ProfilePage" />

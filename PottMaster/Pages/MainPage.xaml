@@ -4,11 +4,12 @@
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
              xmlns:models="clr-namespace:PottMasterLib.Models;assembly=PottMasterLib"
              xmlns:resx="clr-namespace:PottMaster.Resources"
+             xmlns:controls="clr-namespace:PottMaster.Controls"
              x:Class="PottMaster.MainPage"
              x:DataType="vm:MainViewModel"
              Title="{x:Static resx:AppResources.MyWorks}">
 
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="*,60">
         <!-- Works List -->
         <RefreshView Grid.Row="0" 
                      Command="{Binding LoadWorksCommand}"
@@ -97,12 +98,15 @@
         </RefreshView>
 
         <!-- FAB Button -->
-        <Button Grid.Row="1"
+        <Button Grid.Row="0"
                 Text="{x:Static resx:AppResources.AddNewWork}"
                 Command="{Binding AddWorkCommand}"
                 Margin="16"
                 HorizontalOptions="End"
                 VerticalOptions="End"/>
+
+        <!-- Bottom Navigation Bar -->
+        <controls:BottomNavigationBar Grid.Row="1" />
     </Grid>
 
 </ContentPage>

@@ -1,0 +1,49 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outline color -->
+  <defs>
+    <style>
+      .outline {
+        stroke: #3f4a4a;
+        stroke-width: 6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+
+  <!-- Vase neck -->
+  <rect
+    x="48"
+    y="16"
+    width="32"
+    height="28"
+    rx="10"
+    fill="#4fb3bf"
+    class="outline"
+  />
+
+  <!-- Vase body -->
+  <path
+    d="
+      M36 44
+      C36 60, 28 68, 28 88
+      C28 108, 44 116, 64 116
+      C84 116, 100 108, 100 88
+      C100 68, 92 60, 92 44
+      Z
+    "
+    fill="#f47b5b"
+    class="outline"
+  />
+
+  <!-- Vase base -->
+  <rect
+    x="44"
+    y="108"
+    width="40"
+    height="10"
+    rx="5"
+    fill="#cfded0"
+    class="outline"
+  />
+</svg>

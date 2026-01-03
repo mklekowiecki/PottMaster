@@ -110,6 +110,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\BottomNavigationBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\AnalyticsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

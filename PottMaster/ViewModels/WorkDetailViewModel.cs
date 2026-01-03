@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PottMaster.Resources;
 using PottMaster.Services;
+using PottMasterLib.Logic;
 using PottMasterLib.Models;
 using PottMasterLib.Services;
 using System.Collections.ObjectModel;
@@ -71,10 +72,9 @@ public partial class WorkDetailViewModel : ObservableObject
 
             // Set selected status to current status
             SelectedStatus = Statuses.FirstOrDefault(s => s.Id == CurrentWork.StatusId);
-            
-            // Allow status change if not completed or discarded
-            CanChangeStatus = CurrentWork.StatusId < 7; // Assuming 7 is COMPLETED, 8 is DISCARDED
 
+            // Allow status change if not completed or discarded
+            CanChangeStatus = CommonLogic.CanStatusBeChanged(CurrentWork.StatusId);
             // Load photos
             var photosList = await _dbService.GetPhotosByWorkIdAsync(WorkId);
             Photos = new ObservableCollection<LocalPhoto>(photosList);

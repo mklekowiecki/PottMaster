@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:PottMaster.Resources"
+             x:Class="PottMaster.Controls.BottomNavigationBar">
+	<Border BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceContainer}, Dark={StaticResource SurfaceContainerDark}}"
+            Padding="0">
+		<Border.Shadow>
+			<Shadow Brush="{AppThemeBinding Light=Black, Dark=Transparent}"
+                    Opacity="0.1"
+                    Offset="0,-2"
+                    Radius="8" />
+		</Border.Shadow>
+
+		<Grid HeightRequest="80" Padding="8,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<!-- Works Tab -->
+			<Border x:Name="MainBorder"
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Padding="8"
+                    Margin="4">
+				<Border.StrokeShape>
+					<RoundRectangle CornerRadius="16" />
+				</Border.StrokeShape>
+				<VerticalStackLayout Spacing="4"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+					<Border x:Name="MainIconContainer"
+                            BackgroundColor="Transparent"
+                            StrokeThickness="0"
+                            HeightRequest="32"
+                            WidthRequest="64"
+                            HorizontalOptions="Center">
+						<Border.StrokeShape>
+							<RoundRectangle CornerRadius="16" />
+						</Border.StrokeShape>
+						<Image x:Name="MainIcon"
+                               Source="vase.png"
+                               HeightRequest="24"
+                               WidthRequest="24"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+					</Border>
+					<Label x:Name="MainLabel"
+                           Text="{x:Static resx:AppResources.TabWorksTitle}"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}" />
+				</VerticalStackLayout>
+				<Border.GestureRecognizers>
+					<TapGestureRecognizer Tapped="OnMainTapped" />
+				</Border.GestureRecognizers>
+			</Border>
+
+			<!-- Inventory Tab -->
+			<Border x:Name="InventoryBorder"
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Padding="8"
+                    Margin="4">
+				<Border.StrokeShape>
+					<RoundRectangle CornerRadius="16" />
+				</Border.StrokeShape>
+				<VerticalStackLayout Spacing="4"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+					<Border x:Name="InventoryIconContainer"
+                            BackgroundColor="Transparent"
+                            StrokeThickness="0"
+                            HeightRequest="32"
+                            WidthRequest="64"
+                            HorizontalOptions="Center">
+						<Border.StrokeShape>
+							<RoundRectangle CornerRadius="16" />
+						</Border.StrokeShape>
+						<Image x:Name="InventoryIcon"
+                               Source="brush_svgrepo_com.png"
+                               HeightRequest="24"
+                               WidthRequest="24"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+					</Border>
+					<Label x:Name="InventoryLabel"
+                           Text="{x:Static resx:AppResources.TabInventoryTitle}"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}" />
+				</VerticalStackLayout>
+				<Border.GestureRecognizers>
+					<TapGestureRecognizer Tapped="OnInventoryTapped" />
+				</Border.GestureRecognizers>
+			</Border>
+
+			<!-- Wiki Tab -->
+			<Border x:Name="WikiBorder"
+                    Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Padding="8"
+                    Margin="4">
+				<Border.StrokeShape>
+					<RoundRectangle CornerRadius="16" />
+				</Border.StrokeShape>
+				<VerticalStackLayout Spacing="4"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+					<Border x:Name="WikiIconContainer"
+                            BackgroundColor="Transparent"
+                            StrokeThickness="0"
+                            HeightRequest="32"
+                            WidthRequest="64"
+                            HorizontalOptions="Center">
+						<Border.StrokeShape>
+							<RoundRectangle CornerRadius="16" />
+						</Border.StrokeShape>
+						<Image x:Name="WikiIcon"
+                               Source="book_closed_svgrepo_com.png"
+                               HeightRequest="24"
+                               WidthRequest="24"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+					</Border>
+					<Label x:Name="WikiLabel"
+                           Text="{x:Static resx:AppResources.TabWikiTitle}"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}" />
+				</VerticalStackLayout>
+				<Border.GestureRecognizers>
+					<TapGestureRecognizer Tapped="OnWikiTapped" />
+				</Border.GestureRecognizers>
+			</Border>
+
+			<!-- Analytics Tab -->
+			<Border x:Name="AnalyticsBorder"
+                    Grid.Column="3"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Padding="8"
+                    Margin="4">
+				<Border.StrokeShape>
+					<RoundRectangle CornerRadius="16" />
+				</Border.StrokeShape>
+				<VerticalStackLayout Spacing="4"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+					<Border x:Name="AnalyticsIconContainer"
+                            BackgroundColor="Transparent"
+                            StrokeThickness="0"
+                            HeightRequest="32"
+                            WidthRequest="64"
+                            HorizontalOptions="Center">
+						<Border.StrokeShape>
+							<RoundRectangle CornerRadius="16" />
+						</Border.StrokeShape>
+						<Image x:Name="AnalyticsIcon"
+                               Source="chart_line_svgrepo_com.png"
+                               HeightRequest="24"
+                               WidthRequest="24"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+					</Border>
+					<Label x:Name="AnalyticsLabel"
+                           Text="{x:Static resx:AppResources.TabAnalyticsTitle}"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}" />
+				</VerticalStackLayout>
+				<Border.GestureRecognizers>
+					<TapGestureRecognizer Tapped="OnAnalyticsTapped" />
+				</Border.GestureRecognizers>
+			</Border>
+
+			<!-- Profile Tab -->
+			<Border x:Name="ProfileBorder"
+                    Grid.Column="4"
+                    BackgroundColor="Transparent"
+                    StrokeThickness="0"
+                    Padding="8"
+                    Margin="4">
+				<Border.StrokeShape>
+					<RoundRectangle CornerRadius="16" />
+				</Border.StrokeShape>
+				<VerticalStackLayout Spacing="4"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center">
+					<Border x:Name="ProfileIconContainer"
+                            BackgroundColor="Transparent"
+                            StrokeThickness="0"
+                            HeightRequest="32"
+                            WidthRequest="64"
+                            HorizontalOptions="Center">
+						<Border.StrokeShape>
+							<RoundRectangle CornerRadius="16" />
+						</Border.StrokeShape>
+						<Image x:Name="ProfileIcon"
+                               Source="cog_svgrepo_com.png"
+                               HeightRequest="24"
+                               WidthRequest="24"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+					</Border>
+					<Label x:Name="ProfileLabel"
+                           Text="{x:Static resx:AppResources.TabProfileTitle}"
+                           FontSize="12"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}" />
+				</VerticalStackLayout>
+				<Border.GestureRecognizers>
+					<TapGestureRecognizer Tapped="OnProfileTapped" />
+				</Border.GestureRecognizers>
+			</Border>
+		</Grid>
+	</Border>
+</ContentView>
