@@ -153,4 +153,8 @@ public class AuthService : IAuthService
         }
     }
 
+    public async Task ClearSession()
+    {
+        await _client.Auth.SignOut();
+    }
 }

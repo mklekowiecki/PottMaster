@@ -70,7 +70,7 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Konto utworzone, możesz się zalogować..
+        ///   Looks up a localized string similar to Konto utworzone,otwórz pocztę na tym urządzeniu i potwierdź klikając w link.
         /// </summary>
         internal static string AccountCreatedPleaseLogin {
             get {
@@ -192,6 +192,15 @@ namespace PottMaster.Resources {
         internal static string ConfirmDeletionMessage {
             get {
                 return ResourceManager.GetString("ConfirmDeletionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Potwierdzanie adresu e-mail....
+        /// </summary>
+        internal static string ConfirmingEmail {
+            get {
+                return ResourceManager.GetString("ConfirmingEmail", resourceCulture);
             }
         }
         
@@ -331,6 +340,24 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Potwierdzenie adresu e-mail.
+        /// </summary>
+        internal static string EmailConfirmationTitle {
+            get {
+                return ResourceManager.GetString("EmailConfirmationTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adres e-mail potwierdzony pomyślnie!.
+        /// </summary>
+        internal static string EmailConfirmedSuccessfully {
+            get {
+                return ResourceManager.GetString("EmailConfirmedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wprowadź kod pracy.
         /// </summary>
         internal static string EnterWorkCode {
@@ -367,6 +394,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie udało się potwierdzić adresu e-mail..
+        /// </summary>
+        internal static string FailedToConfirmEmail {
+            get {
+                return ResourceManager.GetString("FailedToConfirmEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nieudane ładowanie prac: {0}.
         /// </summary>
         internal static string FailedToLoadWorks {
@@ -385,11 +421,29 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Przejdź do logowania.
+        /// </summary>
+        internal static string GoToLogin {
+            get {
+                return ResourceManager.GetString("GoToLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inicjały.
         /// </summary>
         internal static string Initials {
             get {
                 return ResourceManager.GetString("Initials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nieprawidłowy link potwierdzający..
+        /// </summary>
+        internal static string InvalidConfirmationLink {
+            get {
+                return ResourceManager.GetString("InvalidConfirmationLink", resourceCulture);
             }
         }
         
@@ -498,6 +552,15 @@ namespace PottMaster.Resources {
         internal static string NoAccount {
             get {
                 return ResourceManager.GetString("NoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie otrzymano linku potwierdzającego..
+        /// </summary>
+        internal static string NoConfirmationLinkReceived {
+            get {
+                return ResourceManager.GetString("NoConfirmationLinkReceived", resourceCulture);
             }
         }
         

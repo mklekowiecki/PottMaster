@@ -486,4 +486,25 @@
   <data name="Synced" xml:space="preserve">
     <value>Offline data sent</value>
   </data>
+  <data name="ConfirmingEmail" xml:space="preserve">
+    <value>Confirming your email...</value>
+</data>
+<data name="NoConfirmationLinkReceived" xml:space="preserve">
+    <value>No confirmation link received.</value>
+</data>
+<data name="InvalidConfirmationLink" xml:space="preserve">
+    <value>Invalid confirmation link.</value>
+</data>
+<data name="EmailConfirmedSuccessfully" xml:space="preserve">
+    <value>Email confirmed successfully!</value>
+</data>
+<data name="FailedToConfirmEmail" xml:space="preserve">
+    <value>Failed to confirm email.</value>
+</data>
+<data name="EmailConfirmationTitle" xml:space="preserve">
+    <value>Email Confirmation</value>
+</data>
+<data name="GoToLogin" xml:space="preserve">
+    <value>Go to Login</value>
+</data>
 </root>

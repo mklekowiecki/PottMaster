@@ -17,6 +17,7 @@ namespace PottMaster
             // Register routes for detail pages (modal navigation)
             Routing.RegisterRoute(nameof(NewWorkPage), typeof(NewWorkPage));
             Routing.RegisterRoute(nameof(WorkDetailPage), typeof(WorkDetailPage));
+            Routing.RegisterRoute(nameof(EmailConfirmationPage), typeof(EmailConfirmationPage));
         }
         
         protected override void OnHandlerChanged()
@@ -67,7 +68,11 @@ namespace PottMaster
                 
                 if (!_authStateService.IsAuthenticated)
                 {
-                    await GoToAsync("//LoginPage");
+                    var currentRoute = Shell.Current.CurrentState.Location.OriginalString;
+                    if (!currentRoute.Contains("LoginPage") && !currentRoute.Contains("SignupPage") && !currentRoute.Contains("EmailConfirmationPage"))
+                    {
+                        await GoToAsync("//LoginPage");
+                    }
                 }
             }
         }

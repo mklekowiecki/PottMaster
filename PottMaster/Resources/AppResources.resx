@@ -132,7 +132,7 @@
     <comment>Displayed when signup succeeds</comment>
   </data>
   <data name="AccountCreatedPleaseLogin" xml:space="preserve">
-    <value>Konto utworzone, możesz się zalogować.</value>
+    <value>Konto utworzone,otwórz pocztę na tym urządzeniu i potwierdź klikając w link</value>
     <comment>Displayed after successful signup</comment>
   </data>
   <data name="LoginFailed" xml:space="preserve">
@@ -493,4 +493,28 @@
   <data name="Synced" xml:space="preserve">
     <value>Dane offline wysłane</value>
   </data>
+  <data name="ConfirmingEmail" xml:space="preserve">
+    <value>Potwierdzam email...</value>
+  </data>
+  <data name="ConfirmingEmail" xml:space="preserve">
+    <value>Potwierdzanie adresu e-mail...</value>
+</data>
+<data name="NoConfirmationLinkReceived" xml:space="preserve">
+    <value>Nie otrzymano linku potwierdzającego.</value>
+</data>
+<data name="InvalidConfirmationLink" xml:space="preserve">
+    <value>Nieprawidłowy link potwierdzający.</value>
+</data>
+<data name="EmailConfirmedSuccessfully" xml:space="preserve">
+    <value>Adres e-mail potwierdzony pomyślnie!</value>
+</data>
+<data name="FailedToConfirmEmail" xml:space="preserve">
+    <value>Nie udało się potwierdzić adresu e-mail.</value>
+</data>
+<data name="EmailConfirmationTitle" xml:space="preserve">
+    <value>Potwierdzenie adresu e-mail</value>
+</data>
+<data name="GoToLogin" xml:space="preserve">
+    <value>Przejdź do logowania</value>
+</data>
 </root>

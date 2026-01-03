@@ -40,6 +40,7 @@ public partial class LoginViewModel : ObservableObject
         Email = "mklekowiecki@gmail.com";
         Password = "Tiamat1234!";
 #endif
+
     }
 
     [RelayCommand(CanExecute = nameof(IsLoginEnabled))]

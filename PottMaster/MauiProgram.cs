@@ -52,6 +52,7 @@
 			// Authentication Services (Singleton - maintains auth state)
 			builder.Services.AddSingleton<IAuthService, AuthService>();
 			builder.Services.AddSingleton<IAuthStateService, AuthStateService>();
+			builder.Services.AddSingleton<AppLinkService>();
 
 			// UI Services (Transient - per operation)
 			builder.Services.AddTransient<IAlertService, AlertService>();
@@ -70,6 +71,7 @@
 			builder.Services.AddTransient<NewWorkViewModel>();
 			builder.Services.AddTransient<WorkDetailViewModel>();
 			builder.Services.AddTransient<ProfileViewModel>();
+			builder.Services.AddTransient<EmailConfirmationViewModel>();
 			builder.Services.AddSingleton<SyncStatusViewModel>();
 			
 			// Pages (Transient - new instance per navigation)
@@ -82,6 +84,7 @@
 			builder.Services.AddTransient<GlazeInventoryPage>();
 			builder.Services.AddTransient<WikiPage>();
 			builder.Services.AddTransient<AnalyticsPage>();
+			builder.Services.AddTransient<EmailConfirmationPage>();
 			
 			// Register BackgroundSyncWorker as singleton
 			builder.Services.AddSingleton<BackgroundSyncWorker>();
