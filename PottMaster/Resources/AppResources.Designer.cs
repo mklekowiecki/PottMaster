@@ -466,7 +466,7 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zdjęcie.
+        ///   Looks up a localized string similar to Zdjęcia.
         /// </summary>
         internal static string PhotoTitle {
             get {

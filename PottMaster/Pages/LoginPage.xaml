@@ -5,63 +5,87 @@
              Title="{x:Static resx:AppResources.Login}"
              Shell.NavBarIsVisible="False">
     <ScrollView>
-        <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
+        <VerticalStackLayout Spacing="0" Padding="24" VerticalOptions="Center">
+            
+            <!-- Logo/Brand Area -->
             <Label Text="PottMaster" 
                    SemanticProperties.HeadingLevel="Level1" 
-                   Style="{StaticResource HeadingLabel}" 
-                   Margin="0,40,0,0" />
-            
-            <Label Text="{x:Static resx:AppResources.WelcomeBack}" 
-                   FontSize="24" 
+                   Style="{StaticResource DisplayMedium}" 
                    HorizontalOptions="Center"
-                   Style="{StaticResource SubheadingLabel}" />
+                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                   Margin="0,48,0,0" />
             
+            <!-- Subtitle -->
+            <Label Text="{x:Static resx:AppResources.WelcomeBack}" 
+                   Style="{StaticResource TitleLarge}"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                   Opacity="0.7"
+                   Margin="0,8,0,24" />
+            
+            <!-- Email Entry -->
             <Entry Placeholder="{x:Static resx:AppResources.Username}" 
                    Text="{Binding Email, Mode=TwoWay}" 
-                   Style="{StaticResource ModernEntry}"
+                   Style="{StaticResource PrimaryEntry}"
                    Keyboard="Email"
                    AutomationId="EmailEntry"
-                   SemanticProperties.Description="{x:Static resx:AppResources.Username}" />
+                   SemanticProperties.Description="{x:Static resx:AppResources.Username}"
+                   Margin="0,0,0,12" />
             
+            <!-- Password Entry -->
             <Entry Placeholder="{x:Static resx:AppResources.Password}" 
                    Text="{Binding Password, Mode=TwoWay}" 
                    IsPassword="true" 
-                   Style="{StaticResource ModernEntry}"
+                   Style="{StaticResource PrimaryEntry}"
                    AutomationId="PasswordEntry"
-                   SemanticProperties.Description="{x:Static resx:AppResources.Password}" />
+                   SemanticProperties.Description="{x:Static resx:AppResources.Password}"
+                   Margin="0,0,0,8" />
             
-            <Label Text="{Binding ErrorMessage}"
-                   IsVisible="{Binding HasError}"
-                   TextColor="Red"
-                   FontSize="12"
-                   HorizontalOptions="Center"
-                   Margin="0,-15,0,0" />
+            <!-- Error Message -->
+            <Border IsVisible="{Binding HasError}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource ErrorContainer}, Dark={StaticResource ErrorContainerDark}}"
+                    StrokeThickness="0"
+                    Padding="16,12"
+                    Margin="0,0,0,24">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8"/>
+                </Border.StrokeShape>
+                <Label Text="{Binding ErrorMessage}"
+                       Style="{StaticResource BodyMedium}"
+                       TextColor="{AppThemeBinding Light={StaticResource OnErrorContainer}, Dark={StaticResource OnErrorContainerDark}}"
+                       HorizontalOptions="Center" />
+            </Border>
             
+            <!-- Login Button -->
             <Button Text="{x:Static resx:AppResources.Login}" 
                     Command="{Binding LoginCommand}" 
                     IsEnabled="{Binding IsLoginEnabled}" 
+                    Style="{StaticResource PrimaryButton}"
                     SemanticProperties.Hint="{x:Static resx:AppResources.LoginHint}"
                     AutomationId="LoginButton"
-                    Margin="0,10,0,0" />
+                    Margin="0,0,0,16" />
             
+            <!-- Activity Indicator -->
             <ActivityIndicator IsVisible="{Binding IsBusy}" 
                               IsRunning="{Binding IsBusy}" 
                               HorizontalOptions="Center"
-                              VerticalOptions="Center" />
+                              Margin="0,0,0,32" />
             
+            <!-- No Account Text -->
             <Label Text="{x:Static resx:AppResources.NoAccount}" 
-                   HorizontalOptions="Center" 
-                   Opacity="0.6"
-                   Margin="0,20,0,0" />
+                   Style="{StaticResource BodyMedium}"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                   Opacity="0.7"
+                   Margin="0,0,0,12" />
             
+            <!-- Signup Button -->
             <Button Text="{x:Static resx:AppResources.Signup}" 
                     Command="{Binding SignupCommand}" 
+                    Style="{StaticResource SecondaryButton}"
                     SemanticProperties.Hint="{x:Static resx:AppResources.SignUpHint}"
-                    AutomationId="SignupButton"
-                    BackgroundColor="Transparent"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
-                    BorderColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
-                    BorderWidth="1" />
+                    AutomationId="SignupButton" />
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

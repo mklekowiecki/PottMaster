@@ -14,22 +14,22 @@
                      Command="{Binding LoadWorksCommand}"
                      IsRefreshing="{Binding IsLoading}">
             <ScrollView>
-                <VerticalStackLayout Padding="16" Spacing="12">
+                <VerticalStackLayout Padding="16" Spacing="0">
                     
                     <!-- Empty State -->
                     <VerticalStackLayout IsVisible="{Binding IsEmpty}"
                                        VerticalOptions="Center"
                                        HorizontalOptions="Center"
                                        Spacing="16"
-                                       Padding="32">
+                                       Padding="48">
                         <Label Text="{x:Static resx:AppResources.NoWorksYet}"
-                               FontSize="24"
-                               FontAttributes="Bold"
+                               Style="{StaticResource HeadlineMedium}"
                                HorizontalTextAlignment="Center"/>
                         <Label Text="{x:Static resx:AppResources.StartByAddingWork}"
-                               FontSize="16"
-                               TextColor="{StaticResource Gray600}"
-                               HorizontalTextAlignment="Center"/>
+                               Style="{StaticResource BodyLarge}"
+                               TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                               HorizontalTextAlignment="Center"
+                               Opacity="0.7"/>
                     </VerticalStackLayout>
 
                     <!-- Works Collection -->
@@ -37,9 +37,7 @@
                                   IsVisible="{Binding IsEmpty, Converter={StaticResource InvertedBoolConverter}}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:LocalWork">
-                                <Border Padding="12" 
-                                       Margin="0,0,0,8"
-                                       >
+                                <Border Style="{StaticResource CardStyle}">
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=ViewWorkDetailsCommand}"
                                                             CommandParameter="{Binding .}"/>
@@ -49,7 +47,11 @@
                                         <!-- Photo Thumbnail -->
                                         <Border Grid.Column="0" 
                                                Padding="0"
-                                               BackgroundColor="{StaticResource Gray200}">
+                                               StrokeThickness="0"
+                                               BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceVariant}, Dark={StaticResource SurfaceVariantDark}}">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="8"/>
+                                            </Border.StrokeShape>
                                             <Image Source="{Binding PhotoPath}"
                                                    Aspect="AspectFill"
                                                    HeightRequest="80"
@@ -57,26 +59,33 @@
                                         </Border>
 
                                         <!-- Work Info -->
-                                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                        <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
                                             <Label Text="{Binding Code}"
-                                                   FontSize="16"
-                                                   FontAttributes="Bold"/>
+                                                   Style="{StaticResource TitleMedium}"/>
                                             <Label Text="{Binding CategoryCode, Converter={StaticResource WorkCategoryCodeToLocalizedConverter}}"
-                                                   FontSize="14"
-                                                   TextColor="{StaticResource Gray600}"/>
-                                            <Label Text="{Binding StatusCode, Converter={StaticResource WorkStatusCodeToLocalizedConverter}}"
-                                                   FontSize="12"
-                                                   TextColor="{StaticResource Primary}"/>
+                                                   Style="{StaticResource BodyMedium}"
+                                                   TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"/>
+                                            <Border BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryContainer}, Dark={StaticResource PrimaryContainerDark}}"
+                                                   Padding="8,4"
+                                                   StrokeThickness="0"
+                                                   HorizontalOptions="Start">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="4"/>
+                                                </Border.StrokeShape>
+                                                <Label Text="{Binding StatusCode, Converter={StaticResource WorkStatusCodeToLocalizedConverter}}"
+                                                       Style="{StaticResource LabelMedium}"
+                                                       TextColor="{AppThemeBinding Light={StaticResource OnPrimaryContainer}, Dark={StaticResource OnPrimaryContainerDark}}"/>
+                                            </Border>
                                             <Label Text="{Binding RemainingDryingTime, StringFormat={x:Static resx:AppResources.TimeLeft}}"
-                                                   FontSize="12"
-                                                   TextColor="{StaticResource Gray500}"/>
+                                                   Style="{StaticResource Caption}"/>
                                         </VerticalStackLayout>
 
                                         <!-- Chevron -->
                                         <Label Grid.Column="2"
                                                Text="›"
-                                               FontSize="24"
-                                               TextColor="{StaticResource Gray400}"
+                                               FontSize="28"
+                                               TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                                               Opacity="0.5"
                                                VerticalOptions="Center"/>
                                     </Grid>
                                 </Border>
@@ -87,15 +96,13 @@
             </ScrollView>
         </RefreshView>
 
-        <!-- Add Work Button -->
+        <!-- FAB Button -->
         <Button Grid.Row="1"
                 Text="{x:Static resx:AppResources.AddNewWork}"
                 Command="{Binding AddWorkCommand}"
                 Margin="16"
-                HeightRequest="56"
-                CornerRadius="28"
-                FontSize="18"
-                FontAttributes="Bold"/>
+                HorizontalOptions="End"
+                VerticalOptions="End"/>
     </Grid>
 
 </ContentPage>

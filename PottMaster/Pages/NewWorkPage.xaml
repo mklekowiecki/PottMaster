@@ -14,193 +14,173 @@
     </ContentPage.ToolbarItems>
 
     <ScrollView>
-        <VerticalStackLayout Padding="16" Spacing="24">
+        <VerticalStackLayout Padding="16" Spacing="0">
 
             <!-- Error Message -->
             <Border IsVisible="{Binding ErrorMessage, Converter={StaticResource IsNotNullConverter}}"
-                   BackgroundColor="{StaticResource Secondary}"
-                   Padding="12"
-                   >
+                   BackgroundColor="{AppThemeBinding Light={StaticResource ErrorContainer}, Dark={StaticResource ErrorContainerDark}}"
+                   StrokeThickness="0"
+                   Padding="16,12"
+                   Margin="0,0,0,24">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8"/>
+                </Border.StrokeShape>
                 <Label Text="{Binding ErrorMessage}"
-                       TextColor="{StaticResource White}"
-                       FontSize="14"/>
+                       Style="{StaticResource BodyMedium}"
+                       TextColor="{AppThemeBinding Light={StaticResource OnErrorContainer}, Dark={StaticResource OnErrorContainerDark}}"/>
             </Border>
 
             <!-- Photo Section -->
-            <VerticalStackLayout Spacing="12">
+            <VerticalStackLayout Style="{StaticResource SectionContainer}">
                 <Label Text="{x:Static resources:AppResources.PhotoTitle}"
-                        FontSize="18"
-                        FontAttributes="Bold"/>
+                       Style="{StaticResource SectionHeader}"/>
 
                 <!-- Photos Collection -->
                 <CollectionView ItemsSource="{Binding Photos}"
-                 HeightRequest="200"
-                 IsVisible="{Binding HasPhotos}">
+                               HeightRequest="200"
+                               IsVisible="{Binding HasPhotos}">
                     <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" />
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:LocalPhoto">
-                            <Border HeightRequest="200">
+                            <Border Style="{StaticResource CardStyle}"
+                                   Padding="0"
+                                   HeightRequest="200"
+                                   WidthRequest="200">
                                 <Image Source="{Binding Path, Converter={StaticResource StringToImageSourceConverter}}"
-                        Aspect="AspectFit"
-                        HeightRequest="150"/>
+                                       Aspect="AspectFill"/>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
                 <!-- Empty State -->
-                <Border Padding="32"
-                        BackgroundColor="{StaticResource Gray100}"
-                        HeightRequest="200"
-                        IsVisible="{Binding HasPhotos, Converter={StaticResource InvertedBoolConverter}}">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="12"/>
-                    </Border.StrokeShape>
+                <Border Style="{StaticResource CardStyle}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceVariant}, Dark={StaticResource SurfaceVariantDark}}"
+                       HeightRequest="200"
+                       IsVisible="{Binding HasPhotos, Converter={StaticResource InvertedBoolConverter}}">
                     <VerticalStackLayout VerticalOptions="Center"
                                         HorizontalOptions="Center"
                                         Spacing="8">
-                        <Label Text="?"
-                                FontSize="48"
-                                HorizontalTextAlignment="Center"/>
+                        <Label Text="📷"
+                               FontSize="48"
+                               HorizontalTextAlignment="Center"/>
                         <Label Text="{x:Static resources:AppResources.NoPhoto}"
-                                FontSize="16"
-                                TextColor="{StaticResource Gray600}"
-                                HorizontalTextAlignment="Center"/>
+                               Style="{StaticResource BodyLarge}"
+                               TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                               HorizontalTextAlignment="Center"/>
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- Photo Buttons -->
-                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
                     <Button Grid.Column="0"
                             Text="{x:Static resources:AppResources.TakePhoto}"
                             Command="{Binding TakePhotoCommand}"
-                            BackgroundColor="{StaticResource Primary}"
-                            TextColor="{StaticResource White}"
-                            FontSize="12"/>
+                            Style="{StaticResource PrimaryButton}"/>
                     <Button Grid.Column="1"
                             Text="{x:Static resources:AppResources.PickPhoto}"
                             Command="{Binding PickPhotoCommand}"
-                            BackgroundColor="{StaticResource Secondary}"
-                            TextColor="{StaticResource White}"
-                            FontSize="12"/>
+                            Style="{StaticResource SecondaryButton}"/>
                 </Grid>
             </VerticalStackLayout>
 
-            <!-- Category Section -->
-            <VerticalStackLayout Spacing="12">
+            <!-- Details Section -->
+            <VerticalStackLayout Style="{StaticResource SectionContainer}">
                 <Label Text="{x:Static resources:AppResources.CategoryTitle}"
-                       FontSize="18"
-                       FontAttributes="Bold"/>
+                       Style="{StaticResource SectionHeader}"/>
 
                 <Picker Title="{x:Static resources:AppResources.SelectCategory}"
                         ItemsSource="{Binding Categories}"
                         SelectedItem="{Binding SelectedCategory}"
-                        FontSize="16"
-                        BackgroundColor="{StaticResource White}">
+                        Style="{StaticResource PrimaryPicker}">
                     <Picker.ItemDisplayBinding>
                         <Binding Path="Code" Converter="{StaticResource WorkCategoryCodeToLocalizedConverter}"/>
                     </Picker.ItemDisplayBinding>
                 </Picker>
-            </VerticalStackLayout>
 
-            <!-- Work Code Section -->
-            <VerticalStackLayout Spacing="12">
                 <Label Text="{x:Static resources:AppResources.WorkCode}"
-                       FontSize="18"
-                       FontAttributes="Bold"/>
+                       Style="{StaticResource SectionHeader}"
+                       Margin="0,16,0,8"/>
 
                 <Entry Text="{Binding WorkCode}"
                        Placeholder="{x:Static resources:AppResources.EnterWorkCode}"
-                       FontSize="16"
-                       BackgroundColor="{StaticResource White}"/>
+                       Style="{StaticResource PrimaryEntry}"/>
             </VerticalStackLayout>
 
             <!-- Wall Thickness Section -->
-            <VerticalStackLayout Spacing="12">
-                <HorizontalStackLayout Spacing="8">
+            <VerticalStackLayout Style="{StaticResource SectionContainer}">
+                <HorizontalStackLayout Spacing="8" Margin="0,0,0,16">
                     <Label Text="{x:Static resources:AppResources.WallThicknessTitle}"
-                           FontSize="18"
-                           FontAttributes="Bold"
-                           VerticalOptions="Center"/>
+                           Style="{StaticResource SectionHeader}"
+                           VerticalOptions="Center"
+                           Margin="0"/>
                     <Label Text="{Binding WallThickness, StringFormat='{0:F0} mm'}"
-                           FontSize="16"
-                           TextColor="{StaticResource Primary}"
-                           FontAttributes="Bold"
+                           Style="{StaticResource TitleMedium}"
+                           TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                            VerticalOptions="Center"/>
                 </HorizontalStackLayout>
 
                 <Slider Minimum="3"
                         Maximum="50"
                         Value="{Binding WallThickness}"
-                        MinimumTrackColor="{StaticResource Primary}"
-                        MaximumTrackColor="{StaticResource Gray300}"
-                        ThumbColor="{StaticResource Primary}"/>
+                        Margin="0,0,0,8"/>
 
-                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="4">
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="4" Margin="0,0,0,16">
                     <Label Grid.Column="0"
                            Text="{x:Static resources:AppResources.ThinWallLabel}"
-                           FontSize="12"
-                           TextColor="{StaticResource Gray600}"
+                           Style="{StaticResource Caption}"
                            HorizontalOptions="Start"/>
                     <Label Grid.Column="1"
                            Text="{x:Static resources:AppResources.MidWallLabel}"
-                           FontSize="12"
-                           TextColor="{StaticResource Gray600}"
+                           Style="{StaticResource Caption}"
                            HorizontalOptions="Center"/>
                     <Label Grid.Column="2"
                            Text="{x:Static resources:AppResources.ThickWallLabel}"
-                           FontSize="12"
-                           TextColor="{StaticResource Gray600}"
+                           Style="{StaticResource Caption}"
                            HorizontalOptions="End"/>
                 </Grid>
 
                 <!-- Drying Time Estimate -->
-                <Border Padding="12"
-                       BackgroundColor="{StaticResource Gray100}">
-                    <HorizontalStackLayout Spacing="8">
-                        <Label Text="??"
-                               FontSize="20"
+                <Border Style="{StaticResource InfoCardStyle}">
+                    <HorizontalStackLayout Spacing="12">
+                        <Label Text="⏱️"
+                               FontSize="24"
                                VerticalOptions="Center"/>
-                        <VerticalStackLayout Spacing="2">
+                        <VerticalStackLayout Spacing="4">
                             <Label Text="{x:Static resources:AppResources.EstimatedDryingTimeLabel}"
-                                   FontSize="12"
-                                   TextColor="{StaticResource Gray600}"/>
+                                   Style="{StaticResource LabelMedium}"
+                                   TextColor="{AppThemeBinding Light={StaticResource OnPrimaryContainer}, Dark={StaticResource OnPrimaryContainerDark}}"/>
                             <Label Text="{Binding WallThickness, Converter={StaticResource WallThicknessToDaysConverter}}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource Primary}"/>
+                                   Style="{StaticResource TitleMedium}"
+                                   TextColor="{AppThemeBinding Light={StaticResource OnPrimaryContainer}, Dark={StaticResource OnPrimaryContainerDark}}"/>
                         </VerticalStackLayout>
                     </HorizontalStackLayout>
                 </Border>
             </VerticalStackLayout>
 
-            <!-- Save Button -->
-            <Button Text="{x:Static resources:AppResources.CreateWork}"
-                    Command="{Binding SaveWorkCommand}"
-                    IsEnabled="{Binding IsSaveEnabled, Mode=TwoWay}"
-                    BackgroundColor="{StaticResource Primary}"
-                    TextColor="{StaticResource White}"
-                    HeightRequest="56"
-                    CornerRadius="28"
-                    FontSize="18"
-                    FontAttributes="Bold"
-                    Margin="0,16,0,0">
-                <Button.Triggers>
-                    <DataTrigger TargetType="Button"
-                                Binding="{Binding IsSaving}"
-                                Value="True">
-                        <Setter Property="Text" Value="{x:Static resources:AppResources.CreatingWork}"/>
-                    </DataTrigger>
-                </Button.Triggers>
-            </Button>
+            <!-- Actions Section -->
+            <VerticalStackLayout Spacing="16" Margin="0,16,0,0">
+                <!-- Save Button -->
+                <Button Text="{x:Static resources:AppResources.CreateWork}"
+                        Command="{Binding SaveWorkCommand}"
+                        IsEnabled="{Binding IsSaveEnabled, Mode=TwoWay}"
+                        Style="{StaticResource PrimaryButton}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                    Binding="{Binding IsSaving}"
+                                    Value="True">
+                            <Setter Property="Text" Value="{x:Static resources:AppResources.CreatingWork}"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
 
-            <!-- Loading Indicator -->
-            <ActivityIndicator IsRunning="{Binding IsLoading}"
-                             IsVisible="{Binding IsLoading}"
-                             Color="{StaticResource Primary}"
-                             HeightRequest="50"/>
+                <!-- Loading Indicator -->
+                <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                 IsVisible="{Binding IsLoading}"
+                                 HeightRequest="50"/>
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
