@@ -34,6 +34,12 @@ public partial class WorkDetailViewModel : ObservableObject
     [ObservableProperty]
     private bool hasPhotos;
 
+    [ObservableProperty]
+    private LocalWorkStatus? selectedStatus;
+
+    [ObservableProperty]
+    private bool canChangeStatus;
+
     public WorkDetailViewModel(IWorkService workService, IErrorHandlingService errorHandler, IAlertService alertService, IDbService dbService)
     {
         _workService = workService;
@@ -63,6 +69,12 @@ public partial class WorkDetailViewModel : ObservableObject
             Statuses = new ObservableCollection<LocalWorkStatus>(statusesList);
             CurrentWork!.StatusCode = Statuses.Where(s=>s.Id == CurrentWork.StatusId).Select(s=>s.Code).FirstOrDefault() ?? string.Empty;
 
+            // Set selected status to current status
+            SelectedStatus = Statuses.FirstOrDefault(s => s.Id == CurrentWork.StatusId);
+            
+            // Allow status change if not completed or discarded
+            CanChangeStatus = CurrentWork.StatusId < 7; // Assuming 7 is COMPLETED, 8 is DISCARDED
+
             // Load photos
             var photosList = await _dbService.GetPhotosByWorkIdAsync(WorkId);
             Photos = new ObservableCollection<LocalPhoto>(photosList);
@@ -78,34 +90,33 @@ public partial class WorkDetailViewModel : ObservableObject
         }
     }
 
-    [RelayCommand]
+    [RelayCommand(CanExecute = nameof(CanChangeStatus))]
     private async Task ChangeStatusAsync()
     {
-        if (CurrentWork == null)
+        if (CurrentWork == null || SelectedStatus == null)
             return;
 
-        var currentStatusIndex = Statuses.ToList().FindIndex(s => s.Id == CurrentWork.StatusId);
-        if (currentStatusIndex >= 0 && currentStatusIndex < Statuses.Count - 1)
+        // Don't allow changing to the same status
+        if (SelectedStatus.Id == CurrentWork.StatusId)
+            return;
+
+        var confirm = await _alertService.ShowConfirmationAsync(
+            AppResources.ChangeStatusTitle,
+            string.Format(AppResources.ConfirmChangeStatusMessage, SelectedStatus.Name),
+            AppResources.Yes, AppResources.No);
+
+        if (confirm)
         {
-            var nextStatus = Statuses[currentStatusIndex + 1];
-            var confirm = await _alertService.ShowConfirmationAsync(
-                AppResources.ChangeStatusTitle,
-                string.Format(AppResources.ConfirmChangeStatusMessage, nextStatus.Name),
-                AppResources.Yes, AppResources.No);
+            CurrentWork.StatusId = SelectedStatus.Id;
+            CurrentWork.StatusCode = SelectedStatus.Code;
 
-            if (confirm)
+            if (SelectedStatus.Id == 3) // Assuming 3 is BONE_DRY
             {
-                CurrentWork.StatusId = nextStatus.Id;
-                CurrentWork.StatusCode = nextStatus.Code;
-
-                if (nextStatus.Id == 3)
-                {
-                    CurrentWork.DryingCompletedAt = DateTime.UtcNow;
-                }
-
-                await _workService.UpdateWorkAsync(CurrentWork);
-                await LoadWorkAsync();
+                CurrentWork.DryingCompletedAt = DateTime.UtcNow;
             }
+
+            await _workService.UpdateWorkAsync(CurrentWork);
+            await LoadWorkAsync();
         }
     }
 

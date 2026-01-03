@@ -592,6 +592,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wybierz status.
+        /// </summary>
+        internal static string SelectStatus {
+            get {
+                return ResourceManager.GetString("SelectStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zarejestruj się.
         /// </summary>
         internal static string Signup {

@@ -475,4 +475,7 @@
   <data name="LogoutConfirmationMessage" xml:space="preserve">
     <value>Czy na pewno chcesz się wylogować?</value>
   </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>Wybierz status</value>
+  </data>
 </root>

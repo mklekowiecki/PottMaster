@@ -419,54 +419,56 @@
   </data>
   <data name="AppTitle" xml:space="preserve">
     <value>PottMaster</value>
-</data>
-<data name="LoginTitle" xml:space="preserve">
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
     <value>Login</value>
-</data>
-<data name="SignupTitle" xml:space="preserve">
+  </data>
+  <data name="SignupTitle" xml:space="preserve">
     <value>Sign Up</value>
-</data>
-<data name="TabWorksTitle" xml:space="preserve">
+  </data>
+  <data name="TabWorksTitle" xml:space="preserve">
     <value>Works</value>
-</data>
-<data name="TabInventoryTitle" xml:space="preserve">
+  </data>
+  <data name="TabInventoryTitle" xml:space="preserve">
     <value>Inventory</value>
-</data>
-<data name="TabWikiTitle" xml:space="preserve">
+  </data>
+  <data name="TabWikiTitle" xml:space="preserve">
     <value>Wiki</value>
-</data>
-<data name="TabAnalyticsTitle" xml:space="preserve">
+  </data>
+  <data name="TabAnalyticsTitle" xml:space="preserve">
     <value>Analytics</value>
-</data>
-<data name="TabProfileTitle" xml:space="preserve">
+  </data>
+  <data name="TabProfileTitle" xml:space="preserve">
     <value>Profile</value>
-</data>
-<data name="ProfileTitle" xml:space="preserve">
+  </data>
+  <data name="ProfileTitle" xml:space="preserve">
     <value>Profile</value>
-</data>
-<data name="AccountSettings" xml:space="preserve">
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
     <value>Account Settings</value>
-</data>
-<data name="Initials" xml:space="preserve">
+  </data>
+  <data name="Initials" xml:space="preserve">
     <value>Initials</value>
-</data>
-<data name="About" xml:space="preserve">
+  </data>
+  <data name="About" xml:space="preserve">
     <value>About</value>
-</data>
-<data name="Version" xml:space="preserve">
+  </data>
+  <data name="Version" xml:space="preserve">
     <value>Version</value>
-</data>
-<data name="DangerZone" xml:space="preserve">
+  </data>
+  <data name="DangerZone" xml:space="preserve">
     <value>Danger Zone</value>
-</data>
-<data name="Logout" xml:space="preserve">
+  </data>
+  <data name="Logout" xml:space="preserve">
     <value>Logout</value>
-</data>
-<data name="LogoutConfirmationTitle" xml:space="preserve">
+  </data>
+  <data name="LogoutConfirmationTitle" xml:space="preserve">
     <value>Logout</value>
-</data>
-<data name="LogoutConfirmationMessage" xml:space="preserve">
+  </data>
+  <data name="LogoutConfirmationMessage" xml:space="preserve">
     <value>Are you sure you want to logout?</value>
-</data>
-
+  </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>Select status</value>
+  </data>
 </root>

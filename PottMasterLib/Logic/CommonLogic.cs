@@ -29,6 +29,18 @@ public static class CommonLogic
     }
 
     /// <summary>
+    /// Determines whether the status with the specified identifier can be changed.
+    /// </summary>
+    /// <remarks>A status is considered changeable if its identifier is less than the value representing the
+    /// 'Completed' status in the WorkStatusCode enumeration.</remarks>
+    /// <param name="statusId">The identifier of the status to evaluate.</param>
+    /// <returns>true if the status can be changed; otherwise, false.</returns>
+    public static bool CanStatusBeChanged(int statusId)
+    {
+        return statusId < (int)WorkStatusCode.Completed; // 
+    }
+
+    /// <summary>
     /// Generates a unique work code based on user initials, category code, and existing works.
     /// Format: Initials-CatCode-MMYY-Counter (e.g., MK-CUP-1224-001)
     /// Counter resets monthly and is incremented based on existing works for the user in the same month/category.

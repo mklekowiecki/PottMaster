@@ -199,10 +199,26 @@
 
                 <!-- Action Buttons -->
                 <VerticalStackLayout Spacing="12" Margin="0,8,0,0">
-                    <Button Text="{x:Static resx:AppResources.ChangeStatus}"
-                            IsVisible="{Binding CurrentWork.DryingCompletedAt, Converter={StaticResource IsNullConverter}}"
-                            Command="{Binding ChangeStatusCommand}"
-                            Style="{StaticResource PrimaryButton}"/>
+                    <!-- Status Change Section -->
+                    <VerticalStackLayout Spacing="8" 
+                                       IsVisible="{Binding CanChangeStatus}">
+                        <Label Text="{x:Static resx:AppResources.ChangeStatus}"
+                               Style="{StaticResource TitleMedium}"/>
+
+                        <Picker ItemsSource="{Binding Statuses}"
+                               SelectedItem="{Binding SelectedStatus}"
+                               Style="{StaticResource PrimaryPicker}"
+                               Title="{x:Static resx:AppResources.SelectStatus}">
+                            <Picker.ItemDisplayBinding>
+                                <Binding Path="Code" Converter="{StaticResource WorkStatusCodeToLocalizedConverter}"/>
+                            </Picker.ItemDisplayBinding>
+                        </Picker>
+                        
+                        <Button Text="{x:Static resx:AppResources.ChangeStatus}"
+                                Command="{Binding ChangeStatusCommand}"
+                                Style="{StaticResource PrimaryButton}"
+                                IsEnabled="{Binding SelectedStatus, Converter={StaticResource IsNotNullConverter}}"/>
+                    </VerticalStackLayout>
 
                     <Button Text="{x:Static resx:AppResources.GoBack}"
                             Command="{Binding GoBackCommand}"
