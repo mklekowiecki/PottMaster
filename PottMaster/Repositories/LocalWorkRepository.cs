@@ -16,12 +16,12 @@ public class LocalWorkRepository : IWorkRepository
         _logger = logger;
     }
     
-    public async Task<Result<List<Work>>> GetByUserIdAsync(string userId)
+    public async Task<Result<List<LocalWork>>> GetByUserIdAsync(string userId)
     {
         try
         {
             var localWorks = await _dbService.GetWorksByUserIdAsync(userId);
-            var works = new List<Work>();
+            var works = new List<LocalWork>();
             
             foreach (var localWork in localWorks)
             {
@@ -31,19 +31,19 @@ public class LocalWorkRepository : IWorkRepository
                 var status = await _dbService.GetWorkStatusByIdAsync(localWork.StatusId);
                 localWork.StatusCode = status?.Code ?? "";
                 
-                works.Add(MapToWork(localWork));
+                works.Add(localWork);
             }
-            
-            return Result<List<Work>>.Success(works);
+
+            return Result<List<LocalWork>>.Success(works);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to get works for user {UserId}", userId);
-            return Result<List<Work>>.Failure("Failed to load works", ex);
+            return Result<List<LocalWork>>.Failure("Failed to load works", ex);
         }
     }
-    
-    public async Task<Result<Work>> GetByIdAsync(string workId)
+
+    public async Task<Result<LocalWork>> GetByIdAsync(string workId)
     {
         try
         {
@@ -51,7 +51,7 @@ public class LocalWorkRepository : IWorkRepository
             
             if (localWork == null)
             {
-                return Result<Work>.Failure("Work not found");
+                return Result<LocalWork>.Failure("Work not found");
             }
             
             var category = await _dbService.GetWorkCategoryByIdAsync(localWork.CategoryId);
@@ -60,16 +60,16 @@ public class LocalWorkRepository : IWorkRepository
             var status = await _dbService.GetWorkStatusByIdAsync(localWork.StatusId);
             localWork.StatusCode = status?.Code ?? "";
             
-            return Result<Work>.Success(MapToWork(localWork));
+            return Result<LocalWork>.Success(localWork);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to get work {WorkId}", workId);
-            return Result<Work>.Failure("Failed to load work", ex);
+            return Result<LocalWork>.Failure("Failed to load work", ex);
         }
     }
-    
-    public async Task<Result<Work>> CreateAsync(Work work, string userInitials)
+
+    public async Task<Result<LocalWork>> CreateAsync(LocalWork work, string userInitials)
     {
         try
         {
@@ -81,36 +81,33 @@ public class LocalWorkRepository : IWorkRepository
             {
                 work.Code = CommonLogic.GenerateWorkCode(userInitials, categoryCode, existingWorks);
             }
-            
-            var localWork = MapToLocalWork(work);
-            localWork.Id = Guid.NewGuid().ToString();
-            localWork.StatusId = (int)WorkStatusCode.Wet;
-            localWork.CreatedAt = DateTime.UtcNow;
-            localWork.UpdatedAt = DateTime.UtcNow;
-            localWork.SyncStatus = SyncStatus.Pending.Code();
-            
-            await _dbService.InsertAsync(localWork);
-            
+
+            work.StatusId = (int)WorkStatusCode.Wet;
+            work.CreatedAt = DateTime.UtcNow;
+            work.UpdatedAt = DateTime.UtcNow;
+            work.SyncStatus = SyncStatus.Pending.Code();
+
+            await _dbService.InsertAsync(work);
+
             _logger.LogInformation("Work created with code: {WorkCode}", work.Code);
-            return Result<Work>.Success(work);
+            return Result<LocalWork>.Success(work);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to create work");
-            return Result<Work>.Failure("Failed to create work", ex);
+            return Result<LocalWork>.Failure("Failed to create work", ex);
         }
     }
-    
-    public async Task<Result> UpdateAsync(Work work)
+
+    public async Task<Result> UpdateAsync(LocalWork work)
     {
         try
         {
-            var localWork = MapToLocalWork(work);
-            localWork.UpdatedAt = DateTime.UtcNow;
-            localWork.SyncStatus = SyncStatus.Pending.Code();
-            
-            await _dbService.UpdateAsync(localWork);
-            
+            work.UpdatedAt = DateTime.UtcNow;
+            work.SyncStatus = SyncStatus.Pending.Code();
+
+            await _dbService.UpdateAsync(work);
+
             _logger.LogInformation("Work updated: {WorkId}", work.Id);
             return Result.Success();
         }
@@ -169,45 +166,5 @@ public class LocalWorkRepository : IWorkRepository
             _logger.LogError(ex, "Failed to get statuses");
             return Result<List<LocalWorkStatus>>.Failure("Failed to load statuses", ex);
         }
-    }
-    
-    private Work MapToWork(LocalWork localWork)
-    {
-        return new Work
-        {
-            Id = localWork.Id,
-            UserId = localWork.UserId,
-            Code = localWork.Code,
-            CategoryId = localWork.CategoryId,
-            WallThickness = localWork.WallThickness,
-            PhotoPath = localWork.PhotoPath,
-            StatusId = localWork.StatusId,
-            CreatedAt = localWork.CreatedAt,
-            DryingStartedAt = localWork.DryingStartedAt,
-            DryingCompletedAt = localWork.DryingCompletedAt,
-            SyncStatus = localWork.SyncStatus,
-            UpdatedAt = localWork.UpdatedAt,
-            CategoryCode = localWork.CategoryCode,
-            StatusCode = localWork.StatusCode
-        };
-    }
-    
-    private LocalWork MapToLocalWork(Work work)
-    {
-        return new LocalWork
-        {
-            Id = work.Id,
-            UserId = work.UserId,
-            Code = work.Code,
-            CategoryId = work.CategoryId,
-            WallThickness = work.WallThickness,
-            PhotoPath = work.PhotoPath,
-            StatusId = work.StatusId,
-            CreatedAt = work.CreatedAt,
-            DryingStartedAt = work.DryingStartedAt,
-            DryingCompletedAt = work.DryingCompletedAt,
-            SyncStatus = work.SyncStatus,
-            UpdatedAt = work.UpdatedAt
-        };
     }
 }

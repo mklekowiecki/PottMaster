@@ -101,9 +101,8 @@
 
 			var mauiApp = builder.Build();
 
-			// Start background sync worker
-			var syncWorker = mauiApp.Services.GetRequiredService<BackgroundSyncWorker>();
-			syncWorker.Start();
+			// Force creation of BackgroundSyncWorker to ensure it subscribes to auth state changes early
+			_ = mauiApp.Services.GetRequiredService<BackgroundSyncWorker>();
 
 			// Initialize auth state on startup
 			var authStateService = mauiApp.Services.GetRequiredService<IAuthStateService>();

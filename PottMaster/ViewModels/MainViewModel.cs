@@ -16,7 +16,7 @@ public partial class MainViewModel : ObservableObject
     private readonly IDbService _dbService;
 
     [ObservableProperty]
-    private ObservableCollection<Work> works = [];
+    private ObservableCollection<LocalWork> works = [];
 
     [ObservableProperty]
     private bool isLoading;
@@ -68,7 +68,7 @@ public partial class MainViewModel : ObservableObject
             if (!string.IsNullOrEmpty(userId))
             {
                 var worksList = await _workService.GetUserWorksAsync(userId);
-                Works = new ObservableCollection<Work>(worksList);
+                Works = new ObservableCollection<LocalWork>(worksList);
                 IsEmpty = Works.Count == 0;
             }
             else

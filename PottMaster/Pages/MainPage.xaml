@@ -36,7 +36,7 @@
                     <CollectionView ItemsSource="{Binding Works}"
                                   IsVisible="{Binding IsEmpty, Converter={StaticResource InvertedBoolConverter}}">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:Work">
+                            <DataTemplate x:DataType="models:LocalWork">
                                 <Border Padding="12" 
                                        Margin="0,0,0,8"
                                        >

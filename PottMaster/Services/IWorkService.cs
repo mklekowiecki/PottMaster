@@ -4,10 +4,10 @@ namespace PottMaster.Services;
 
 public interface IWorkService
 {
-    Task<List<Work>> GetUserWorksAsync(string userId);
-    Task<Work?> GetWorkByIdAsync(string workId);
-    Task<Work> CreateWorkAsync(Work work, string userInitials);
-    Task UpdateWorkAsync(Work work);
+    Task<List<LocalWork>> GetUserWorksAsync(string userId);
+    Task<LocalWork?> GetWorkByIdAsync(string workId);
+    Task<LocalWork> CreateWorkAsync(LocalWork work, string userInitials);
+    Task UpdateWorkAsync(LocalWork work);
     Task DeleteWorkAsync(string workId);
     Task<List<LocalWorkCategory>> GetCategoriesAsync();
     Task<List<LocalWorkStatus>> GetStatusesAsync();

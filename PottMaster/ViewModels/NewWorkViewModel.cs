@@ -5,6 +5,8 @@ using PottMaster.Resources;
 using System.Collections.ObjectModel;
 using PottMasterLib.Services;
 using PottMasterLib.Models;
+using PottMasterLib.Logic;
+using System.Linq;
 
 namespace PottMaster.ViewModels;
 
@@ -15,9 +17,9 @@ public partial class NewWorkViewModel : ObservableObject
     private readonly IDbService _dbService;
     private readonly IImageService _imageService;
     private readonly IAlertService _alertService;
-
+    private readonly IAuthStateService _authStateService;
     [ObservableProperty]
-    private ObservableCollection<LocalWorkCategory> categories = [];
+    private ObservableCollection<LocalWorkCategory> categories = new();
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
@@ -29,6 +31,9 @@ public partial class NewWorkViewModel : ObservableObject
 
     [ObservableProperty]
     private ObservableCollection<LocalPhoto> photos = [];
+
+    [ObservableProperty]
+    private bool hasPhotos;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
@@ -44,18 +49,19 @@ public partial class NewWorkViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(IsSaveEnabled))]
     private string? workCode;
 
-    private List<Work> existingWorks = [];
+    private List<LocalWork> existingWorks = [];
     private string userInitials = "";
 
-    public bool IsSaveEnabled => !isSaving && !isLoading && selectedCategory != null && wallThickness >= 3 && wallThickness <= 50 && !string.IsNullOrWhiteSpace(WorkCode);
+    public bool IsSaveEnabled => !IsSaving && !IsLoading && SelectedCategory != null && WallThickness >= 3 && WallThickness <= 50 && !string.IsNullOrWhiteSpace(WorkCode);
 
-    public NewWorkViewModel(IWorkService workService, IAuthService authService, IDbService dbService, IImageService imageService, IAlertService alertService)
+    public NewWorkViewModel(IWorkService workService, IAuthService authService, IDbService dbService, IImageService imageService, IAlertService alertService, IAuthStateService authStateService)
     {
         _workService = workService;
         _authService = authService;
         _dbService = dbService;
         _imageService = imageService;
         _alertService = alertService;
+        _authStateService = authStateService;
     }
 
     public async Task InitializeAsync()
@@ -74,7 +80,7 @@ public partial class NewWorkViewModel : ObservableObject
             {
                 var profile = await _dbService.GetUserProfileByIdAsync(user.Id);
                 userInitials = profile?.Initials ?? "";
-                existingWorks = await _workService.GetUserWorksAsync(user.Id);
+                existingWorks = (await _workService.GetUserWorksAsync(user.Id)).ToList();
             }
         }
         catch (Exception ex)
@@ -143,6 +149,7 @@ public partial class NewWorkViewModel : ObservableObject
                 Order = Photos.Count
             };
             Photos.Add(newPhoto);
+            HasPhotos = Photos.Count > 0;
         }
         catch (Exception ex)
         {
@@ -166,28 +173,23 @@ public partial class NewWorkViewModel : ObservableObject
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(WorkCode) || WorkCode.Length > 20)
+        {
+            await _alertService.ShowAlertAsync(AppResources.Validation, "Work code must be between 1 and 20 characters.");
+            return;
+        }
+
         IsSaving = true;
         ErrorMessage = null;
 
         try
         {
             var user = await _authService.GetCurrentUserAsync();
-            if (user?.Id == null)
-            {
-                await _alertService.ShowAlertAsync(AppResources.Error, AppResources.UserNotLoggedIn);
-                return;
-            }
-
             var profile = await _dbService.GetUserProfileByIdAsync(user.Id);
-            if (profile == null)
-            {
-                await _alertService.ShowAlertAsync(AppResources.Error, AppResources.UserProfileNotFound);
-                return;
-            }
 
             userInitials = profile.Initials;
 
-            var work = new Work
+            var work = new LocalWork
             {
                 UserId = user.Id,
                 CategoryId = SelectedCategory.Id,
@@ -226,6 +228,7 @@ public partial class NewWorkViewModel : ObservableObject
     private async Task RemovePhotoAsync(LocalPhoto photo)
     {
         Photos.Remove(photo);
+        HasPhotos = Photos.Count > 0;
         // Optionally delete the file
         if (!string.IsNullOrEmpty(photo.Path) && File.Exists(photo.Path))
         {
@@ -239,11 +242,24 @@ public partial class NewWorkViewModel : ObservableObject
         await Shell.Current.GoToAsync("..");
     }
 
-    partial void OnSelectedCategoryChanged(LocalWorkCategory? value)
+    async partial void OnSelectedCategoryChanged(LocalWorkCategory? value)
     {
+        
         if (value != null && !string.IsNullOrEmpty(userInitials))
         {
-            WorkCode = GenerateWorkCode(userInitials, value.Code, existingWorks);
+            try
+            {
+                var works = await _dbService.GetWorksByUserIdAsync(_authStateService!.CurrentUserId!);
+                WorkCode = CommonLogic.GenerateWorkCode(
+                    userInitials, 
+                    value.Code, 
+                    works);
+            }
+            catch (InvalidOperationException ex)
+            {
+                ErrorMessage = ex.Message;
+                WorkCode = string.Empty;
+            }
         }
         SaveWorkCommand.NotifyCanExecuteChanged();
     }
@@ -251,17 +267,5 @@ public partial class NewWorkViewModel : ObservableObject
     partial void OnWallThicknessChanged(double value)
     {
         SaveWorkCommand.NotifyCanExecuteChanged();
-    }
-
-    private string GenerateWorkCode(string userInitials, string categoryCode, IEnumerable<Work> existingWorks)
-    {
-        var monthYear = DateTime.UtcNow.ToString("MMyy");
-
-        var filteredWorks = existingWorks
-            .Where(w => w.Code.StartsWith($"{userInitials}-{categoryCode}-{monthYear}-"))
-            .ToList();
-
-        var counter = filteredWorks.Count + 1;
-        return $"{userInitials}-{categoryCode}-{monthYear}-{counter:D3}";
     }
 }

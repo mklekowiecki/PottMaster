@@ -20,7 +20,7 @@ public partial class WorkDetailViewModel : ObservableObject
     private string? workId;
 
     [ObservableProperty]
-    private Work? currentWork;
+    private LocalWork? currentWork;
 
     [ObservableProperty]
     private ObservableCollection<LocalWorkStatus> statuses = [];

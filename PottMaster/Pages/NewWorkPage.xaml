@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
+             xmlns:models="clr-namespace:PottMasterLib.Models;assembly=PottMasterLib"
              xmlns:resources="clr-namespace:PottMaster.Resources;assembly=PottMaster"
              x:Class="PottMaster.Pages.NewWorkPage"
              x:DataType="vm:NewWorkViewModel"
@@ -33,23 +34,17 @@
 
                 <!-- Photos Collection -->
                 <CollectionView ItemsSource="{Binding Photos}"
-                                HeightRequest="120"
-                                IsVisible="{Binding Photos.Count, Converter={StaticResource IsNotNullConverter}}">
+                 HeightRequest="200"
+                 IsVisible="{Binding HasPhotos}">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Border Padding="4"
-                                   BackgroundColor="{StaticResource Gray200}"
-                                   WidthRequest="100"
-                                   HeightRequest="100">
-                                <Image Source="{Binding Path, Mode=TwoWay, Converter={StaticResource StringToImageSourceConverter}}"
-                                        Aspect="AspectFill"/>
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding BindingContext.RemovePhotoCommand, Source={x:Reference NewWorkPage}}"
-                                                          CommandParameter="{Binding .}"/>
-                                </Border.GestureRecognizers>
+                        <DataTemplate x:DataType="models:LocalPhoto">
+                            <Border HeightRequest="200">
+                                <Image Source="{Binding Path, Converter={StaticResource StringToImageSourceConverter}}"
+                        Aspect="AspectFit"
+                        HeightRequest="150"/>
                             </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -58,23 +53,26 @@
                 <!-- Empty State -->
                 <Border Padding="32"
                         BackgroundColor="{StaticResource Gray100}"
-                        HeightRequest="100"
-                        IsVisible="{Binding Photos.Count, Converter={StaticResource IsNullConverter}}">
+                        HeightRequest="200"
+                        IsVisible="{Binding HasPhotos, Converter={StaticResource InvertedBoolConverter}}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="12"/>
+                    </Border.StrokeShape>
                     <VerticalStackLayout VerticalOptions="Center"
                                         HorizontalOptions="Center"
                                         Spacing="8">
                         <Label Text="?"
-                                FontSize="24"
+                                FontSize="48"
                                 HorizontalTextAlignment="Center"/>
-                        <Label Text="{x:Static resources:AppResources.NoPhotoSelected}"
-                                FontSize="14"
+                        <Label Text="{x:Static resources:AppResources.NoPhoto}"
+                                FontSize="16"
                                 TextColor="{StaticResource Gray600}"
                                 HorizontalTextAlignment="Center"/>
                     </VerticalStackLayout>
                 </Border>
 
                 <!-- Photo Buttons -->
-                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
                     <Button Grid.Column="0"
                             Text="{x:Static resources:AppResources.TakePhoto}"
                             Command="{Binding TakePhotoCommand}"

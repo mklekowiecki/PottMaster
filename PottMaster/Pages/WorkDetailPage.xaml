@@ -4,8 +4,10 @@
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
              xmlns:resx="clr-namespace:PottMaster.Resources"
              xmlns:converters="clr-namespace:PottMaster.Converters"
+             xmlns:models="clr-namespace:PottMasterLib.Models;assembly=PottMasterLib"
              x:Class="PottMaster.Pages.WorkDetailPage"
-             Title="{x:Static resx:AppResources.WorkDetails}">
+             Title="{x:Static resx:AppResources.WorkDetails}"
+             x:DataType="vm:WorkDetailViewModel">
 
     <ContentPage.Resources>
         <converters:SyncStatusCodeToLocalizedConverter x:Key="SyncStatusCodeToLocalizedConverter" />
@@ -28,17 +30,22 @@
         <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
             <VerticalStackLayout Padding="16" Spacing="24">
 
-                <CarouselView ItemsSource="{Binding Photos}"
-                              IsVisible="{Binding HasPhotos}"
-                              HeightRequest="300">
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Path}"
-                                   Aspect="AspectFill"
-                                   HeightRequest="300"/>
+                <CollectionView ItemsSource="{Binding Photos}"
+                 HeightRequest="200"
+                 IsVisible="{Binding HasPhotos}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:LocalPhoto">
+                            <Border HeightRequest="200">
+                                <Image Source="{Binding Path, Converter={StaticResource StringToImageSourceConverter}}"
+                        Aspect="AspectFit"
+                        HeightRequest="150"/>
+                            </Border>
                         </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
                 <Border Padding="32"
                         BackgroundColor="{StaticResource Gray100}"

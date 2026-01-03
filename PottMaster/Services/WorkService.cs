@@ -14,7 +14,7 @@ public class WorkService : IWorkService
         _errorHandler = errorHandler;
     }
 
-    public async Task<List<Work>> GetUserWorksAsync(string userId)
+    public async Task<List<LocalWork>> GetUserWorksAsync(string userId)
     {
         var result = await _workRepository.GetByUserIdAsync(userId);
         
@@ -24,13 +24,13 @@ public class WorkService : IWorkService
             {
                 await _errorHandler.HandleErrorAsync(result.Exception, nameof(GetUserWorksAsync), false);
             }
-            return new List<Work>();
+            return new List<LocalWork>();
         }
-        
-        return result.Value ?? new List<Work>();
+
+        return result.Value ?? new List<LocalWork>();
     }
 
-    public async Task<Work?> GetWorkByIdAsync(string workId)
+    public async Task<LocalWork?> GetWorkByIdAsync(string workId)
     {
         var result = await _workRepository.GetByIdAsync(workId);
         
@@ -46,7 +46,7 @@ public class WorkService : IWorkService
         return result.Value;
     }
 
-    public async Task<Work> CreateWorkAsync(Work work, string userInitials)
+    public async Task<LocalWork> CreateWorkAsync(LocalWork work, string userInitials)
     {
         var result = await _workRepository.CreateAsync(work, userInitials);
 
@@ -62,7 +62,7 @@ public class WorkService : IWorkService
         return result.Value!;
     }
 
-    public async Task UpdateWorkAsync(Work work)
+    public async Task UpdateWorkAsync(LocalWork work)
     {
         var result = await _workRepository.UpdateAsync(work);
         
