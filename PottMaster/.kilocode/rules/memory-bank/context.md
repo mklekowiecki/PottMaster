@@ -63,13 +63,14 @@ PottMaster addresses these challenges through:
   - AppResources.en.resx (English)
   - Full localization for NewWorkPage and WorkDetailPage
 - Memory bank initialized and updated for .NET MAUI
-- CI/CD pipeline configured with MAUI workload installation for GitHub Actions
+- CI/CD pipeline configured with MAUI workload installation for GitHub Actions, updated with path filters to trigger only on code changes and branch changed to 'main'
 - **Full SQLite/SQLite-net-pcl integration and offline support via DbService** ✅
 - **Complete work registration implementation (US-002) with photo compression and local storage** ✅
 - **Unique identification code generation (US-003)** ✅
 - **Manual status correction (US-005)** ✅
 - **Supabase data sync implementation (US-008)** ✅
 - **Process timer management (US-004)** ✅ - Automatic status advancement and notifications when drying completes
+- **SupabaseApi service implemented** - Direct Supabase client wrapper for API operations
 
 ### Upcoming
 - Image handling and upload to Supabase Storage
@@ -141,6 +142,6 @@ PottMaster addresses these challenges through:
 
 ---
 
-**Last Updated**: 2026-01-01
+**Last Updated**: 2026-01-03
 **Document Owner**: Development Team
 **Review Cycle**: Weekly during MVP phase

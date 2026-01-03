@@ -86,7 +86,7 @@ PottMaster follows an **offline-first, cross-platform architecture** using .NET 
 
 ## API Layer
 
-The REST API is implemented using Supabase .NET Client (Supabase-CSharp) for direct CRUD operations and Edge Functions for complex business logic. The client is initialized using dependency injection with platform-specific configuration.
+The REST API is implemented using Supabase .NET Client (Supabase-CSharp) wrapped in SupabaseApi service for direct CRUD operations and Edge Functions for complex business logic. The client is initialized using dependency injection with platform-specific configuration.
 
 ### Supabase Client Setup
 - **Configuration**: Uses configuration object to provide project URL and anon key.
@@ -124,6 +124,6 @@ For detailed setup instructions, see `.ai/supabase-connection-setup.md`.
 
 ---
 
-**Last Updated**: 2025-12-30
+**Last Updated**: 2026-01-03
 **Document Owner**: Technical Lead
 **Review Cycle**: After major architectural changes

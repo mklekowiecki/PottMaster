@@ -72,8 +72,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to receive a short code to physically apply it to wet clay.
 
 **Acceptance Criteria**:
-1. [ ] Code is generated locally (offline) according to the mask: `Initials-CatCode-MMYY-Counter`
-2. [ ] Code is visible immediately after saving the record in SQLite
+1. ✅ Code is generated locally (offline) according to the mask: `Initials-CatCode-MMYY-Counter`
+2. ✅ Code is visible immediately after saving the record in SQLite
 
 **Code Format Examples**:
 - `MK-CUP-1224-001` (Maria Klein, Cup, December 2024, 1st piece)
@@ -97,8 +97,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to see how much time is left until safe object processing.
 
 **Acceptance Criteria**:
-1. [ ] Application displays a real-time counter (Countdown)
-2. [ ] Algorithm adjusts the time based on the selected wall thickness
+1. ✅ Application displays a real-time counter (Countdown)
+2. ✅ Algorithm adjusts the time based on the selected wall thickness
 
 **Drying Time Algorithm**:
 | Wall Thickness | Drying Time |
@@ -126,8 +126,8 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to manually mark a stage as ready to move to the next firing phase.
 
 **Acceptance Criteria**:
-1. [ ] User can click the \"Ready for Firing\" button ahead of time
-2. [ ] System stops the timer and updates the status in the local database
+1. ✅ User can click the \"Ready for Firing\" button ahead of time
+2. ✅ System stops the timer and updates the status in the local database
 
 **Work Statuses**:
 - `WET` → Initial state
@@ -457,6 +457,6 @@ US-011 (Pottery Wrapped)
 
 ---
 
-**Last Updated**: 2026-01-01
+**Last Updated**: 2026-01-03
 **Document Owner**: Product Team
 **Review Cycle**: Sprint planning (bi-weekly)
