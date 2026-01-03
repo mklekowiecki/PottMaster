@@ -4,7 +4,7 @@ using Supabase.Postgrest.Models;
 namespace PottMasterLib.Models;
 
 [Table("work_categories")]
-public class WorkCategory : BaseModel
+public class WorkCategory : BaseModel, IWorkCategory
 {
     [PrimaryKey("id")]
     public int Id { get; set; }

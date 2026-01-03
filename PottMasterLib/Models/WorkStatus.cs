@@ -17,7 +17,7 @@ public enum WorkStatusCode
 }
 
 [Table("work_statuses")]
-public class WorkStatus : BaseModel
+public class WorkStatus : BaseModel, IWorkStatus
 {
     [PrimaryKey("id")]
     public int Id { get; set; }

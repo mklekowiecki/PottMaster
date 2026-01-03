@@ -3,7 +3,7 @@ using SQLite;
 namespace PottMasterLib.Models;
 
 [Table("work_categories")]
-public class LocalWorkCategory
+public class LocalWorkCategory : IWorkCategory
 {
     [PrimaryKey]
     public int Id { get; set; }

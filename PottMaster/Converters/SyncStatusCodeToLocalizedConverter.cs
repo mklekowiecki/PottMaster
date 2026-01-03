@@ -1,6 +1,7 @@
+using PottMaster.Resources;
+using PottMasterLib.Models;
 using System.Globalization;
 using System.Resources;
-using PottMaster.Resources;
 
 namespace PottMaster.Converters;
 
@@ -10,14 +11,20 @@ public class SyncStatusCodeToLocalizedConverter : IValueConverter
     {
         if (value is string syncStatusCode)
         {
-            return syncStatusCode switch
+            // Convert code to enum
+            var status = Helpers.EnumHelpers.CodeToEnum<SyncStatus>(syncStatusCode);
+
+            if (status.HasValue)
             {
-                "PENDING" => AppResources.SyncStatusPending,
-                "SYNCING" => AppResources.SyncStatusSyncing,
-                "SYNCED" => AppResources.SyncStatusSynced,
-                "ERROR" => AppResources.SyncStatusError,
-                _ => AppResources.SyncStatusUnknown
-            };
+                return status.Value switch
+                {
+                    SyncStatus.Pending => AppResources.SyncStatusPending,
+                    SyncStatus.Syncing => AppResources.SyncStatusSyncing,
+                    SyncStatus.Synced => AppResources.SyncStatusSynced,
+                    SyncStatus.Error => AppResources.SyncStatusError,
+                    _ => AppResources.SyncStatusUnknown
+                };
+            }
         }
 
         return AppResources.SyncStatusUnknown;

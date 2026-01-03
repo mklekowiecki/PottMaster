@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace PottMasterLib.Models;
 
 [Table("user_profiles")]
-public class UserProfiles : BaseModel
+public class UserProfiles : BaseModel, IUserProfile
 {
     [Column("id")]
     public string Id { get; set; } = string.Empty;
@@ -15,9 +15,8 @@ public class UserProfiles : BaseModel
     public string Initials { get; set; } = string.Empty;
 
 	[Column("email")]
-	public string Email { get; internal set; } = string.Empty;
+	public string Email { get; set; } = string.Empty;
 
 	[Column("created_at")]
-	public DateTime CreatedAt { get; internal set; }
-
+	public DateTime CreatedAt { get; set; }
 }

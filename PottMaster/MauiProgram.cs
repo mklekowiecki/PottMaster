@@ -41,6 +41,7 @@
 
 			// Infrastructure Services (Singleton - shared across app lifetime)
 			builder.Services.AddSingleton<IDbService, DbService>();
+			builder.Services.AddSingleton<IApiEndpoint, SupabaseApi>();
 			builder.Services.AddSingleton<IImageService, ImageService>();
 			builder.Services.AddSingleton<ISyncService, SyncService>();
 			builder.Services.AddSingleton<IErrorHandlingService, ErrorHandlingService>();

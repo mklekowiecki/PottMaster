@@ -1,7 +1,6 @@
 using PottMasterLib.Models;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
-using Nelibur.ObjectMapper;
 
 
 namespace PottMasterLib.Services;
@@ -9,18 +8,15 @@ namespace PottMasterLib.Services;
 public class SyncService : ISyncService
 {
     private readonly IDbService _dbService;
-    private readonly Supabase.Client _supabaseClient;
+    private readonly IApiEndpoint _apiEndpoint;
     private readonly ILogger<SyncService> _logger;
     private bool _isSyncing = false;
 
-    public SyncService(IDbService dbService, Supabase.Client supabaseClient, ILogger<SyncService> logger)
+    public SyncService(IDbService dbService, IApiEndpoint apiEndpoint, ILogger<SyncService> logger)
     {
         _dbService = dbService;
-        _supabaseClient = supabaseClient;
+        _apiEndpoint = apiEndpoint;
         _logger = logger;
-        TinyMapper.Bind<LocalWork, RemoteWork>();
-        TinyMapper.Bind<WorkCategory, LocalWorkCategory>();
-        TinyMapper.Bind<WorkStatus, LocalWorkStatus>();
     }
 
     public async Task<bool> IsOnlineAsync()
@@ -53,35 +49,37 @@ public class SyncService : ISyncService
     {
         try
         {
-            // Fetch work categories from Supabase
             var localCategories = await _dbService.GetAllAsync<LocalWorkCategory>();
             if (!localCategories.Any())
             {
-                var categoriesResponse = await _supabaseClient
-                    .From<WorkCategory>()
-                    .Get();
-                var categories = categoriesResponse.Models;
-                if (categories != null)
+                var categoriesResult = await _apiEndpoint.GetWorkCategoriesAsync();
+                if (categoriesResult.IsSuccess && categoriesResult.Value != null)
                 {
-                    var localCategoriesToUpsert = categories.Select(c => TinyMapper.Map<LocalWorkCategory>(c)).ToList();
+                    var localCategoriesToUpsert = categoriesResult.Value.Select(c => new LocalWorkCategory
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        Code = c.Code
+                    }).ToList();
                     await _dbService.UpsertAllAsync(localCategoriesToUpsert);
-                    Debug.WriteLine($"Synced {categories.Count} work categories.");
+                    Debug.WriteLine($"Synced {categoriesResult.Value.Count} work categories.");
                 }
             }
 
-            // Fetch work statuses from Supabase
             var localStatuses = await _dbService.GetAllAsync<LocalWorkStatus>();
             if (!localStatuses.Any())
             {
-                var statusesResponse = await _supabaseClient
-                    .From<WorkStatus>()
-                    .Get();
-                var statuses = statusesResponse.Models;
-                if (statuses != null)
+                var statusesResult = await _apiEndpoint.GetWorkStatusesAsync();
+                if (statusesResult.IsSuccess && statusesResult.Value != null)
                 {
-                    var localStatusesToUpsert = statuses.Select(s => TinyMapper.Map<LocalWorkStatus>(s)).ToList();
+                    var localStatusesToUpsert = statusesResult.Value.Select(s => new LocalWorkStatus
+                    {
+                        Id = s.Id,
+                        Name = s.Name,
+                        Code = s.Code
+                    }).ToList();
                     await _dbService.UpsertAllAsync(localStatusesToUpsert);
-                    Debug.WriteLine($"Synced {statuses.Count} work statuses.");
+                    Debug.WriteLine($"Synced {statusesResult.Value.Count} work statuses.");
                 }
             }
         }
@@ -109,10 +107,8 @@ public class SyncService : ISyncService
 
         try
         {
-            // Sync dictionaries first
             await SyncDictionariesAsync();
 
-            // Sync pending works
             var pendingWorks = (await _dbService.GetAllAsync<LocalWork>())
                 .Where(w => w.SyncStatus == SyncStatus.Pending.Code() || w.SyncStatus == SyncStatus.Error.Code())
                 .ToList();
@@ -141,17 +137,23 @@ public class SyncService : ISyncService
             work.SyncStatus = SyncStatus.Syncing.Code();
             await _dbService.UpdateAsync(work);
 
-            var workToSync = TinyMapper.Map<RemoteWork>(work);
+            var result = await _apiEndpoint.UpsertWorkAsync(work);
 
-            await _supabaseClient
-                .From<RemoteWork>()
-                .Upsert(workToSync);
+            if (result.IsSuccess)
+            {
+                work.SyncStatus = SyncStatus.Synced.Code();
+                await _dbService.UpdateAsync(work);
 
-            work.SyncStatus = SyncStatus.Synced.Code();
-            await _dbService.UpdateAsync(work);
-
-            Debug.WriteLine($"Successfully synced work: {work.Code}");
-            return true;
+                Debug.WriteLine($"Successfully synced work: {work.Code}");
+                return true;
+            }
+            else
+            {
+                work.SyncStatus = SyncStatus.Error.Code();
+                await _dbService.UpdateAsync(work);
+                _logger.LogError("Failed to sync work {Code}: {Error}", work.Code ?? "Unknown", result.Error ?? "Unknown error");
+                return false;
+            }
         }
         catch (Exception ex)
         {
@@ -168,20 +170,18 @@ public class SyncService : ISyncService
     {
         try
         {
-            var remoteProfile = new UserProfiles
+            var result = await _apiEndpoint.UpsertUserProfileAsync(profile);
+
+            if (result.IsSuccess)
             {
-                Id = profile.Id,
-                Email = profile.Email,
-                Initials = profile.Initials,
-                CreatedAt = profile.CreatedAt
-            };
-
-            await _supabaseClient
-                .From<UserProfiles>()
-                .Upsert(remoteProfile);
-
-            Debug.WriteLine($"Successfully synced user profile: {profile.Email}");
-            return true;
+                Debug.WriteLine($"Successfully synced user profile: {profile.Email}");
+                return true;
+            }
+            else
+            {
+                _logger.LogError("Failed to sync user profile: {Error}", result.Error);
+                return false;
+            }
         }
         catch (Exception ex)
         {

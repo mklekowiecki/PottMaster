@@ -4,7 +4,7 @@ using Supabase.Postgrest.Models;
 namespace PottMasterLib.Models;
 
 [Table("works")]
-public class RemoteWork : BaseModel
+public class RemoteWork : BaseModel, IWork
 {
     [PrimaryKey("id")]
     public string Id { get; set; } = string.Empty;

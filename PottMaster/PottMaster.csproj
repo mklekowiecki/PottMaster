@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
@@ -66,6 +66,7 @@
 	<ItemGroup>
 	  <None Include=".ai\api-plan.md" />
 	  <None Include=".ai\db-plan.md" />
+	  <None Include=".ai\ui-plan.md" />
 	  <None Include=".github\copilot-instructions.md" />
 	  <None Include=".kilocodemodes\localization_mode.yaml" />
 	  <None Include=".kilocode\rules\maui-guidelines.md" />

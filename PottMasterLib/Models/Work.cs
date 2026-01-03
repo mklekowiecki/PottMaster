@@ -4,7 +4,7 @@ using SQLite;
 namespace PottMasterLib.Models;
 
 [Table("works")]
-public class Work
+public class Work : IWork
 {
     [PrimaryKey]
     public string Id { get; set; } = Guid.NewGuid().ToString();
