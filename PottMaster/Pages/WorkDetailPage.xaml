@@ -16,7 +16,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{x:Static resx:AppResources.Delete}"
                      Command="{Binding DeleteWorkCommand}"
-                     IconImageSource="delete.png"/>
+                     IconImageSource="trashcan_svgrepo_com.png"/>
     </ContentPage.ToolbarItems>
 
     <Grid>

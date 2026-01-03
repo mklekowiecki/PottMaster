@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<UseMaui>true</UseMaui>
+	<Configurations>Debug;Release;Debug-Remote</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

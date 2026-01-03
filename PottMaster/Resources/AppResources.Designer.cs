@@ -529,6 +529,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brak internetu.
+        /// </summary>
+        internal static string Offline {
+            get {
+                return ResourceManager.GetString("Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string Ok {
@@ -543,6 +552,15 @@ namespace PottMaster.Resources {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wysyłka danych do bazy....
+        /// </summary>
+        internal static string Pending {
+            get {
+                return ResourceManager.GetString("Pending", resourceCulture);
             }
         }
         
@@ -660,6 +678,33 @@ namespace PottMaster.Resources {
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dane offline wysłane.
+        /// </summary>
+        internal static string Synced {
+            get {
+                return ResourceManager.GetString("Synced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd wysyłki danych.
+        /// </summary>
+        internal static string SyncError {
+            get {
+                return ResourceManager.GetString("SyncError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wysyłam dane.....
+        /// </summary>
+        internal static string Syncing {
+            get {
+                return ResourceManager.GetString("Syncing", resourceCulture);
             }
         }
         

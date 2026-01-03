@@ -5,9 +5,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PottMaster"
     xmlns:pages="clr-namespace:PottMaster.Pages"
+    xmlns:controls="clr-namespace:PottMaster.Controls"
     xmlns:resx="clr-namespace:PottMaster.Resources"
     Title="{x:Static resx:AppResources.AppTitle}"
     TabBarIsVisible="False">
+
+    <Shell.TitleView>
+        <controls:SyncStatusIndicator x:Name="SyncIndicator" HorizontalOptions="End" Margin="0,0,16,0"/>
+    </Shell.TitleView>
 
     <!-- Login/Signup Pages (Outside TabBar) -->
     <ShellContent

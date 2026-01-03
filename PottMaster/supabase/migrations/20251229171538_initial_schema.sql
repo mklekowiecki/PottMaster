@@ -8,7 +8,7 @@
 --   - Initial RLS policies are defined for basic access control.
 
 -- Enable uuid-ossp extension for uuid_generate_v4()
-create extension if not exists "uuid-ossp";
+create extension if not exists "uuid-ossp" with schema "extensions";
 
 -- 1. Create Tables
 
@@ -66,7 +66,7 @@ alter table public.wiki_material_types enable row level security;
 -- Table: public.works
 -- Stores details about individual ceramic pieces.
 create table public.works (
-    id uuid primary key default uuid_generate_v4(),
+    id uuid primary key default extensions.uuid_generate_v4(),
     user_id uuid not null references public.user_profiles(id) on delete cascade,
     code varchar(20) unique not null,
     category_id smallint not null references public.work_categories(id),
@@ -91,7 +91,7 @@ alter table public.works enable row level security;
 -- Table: public.glazes
 -- Stores user's glaze inventory.
 create table public.glazes (
-    id uuid primary key default uuid_generate_v4(),
+    id uuid primary key default extensions.uuid_generate_v4(),
     user_id uuid not null references public.user_profiles(id) on delete cascade,
     name varchar(100) not null,
     manufacturer varchar(100),
@@ -123,7 +123,7 @@ alter table public.work_glazes enable row level security;
 -- Table: public.wiki_materials
 -- Public knowledge base for ceramic materials.
 create table public.wiki_materials (
-    id uuid primary key default uuid_generate_v4(),
+    id uuid primary key default extensions.uuid_generate_v4(),
     name varchar(255) not null,
     type_id smallint not null references public.wiki_material_types(id),
     manufacturer varchar(255),

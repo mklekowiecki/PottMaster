@@ -1,12 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PottMaster.Pages;
 using PottMaster.Services;
+using PottMaster.ViewModels;
 
 namespace PottMaster
 {
     public partial class AppShell : Shell
     {
         private IAuthStateService? _authStateService;
+        private SyncStatusViewModel? _syncStatusViewModel;
         
         public AppShell()
         {
@@ -21,13 +23,22 @@ namespace PottMaster
         {
             base.OnHandlerChanged();
             
-            if (Handler?.MauiContext?.Services != null && _authStateService == null)
+            if (Handler?.MauiContext?.Services != null)
             {
-                _authStateService = Handler.MauiContext.Services.GetRequiredService<IAuthStateService>();
-                _authStateService.AuthStateChanged += OnAuthStateChanged;
+                if (_authStateService == null)
+                {
+                    _authStateService = Handler.MauiContext.Services.GetRequiredService<IAuthStateService>();
+                    _authStateService.AuthStateChanged += OnAuthStateChanged;
+                    
+                    // Set initial tab bar visibility
+                    UpdateTabBarVisibility(_authStateService.IsAuthenticated);
+                }
                 
-                // Set initial tab bar visibility
-                UpdateTabBarVisibility(_authStateService.IsAuthenticated);
+                if (_syncStatusViewModel == null)
+                {
+                    _syncStatusViewModel = Handler.MauiContext.Services.GetRequiredService<SyncStatusViewModel>();
+                    SyncIndicator.BindingContext = _syncStatusViewModel;
+                }
             }
         }
         

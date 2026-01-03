@@ -478,4 +478,19 @@
   <data name="SelectStatus" xml:space="preserve">
     <value>Wybierz status</value>
   </data>
+  <data name="Syncing" xml:space="preserve">
+    <value>Wysyłam dane....</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Brak internetu</value>
+  </data>
+  <data name="SyncError" xml:space="preserve">
+    <value>Błąd wysyłki danych</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Wysyłka danych do bazy...</value>
+  </data>
+  <data name="Synced" xml:space="preserve">
+    <value>Dane offline wysłane</value>
+  </data>
 </root>

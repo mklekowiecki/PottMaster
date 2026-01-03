@@ -70,6 +70,7 @@
 			builder.Services.AddTransient<NewWorkViewModel>();
 			builder.Services.AddTransient<WorkDetailViewModel>();
 			builder.Services.AddTransient<ProfileViewModel>();
+			builder.Services.AddSingleton<SyncStatusViewModel>();
 			
 			// Pages (Transient - new instance per navigation)
 			builder.Services.AddTransient<MainPage>();

@@ -45,6 +45,8 @@
 		<NeutralLanguage>pl</NeutralLanguage>
 
 		<MauiStrictXamlCompilation>true</MauiStrictXamlCompilation>
+
+		<Configurations>Debug;Release;Debug-Remote</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -70,6 +72,7 @@
 	  <None Include=".ai\db-plan.md" />
 	  <None Include=".ai\localization-additions.md" />
 	  <None Include=".ai\phase3-navigation-summary.md" />
+	  <None Include=".ai\sync-status-indicator-implementation.md" />
 	  <None Include=".ai\ui-plan.md" />
 	  <None Include=".ai\ui-refactor-plan.md" />
 	  <None Include=".github\copilot-instructions.md" />
@@ -111,6 +114,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Controls\BottomNavigationBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\SyncStatusIndicator.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\AnalyticsPage.xaml">
