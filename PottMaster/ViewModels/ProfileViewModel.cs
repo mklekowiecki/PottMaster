@@ -62,8 +62,8 @@ public partial class ProfileViewModel : ObservableObject
     private async Task LogoutAsync()
     {
         var confirm = await _alertService.ShowConfirmationAsync(
-            "Logout",
-            "Are you sure you want to logout?");
+            AppResources.LogoutConfirmationTitle,
+            AppResources.LogoutConfirmationMessage);
 
         if (!confirm)
             return;

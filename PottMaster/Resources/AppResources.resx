@@ -424,4 +424,55 @@
   <data name="ConfirmDeletionMessage" xml:space="preserve">
     <value>Czy na pewno chcesz usunąć?</value>
   </data>
+  <data name="AppTitle" xml:space="preserve">
+    <value>PottMaster</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Logowanie</value>
+  </data>
+  <data name="SignupTitle" xml:space="preserve">
+    <value>Rejestracja</value>
+  </data>
+  <data name="TabWorksTitle" xml:space="preserve">
+    <value>Prace</value>
+  </data>
+  <data name="TabInventoryTitle" xml:space="preserve">
+    <value>Inwentarz</value>
+  </data>
+  <data name="TabWikiTitle" xml:space="preserve">
+    <value>Wikipedia</value>
+  </data>
+  <data name="TabAnalyticsTitle" xml:space="preserve">
+    <value>Analizy</value>
+  </data>
+  <data name="TabProfileTitle" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="ProfileTitle" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Ustawienia konta</value>
+  </data>
+  <data name="Initials" xml:space="preserve">
+    <value>Inicjały</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>O aplikacji</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Wersja</value>
+  </data>
+  <data name="DangerZone" xml:space="preserve">
+    <value>Strefa zagro?enia</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
+  <data name="LogoutConfirmationTitle" xml:space="preserve">
+    <value>Wylogowanie</value>
+  </data>
+  <data name="LogoutConfirmationMessage" xml:space="preserve">
+    <value>Czy na pewno chcesz się wylogować?</value>
+  </data>
 </root>

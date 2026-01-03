@@ -5,46 +5,47 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:PottMaster"
     xmlns:pages="clr-namespace:PottMaster.Pages"
-    Title="PottMaster">
+    xmlns:resx="clr-namespace:PottMaster.Resources"
+    Title="{x:Static resx:AppResources.AppTitle}">
 
     <!-- Login/Signup Pages (Outside TabBar) -->
     <ShellContent
-        Title="Login"
+        Title="{x:Static resx:AppResources.LoginTitle}"
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage" />
 
     <ShellContent
-        Title="Signup"
+        Title="{x:Static resx:AppResources.SignupTitle}"
         ContentTemplate="{DataTemplate local:SignupPage}"
         Route="SignupPage" />
 
     <!-- Main App Navigation (Bottom Tab Bar) -->
     <TabBar Route="main" x:Name="MainTabBar">
-        <Tab Title="Works" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabWorksTitle}" Icon="dotnet_bot.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate local:MainPage}" 
                 Route="MainPage" />
         </Tab>
         
-        <Tab Title="Inventory" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabInventoryTitle}" Icon="dotnet_bot.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate pages:GlazeInventoryPage}" 
                 Route="GlazeInventoryPage" />
         </Tab>
         
-        <Tab Title="Wiki" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabWikiTitle}" Icon="dotnet_bot.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate pages:WikiPage}" 
                 Route="WikiPage" />
         </Tab>
         
-        <Tab Title="Analytics" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabAnalyticsTitle}" Icon="dotnet_bot.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate pages:AnalyticsPage}" 
                 Route="AnalyticsPage" />
         </Tab>
         
-        <Tab Title="Profile" Icon="dotnet_bot.png">
+        <Tab Title="{x:Static resx:AppResources.TabProfileTitle}" Icon="dotnet_bot.png">
             <ShellContent 
                 ContentTemplate="{DataTemplate pages:ProfilePage}" 
                 Route="ProfilePage" />

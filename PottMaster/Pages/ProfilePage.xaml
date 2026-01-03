@@ -5,7 +5,7 @@
              xmlns:resx="clr-namespace:PottMaster.Resources"
              x:Class="PottMaster.Pages.ProfilePage"
              x:DataType="vm:ProfileViewModel"
-             Title="Profile">
+             Title="{x:Static resx:AppResources.ProfileTitle}">
 
     <Grid>
         <!-- Loading Indicator -->
@@ -46,13 +46,13 @@
 
                 <!-- Account Settings Section -->
                 <VerticalStackLayout Style="{StaticResource SectionContainer}">
-                    <Label Text="Account Settings"
+                    <Label Text="{x:Static resx:AppResources.AccountSettings}"
                            Style="{StaticResource SectionHeader}"/>
 
                     <!-- Initials Display -->
                     <Border Style="{StaticResource CardStyle}">
                         <VerticalStackLayout Spacing="8">
-                            <Label Text="Initials"
+                            <Label Text="{x:Static resx:AppResources.Initials}"
                                    Style="{StaticResource LabelLarge}"/>
                             <Label Text="{Binding UserInitials}"
                                    Style="{StaticResource BodyLarge}"/>
@@ -62,13 +62,13 @@
 
                 <!-- About Section -->
                 <VerticalStackLayout Style="{StaticResource SectionContainer}">
-                    <Label Text="About"
+                    <Label Text="{x:Static resx:AppResources.About}"
                            Style="{StaticResource SectionHeader}"/>
 
                     <!-- Version Info -->
                     <Border Style="{StaticResource CardStyle}">
                         <VerticalStackLayout Spacing="8">
-                            <Label Text="Version"
+                            <Label Text="{x:Static resx:AppResources.Version}"
                                    Style="{StaticResource LabelLarge}"/>
                             <Label Text="{Binding AppVersion}"
                                    Style="{StaticResource BodyLarge}"/>
@@ -78,12 +78,12 @@
 
                 <!-- Danger Zone Section -->
                 <VerticalStackLayout Style="{StaticResource SectionContainer}">
-                    <Label Text="Danger Zone"
+                    <Label Text="{x:Static resx:AppResources.DangerZone}"
                            Style="{StaticResource SectionHeader}"
                            TextColor="{AppThemeBinding Light={StaticResource Error}, Dark={StaticResource ErrorDark}}"/>
 
                     <!-- Logout Button -->
-                    <Button Text="Logout"
+                    <Button Text="{x:Static resx:AppResources.Logout}"
                             Command="{Binding LogoutCommand}"
                             Style="{StaticResource SecondaryButton}"
                             BorderColor="{AppThemeBinding Light={StaticResource Error}, Dark={StaticResource ErrorDark}}"

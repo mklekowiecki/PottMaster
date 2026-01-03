@@ -68,6 +68,7 @@
 	<ItemGroup>
 	  <None Include=".ai\api-plan.md" />
 	  <None Include=".ai\db-plan.md" />
+	  <None Include=".ai\localization-additions.md" />
 	  <None Include=".ai\phase3-navigation-summary.md" />
 	  <None Include=".ai\ui-plan.md" />
 	  <None Include=".ai\ui-refactor-plan.md" />
