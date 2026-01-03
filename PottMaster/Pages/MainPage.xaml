@@ -9,7 +9,7 @@
              x:DataType="vm:MainViewModel"
              Title="{x:Static resx:AppResources.MyWorks}">
 
-    <Grid RowDefinitions="*,60">
+    <Grid RowDefinitions="*,Auto">
         <!-- Works List -->
         <RefreshView Grid.Row="0" 
                      Command="{Binding LoadWorksCommand}"

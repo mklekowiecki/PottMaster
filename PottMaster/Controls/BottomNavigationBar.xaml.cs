@@ -14,6 +14,21 @@ public partial class BottomNavigationBar : ContentView
 
     private void OnLoaded(object sender, EventArgs e)
     {
+        var currentRoute = Shell.Current?.CurrentState?.Location?.OriginalString;
+        if (!string.IsNullOrEmpty(currentRoute))
+        {
+            if (currentRoute.Contains("MainPage"))
+                _currentPage = "MainPage";
+            else if (currentRoute.Contains("GlazeInventoryPage"))
+                _currentPage = "GlazeInventoryPage";
+            else if (currentRoute.Contains("WikiPage"))
+                _currentPage = "WikiPage";
+            else if (currentRoute.Contains("AnalyticsPage"))
+                _currentPage = "AnalyticsPage";
+            else if (currentRoute.Contains("ProfilePage"))
+                _currentPage = "ProfilePage";
+        }
+        
         UpdateActiveTab(_currentPage);
     }
 

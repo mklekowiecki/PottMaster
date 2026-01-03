@@ -10,7 +10,8 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{x:Static resources:AppResources.Cancel}"
-                     Command="{Binding CancelCommand}"/>
+                     Command="{Binding CancelCommand}"
+                     IconImageSource="cancel.png"/>
     </ContentPage.ToolbarItems>
 
     <ScrollView>
