@@ -55,10 +55,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" Resize="true"/>
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" Resize="true" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#E6D3B1" BaseSize="128,128"  />
+		<MauiSplashScreen Include="Resources\Splash\splash.png" Color="#E6D3B1" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -74,6 +74,10 @@
 	<ItemGroup>
 	  <None Include=".ai\api-plan.md" />
 	  <None Include=".ai\db-plan.md" />
+	  <None Include=".ai\glaze-db-update-summary.md" />
+	  <None Include=".ai\glaze-parameters.md" />
+	  <None Include=".ai\glaze-ui-implementation-guide.md" />
+	  <None Include=".ai\glaze-ui-summary.md" />
 	  <None Include=".ai\ui-plan.md" />
 	  <None Include=".ai\ui-refactor-plan.md" />
 	  <None Include=".github\copilot-instructions.md" />
@@ -115,6 +119,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Controls\BottomNavigationBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\CollapsibleSection.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\SyncStatusIndicator.xaml">
