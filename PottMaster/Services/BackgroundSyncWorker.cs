@@ -59,6 +59,7 @@ public class BackgroundSyncWorker : IAsyncDisposable
             try
             {
                 await _syncService.SyncPendingChangesAsync();
+                await _syncService.SyncWorksFromServerAsync(_authStateService.CurrentUserId!);
             }
             catch (Exception ex)
             {

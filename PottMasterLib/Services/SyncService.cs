@@ -1,6 +1,11 @@
+using PottMasterLib.Logic;
 using PottMasterLib.Models;
-using System.Diagnostics;
+using PottMasterLib.Services;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using Microsoft.Maui.Networking;
+using Microsoft.Maui.Storage;
+using System.IO;
 
 
 namespace PottMasterLib.Services;
@@ -242,6 +247,129 @@ public class SyncService : ISyncService
         {
             _logger.LogError(ex, "Failed to sync user profile");
             return false;
+        }
+    }
+
+    public async Task SyncWorksFromServerAsync(string userId)
+    {
+        if (_isSyncing)
+        {
+            Debug.WriteLine("Sync already in progress, skipping...");
+            return;
+        }
+
+        if (!await IsOnlineAsync())
+        {
+            Debug.WriteLine("No internet connection, skipping sync");
+            return;
+        }
+
+        _isSyncing = true;
+
+        try
+        {
+            var worksResult = await _apiEndpoint.GetWorksByUserIdAsync(userId);
+            if (!worksResult.IsSuccess || worksResult.Value == null)
+            {
+                Debug.WriteLine("Failed to get works from server");
+                return;
+            }
+
+            foreach (var work in worksResult.Value)
+            {
+                var localWork = await _dbService.GetByIdAsync<LocalWork>(work.Id);
+                if (localWork == null || work.UpdatedAt > localWork.UpdatedAt)
+                {
+                    var localWorkToUpsert = new LocalWork
+                    {
+                        Id = work.Id,
+                        UserId = work.UserId,
+                        Code = work.Code,
+                        CategoryId = work.CategoryId,
+                        WallThickness = work.WallThickness,
+                        PhotoPath = null, // Will set after download
+                        StatusId = work.StatusId,
+                        CreatedAt = work.CreatedAt,
+                        DryingStartedAt = work.DryingStartedAt,
+                        DryingCompletedAt = work.DryingCompletedAt,
+                        SyncStatus = SyncStatus.Synced.Code(),
+                        UpdatedAt = work.UpdatedAt
+                    };
+
+                    await _dbService.UpsertAllAsync(new[] { localWorkToUpsert });
+
+                    // Download main photo if exists
+                    if (!string.IsNullOrEmpty(work.PhotoPath))
+                    {
+                        var downloadResult = await _apiEndpoint.DownloadPhotoAsync(work.PhotoPath);
+                        if (downloadResult.IsSuccess && downloadResult.Value != null)
+                        {
+                            var localPath = Path.Combine(FileSystem.AppDataDirectory, "images", work.Id + "_main.jpg");
+                            Directory.CreateDirectory(Path.GetDirectoryName(localPath)!);
+                            await File.WriteAllBytesAsync(localPath, downloadResult.Value);
+                            localWorkToUpsert.PhotoPath = localPath;
+                            await _dbService.UpdateAsync(localWorkToUpsert);
+                        }
+                    }
+
+                    // Sync photos for this work
+                    await SyncPhotosForWorkFromServerAsync(work.Id);
+                }
+            }
+
+            Debug.WriteLine($"Downloaded {worksResult.Value.Count} works.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to sync works from server");
+        }
+        finally
+        {
+            _isSyncing = false;
+        }
+    }
+
+    private async Task SyncPhotosForWorkFromServerAsync(string workId)
+    {
+        try
+        {
+            var photosResult = await _apiEndpoint.GetPhotosByWorkIdAsync(workId);
+            if (!photosResult.IsSuccess || photosResult.Value == null)
+            {
+                return;
+            }
+
+            foreach (var photo in photosResult.Value)
+            {
+                var localPhoto = await _dbService.GetByIdAsync<LocalPhoto>(photo.Id);
+                if (localPhoto == null || photo.UpdatedAt > localPhoto.UpdatedAt)
+                {
+                    var downloadResult = await _apiEndpoint.DownloadPhotoAsync(photo.RemotePath);
+                    if (downloadResult.IsSuccess && downloadResult.Value != null)
+                    {
+                        var localPath = Path.Combine(FileSystem.AppDataDirectory, "images", photo.Id + ".jpg");
+                        Directory.CreateDirectory(Path.GetDirectoryName(localPath)!);
+                        await File.WriteAllBytesAsync(localPath, downloadResult.Value);
+
+                        var localPhotoToUpsert = new LocalPhoto
+                        {
+                            Id = photo.Id,
+                            WorkId = photo.WorkId,
+                            RemotePath = photo.RemotePath,
+                            Path = localPath,
+                            Order = photo.Order,
+                            SyncStatus = SyncStatus.Synced.Code(),
+                            UpdatedAt = photo.UpdatedAt
+                        };
+
+                        await _dbService.UpsertAllAsync(new[] { localPhotoToUpsert });
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to sync photos for work {WorkId}", workId);
         }
     }
 }

@@ -3,18 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:PottMaster.Resources"
              x:Class="PottMaster.Controls.SyncStatusIndicator">
-    
-    <Border BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceVariant}, Dark={StaticResource SurfaceVariantDark}}"
+    <Border BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceContainer}, Dark={StaticResource SurfaceContainerDark}}"
             StrokeThickness="0"
+            HorizontalOptions="Center"
             Padding="12,12"
             IsVisible="{Binding IsAuthenticated}">
-     
-        
-        <HorizontalStackLayout Spacing="8">
+
+
+        <HorizontalStackLayout Spacing="8" Padding="5">
             <!-- Sync Status Icon -->
             <Label Text="{Binding StatusIcon}"
                    FontSize="16"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="Center" />
 
             <!-- Pending Count (only show if > 0) -->
             <Label Text="{Binding PendingCount}"
@@ -34,5 +34,4 @@
             <TapGestureRecognizer Command="{Binding TriggerSyncCommand}"/>
         </Border.GestureRecognizers>
     </Border>
-
 </ContentView>

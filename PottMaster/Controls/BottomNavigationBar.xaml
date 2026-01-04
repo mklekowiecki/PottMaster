@@ -5,12 +5,6 @@
              x:Class="PottMaster.Controls.BottomNavigationBar">
 	<Border BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceContainer}, Dark={StaticResource SurfaceContainerDark}}"
             Padding="0">
-		<Border.Shadow>
-			<Shadow Brush="{AppThemeBinding Light=Black, Dark=Transparent}"
-                    Opacity="0.1"
-                    Offset="0,-2"
-                    Radius="8" />
-		</Border.Shadow>
 
 		<Grid HeightRequest="80" Padding="8,0">
 			<Grid.ColumnDefinitions>

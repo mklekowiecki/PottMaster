@@ -84,16 +84,18 @@ PottMaster addresses these challenges through:
 - Full offline support (SQLite)
 - Integration with Supabase (Auth, Database, Storage)
 - Coding system and timers
-- Basic Wiki version
 - Work lifecycle management
 - Glaze inventory
 - Automatic synchronization
 
 ### Outside MVP Scope ❌
-- Proprietary .NET server infrastructure
 - Advanced AI algorithms for image analysis
 - Social modules and marketplace
 - Advanced analytics beyond basic Yield Rate
+- Creating social elements- creating groups, adding friends, sharing works within groups
+- Adding logs to separate database table, sending logs during sync
+- Adding phptos to already existing works
+- Basic Wiki version
 
 ## Success Metrics
 

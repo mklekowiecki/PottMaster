@@ -254,4 +254,45 @@ public class SupabaseApi : IApiEndpoint
             return Result<string>.Failure("Failed to upload photo", ex);
         }
     }
+
+    public async Task<Result<List<Photo>>> GetPhotosByWorkIdAsync(string workId)
+    {
+        try
+        {
+            var response = await _supabaseClient
+                .From<Photo>()
+                .Filter("work_id", Constants.Operator.Equals, workId)
+                .Get();
+
+            var photos = response.Models.ToList();
+            return Result<List<Photo>>.Success(photos);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to get photos for work {WorkId}", workId);
+            return Result<List<Photo>>.Failure("Failed to load photos from server", ex);
+        }
+    }
+
+    public async Task<Result<byte[]>> DownloadPhotoAsync(string remotePath)
+    {
+        try
+        {
+            // Assuming remotePath is the public URL
+            using var httpClient = new HttpClient();
+            var response = await httpClient.GetAsync(remotePath);
+            if (!response.IsSuccessStatusCode)
+            {
+                return Result<byte[]>.Failure("Failed to download photo");
+            }
+
+            var bytes = await response.Content.ReadAsByteArrayAsync();
+            return Result<byte[]>.Success(bytes);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to download photo from {RemotePath}", remotePath);
+            return Result<byte[]>.Failure("Failed to download photo", ex);
+        }
+    }
 }
