@@ -65,6 +65,13 @@
                     AutomationId="LoginButton"
                     Margin="0,0,0,16" />
             
+            <!-- Fingerprint Login Button -->
+            <Button Text="Zaloguj si? odciskiem palca" 
+                    Command="{Binding FingerprintLoginCommand}" 
+                    IsVisible="{Binding IsBiometricAvailable}"
+                    Style="{StaticResource SecondaryButton}"
+                    Margin="0,0,0,16" />
+            
             <!-- Activity Indicator -->
             <ActivityIndicator IsVisible="{Binding IsBusy}" 
                               IsRunning="{Binding IsBusy}" 

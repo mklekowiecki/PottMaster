@@ -89,6 +89,10 @@
 			// Register BackgroundSyncWorker as singleton
 			builder.Services.AddSingleton<BackgroundSyncWorker>();
 
+#if ANDROID
+			builder.Services.AddSingleton<IBiometricService, PottMaster.Platforms.Android.BiometricService>();
+#endif
+
 #if DEBUG
 			builder.Logging.AddDebug();
 #endif

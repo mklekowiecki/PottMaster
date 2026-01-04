@@ -56,12 +56,12 @@ public static class CommonLogic
         var monthYear = DateTime.UtcNow.ToString("MMyy");
 
         var filteredWorks = existingWorks
-            .Where(w => w.Code.StartsWith($"{userInitials}-{categoryCode}-{monthYear}-"))
+            .Where(w => w.Code.StartsWith($"{userInitials}-{categoryCode.Substring(0,3)}-{monthYear}-"))
             .ToList();
 
         var counter = filteredWorks.Count + 1;
         
-        var result = $"{userInitials}-{categoryCode}-{monthYear}-{counter:D3}";
+        var result = $"{userInitials}-{categoryCode.Substring(0,3)}-{monthYear}-{counter:D3}";
 
         //Take last 20 characters
         if (result.Length > 20)

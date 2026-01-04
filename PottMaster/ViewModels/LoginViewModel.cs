@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using PottMaster.Services;
 using PottMaster.Resources;
+using Microsoft.Maui.Storage;
 
 namespace PottMaster.ViewModels;
 
@@ -10,6 +11,7 @@ public partial class LoginViewModel : ObservableObject
     private readonly IAuthService _authService;
     private readonly IAuthStateService _authStateService;
     private readonly IErrorHandlingService _errorHandler;
+    private readonly IBiometricService _biometricService;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(IsLoginEnabled))]
@@ -27,15 +29,19 @@ public partial class LoginViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(HasError))]
     private string errorMessage = string.Empty;
 
+    public bool IsBiometricAvailable { get; private set; }
+
     public bool HasError => !string.IsNullOrWhiteSpace(ErrorMessage);
     
     public bool IsLoginEnabled => !string.IsNullOrWhiteSpace(Email) && !string.IsNullOrWhiteSpace(Password) && !IsBusy;
 
-    public LoginViewModel(IAuthService authService, IAuthStateService authStateService, IErrorHandlingService errorHandler)
+    public LoginViewModel(IAuthService authService, IAuthStateService authStateService, IErrorHandlingService errorHandler, IBiometricService biometricService)
     {
         _authService = authService;
         _authStateService = authStateService;
         _errorHandler = errorHandler;
+        _biometricService = biometricService;
+        IsBiometricAvailable = _biometricService.IsBiometricAvailable();
 #if DEBUG || DEBUG_REMOTE
         Email = "m.klekowiecki@gmail.com";
         Password = "Tiamat1234!";
@@ -71,6 +77,10 @@ public partial class LoginViewModel : ObservableObject
                 profileResult.Data.Email, 
                 profileResult.Data.Initials);
             
+            // Store credentials for biometric login
+            await SecureStorage.SetAsync("email", Email);
+            await SecureStorage.SetAsync("password", Password);
+            
             await Shell.Current.GoToAsync("//main");
         }
         catch (Exception ex)
@@ -88,5 +98,43 @@ public partial class LoginViewModel : ObservableObject
     private async Task Signup()
     {
         await Shell.Current.GoToAsync("//SignupPage");
+    }
+
+    [RelayCommand]
+    private async Task FingerprintLogin()
+    {
+        IsBusy = true;
+        ErrorMessage = string.Empty;
+        
+        try
+        {
+            var success = await _biometricService.AuthenticateBiometricAsync("Logowanie odciskiem palca", "Użyj odcisku palca, aby się zalogować");
+            if (!success)
+            {
+                ErrorMessage =  "Uwierzytelnianie biometryczne nie powiodło się";
+                return;
+            }
+            
+            var email = await SecureStorage.GetAsync("email");
+            var password = await SecureStorage.GetAsync("password");
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                ErrorMessage = "Brak zapisanych danych logowania dla logowania odciskiem palca";
+                return;
+            }
+            
+            Email = email;
+            Password = password;
+            await Login();
+        }
+        catch (Exception ex)
+        {
+            await _errorHandler.HandleErrorAsync(ex, nameof(FingerprintLogin));
+            ErrorMessage = _errorHandler.GetUserFriendlyError(ex);
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 }
