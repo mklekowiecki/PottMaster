@@ -108,10 +108,10 @@ public partial class LoginViewModel : ObservableObject
         
         try
         {
-            var success = await _biometricService.AuthenticateBiometricAsync("Logowanie odciskiem palca", "Użyj odcisku palca, aby się zalogować");
+            var success = await _biometricService.AuthenticateBiometricAsync(AppResources.FingerPrintLogin, AppResources.FingerPrintLoginMsg);
             if (!success)
             {
-                ErrorMessage =  "Uwierzytelnianie biometryczne nie powiodło się";
+                ErrorMessage =  AppResources.FingerPrintLoginFailed;
                 return;
             }
             
@@ -119,7 +119,7 @@ public partial class LoginViewModel : ObservableObject
             var password = await SecureStorage.GetAsync("password");
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
             {
-                ErrorMessage = "Brak zapisanych danych logowania dla logowania odciskiem palca";
+                ErrorMessage = AppResources.NoFingerPrintDataSaved;
                 return;
             }
             

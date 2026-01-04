@@ -66,7 +66,7 @@
                     Margin="0,0,0,16" />
             
             <!-- Fingerprint Login Button -->
-            <Button Text="Zaloguj si? odciskiem palca" 
+            <Button Text="{x:Static resx:AppResources.LoginWithFingerprint}"  
                     Command="{Binding FingerprintLoginCommand}" 
                     IsVisible="{Binding IsBiometricAvailable}"
                     Style="{StaticResource SecondaryButton}"

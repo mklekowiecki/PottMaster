@@ -1,34 +1,41 @@
-<svg viewBox="0 0 108 108"
-     xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+<svg width="108" height="108" viewBox="0 0 108 108"
+     xmlns="http://www.w3.org/2000/svg">
 
-  <!-- Group centered with safe padding -->
-  <g transform="translate(18 18)">
+	<!-- Safe area shifted 10% upward -->
+	<g transform="translate(18 10.8)">
 
-    <!-- Pot Body -->
-    <path
-      d="M18 24
-         C18 16 54 16 54 24
-         L50 32
-         C58 44 54 64 36 72
-         C18 64 14 44 22 32
+		<!-- Pot Body -->
+		<path
+		  d="M18 22
+         C18 14 54 14 54 22
+         L50 30
+         C58 44 54 62 36 70
+         C18 62 14 44 22 30
          Z"
-      fill="#B85C38"/>
+		  fill="#B85C38"/>
 
-    <!-- Pot Rim -->
-    <ellipse cx="36" cy="24" rx="18" ry="4"
-             fill="#9C4A2D"/>
+		<!-- Pot Rim -->
+		<ellipse
+		  cx="36"
+		  cy="22"
+		  rx="18"
+		  ry="4"
+		  fill="#9C4A2D"/>
 
-    <!-- Status Badge -->
-    <circle cx="56" cy="56" r="10"
-            fill="#4CAF50"/>
+		<!-- Status Badge -->
+		<circle
+		  cx="52"
+		  cy="52"
+		  r="9"
+		  fill="#4CAF50"/>
 
-    <!-- Checkmark -->
-    <path
-      d="M52 56 L56 60 L62 54"
-      fill="none"
-      stroke="#FFFFFF"
-      stroke-width="3"
-      stroke-linecap="round"
-      stroke-linejoin="round"/>
-  </g>
+		<!-- Checkmark -->
+		<path
+		  d="M48.5 52 L52 55.5 L58 49.5"
+		  fill="none"
+		  stroke="#FFFFFF"
+		  stroke-width="2.8"
+		  stroke-linecap="round"
+		  stroke-linejoin="round"/>
+	</g>
 </svg>

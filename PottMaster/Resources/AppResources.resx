@@ -494,27 +494,39 @@
     <value>Dane offline wysłane</value>
   </data>
   <data name="ConfirmingEmail" xml:space="preserve">
-    <value>Potwierdzam email...</value>
-  </data>
-  <data name="ConfirmingEmail" xml:space="preserve">
     <value>Potwierdzanie adresu e-mail...</value>
-</data>
-<data name="NoConfirmationLinkReceived" xml:space="preserve">
+  </data>
+  <data name="NoConfirmationLinkReceived" xml:space="preserve">
     <value>Nie otrzymano linku potwierdzającego.</value>
-</data>
-<data name="InvalidConfirmationLink" xml:space="preserve">
+  </data>
+  <data name="InvalidConfirmationLink" xml:space="preserve">
     <value>Nieprawidłowy link potwierdzający.</value>
-</data>
-<data name="EmailConfirmedSuccessfully" xml:space="preserve">
+  </data>
+  <data name="EmailConfirmedSuccessfully" xml:space="preserve">
     <value>Adres e-mail potwierdzony pomyślnie!</value>
-</data>
-<data name="FailedToConfirmEmail" xml:space="preserve">
+  </data>
+  <data name="FailedToConfirmEmail" xml:space="preserve">
     <value>Nie udało się potwierdzić adresu e-mail.</value>
-</data>
-<data name="EmailConfirmationTitle" xml:space="preserve">
+  </data>
+  <data name="EmailConfirmationTitle" xml:space="preserve">
     <value>Potwierdzenie adresu e-mail</value>
-</data>
-<data name="GoToLogin" xml:space="preserve">
+  </data>
+  <data name="GoToLogin" xml:space="preserve">
     <value>Przejdź do logowania</value>
-</data>
+  </data>
+  <data name="FingerPrintLogin" xml:space="preserve">
+    <value>Logowanie odciskiem palca</value>
+  </data>
+  <data name="FingerPrintLoginMsg" xml:space="preserve">
+    <value>Użyj odcisku palca, aby się zalogować</value>
+  </data>
+  <data name="FingerPrintLoginFailed" xml:space="preserve">
+    <value>Uwierzytelnianie biometryczne nie powiodło się</value>
+  </data>
+  <data name="NoFingerPrintDataSaved" xml:space="preserve">
+    <value>Brak zapisanych danych logowania dla logowania odciskiem palca</value>
+  </data>
+  <data name="LoginWithFingerprint" xml:space="preserve">
+    <value>Zaloguj się odciskiem palca</value>
+  </data>
 </root>

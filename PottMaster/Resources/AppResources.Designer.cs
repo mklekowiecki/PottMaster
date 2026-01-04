@@ -412,6 +412,33 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logowanie odciskiem palca.
+        /// </summary>
+        internal static string FingerPrintLogin {
+            get {
+                return ResourceManager.GetString("FingerPrintLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uwierzytelnianie biometryczne nie powiodło się.
+        /// </summary>
+        internal static string FingerPrintLoginFailed {
+            get {
+                return ResourceManager.GetString("FingerPrintLoginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Użyj odcisku palca, aby się zalogować.
+        /// </summary>
+        internal static string FingerPrintLoginMsg {
+            get {
+                return ResourceManager.GetString("FingerPrintLoginMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wróć.
         /// </summary>
         internal static string GoBack {
@@ -480,6 +507,15 @@ namespace PottMaster.Resources {
         internal static string LoginTitle {
             get {
                 return ResourceManager.GetString("LoginTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zaloguj się odciskiem palca.
+        /// </summary>
+        internal static string LoginWithFingerprint {
+            get {
+                return ResourceManager.GetString("LoginWithFingerprint", resourceCulture);
             }
         }
         
@@ -561,6 +597,15 @@ namespace PottMaster.Resources {
         internal static string NoConfirmationLinkReceived {
             get {
                 return ResourceManager.GetString("NoConfirmationLinkReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brak zapisanych danych logowania dla logowania odciskiem palca.
+        /// </summary>
+        internal static string NoFingerPrintDataSaved {
+            get {
+                return ResourceManager.GetString("NoFingerPrintDataSaved", resourceCulture);
             }
         }
         
