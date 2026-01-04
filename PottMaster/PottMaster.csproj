@@ -45,8 +45,12 @@
 		<NeutralLanguage>pl</NeutralLanguage>
 
 		<MauiStrictXamlCompilation>true</MauiStrictXamlCompilation>
-
+		<XamlDebuggingInformation>true</XamlDebuggingInformation>
 		<Configurations>Debug;Release;Debug-Remote</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Debug-Remote'">
+		<MauiStrictXamlCompilation>false</MauiStrictXamlCompilation>
 	</PropertyGroup>
 
 	<ItemGroup>

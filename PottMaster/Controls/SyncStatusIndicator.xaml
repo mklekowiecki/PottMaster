@@ -8,9 +8,7 @@
             StrokeThickness="0"
             Padding="12,12"
             IsVisible="{Binding IsAuthenticated}">
-        <Border.StrokeShape>
-            <RoundRectangle CornerRadius="16"/>
-        </Border.StrokeShape>
+     
         
         <HorizontalStackLayout Spacing="8">
             <!-- Sync Status Icon -->

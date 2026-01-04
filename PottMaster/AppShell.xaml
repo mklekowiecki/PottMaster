@@ -11,7 +11,7 @@
     TabBarIsVisible="False">
 
     <Shell.TitleView>
-        <controls:SyncStatusIndicator x:Name="SyncIndicator" HorizontalOptions="End" Margin="0,0,16,0"/>
+        <controls:SyncStatusIndicator x:Name="SyncIndicator" HorizontalOptions="Fill" Margin="0"/>
     </Shell.TitleView>
 
     <!-- Login/Signup Pages (Outside TabBar) -->
@@ -57,5 +57,4 @@
                 Route="ProfilePage" />
         </Tab>
     </TabBar>
-
 </Shell>

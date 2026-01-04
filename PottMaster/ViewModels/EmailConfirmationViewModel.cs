@@ -44,7 +44,8 @@ public partial class EmailConfirmationViewModel : ObservableObject
                 return;
             }
 
-            var query = HttpUtility.ParseQueryString(uri.Query);
+            var fragment = uri.Fragment.TrimStart('#');
+            var query = HttpUtility.ParseQueryString(fragment);
             var accessToken = query["access_token"];
             var refreshToken = query["refresh_token"];
 

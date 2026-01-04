@@ -4,10 +4,9 @@ public static class Constants
 {
 #if DEBUG
 
-    public const string SupabaseBaseUrl = "http://127.0.0.1:54321";
-    public const string SupabaseAnonKey = "sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH";
+    //public const string SupabaseBaseUrl = "http://127.0.0.1:54321";
+    // const string SupabaseAnonKey = "sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH";
     // TODO: Replace with actual values. For local development, run `supabase start` in the supabase directory to get the anon key.
-#elif DEBUG_REMOTE
     public const string SupabaseBaseUrl = "https://tvmitdhydieegokheqxx.supabase.co";
     public const string SupabaseAnonKey = "sb_publishable_n6UmZtzwWCJLJ87NLFvuuQ_kn_iWu8L";
 #elif RELEASE

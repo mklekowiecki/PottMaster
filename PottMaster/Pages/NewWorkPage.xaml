@@ -9,9 +9,7 @@
              Title="{x:Static resources:AppResources.NewWorkPage}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="{x:Static resources:AppResources.Cancel}"
-                     Command="{Binding CancelCommand}"
-                     IconImageSource="cancel_svgrepo_com.png"/>
+      
     </ContentPage.ToolbarItems>
 
     <ScrollView>

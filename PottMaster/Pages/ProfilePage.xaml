@@ -79,10 +79,7 @@
 
                 <!-- Danger Zone Section -->
                 <VerticalStackLayout Style="{StaticResource SectionContainer}">
-                    <Label Text="{x:Static resx:AppResources.DangerZone}"
-                           Style="{StaticResource SectionHeader}"
-                           TextColor="{AppThemeBinding Light={StaticResource Error}, Dark={StaticResource ErrorDark}}"/>
-
+                   
                     <!-- Logout Button -->
                     <Button Text="{x:Static resx:AppResources.Logout}"
                             Command="{Binding LogoutCommand}"

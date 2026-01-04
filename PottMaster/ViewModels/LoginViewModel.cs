@@ -36,8 +36,8 @@ public partial class LoginViewModel : ObservableObject
         _authService = authService;
         _authStateService = authStateService;
         _errorHandler = errorHandler;
-#if DEBUG
-        Email = "mklekowiecki@gmail.com";
+#if DEBUG || DEBUG_REMOTE
+        Email = "m.klekowiecki@gmail.com";
         Password = "Tiamat1234!";
 #endif
 

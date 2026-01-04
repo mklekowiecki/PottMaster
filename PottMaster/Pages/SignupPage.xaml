@@ -9,7 +9,7 @@
         <VerticalStackLayout Spacing="0" Padding="24" VerticalOptions="Center">
             
             <!-- Logo/Brand Area -->
-            <Label Text="{x:Static resx:AppResources.Welcome}" 
+            <Label Text="{x:Static resx:AppResources.Signup}" 
                    SemanticProperties.HeadingLevel="Level1" 
                    Style="{StaticResource DisplayMedium}"
                    HorizontalOptions="Center"

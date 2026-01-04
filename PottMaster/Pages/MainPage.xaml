@@ -99,8 +99,9 @@
 
         <!-- FAB Button -->
         <Button Grid.Row="0"
-                Text="{x:Static resx:AppResources.AddNewWork}"
+                ImageSource="add_svgrepo_com.png"
                 Command="{Binding AddWorkCommand}"
+                Style="{StaticResource FABButton}"
                 Margin="16"
                 HorizontalOptions="End"
                 VerticalOptions="End"/>
