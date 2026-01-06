@@ -31,6 +31,8 @@ public class DbService : IDbService
             await _database.CreateTableAsync<LocalWorkCategory>();
             await _database.CreateTableAsync<LocalWorkStatus>();
             await _database.CreateTableAsync<LocalPhoto>();
+            await _database.CreateTableAsync<LocalGlaze>();
+            await _database.CreateTableAsync<LocalGlazeType>();
         }
         catch (Exception ex)
         {

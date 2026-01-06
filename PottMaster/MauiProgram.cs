@@ -58,11 +58,21 @@
 			builder.Services.AddTransient<IAlertService, AlertService>();
 			builder.Services.AddTransient<INotificationService, NotificationService>();
 			
-			// Repository Pattern (Scoped - per operation context)
-			builder.Services.AddScoped<IWorkRepository, LocalWorkRepository>();
+			
+#if ANDROID
+			builder.Services.AddSingleton<IBiometricService, PottMaster.Platforms.Android.BiometricService>();
+#else
+			// Biometric Service (Platform-specific)
+			builder.Services.AddSingleton<IBiometricService, BiometricService>();
+#endif
+
+            // Repository Pattern (Scoped - per operation context)
+            builder.Services.AddScoped<IWorkRepository, LocalWorkRepository>();
+			builder.Services.AddScoped<IGlazeRepository, LocalGlazeRepository>();
 			
 			// Business Logic Services (Scoped - user-specific operations)
 			builder.Services.AddScoped<IWorkService, WorkService>();
+			builder.Services.AddScoped<IGlazeService, GlazeService>();
 			
 			// ViewModels (Transient - new instance per navigation)
 			builder.Services.AddTransient<LoginViewModel>();
@@ -73,6 +83,8 @@
 			builder.Services.AddTransient<ProfileViewModel>();
 			builder.Services.AddTransient<EmailConfirmationViewModel>();
 			builder.Services.AddSingleton<SyncStatusViewModel>();
+			builder.Services.AddTransient<GlazeInventoryViewModel>();
+			builder.Services.AddTransient<NewGlazeViewModel>();
 			
 			// Pages (Transient - new instance per navigation)
 			builder.Services.AddTransient<MainPage>();
@@ -82,16 +94,13 @@
 			builder.Services.AddTransient<WorkDetailPage>();
 			builder.Services.AddTransient<ProfilePage>();
 			builder.Services.AddTransient<GlazeInventoryPage>();
+			builder.Services.AddTransient<NewGlazePage>();
 			builder.Services.AddTransient<WikiPage>();
 			builder.Services.AddTransient<AnalyticsPage>();
 			builder.Services.AddTransient<EmailConfirmationPage>();
 			
 			// Register BackgroundSyncWorker as singleton
 			builder.Services.AddSingleton<BackgroundSyncWorker>();
-
-#if ANDROID
-			builder.Services.AddSingleton<IBiometricService, PottMaster.Platforms.Android.BiometricService>();
-#endif
 
 #if DEBUG
 			builder.Logging.AddDebug();

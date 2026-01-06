@@ -5,7 +5,7 @@ using PottMasterLib.Models.GlazeProperties;
 namespace PottMasterLib.Models;
 
 [Table("glazes")]
-public class LocalGlaze
+public class LocalGlaze : IGlaze
 {
     [PrimaryKey]
     public string Id { get; set; } = Guid.NewGuid().ToString();

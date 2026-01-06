@@ -151,6 +151,42 @@ public class SupabaseApi : IApiEndpoint
         }
     }
 
+    public async Task<Result<List<IGlazeType>>> GetGlazeTypesAsync()
+    {
+        try
+        {
+            var response = await _supabaseClient
+                .From<GlazeType>()
+                .Get();
+
+            var types = response.Models.Cast<IGlazeType>().ToList();
+            return Result<List<IGlazeType>>.Success(types);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to get glaze types");
+            return Result<List<IGlazeType>>.Failure("Failed to load glaze types from server", ex);
+        }
+    }
+
+    public async Task<Result<List<IGlaze>>> GetGlazesAsync()
+    {
+        try
+        {
+            var response = await _supabaseClient
+                .From<Glaze>()
+                .Get();
+
+            var glazes = response.Models.Cast<IGlaze>().ToList();
+            return Result<List<IGlaze>>.Success(glazes);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to get glazes");
+            return Result<List<IGlaze>>.Failure("Failed to load glazes from server", ex);
+        }
+    }
+
     public async Task<Result<IUserProfile>> GetUserProfileByIdAsync(string userId)
     {
         try

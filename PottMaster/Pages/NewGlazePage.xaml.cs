@@ -2,11 +2,11 @@ using PottMaster.ViewModels;
 
 namespace PottMaster.Pages;
 
-public partial class GlazeInventoryPage : ContentPage
+public partial class NewGlazePage : ContentPage
 {
-	private readonly GlazeInventoryViewModel _viewModel;
+	private readonly NewGlazeViewModel _viewModel;
 
-	public GlazeInventoryPage(GlazeInventoryViewModel viewModel)
+	public NewGlazePage(NewGlazeViewModel viewModel)
 	{
 		InitializeComponent();
 		_viewModel = viewModel;

@@ -72,11 +72,24 @@ PottMaster addresses these challenges through:
 - **Process timer management (US-004)** ✅ - Automatic status advancement and notifications when drying completes
 - **SupabaseApi service implemented** - Direct Supabase client wrapper for API operations
 - **Multiple photos per work implemented** - New Photo entity, database table, UI for adding/viewing multiple photos, sync support
+- **Glaze Catalogue Migration**: Created migration script `20260106120000_populate_glaze_catalogue.sql` that inserts 12 professional glaze entries with complete technical specifications
+- **System User**: Added system user profile for seeded data management
+- **Glaze Properties**: Implemented detailed JSONB properties for each glaze including firing requirements, appearance, behavior, and application methods
 
 ### Upcoming
 - Image handling and upload to Supabase Storage
 - Glaze inventory features (US-006)
 - Wiki browsing and submission (US-009)
+
+## Current Focus
+- Implementing glaze inventory management system
+- Created comprehensive glaze catalogue population migration
+- Added seeded glaze data for user reference (12 glazes across low-fire, mid-fire, and high-fire ranges)
+
+## Next Steps
+- Test glaze catalogue integration in the app
+- Implement glaze search and filtering functionality
+- Add glaze-work linking features
 
 ## Project Boundaries
 

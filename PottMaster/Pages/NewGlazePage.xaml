@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PottMaster.ViewModels"
+             xmlns:converters="clr-namespace:PottMaster.Converters"
+             x:Class="PottMaster.Pages.NewGlazePage"
+             x:DataType="vm:NewGlazeViewModel"
+             Title="New Glaze">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringEqualConverter x:Key="StringEqualConverter" />
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:TabActiveColorConverter x:Key="TabActiveColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Tab Bar -->
+        <ScrollView Grid.Row="0" Orientation="Horizontal" 
+                    HorizontalScrollBarVisibility="Never"
+                    Padding="8">
+            <HorizontalStackLayout Spacing="8">
+                <Button Text="Basic" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="basic"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=basic}"/>
+                <Button Text="Firing" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="firing"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=firing}"/>
+                <Button Text="Appearance" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="appearance"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=appearance}"/>
+                <Button Text="Behavior" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="behavior"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=behavior}"/>
+                <Button Text="Application" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="application"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=application}"/>
+                <Button Text="Advanced" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="advanced"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=advanced}"/>
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- Tab Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="16" Padding="16">
+                <!-- Basic Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=basic}"
+                                    Spacing="12">
+                    <Label Text="Required Information" FontSize="18" FontAttributes="Bold"/>
+                    <Entry Placeholder="Glaze Name *" 
+                           Text="{Binding Name}"/>
+                    
+                    <Label Text="Optional Details" FontSize="18" FontAttributes="Bold" Margin="0,16,0,0"/>
+                    <Entry Placeholder="Manufacturer" 
+                           Text="{Binding Manufacturer}"/>
+                    <DatePicker Date="{Binding BatchDate}" 
+                               Format="D"/>
+                    <Picker Title="Glaze Type"
+                            ItemsSource="{Binding GlazeTypes}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedType}"/>
+                    <Entry Placeholder="Color" 
+                           Text="{Binding Color}"/>
+                    <Entry Placeholder="Cone Rating (e.g., Cone 6)" 
+                           Text="{Binding ConeRating}"/>
+                    <Entry Placeholder="Quantity (e.g., 500g, half jar)" 
+                           Text="{Binding Quantity}"/>
+                    
+                    <Label Text="Food Safety" FontAttributes="Bold" Margin="0,8,0,0"/>
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                        <Button Grid.Column="0" Text="Not Tested"
+                                Command="{Binding SetFoodSafeCommand}"
+                                CommandParameter="{x:Null}"/>
+                        <Button Grid.Column="1" Text="Safe"
+                                Command="{Binding SetFoodSafeCommand}"
+                                CommandParameter="True"/>
+                        <Button Grid.Column="2" Text="Not Safe"
+                                Command="{Binding SetFoodSafeCommand}"
+                                CommandParameter="False"/>
+                    </Grid>
+                    
+                    <HorizontalStackLayout Spacing="8" Margin="0,8,0,0">
+                        <CheckBox IsChecked="{Binding IsFavorite}"/>
+                        <Label Text="Mark as Favorite" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+                    <Label Text="Notes" FontAttributes="Bold" Margin="0,8,0,0"/>
+                    <Editor Text="{Binding Notes}"
+                            Placeholder="Additional notes..."
+                            HeightRequest="100"/>
+                </VerticalStackLayout>
+
+                <!-- Firing Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=firing}"
+                                    Spacing="12">
+                    <Label Text="Firing Parameters" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="Temperature Range" FontAttributes="Bold"/>
+                    <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="8">
+                        <Entry Grid.Column="0" 
+                               Placeholder="Min" 
+                               Keyboard="Numeric"
+                               Text="{Binding TemperatureMin}"/>
+                        <Label Grid.Column="1" Text="-" VerticalOptions="Center"/>
+                        <Entry Grid.Column="2" 
+                               Placeholder="Max" 
+                               Keyboard="Numeric"
+                               Text="{Binding TemperatureMax}"/>
+                    </Grid>
+                    
+                    <Picker Title="Unit"
+                            SelectedItem="{Binding TemperatureUnit}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>C</x:String>
+                                <x:String>F</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    
+                    <Picker Title="Atmosphere"
+                            SelectedItem="{Binding Atmosphere}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Oxidation</x:String>
+                                <x:String>Reduction</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    
+                    <Picker Title="Curve Sensitivity"
+                            SelectedItem="{Binding CurveSensitivity}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Low</x:String>
+                                <x:String>Medium</x:String>
+                                <x:String>High</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+
+                <!-- Appearance Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=appearance}"
+                                    Spacing="12">
+                    <Label Text="Appearance Properties" FontSize="18" FontAttributes="Bold"/>
+                    <Picker Title="Transparency"
+                            SelectedItem="{Binding Transparency}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Transparent</x:String>
+                                <x:String>Semi-transparent</x:String>
+                                <x:String>Opaque</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    
+                    <Picker Title="Finish"
+                            SelectedItem="{Binding Finish}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Gloss</x:String>
+                                <x:String>Satin</x:String>
+                                <x:String>Semi-matte</x:String>
+                                <x:String>Matte</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+
+                <!-- Behavior Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=behavior}"
+                                    Spacing="12">
+                    <Label Text="Glaze Behavior" FontSize="18" FontAttributes="Bold"/>
+                    <Picker Title="Melt Fluidity"
+                            SelectedItem="{Binding MeltFluidity}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Low</x:String>
+                                <x:String>Medium</x:String>
+                                <x:String>High</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    
+                    <Picker Title="Thickness Tolerance"
+                            SelectedItem="{Binding ThicknessTolerance}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Low</x:String>
+                                <x:String>Medium</x:String>
+                                <x:String>High</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Picker Title="Color Stability"
+                            SelectedItem="{Binding ColorStability}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Stable</x:String>
+                                <x:String>Variable</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Picker Title="Repeatability"
+                            SelectedItem="{Binding Repeatability}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Low</x:String>
+                                <x:String>Medium</x:String>
+                                <x:String>High</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                </VerticalStackLayout>
+
+                <!-- Application Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=application}"
+                                    Spacing="12">
+                    <Label Text="Application Details" FontSize="18" FontAttributes="Bold"/>
+                    <Picker Title="Form"
+                            SelectedItem="{Binding Form}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Dry Mix</x:String>
+                                <x:String>Liquid</x:String>
+                                <x:String>Brushing</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    
+                    <Entry Placeholder="Recommended Thickness (e.g., 2-3 mm)" 
+                           Text="{Binding RecommendedThickness}"/>
+
+                    <Label Text="Application Notes" FontAttributes="Bold"/>
+                    <Editor Text="{Binding ApplicationNotes}"
+                            Placeholder="Special instructions..."
+                            HeightRequest="100"/>
+                </VerticalStackLayout>
+
+                <!-- Advanced Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=advanced}"
+                                    Spacing="12">
+                    <Label Text="Advanced Properties" FontSize="18" FontAttributes="Bold"/>
+                    
+                    <Label Text="Clay Interaction" FontAttributes="Bold"/>
+                    <Picker Title="Select Interaction Type"
+                            SelectedItem="{Binding ClayInteraction}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Neutral</x:String>
+                                <x:String>Contrasting</x:String>
+                                <x:String>Highly Reactive</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Label Text="Work Type" FontAttributes="Bold" Margin="0,12,0,0"/>
+                    <Picker Title="Select Work Type"
+                            SelectedItem="{Binding WorkType}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Artistic</x:String>
+                                <x:String>Functional</x:String>
+                                <x:String>Both</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Label Text="Durability" FontAttributes="Bold" Margin="0,12,0,0"/>
+                    <Picker Title="Select Durability"
+                            SelectedItem="{Binding Durability}">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Low</x:String>
+                                <x:String>Medium</x:String>
+                                <x:String>High</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <Label Text="Mitigation Notes" FontAttributes="Bold" Margin="0,12,0,0"/>
+                    <Editor Text="{Binding MitigationNotes}"
+                            Placeholder="Known issues and how to prevent them..."
+                            HeightRequest="100"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Action Buttons -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" Padding="16" ColumnSpacing="8">
+            <Button Grid.Column="0" 
+                    Text="Cancel" 
+                    Command="{Binding CancelCommand}"/>
+            <Button Grid.Column="1" 
+                    Text="Save" 
+                    Command="{Binding SaveCommand}"
+                    IsEnabled="{Binding IsSaving, Converter={StaticResource InverseBoolConverter}}"/>
+        </Grid>
+    </Grid>
+</ContentPage>

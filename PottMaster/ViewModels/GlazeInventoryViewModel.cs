@@ -72,6 +72,21 @@ public partial class GlazeInventoryViewModel : ObservableObject
             if (!string.IsNullOrEmpty(userId))
             {
                 var glazeList = await _glazeService.GetUserGlazesAsync(userId);
+                var glazeTypes = await _glazeService.GetGlazeTypesAsync();
+                
+                // Populate TypeName for each glaze
+                foreach (var glaze in glazeList)
+                {
+                    if (glaze.TypeId.HasValue)
+                    {
+                        var type = glazeTypes.FirstOrDefault(t => t.Id == glaze.TypeId.Value);
+                        if (type != null)
+                        {
+                            glaze.TypeName = type.Name;
+                        }
+                    }
+                }
+                
                 Glazes = new ObservableCollection<LocalGlaze>(glazeList);
                 ApplyFilters();
             }
@@ -123,6 +138,29 @@ public partial class GlazeInventoryViewModel : ObservableObject
         catch (Exception ex)
         {
             await _errorHandler.HandleErrorAsync(ex, nameof(ToggleFavoriteAsync));
+        }
+    }
+
+    [RelayCommand]
+    private async Task DeleteGlazeAsync(LocalGlaze glaze)
+    {
+        try
+        {
+            bool confirm = await Shell.Current.DisplayAlert(
+                "Delete Glaze",
+                $"Are you sure you want to delete {glaze.Name}?",
+                "Delete",
+                "Cancel");
+
+            if (confirm)
+            {
+                await _glazeService.DeleteGlazeAsync(glaze.Id);
+                await LoadGlazesAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            await _errorHandler.HandleErrorAsync(ex, nameof(DeleteGlazeAsync));
         }
     }
 

@@ -16,7 +16,7 @@ public class FoodSafeToTextConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        return null;
     }
 }
 
@@ -33,7 +33,7 @@ public class FoodSafeToColorConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        return null;
     }
 }
 
@@ -50,7 +50,7 @@ public class BoolToStarIconConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        return null;
     }
 }
 
@@ -73,6 +73,80 @@ public class GlazeTypeIdToColorConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        return null;
+    }
+}
+
+public class StringEqualConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is string strValue && parameter is string paramValue)
+        {
+            return strValue.Equals(paramValue, StringComparison.OrdinalIgnoreCase);
+        }
+        return false;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        return null;
+    }
+}
+
+public class InverseBoolConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool boolValue)
+        {
+            return !boolValue;
+        }
+        return true;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool boolValue)
+        {
+            return !boolValue;
+        }
+        return false;
+    }
+}
+
+public class BoolToFavoriteTextConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is bool isFavorite && isFavorite)
+        {
+            return "? Unfavorite";
+        }
+        return "? Favorite";
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        return null;
+    }
+}
+
+public class TabActiveColorConverter : IValueConverter
+{
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        if (value is string currentTab && parameter is string tabName)
+        {
+            return currentTab.Equals(tabName, StringComparison.OrdinalIgnoreCase)
+                ? Color.FromArgb("#4ECDC4") // Active color
+                : Colors.LightGray; // Inactive color
+        }
+        return Colors.LightGray;
+    }
+
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+    {
+        return null;
     }
 }

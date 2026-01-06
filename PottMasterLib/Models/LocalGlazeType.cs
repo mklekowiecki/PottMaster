@@ -1,6 +1,6 @@
 namespace PottMasterLib.Models;
 
-public class LocalGlazeType
+public class LocalGlazeType : IGlazeType
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;

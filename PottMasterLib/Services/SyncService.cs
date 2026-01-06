@@ -87,6 +87,53 @@ public class SyncService : ISyncService
                     Debug.WriteLine($"Synced {statusesResult.Value.Count} work statuses.");
                 }
             }
+
+            var localGlazeTypes = await _dbService.GetAllAsync<LocalGlazeType>();
+            if (!localGlazeTypes.Any())
+            {
+                var typesResult = await _apiEndpoint.GetGlazeTypesAsync();
+                if (typesResult.IsSuccess && typesResult.Value != null)
+                {
+                    var localTypesToUpsert = typesResult.Value.Select(t => new LocalGlazeType
+                    {
+                        Id = t.Id,
+                        Name = t.Name,
+                        Code = t.Code
+                    }).ToList();
+                    await _dbService.UpsertAllAsync(localTypesToUpsert);
+                    Debug.WriteLine($"Synced {typesResult.Value.Count} glaze types.");
+                }
+            }
+
+            var localGlazes = await _dbService.GetAllAsync<LocalGlaze>();
+            if (!localGlazes.Any())
+            {
+                var glazesResult = await _apiEndpoint.GetGlazesAsync();
+                if (glazesResult.IsSuccess && glazesResult.Value != null)
+                {
+                    var localGlazesToUpsert = glazesResult.Value.Select(g => new LocalGlaze
+                    {
+                        Id = g.Id,
+                        UserId = g.UserId,
+                        Name = g.Name,
+                        Manufacturer = g.Manufacturer,
+                        BatchDate = g.BatchDate,
+                        TypeId = g.TypeId,
+                        Color = g.Color,
+                        ConeRating = g.ConeRating,
+                        Quantity = g.Quantity,
+                        PropertiesJson = g.PropertiesJson,
+                        Notes = g.Notes,
+                        FoodSafe = g.FoodSafe,
+                        IsFavorite = g.IsFavorite,
+                        SyncStatus = SyncStatus.Synced.Code(),
+                        CreatedAt = g.CreatedAt,
+                        UpdatedAt = g.UpdatedAt
+                    }).ToList();
+                    await _dbService.UpsertAllAsync(localGlazesToUpsert);
+                    Debug.WriteLine($"Synced {glazesResult.Value.Count} glazes.");
+                }
+            }
         }
         catch (Exception ex)
         {

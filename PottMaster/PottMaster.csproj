@@ -74,8 +74,11 @@
 	<ItemGroup>
 	  <None Include=".ai\api-plan.md" />
 	  <None Include=".ai\db-plan.md" />
+	  <None Include=".ai\glaze-catalogue-population-spec.md" />
 	  <None Include=".ai\glaze-db-update-summary.md" />
+	  <None Include=".ai\glaze-implementation-complete.md" />
 	  <None Include=".ai\glaze-parameters.md" />
+	  <None Include=".ai\glaze-quick-start-guide.md" />
 	  <None Include=".ai\glaze-ui-implementation-guide.md" />
 	  <None Include=".ai\glaze-ui-summary.md" />
 	  <None Include=".ai\ui-plan.md" />
@@ -130,7 +133,13 @@
 	  <MauiXaml Update="Pages\AnalyticsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\GlazeDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\GlazeInventoryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\NewGlazePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\NewWorkPage.xaml">

@@ -12,6 +12,9 @@ public interface IApiEndpoint
     Task<Result<List<IWorkCategory>>> GetWorkCategoriesAsync();
     Task<Result<List<IWorkStatus>>> GetWorkStatusesAsync();
 
+    Task<Result<List<IGlazeType>>> GetGlazeTypesAsync();
+    Task<Result<List<IGlaze>>> GetGlazesAsync();
+
     Task<Result<IUserProfile>> GetUserProfileByIdAsync(string userId);
     Task<Result<IUserProfile>> UpsertUserProfileAsync(IUserProfile profile);
 

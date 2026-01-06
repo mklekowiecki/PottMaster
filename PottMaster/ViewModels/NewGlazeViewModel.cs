@@ -165,6 +165,12 @@ public partial class NewGlazeViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private void SetFoodSafe(bool? value)
+    {
+        FoodSafe = value;
+    }
+
+    [RelayCommand]
     private async Task SaveAsync()
     {
         if (string.IsNullOrWhiteSpace(Name))
