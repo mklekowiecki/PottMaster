@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:PottMaster.Resources"
              Title="{x:Static resx:AppResources.Login}"
+             xmlns:vm="clr-namespace:PottMaster.ViewModels"
+             x:DataType="{x:Type vm:LoginViewModel}"
              Shell.NavBarIsVisible="False">
     <ScrollView>
         <VerticalStackLayout Spacing="0" Padding="24" VerticalOptions="Center">

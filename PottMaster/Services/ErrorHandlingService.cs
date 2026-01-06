@@ -33,18 +33,18 @@ public class ErrorHandlingService : IErrorHandlingService
         return exception switch
         {
             HttpRequestException httpEx when httpEx.StatusCode == HttpStatusCode.Unauthorized => 
-                "Unauthorized access. Please log in again.",
+                AppResources.UnauthorizedAccess ?? "Unauthorized access. Please log in again.",
             HttpRequestException httpEx when httpEx.StatusCode == HttpStatusCode.NotFound => 
-                "Resource not found.",
+                AppResources.ResourceNotFound ?? "Resource not found.",
             HttpRequestException => 
-                "Network error. Please check your connection.",
+                AppResources.NetworkError ?? "Network error. Please check your connection.",
             TimeoutException => 
-                "Request timed out. Please try again.",
+                AppResources.RequestTimeout ?? "Request timed out. Please try again.",
             UnauthorizedAccessException => 
-                "Unauthorized access. Please log in again.",
+                AppResources.UnauthorizedAccess ?? "Unauthorized access. Please log in again.",
             InvalidOperationException => 
-                "Invalid operation.",
-            _ => AppResources.Error ?? "An error occurred"
+                AppResources.InvalidOperation ?? "Invalid operation.",
+            _ => AppResources.GenericError ?? "An error occurred"
         };
     }
     

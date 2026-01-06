@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PottMaster.Resources;
 using PottMaster.Services;
 using PottMasterLib.Models;
 using PottMasterLib.Models.GlazeProperties;
@@ -12,7 +13,7 @@ public partial class NewGlazeViewModel : ObservableObject
     private readonly IGlazeService _glazeService;
     private readonly IAuthStateService _authStateService;
     private readonly IErrorHandlingService _errorHandler;
-
+    private readonly IAlertService _alertService;
     [ObservableProperty]
     private LocalGlaze glaze = new();
 
@@ -133,11 +134,13 @@ public partial class NewGlazeViewModel : ObservableObject
     public NewGlazeViewModel(
         IGlazeService glazeService,
         IAuthStateService authStateService,
-        IErrorHandlingService errorHandler)
+        IErrorHandlingService errorHandler,
+        IAlertService alertService)
     {
         _glazeService = glazeService;
         _authStateService = authStateService;
         _errorHandler = errorHandler;
+        _alertService = alertService;
     }
 
     public async Task InitializeAsync()
@@ -175,7 +178,7 @@ public partial class NewGlazeViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(Name))
         {
-            await Shell.Current.DisplayAlert("Error", "Glaze name is required", "OK");
+            await _alertService.ShowAlertAsync(AppResources.Error, AppResources.GlazeNameRequired ?? "Glaze name is required");
             return;
         }
 

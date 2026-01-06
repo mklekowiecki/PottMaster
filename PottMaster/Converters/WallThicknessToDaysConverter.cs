@@ -18,7 +18,7 @@ public class WallThicknessToDaysConverter : IValueConverter
             return $"{days} {localizedValue}";
         }
 
-        return "0 days";
+        return AppResources.ZeroDays ?? "0 days";
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

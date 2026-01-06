@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PottMaster.Resources;
 using PottMaster.Services;
 using PottMasterLib.Models;
 using PottMasterLib.Models.GlazeProperties;
@@ -12,7 +13,7 @@ public partial class GlazeInventoryViewModel : ObservableObject
     private readonly IGlazeService _glazeService;
     private readonly IAuthStateService _authStateService;
     private readonly IErrorHandlingService _errorHandler;
-
+    private readonly IAlertService _alertService;
     [ObservableProperty]
     private ObservableCollection<LocalGlaze> glazes = new();
 
@@ -34,11 +35,13 @@ public partial class GlazeInventoryViewModel : ObservableObject
     public GlazeInventoryViewModel(
         IGlazeService glazeService,
         IAuthStateService authStateService,
-        IErrorHandlingService errorHandler)
+        IErrorHandlingService errorHandler,
+        IAlertService alertService)
     {
         _glazeService = glazeService;
         _authStateService = authStateService;
         _errorHandler = errorHandler;
+        _alertService = alertService;
 
         _authStateService.AuthStateChanged += OnAuthStateChanged;
     }
@@ -146,11 +149,11 @@ public partial class GlazeInventoryViewModel : ObservableObject
     {
         try
         {
-            bool confirm = await Shell.Current.DisplayAlert(
-                "Delete Glaze",
-                $"Are you sure you want to delete {glaze.Name}?",
-                "Delete",
-                "Cancel");
+            bool confirm = await _alertService.ShowConfirmationAsync(
+                AppResources.DeleteGlaze ?? "Delete Glaze",
+                string.Format(AppResources.ConfirmDeleteGlaze ?? "Are you sure you want to delete {0}?", glaze.Name),
+                AppResources.Delete ?? "Delete",
+                AppResources.Cancel ?? "Cancel");
 
             if (confirm)
             {

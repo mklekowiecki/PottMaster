@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:PottMaster.Controls"
+             xmlns:resx="clr-namespace:PottMaster.Resources"
              x:Class="PottMaster.Pages.GlazeDetailPage"
-             Title="Glaze Details">
+             Title="{x:Static resx:AppResources.GlazeDetails}">
     <ScrollView>
         <VerticalStackLayout Spacing="16" Padding="16">
             <!-- Header -->
@@ -17,7 +18,7 @@
                        FontSize="16"
                        Opacity="0.7"/>
                 <Button Grid.Column="1" Grid.RowSpan="2"
-                        Text="Edit"
+                        Text="{x:Static resx:AppResources.Edit}"
                         Command="{Binding EditCommand}"
                         VerticalOptions="Center"/>
             </Grid>
@@ -38,19 +39,19 @@
                 </Border.StrokeShape>
                 <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
                       RowSpacing="12">
-                    <Label Grid.Row="0" Grid.Column="0" Text="Type:" FontAttributes="Bold"/>
+                    <Label Grid.Row="0" Grid.Column="0" Text="{x:Static resx:AppResources.TypeLabel}" FontAttributes="Bold"/>
                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding Glaze.TypeName}"/>
                     
-                    <Label Grid.Row="1" Grid.Column="0" Text="Cone Rating:" FontAttributes="Bold"/>
+                    <Label Grid.Row="1" Grid.Column="0" Text="{x:Static resx:AppResources.ConeRatingLabel}" FontAttributes="Bold"/>
                     <Label Grid.Row="1" Grid.Column="1" Text="{Binding Glaze.ConeRating}"/>
                     
-                    <Label Grid.Row="2" Grid.Column="0" Text="Color:" FontAttributes="Bold"/>
+                    <Label Grid.Row="2" Grid.Column="0" Text="{x:Static resx:AppResources.ColorLabel}" FontAttributes="Bold"/>
                     <Label Grid.Row="2" Grid.Column="1" Text="{Binding Glaze.Color}"/>
                     
-                    <Label Grid.Row="3" Grid.Column="0" Text="Quantity:" FontAttributes="Bold"/>
+                    <Label Grid.Row="3" Grid.Column="0" Text="{x:Static resx:AppResources.QuantityLabel}" FontAttributes="Bold"/>
                     <Label Grid.Row="3" Grid.Column="1" Text="{Binding Glaze.Quantity}"/>
                     
-                    <Label Grid.Row="4" Grid.Column="0" Text="Food Safe:" FontAttributes="Bold"/>
+                    <Label Grid.Row="4" Grid.Column="0" Text="{x:Static resx:AppResources.FoodSafeLabel}" FontAttributes="Bold"/>
                     <Label Grid.Row="4" Grid.Column="1" 
                            Text="{Binding Glaze.FoodSafe, Converter={StaticResource FoodSafeToTextConverter}}"/>
                 </Grid>
@@ -59,19 +60,19 @@
             <!-- Collapsible Sections -->
             <controls:CollapsibleSection Title="Firing Parameters" IsExpanded="True">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Coming soon: Detailed firing parameters"/>
+                    <Label Text="{x:Static resx:AppResources.FiringParametersComingSoon}"/>
                 </VerticalStackLayout>
             </controls:CollapsibleSection>
 
             <controls:CollapsibleSection Title="Appearance">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Coming soon: Appearance properties"/>
+                    <Label Text="{x:Static resx:AppResources.AppearanceComingSoon}"/>
                 </VerticalStackLayout>
             </controls:CollapsibleSection>
 
             <controls:CollapsibleSection Title="Behavior">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="Coming soon: Behavior properties"/>
+                    <Label Text="{x:Static resx:AppResources.BehaviorComingSoon}"/>
                 </VerticalStackLayout>
             </controls:CollapsibleSection>
 
@@ -84,13 +85,13 @@
                     <RoundRectangle CornerRadius="12"/>
                 </Border.StrokeShape>
                 <VerticalStackLayout Spacing="8" Padding="16">
-                    <Label Text="Notes" FontAttributes="Bold" FontSize="16"/>
+                    <Label Text="{x:Static resx:AppResources.Notes}" FontAttributes="Bold" FontSize="16"/>
                     <Label Text="{Binding Glaze.Notes}" LineBreakMode="WordWrap"/>
                 </VerticalStackLayout>
             </Border>
 
             <!-- Delete Button -->
-            <Button Text="Delete Glaze"
+            <Button Text="{x:Static resx:AppResources.DeleteGlaze}"
                     Command="{Binding DeleteCommand}"
                     BackgroundColor="Red"
                     Margin="0,24,0,0"/>

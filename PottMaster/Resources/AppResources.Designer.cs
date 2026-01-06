@@ -97,6 +97,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zaawansowane właściwości.
+        /// </summary>
+        internal static string AdvancedProperties {
+            get {
+                return ResourceManager.GetString("AdvancedProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Masz już konto? Zaloguj się.
         /// </summary>
         internal static string AlreadyHaveAccount {
@@ -106,11 +115,110 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Analizy i raporty.
+        /// </summary>
+        internal static string AnalyticsAndReports {
+            get {
+                return ResourceManager.GetString("AnalyticsAndReports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wyświetl swoje miesięczne raporty Pottery Wrapped, śledź swoje postępy i analizuj trendy prac ceramicznych..
+        /// </summary>
+        internal static string AnalyticsDescription {
+            get {
+                return ResourceManager.GetString("AnalyticsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wygląd wkrótce.
+        /// </summary>
+        internal static string AppearanceComingSoon {
+            get {
+                return ResourceManager.GetString("AppearanceComingSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Właściwości wyglądu.
+        /// </summary>
+        internal static string AppearanceProperties {
+            get {
+                return ResourceManager.GetString("AppearanceProperties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Szczegóły aplikacji.
+        /// </summary>
+        internal static string ApplicationDetails {
+            get {
+                return ResourceManager.GetString("ApplicationDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notatki aplikacji.
+        /// </summary>
+        internal static string ApplicationNotes {
+            get {
+                return ResourceManager.GetString("ApplicationNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to PottMaster.
         /// </summary>
         internal static string AppTitle {
             get {
                 return ResourceManager.GetString("AppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artystyczna.
+        /// </summary>
+        internal static string Artistic {
+            get {
+                return ResourceManager.GetString("Artistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Atmosfera.
+        /// </summary>
+        internal static string Atmosphere {
+            get {
+                return ResourceManager.GetString("Atmosphere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zachowanie wkrótce.
+        /// </summary>
+        internal static string BehaviorComingSoon {
+            get {
+                return ResourceManager.GetString("BehaviorComingSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Obie.
+        /// </summary>
+        internal static string Both {
+            get {
+                return ResourceManager.GetString("Both", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do malowania.
+        /// </summary>
+        internal static string Brushing {
+            get {
+                return ResourceManager.GetString("Brushing", resourceCulture);
             }
         }
         
@@ -160,11 +268,74 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Interakcja z gliną.
+        /// </summary>
+        internal static string ClayInteraction {
+            get {
+                return ResourceManager.GetString("ClayInteraction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kolor.
+        /// </summary>
+        internal static string Color {
+            get {
+                return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kolor.
+        /// </summary>
+        internal static string ColorLabel {
+            get {
+                return ResourceManager.GetString("ColorLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stabilność koloru.
+        /// </summary>
+        internal static string ColorStability {
+            get {
+                return ResourceManager.GetString("ColorStability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ocena stożka (np. Stożek 6).
+        /// </summary>
+        internal static string ConeRatingExample {
+            get {
+                return ResourceManager.GetString("ConeRatingExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ocena stożka.
+        /// </summary>
+        internal static string ConeRatingLabel {
+            get {
+                return ResourceManager.GetString("ConeRatingLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Czy potwierdzasz zmianę statusu?.
         /// </summary>
         internal static string ConfirmChangeStatusMessage {
             get {
                 return ResourceManager.GetString("ConfirmChangeStatusMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Czy na pewno chcesz usunąć {0}?.
+        /// </summary>
+        internal static string ConfirmDeleteGlaze {
+            get {
+                return ResourceManager.GetString("ConfirmDeleteGlaze", resourceCulture);
             }
         }
         
@@ -205,6 +376,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kontrastowa.
+        /// </summary>
+        internal static string Contrasting {
+            get {
+                return ResourceManager.GetString("Contrasting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Utwórz nowe konto.
         /// </summary>
         internal static string CreateAccount {
@@ -241,6 +421,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Czułość krzywej.
+        /// </summary>
+        internal static string CurveSensitivity {
+            get {
+                return ResourceManager.GetString("CurveSensitivity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Strefa zagro?enia.
         /// </summary>
         internal static string DangerZone {
@@ -255,6 +444,15 @@ namespace PottMaster.Resources {
         internal static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuń glazurę.
+        /// </summary>
+        internal static string DeleteGlaze {
+            get {
+                return ResourceManager.GetString("DeleteGlaze", resourceCulture);
             }
         }
         
@@ -327,6 +525,33 @@ namespace PottMaster.Resources {
         internal static string DryingTime {
             get {
                 return ResourceManager.GetString("DryingTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mieszanka sucha.
+        /// </summary>
+        internal static string DryMix {
+            get {
+                return ResourceManager.GetString("DryMix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wytrzymałość.
+        /// </summary>
+        internal static string Durability {
+            get {
+                return ResourceManager.GetString("Durability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edytuj.
+        /// </summary>
+        internal static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -439,6 +664,114 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wykończenie.
+        /// </summary>
+        internal static string Finish {
+            get {
+                return ResourceManager.GetString("Finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parametry wypalania.
+        /// </summary>
+        internal static string FiringParameters {
+            get {
+                return ResourceManager.GetString("FiringParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parametry wypalania wkrótce.
+        /// </summary>
+        internal static string FiringParametersComingSoon {
+            get {
+                return ResourceManager.GetString("FiringParametersComingSoon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezpieczne dla żywności.
+        /// </summary>
+        internal static string FoodSafeLabel {
+            get {
+                return ResourceManager.GetString("FoodSafeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezpieczeństwo żywności.
+        /// </summary>
+        internal static string FoodSafety {
+            get {
+                return ResourceManager.GetString("FoodSafety", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forma.
+        /// </summary>
+        internal static string Form {
+            get {
+                return ResourceManager.GetString("Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Funkcjonalna.
+        /// </summary>
+        internal static string Functional {
+            get {
+                return ResourceManager.GetString("Functional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wystąpił błąd..
+        /// </summary>
+        internal static string GenericError {
+            get {
+                return ResourceManager.GetString("GenericError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zachowanie glazury.
+        /// </summary>
+        internal static string GlazeBehavior {
+            get {
+                return ResourceManager.GetString("GlazeBehavior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Detale szkliwa.
+        /// </summary>
+        internal static string GlazeDetails {
+            get {
+                return ResourceManager.GetString("GlazeDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nazwa glazury jest wymagana..
+        /// </summary>
+        internal static string GlazeNameRequired {
+            get {
+                return ResourceManager.GetString("GlazeNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błyszczące.
+        /// </summary>
+        internal static string Gloss {
+            get {
+                return ResourceManager.GetString("Gloss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wróć.
         /// </summary>
         internal static string GoBack {
@@ -457,6 +790,24 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wysoka.
+        /// </summary>
+        internal static string High {
+            get {
+                return ResourceManager.GetString("High", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wysoko reaktywna.
+        /// </summary>
+        internal static string HighlyReactive {
+            get {
+                return ResourceManager.GetString("HighlyReactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Inicjały.
         /// </summary>
         internal static string Initials {
@@ -471,6 +822,42 @@ namespace PottMaster.Resources {
         internal static string InvalidConfirmationLink {
             get {
                 return ResourceManager.GetString("InvalidConfirmationLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nieprawidłowa operacja..
+        /// </summary>
+        internal static string InvalidOperation {
+            get {
+                return ResourceManager.GetString("InvalidOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Baza wiedzy.
+        /// </summary>
+        internal static string KnowledgeBase {
+            get {
+                return ResourceManager.GetString("KnowledgeBase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Znane problemy i jak je zapobiegać....
+        /// </summary>
+        internal static string KnownIssues {
+            get {
+                return ResourceManager.GetString("KnownIssues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Płynna.
+        /// </summary>
+        internal static string Liquid {
+            get {
+                return ResourceManager.GetString("Liquid", resourceCulture);
             }
         }
         
@@ -547,6 +934,69 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Niska.
+        /// </summary>
+        internal static string Low {
+            get {
+                return ResourceManager.GetString("Low", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Producent.
+        /// </summary>
+        internal static string Manufacturer {
+            get {
+                return ResourceManager.GetString("Manufacturer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oznacz jako ulubione.
+        /// </summary>
+        internal static string MarkAsFavorite {
+            get {
+                return ResourceManager.GetString("MarkAsFavorite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matowe.
+        /// </summary>
+        internal static string Matte {
+            get {
+                return ResourceManager.GetString("Matte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max.
+        /// </summary>
+        internal static string Max {
+            get {
+                return ResourceManager.GetString("Max", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Średnia.
+        /// </summary>
+        internal static string Medium {
+            get {
+                return ResourceManager.GetString("Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Płynność topnienia.
+        /// </summary>
+        internal static string MeltFluidity {
+            get {
+                return ResourceManager.GetString("MeltFluidity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ~25 mm.
         /// </summary>
         internal static string MidWallLabel {
@@ -556,11 +1006,47 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Min.
+        /// </summary>
+        internal static string Min {
+            get {
+                return ResourceManager.GetString("Min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notatki łagodzące.
+        /// </summary>
+        internal static string MitigationNotes {
+            get {
+                return ResourceManager.GetString("MitigationNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Moje prace.
         /// </summary>
         internal static string MyWorks {
             get {
                 return ResourceManager.GetString("MyWorks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Błąd sieci. Sprawdź połączenie..
+        /// </summary>
+        internal static string NetworkError {
+            get {
+                return ResourceManager.GetString("NetworkError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neutralna.
+        /// </summary>
+        internal static string Neutral {
+            get {
+                return ResourceManager.GetString("Neutral", resourceCulture);
             }
         }
         
@@ -610,6 +1096,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie znaleziono glazur. Dodaj swoją pierwszą glazurę!.
+        /// </summary>
+        internal static string NoGlazesFound {
+            get {
+                return ResourceManager.GetString("NoGlazesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brak zdjęcia.
         /// </summary>
         internal static string NoPhoto {
@@ -624,6 +1119,33 @@ namespace PottMaster.Resources {
         internal static string NoPhotoSelected {
             get {
                 return ResourceManager.GetString("NoPhotoSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notatki.
+        /// </summary>
+        internal static string Notes {
+            get {
+                return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Niebezpieczne.
+        /// </summary>
+        internal static string NotSafe {
+            get {
+                return ResourceManager.GetString("NotSafe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nie testowane.
+        /// </summary>
+        internal static string NotTested {
+            get {
+                return ResourceManager.GetString("NotTested", resourceCulture);
             }
         }
         
@@ -651,6 +1173,24 @@ namespace PottMaster.Resources {
         internal static string Ok {
             get {
                 return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kryjące.
+        /// </summary>
+        internal static string Opaque {
+            get {
+                return ResourceManager.GetString("Opaque", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opcjonalne szczegóły.
+        /// </summary>
+        internal static string OptionalDetails {
+            get {
+                return ResourceManager.GetString("OptionalDetails", resourceCulture);
             }
         }
         
@@ -700,6 +1240,105 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ilość (np. 500g, pół słoika).
+        /// </summary>
+        internal static string QuantityExample {
+            get {
+                return ResourceManager.GetString("QuantityExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ilość.
+        /// </summary>
+        internal static string QuantityLabel {
+            get {
+                return ResourceManager.GetString("QuantityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zalecana grubość (np. 2-3 mm).
+        /// </summary>
+        internal static string RecommendedThicknessExample {
+            get {
+                return ResourceManager.GetString("RecommendedThicknessExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Powtarzalność.
+        /// </summary>
+        internal static string Repeatability {
+            get {
+                return ResourceManager.GetString("Repeatability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Przekroczono limit czasu żądania. Spróbuj ponownie..
+        /// </summary>
+        internal static string RequestTimeout {
+            get {
+                return ResourceManager.GetString("RequestTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wymagane informacje.
+        /// </summary>
+        internal static string RequiredInformation {
+            get {
+                return ResourceManager.GetString("RequiredInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zasób nie znaleziony..
+        /// </summary>
+        internal static string ResourceNotFound {
+            get {
+                return ResourceManager.GetString("ResourceNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezpieczne.
+        /// </summary>
+        internal static string Safe {
+            get {
+                return ResourceManager.GetString("Safe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Satynowe.
+        /// </summary>
+        internal static string Satin {
+            get {
+                return ResourceManager.GetString("Satin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zapisz.
+        /// </summary>
+        internal static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Szukaj glazur....
+        /// </summary>
+        internal static string SearchGlazesPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchGlazesPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wybierz kategorię.
         /// </summary>
         internal static string SelectCategory {
@@ -718,11 +1357,56 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Wybierz wytrzymałość.
+        /// </summary>
+        internal static string SelectDurability {
+            get {
+                return ResourceManager.GetString("SelectDurability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wybierz typ interakcji.
+        /// </summary>
+        internal static string SelectInteractionType {
+            get {
+                return ResourceManager.GetString("SelectInteractionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wybierz status.
         /// </summary>
         internal static string SelectStatus {
             get {
                 return ResourceManager.GetString("SelectStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wybierz typ pracy.
+        /// </summary>
+        internal static string SelectWorkType {
+            get {
+                return ResourceManager.GetString("SelectWorkType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Półmatowe.
+        /// </summary>
+        internal static string SemiMatte {
+            get {
+                return ResourceManager.GetString("SemiMatte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Półprzejrzyste.
+        /// </summary>
+        internal static string SemiTransparent {
+            get {
+                return ResourceManager.GetString("SemiTransparent", resourceCulture);
             }
         }
         
@@ -759,6 +1443,15 @@ namespace PottMaster.Resources {
         internal static string SignupTitle {
             get {
                 return ResourceManager.GetString("SignupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specjalne instrukcje....
+        /// </summary>
+        internal static string SpecialInstructions {
+            get {
+                return ResourceManager.GetString("SpecialInstructions", resourceCulture);
             }
         }
         
@@ -871,11 +1564,65 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zaawansowane.
+        /// </summary>
+        internal static string TabAdvanced {
+            get {
+                return ResourceManager.GetString("TabAdvanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Analizy.
         /// </summary>
         internal static string TabAnalyticsTitle {
             get {
                 return ResourceManager.GetString("TabAnalyticsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wygląd.
+        /// </summary>
+        internal static string TabAppearance {
+            get {
+                return ResourceManager.GetString("TabAppearance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aplikacja.
+        /// </summary>
+        internal static string TabApplication {
+            get {
+                return ResourceManager.GetString("TabApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Podstawowe.
+        /// </summary>
+        internal static string TabBasic {
+            get {
+                return ResourceManager.GetString("TabBasic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zachowanie.
+        /// </summary>
+        internal static string TabBehavior {
+            get {
+                return ResourceManager.GetString("TabBehavior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wypalanie.
+        /// </summary>
+        internal static string TabFiring {
+            get {
+                return ResourceManager.GetString("TabFiring", resourceCulture);
             }
         }
         
@@ -925,6 +1672,24 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Zakres temperatury.
+        /// </summary>
+        internal static string TemperatureRange {
+            get {
+                return ResourceManager.GetString("TemperatureRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tolerancja grubości.
+        /// </summary>
+        internal static string ThicknessTolerance {
+            get {
+                return ResourceManager.GetString("ThicknessTolerance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 50 mm (gruba).
         /// </summary>
         internal static string ThickWallLabel {
@@ -948,6 +1713,51 @@ namespace PottMaster.Resources {
         internal static string TimeLeft {
             get {
                 return ResourceManager.GetString("TimeLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Przejrzystość.
+        /// </summary>
+        internal static string Transparency {
+            get {
+                return ResourceManager.GetString("Transparency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Przejrzyste.
+        /// </summary>
+        internal static string Transparent {
+            get {
+                return ResourceManager.GetString("Transparent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ.
+        /// </summary>
+        internal static string TypeLabel {
+            get {
+                return ResourceManager.GetString("TypeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Brak dostępu. Zaloguj się ponownie..
+        /// </summary>
+        internal static string UnauthorizedAccess {
+            get {
+                return ResourceManager.GetString("UnauthorizedAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jednostka.
+        /// </summary>
+        internal static string Unit {
+            get {
+                return ResourceManager.GetString("Unit", resourceCulture);
             }
         }
         
@@ -1051,6 +1861,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Przeglądaj informacje zweryfikowane przez społeczność na temat materiałów ceramicznych, narzędzi i technik..
+        /// </summary>
+        internal static string WikiDescription {
+            get {
+                return ResourceManager.GetString("WikiDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Miska.
         /// </summary>
         internal static string WorkCategory_BOWL {
@@ -1119,6 +1938,15 @@ namespace PottMaster.Resources {
         internal static string WorkCode {
             get {
                 return ResourceManager.GetString("WorkCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nieprawidłowy kod pracy lub długość kodu..
+        /// </summary>
+        internal static string WorkCodeValidation {
+            get {
+                return ResourceManager.GetString("WorkCodeValidation", resourceCulture);
             }
         }
         
@@ -1222,11 +2050,29 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Typ pracy.
+        /// </summary>
+        internal static string WorkType {
+            get {
+                return ResourceManager.GetString("WorkType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tak.
         /// </summary>
         internal static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0 dni.
+        /// </summary>
+        internal static string ZeroDays {
+            get {
+                return ResourceManager.GetString("ZeroDays", resourceCulture);
             }
         }
     }

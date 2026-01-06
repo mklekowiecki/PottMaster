@@ -47,6 +47,10 @@
 		<MauiStrictXamlCompilation>true</MauiStrictXamlCompilation>
 		<XamlDebuggingInformation>true</XamlDebuggingInformation>
 		<Configurations>Debug;Release;Debug-Remote</Configurations>
+		<NoWarn>MVVMTK0045</NoWarn>
+
+		<!-- Prevent implicit collection creation for ICollection properties. See: https://github.com/dotnet/maui/issues/11483 -->
+		<DisableImplicitCollectionCreation>true</DisableImplicitCollectionCreation>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)'=='Debug-Remote'">

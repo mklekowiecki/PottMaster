@@ -175,7 +175,7 @@ public partial class NewWorkViewModel : ObservableObject
 
         if (string.IsNullOrWhiteSpace(WorkCode) || WorkCode.Length > 20)
         {
-            await _alertService.ShowAlertAsync(AppResources.Validation, "Work code must be between 1 and 20 characters.");
+            await _alertService.ShowAlertAsync(AppResources.Validation, AppResources.WorkCodeValidation);
             return;
         }
 
