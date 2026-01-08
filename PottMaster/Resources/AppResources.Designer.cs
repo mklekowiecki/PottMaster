@@ -88,6 +88,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dodatkowe informacje.
+        /// </summary>
+        internal static string AdditionalNotes {
+            get {
+                return ResourceManager.GetString("AdditionalNotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dodaj nową pracę.
         /// </summary>
         internal static string AddNewWork {
@@ -754,11 +763,29 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nazwa szkliwa.
+        /// </summary>
+        internal static string GlazeName {
+            get {
+                return ResourceManager.GetString("GlazeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nazwa glazury jest wymagana..
         /// </summary>
         internal static string GlazeNameRequired {
             get {
                 return ResourceManager.GetString("GlazeNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Typ szkliwa.
+        /// </summary>
+        internal static string GlazeType {
+            get {
+                return ResourceManager.GetString("GlazeType", resourceCulture);
             }
         }
         
@@ -1141,6 +1168,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brak informacji.
+        /// </summary>
+        internal static string NotSpecified {
+            get {
+                return ResourceManager.GetString("NotSpecified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nie testowane.
         /// </summary>
         internal static string NotTested {
@@ -1191,6 +1227,15 @@ namespace PottMaster.Resources {
         internal static string OptionalDetails {
             get {
                 return ResourceManager.GetString("OptionalDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oksydacja.
+        /// </summary>
+        internal static string Oxidation {
+            get {
+                return ResourceManager.GetString("Oxidation", resourceCulture);
             }
         }
         
@@ -1263,6 +1308,15 @@ namespace PottMaster.Resources {
         internal static string RecommendedThicknessExample {
             get {
                 return ResourceManager.GetString("RecommendedThicknessExample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redukcja.
+        /// </summary>
+        internal static string Reduction {
+            get {
+                return ResourceManager.GetString("Reduction", resourceCulture);
             }
         }
         
@@ -1452,6 +1506,15 @@ namespace PottMaster.Resources {
         internal static string SpecialInstructions {
             get {
                 return ResourceManager.GetString("SpecialInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stabilna.
+        /// </summary>
+        internal static string Stable {
+            get {
+                return ResourceManager.GetString("Stable", resourceCulture);
             }
         }
         
@@ -1803,6 +1866,15 @@ namespace PottMaster.Resources {
         internal static string Validation {
             get {
                 return ResourceManager.GetString("Validation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zmienna.
+        /// </summary>
+        internal static string Variable {
+            get {
+                return ResourceManager.GetString("Variable", resourceCulture);
             }
         }
         

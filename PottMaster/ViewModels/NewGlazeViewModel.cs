@@ -49,7 +49,10 @@ public partial class NewGlazeViewModel : ObservableObject
     private string? quantity;
 
     [ObservableProperty]
-    private bool? foodSafe;
+    private string? foodSafe;
+
+    [ObservableProperty]
+    private ObservableCollection<string> foodSafeOptions = new() { AppResources.Yes, AppResources.No, AppResources.NotSpecified };
 
     [ObservableProperty]
     private bool isFavorite;
@@ -131,6 +134,45 @@ public partial class NewGlazeViewModel : ObservableObject
     [ObservableProperty]
     private string? durability;
 
+    [ObservableProperty]
+    private ObservableCollection<string> temperatureUnits = new() { "C", "F" };
+
+    [ObservableProperty]
+    private ObservableCollection<string> atmospheres = new() { AppResources.Oxidation, AppResources.Reduction };
+
+    [ObservableProperty]
+    private ObservableCollection<string> curveSensitivities = new() { AppResources.Low, AppResources.Medium, AppResources.High };
+
+    [ObservableProperty]
+    private ObservableCollection<string> transparencies = new() { AppResources.Transparent, AppResources.SemiTransparent, AppResources.Opaque };
+
+    [ObservableProperty]
+    private ObservableCollection<string> finishes = new() { AppResources.Gloss, AppResources.Satin, AppResources.SemiMatte, AppResources.Matte };
+
+    [ObservableProperty]
+    private ObservableCollection<string> meltFluidities = new() { AppResources.Low, AppResources.Medium, AppResources.High };
+
+    [ObservableProperty]
+    private ObservableCollection<string> thicknessTolerances = new() { AppResources.Low, AppResources.Medium, AppResources.High };
+
+    [ObservableProperty]
+    private ObservableCollection<string> colorStabilities = new() { AppResources.Stable, AppResources.Variable };
+
+    [ObservableProperty]
+    private ObservableCollection<string> repeatabilities = new() { AppResources.Low, AppResources.Medium, AppResources.High };
+
+    [ObservableProperty]
+    private ObservableCollection<string> forms = new() { AppResources.DryMix, AppResources.Liquid, AppResources.Brushing };
+
+    [ObservableProperty]
+    private ObservableCollection<string> clayInteractions = new() { AppResources.Neutral, AppResources.Contrasting, AppResources.HighlyReactive };
+
+    [ObservableProperty]
+    private ObservableCollection<string> workTypes = new() { AppResources.Artistic, AppResources.Functional, AppResources.Both };
+
+    [ObservableProperty]
+    private ObservableCollection<string> durabilities = new() { AppResources.Low, AppResources.Medium, AppResources.High };
+
     public NewGlazeViewModel(
         IGlazeService glazeService,
         IAuthStateService authStateService,
@@ -168,12 +210,6 @@ public partial class NewGlazeViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void SetFoodSafe(bool? value)
-    {
-        FoodSafe = value;
-    }
-
-    [RelayCommand]
     private async Task SaveAsync()
     {
         if (string.IsNullOrWhiteSpace(Name))
@@ -203,7 +239,7 @@ public partial class NewGlazeViewModel : ObservableObject
                 ConeRating = ConeRating,
                 Quantity = Quantity,
                 Notes = Notes,
-                FoodSafe = FoodSafe,
+                FoodSafe = FoodSafe == "Yes" ? true : FoodSafe == "No" ? false : null,
                 IsFavorite = IsFavorite,
                 Properties = BuildProperties()
             };

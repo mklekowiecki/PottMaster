@@ -559,252 +559,273 @@
     <value>Glaze details</value>
   </data>
   <data name="Edit" xml:space="preserve">
-  <value>Edit</value>
-</data>
-<data name="FiringParametersComingSoon" xml:space="preserve">
-  <value>Firing parameters coming soon</value>
-</data>
-<data name="AppearanceComingSoon" xml:space="preserve">
-  <value>Appearance coming soon</value>
-</data>
-<data name="BehaviorComingSoon" xml:space="preserve">
-  <value>Behavior coming soon</value>
-</data>
-<data name="TypeLabel" xml:space="preserve">
-  <value>Type</value>
-</data>
-<data name="ConeRatingLabel" xml:space="preserve">
-  <value>Cone Rating</value>
-</data>
-<data name="ColorLabel" xml:space="preserve">
-  <value>Color</value>
-</data>
-<data name="QuantityLabel" xml:space="preserve">
-  <value>Quantity</value>
-</data>
-<data name="FoodSafeLabel" xml:space="preserve">
-  <value>Food Safe</value>
-</data>
-<data name="Notes" xml:space="preserve">
-  <value>Notes</value>
-</data>
-<data name="SearchGlazesPlaceholder" xml:space="preserve">
-  <value>Search glazes...</value>
-</data>
-<data name="NoGlazesFound" xml:space="preserve">
-  <value>No glazes found. Add your first glaze!</value>
-</data>
-<data name="TabBasic" xml:space="preserve">
-  <value>Basic</value>
-</data>
-<data name="TabFiring" xml:space="preserve">
-  <value>Firing</value>
-</data>
-<data name="TabAppearance" xml:space="preserve">
-  <value>Appearance</value>
-</data>
-<data name="TabBehavior" xml:space="preserve">
-  <value>Behavior</value>
-</data>
-<data name="TabApplication" xml:space="preserve">
-  <value>Application</value>
-</data>
-<data name="TabAdvanced" xml:space="preserve">
-  <value>Advanced</value>
-</data>
-<data name="RequiredInformation" xml:space="preserve">
-  <value>Required Information</value>
-</data>
-<data name="OptionalDetails" xml:space="preserve">
-  <value>Optional Details</value>
-</data>
-<data name="Manufacturer" xml:space="preserve">
-  <value>Manufacturer</value>
-</data>
-<data name="Color" xml:space="preserve">
-  <value>Color</value>
-</data>
-<data name="ConeRatingExample" xml:space="preserve">
-  <value>Cone Rating (e.g., Cone 6)</value>
-</data>
-<data name="QuantityExample" xml:space="preserve">
-  <value>Quantity (e.g., 500g, half jar)</value>
-</data>
-<data name="FoodSafety" xml:space="preserve">
-  <value>Food Safety</value>
-</data>
-<data name="NotTested" xml:space="preserve">
-  <value>Not Tested</value>
-</data>
-<data name="Safe" xml:space="preserve">
-  <value>Safe</value>
-</data>
-<data name="NotSafe" xml:space="preserve">
-  <value>Not Safe</value>
-</data>
-<data name="MarkAsFavorite" xml:space="preserve">
-  <value>Mark as Favorite</value>
-</data>
-<data name="FiringParameters" xml:space="preserve">
-  <value>Firing Parameters</value>
-</data>
-<data name="TemperatureRange" xml:space="preserve">
-  <value>Temperature Range</value>
-</data>
-<data name="Min" xml:space="preserve">
-  <value>Min</value>
-</data>
-<data name="Max" xml:space="preserve">
-  <value>Max</value>
-</data>
-<data name="Unit" xml:space="preserve">
-  <value>Unit</value>
-</data>
-<data name="Atmosphere" xml:space="preserve">
-  <value>Atmosphere</value>
-</data>
-<data name="CurveSensitivity" xml:space="preserve">
-  <value>Curve Sensitivity</value>
-</data>
-<data name="Low" xml:space="preserve">
-  <value>Low</value>
-</data>
-<data name="Medium" xml:space="preserve">
-  <value>Medium</value>
-</data>
-<data name="High" xml:space="preserve">
-  <value>High</value>
-</data>
-<data name="AppearanceProperties" xml:space="preserve">
-  <value>Appearance Properties</value>
-</data>
-<data name="Transparency" xml:space="preserve">
-  <value>Transparency</value>
-</data>
-<data name="Transparent" xml:space="preserve">
-  <value>Transparent</value>
-</data>
-<data name="SemiTransparent" xml:space="preserve">
-  <value>Semi-transparent</value>
-</data>
-<data name="Opaque" xml:space="preserve">
-  <value>Opaque</value>
-</data>
-<data name="Finish" xml:space="preserve">
-  <value>Finish</value>
-</data>
-<data name="Gloss" xml:space="preserve">
-  <value>Gloss</value>
-</data>
-<data name="Satin" xml:space="preserve">
-  <value>Satin</value>
-</data>
-<data name="SemiMatte" xml:space="preserve">
-  <value>Semi-matte</value>
-</data>
-<data name="Matte" xml:space="preserve">
-  <value>Matte</value>
-</data>
-<data name="GlazeBehavior" xml:space="preserve">
-  <value>Glaze Behavior</value>
-</data>
-<data name="MeltFluidity" xml:space="preserve">
-  <value>Melt Fluidity</value>
-</data>
-<data name="ThicknessTolerance" xml:space="preserve">
-  <value>Thickness Tolerance</value>
-</data>
-<data name="ColorStability" xml:space="preserve">
-  <value>Color Stability</value>
-</data>
-<data name="Repeatability" xml:space="preserve">
-  <value>Repeatability</value>
-</data>
-<data name="ApplicationDetails" xml:space="preserve">
-  <value>Application Details</value>
-</data>
-<data name="Form" xml:space="preserve">
-  <value>Form</value>
-</data>
-<data name="DryMix" xml:space="preserve">
-  <value>Dry Mix</value>
-</data>
-<data name="Liquid" xml:space="preserve">
-  <value>Liquid</value>
-</data>
-<data name="Brushing" xml:space="preserve">
-  <value>Brushing</value>
-</data>
-<data name="RecommendedThicknessExample" xml:space="preserve">
-  <value>Recommended Thickness (e.g., 2-3 mm)</value>
-</data>
-<data name="ApplicationNotes" xml:space="preserve">
-  <value>Application Notes</value>
-</data>
-<data name="SpecialInstructions" xml:space="preserve">
-  <value>Special instructions...</value>
-</data>
-<data name="AdvancedProperties" xml:space="preserve">
-  <value>Advanced Properties</value>
-</data>
-<data name="ClayInteraction" xml:space="preserve">
-  <value>Clay Interaction</value>
-</data>
-<data name="SelectInteractionType" xml:space="preserve">
-  <value>Select Interaction Type</value>
-</data>
-<data name="Neutral" xml:space="preserve">
-  <value>Neutral</value>
-</data>
-<data name="Contrasting" xml:space="preserve">
-  <value>Contrasting</value>
-</data>
-<data name="HighlyReactive" xml:space="preserve">
-  <value>Highly Reactive</value>
-</data>
-<data name="WorkType" xml:space="preserve">
-  <value>Work Type</value>
-</data>
-<data name="SelectWorkType" xml:space="preserve">
-  <value>Select Work Type</value>
-</data>
-<data name="Artistic" xml:space="preserve">
-  <value>Artistic</value>
-</data>
-<data name="Functional" xml:space="preserve">
-  <value>Functional</value>
-</data>
-<data name="Both" xml:space="preserve">
-  <value>Both</value>
-</data>
-<data name="Durability" xml:space="preserve">
-  <value>Durability</value>
-</data>
-<data name="SelectDurability" xml:space="preserve">
-  <value>Select Durability</value>
-</data>
-<data name="MitigationNotes" xml:space="preserve">
-  <value>Mitigation Notes</value>
-</data>
-<data name="KnownIssues" xml:space="preserve">
-  <value>Known issues and how to prevent them...</value>
-</data>
-<data name="Cancel" xml:space="preserve">
-  <value>Cancel</value>
-</data>
-<data name="Save" xml:space="preserve">
-  <value>Save</value>
-</data>
-<data name="KnowledgeBase" xml:space="preserve">
-  <value>Knowledge Base</value>
-</data>
-<data name="WikiDescription" xml:space="preserve">
-  <value>Browse community-verified information about ceramic materials, tools, and techniques.</value>
-</data>
-<data name="AnalyticsAndReports" xml:space="preserve">
-  <value>Analytics and Reports</value>
-</data>
-<data name="AnalyticsDescription" xml:space="preserve">
-  <value>View your monthly Pottery Wrapped reports, track your progress, and analyze your ceramic work trends.</value>
-</data>
+    <value>Edit</value>
+  </data>
+  <data name="FiringParametersComingSoon" xml:space="preserve">
+    <value>Firing parameters coming soon</value>
+  </data>
+  <data name="AppearanceComingSoon" xml:space="preserve">
+    <value>Appearance coming soon</value>
+  </data>
+  <data name="BehaviorComingSoon" xml:space="preserve">
+    <value>Behavior coming soon</value>
+  </data>
+  <data name="TypeLabel" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ConeRatingLabel" xml:space="preserve">
+    <value>Cone Rating</value>
+  </data>
+  <data name="ColorLabel" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="QuantityLabel" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="FoodSafeLabel" xml:space="preserve">
+    <value>Food Safe</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="SearchGlazesPlaceholder" xml:space="preserve">
+    <value>Search glazes...</value>
+  </data>
+  <data name="NoGlazesFound" xml:space="preserve">
+    <value>No glazes found. Add your first glaze!</value>
+  </data>
+  <data name="TabBasic" xml:space="preserve">
+    <value>Basic</value>
+  </data>
+  <data name="TabFiring" xml:space="preserve">
+    <value>Firing</value>
+  </data>
+  <data name="TabAppearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="TabBehavior" xml:space="preserve">
+    <value>Behavior</value>
+  </data>
+  <data name="TabApplication" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="TabAdvanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="RequiredInformation" xml:space="preserve">
+    <value>Required Information</value>
+  </data>
+  <data name="OptionalDetails" xml:space="preserve">
+    <value>Optional Details</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>Manufacturer</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="ConeRatingExample" xml:space="preserve">
+    <value>Cone Rating (e.g., Cone 6)</value>
+  </data>
+  <data name="QuantityExample" xml:space="preserve">
+    <value>Quantity (e.g., 500g, half jar)</value>
+  </data>
+  <data name="FoodSafety" xml:space="preserve">
+    <value>Food Safety</value>
+  </data>
+  <data name="NotTested" xml:space="preserve">
+    <value>Not Tested</value>
+  </data>
+  <data name="Safe" xml:space="preserve">
+    <value>Safe</value>
+  </data>
+  <data name="NotSafe" xml:space="preserve">
+    <value>Not Safe</value>
+  </data>
+  <data name="MarkAsFavorite" xml:space="preserve">
+    <value>Mark as Favorite</value>
+  </data>
+  <data name="FiringParameters" xml:space="preserve">
+    <value>Firing Parameters</value>
+  </data>
+  <data name="TemperatureRange" xml:space="preserve">
+    <value>Temperature Range</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="Unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Atmosphere" xml:space="preserve">
+    <value>Atmosphere</value>
+  </data>
+  <data name="CurveSensitivity" xml:space="preserve">
+    <value>Curve Sensitivity</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="AppearanceProperties" xml:space="preserve">
+    <value>Appearance Properties</value>
+  </data>
+  <data name="Transparency" xml:space="preserve">
+    <value>Transparency</value>
+  </data>
+  <data name="Transparent" xml:space="preserve">
+    <value>Transparent</value>
+  </data>
+  <data name="SemiTransparent" xml:space="preserve">
+    <value>Semi-transparent</value>
+  </data>
+  <data name="Opaque" xml:space="preserve">
+    <value>Opaque</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="Gloss" xml:space="preserve">
+    <value>Gloss</value>
+  </data>
+  <data name="Satin" xml:space="preserve">
+    <value>Satin</value>
+  </data>
+  <data name="SemiMatte" xml:space="preserve">
+    <value>Semi-matte</value>
+  </data>
+  <data name="Matte" xml:space="preserve">
+    <value>Matte</value>
+  </data>
+  <data name="GlazeBehavior" xml:space="preserve">
+    <value>Glaze Behavior</value>
+  </data>
+  <data name="MeltFluidity" xml:space="preserve">
+    <value>Melt Fluidity</value>
+  </data>
+  <data name="ThicknessTolerance" xml:space="preserve">
+    <value>Thickness Tolerance</value>
+  </data>
+  <data name="ColorStability" xml:space="preserve">
+    <value>Color Stability</value>
+  </data>
+  <data name="Repeatability" xml:space="preserve">
+    <value>Repeatability</value>
+  </data>
+  <data name="ApplicationDetails" xml:space="preserve">
+    <value>Application Details</value>
+  </data>
+  <data name="Form" xml:space="preserve">
+    <value>Form</value>
+  </data>
+  <data name="DryMix" xml:space="preserve">
+    <value>Dry Mix</value>
+  </data>
+  <data name="Liquid" xml:space="preserve">
+    <value>Liquid</value>
+  </data>
+  <data name="Brushing" xml:space="preserve">
+    <value>Brushing</value>
+  </data>
+  <data name="RecommendedThicknessExample" xml:space="preserve">
+    <value>Recommended Thickness (e.g., 2-3 mm)</value>
+  </data>
+  <data name="ApplicationNotes" xml:space="preserve">
+    <value>Application Notes</value>
+  </data>
+  <data name="SpecialInstructions" xml:space="preserve">
+    <value>Special instructions...</value>
+  </data>
+  <data name="AdvancedProperties" xml:space="preserve">
+    <value>Advanced Properties</value>
+  </data>
+  <data name="ClayInteraction" xml:space="preserve">
+    <value>Clay Interaction</value>
+  </data>
+  <data name="SelectInteractionType" xml:space="preserve">
+    <value>Select Interaction Type</value>
+  </data>
+  <data name="Neutral" xml:space="preserve">
+    <value>Neutral</value>
+  </data>
+  <data name="Contrasting" xml:space="preserve">
+    <value>Contrasting</value>
+  </data>
+  <data name="HighlyReactive" xml:space="preserve">
+    <value>Highly Reactive</value>
+  </data>
+  <data name="WorkType" xml:space="preserve">
+    <value>Work Type</value>
+  </data>
+  <data name="SelectWorkType" xml:space="preserve">
+    <value>Select Work Type</value>
+  </data>
+  <data name="Artistic" xml:space="preserve">
+    <value>Artistic</value>
+  </data>
+  <data name="Functional" xml:space="preserve">
+    <value>Functional</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Both</value>
+  </data>
+  <data name="Durability" xml:space="preserve">
+    <value>Durability</value>
+  </data>
+  <data name="SelectDurability" xml:space="preserve">
+    <value>Select Durability</value>
+  </data>
+  <data name="MitigationNotes" xml:space="preserve">
+    <value>Mitigation Notes</value>
+  </data>
+  <data name="KnownIssues" xml:space="preserve">
+    <value>Known issues and how to prevent them...</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="KnowledgeBase" xml:space="preserve">
+    <value>Knowledge Base</value>
+  </data>
+  <data name="WikiDescription" xml:space="preserve">
+    <value>Browse community-verified information about ceramic materials, tools, and techniques.</value>
+  </data>
+  <data name="AnalyticsAndReports" xml:space="preserve">
+    <value>Analytics and Reports</value>
+  </data>
+  <data name="AnalyticsDescription" xml:space="preserve">
+    <value>View your monthly Pottery Wrapped reports, track your progress, and analyze your ceramic work trends.</value>
+  </data>
+  <data name="Oxidation" xml:space="preserve">
+    <value>Oxidation</value>
+  </data>
+  <data name="Reduction" xml:space="preserve">
+    <value>Reduction</value>
+  </data>
+  <data name="Stable" xml:space="preserve">
+    <value>Stable</value>
+  </data>
+  <data name="Variable" xml:space="preserve">
+    <value>Variable</value>
+  </data>
+  <data name="NotSpecified" xml:space="preserve">
+    <value>Not specified</value>
+  </data>
+  <data name="GlazeName" xml:space="preserve">
+    <value>Glaze name</value>
+  </data>
+  <data name="GlazeType" xml:space="preserve">
+    <value>Typ szkliwa</value>
+  </data>
+  <data name="AdditionalNotes" xml:space="preserve">
+    <value>Additional notes</value>
+  </data>
 </root>
