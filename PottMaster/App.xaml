@@ -18,6 +18,12 @@
             <converters:WallThicknessToDaysConverter x:Key="WallThicknessToDaysConverter"/>
             <converters:WorkCategoryCodeToLocalizedConverter x:Key="WorkCategoryCodeToLocalizedConverter"/>
             <converters:WorkStatusCodeToLocalizedConverter x:Key="WorkStatusCodeToLocalizedConverter"/>
+            <converters:StringToImageSourceConverter x:Key="StringToImageSourceConverter"/>
+            <converters:SyncStatusCodeToLocalizedConverter x:Key="SyncStatusCodeToLocalizedConverter" />
+            <converters:FoodSafeToTextConverter x:Key="FoodSafeToTextConverter" />
+            <converters:BoolToFavoriteTextConverter x:Key="BoolToFavoriteTextConverter" />
+            <converters:BoolToExpandIconConverter x:Key="BoolToExpandIconConverter" />
+            <converters:BoolToTitleConverter x:Key="BoolToTitleConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

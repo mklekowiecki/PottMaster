@@ -12,7 +12,7 @@
 
     public static class MauiProgram
 	{
-		public static MauiApp CreateMauiApp()
+        public static MauiApp CreateMauiApp()
 		{
 			var builder = MauiApp.CreateBuilder();
 			builder
@@ -41,24 +41,40 @@
 
 			// Infrastructure Services (Singleton - shared across app lifetime)
 			builder.Services.AddSingleton<IDbService, DbService>();
+			builder.Services.AddSingleton<IApiEndpoint, SupabaseApi>();
 			builder.Services.AddSingleton<IImageService, ImageService>();
 			builder.Services.AddSingleton<ISyncService, SyncService>();
 			builder.Services.AddSingleton<IErrorHandlingService, ErrorHandlingService>();
 			builder.Services.AddSingleton<IDryingMonitorService, DryingMonitorService>();
+			builder.Services.AddSingleton<GlobalExceptionHandler>();
+
 
 			// Authentication Services (Singleton - maintains auth state)
 			builder.Services.AddSingleton<IAuthService, AuthService>();
 			builder.Services.AddSingleton<IAuthStateService, AuthStateService>();
+			builder.Services.AddSingleton<AppLinkService>();
 
 			// UI Services (Transient - per operation)
 			builder.Services.AddTransient<IAlertService, AlertService>();
 			builder.Services.AddTransient<INotificationService, NotificationService>();
 			
-			// Repository Pattern (Scoped - per operation context)
-			builder.Services.AddScoped<IWorkRepository, LocalWorkRepository>();
+			
+#if ANDROID
+			builder.Services.AddSingleton<IBiometricService, PottMaster.Platforms.Android.BiometricService>();
+#else
+			// Biometric Service (Platform-specific)
+			builder.Services.AddSingleton<IBiometricService, BiometricService>();
+#endif
+
+            // Repository Pattern (Scoped - per operation context)
+            builder.Services.AddScoped<IWorkRepository, LocalWorkRepository>();
+			builder.Services.AddScoped<IGlazeRepository, LocalGlazeRepository>();
+			builder.Services.AddScoped<IWikiRepository, WikiRepository>();
 			
 			// Business Logic Services (Scoped - user-specific operations)
 			builder.Services.AddScoped<IWorkService, WorkService>();
+			builder.Services.AddScoped<IGlazeService, GlazeService>();
+			builder.Services.AddScoped<IWikiService, WikiService>();
 			
 			// ViewModels (Transient - new instance per navigation)
 			builder.Services.AddTransient<LoginViewModel>();
@@ -66,6 +82,15 @@
 			builder.Services.AddTransient<MainViewModel>();
 			builder.Services.AddTransient<NewWorkViewModel>();
 			builder.Services.AddTransient<WorkDetailViewModel>();
+			builder.Services.AddTransient<ProfileViewModel>();
+			builder.Services.AddTransient<EmailConfirmationViewModel>();
+			builder.Services.AddSingleton<SyncStatusViewModel>();
+			builder.Services.AddTransient<GlazeInventoryViewModel>();
+			builder.Services.AddTransient<GlazeDetailViewModel>();
+			builder.Services.AddTransient<GlazeDetailViewModel>();
+			builder.Services.AddTransient<WikiViewModel>();
+			builder.Services.AddTransient<WikiDetailViewModel>();
+			builder.Services.AddTransient<WikiSubmitViewModel>();
 			
 			// Pages (Transient - new instance per navigation)
 			builder.Services.AddTransient<MainPage>();
@@ -73,7 +98,14 @@
 			builder.Services.AddTransient<LoginPage>();
 			builder.Services.AddTransient<SignupPage>();
 			builder.Services.AddTransient<WorkDetailPage>();
-
+			builder.Services.AddTransient<ProfilePage>();
+			builder.Services.AddTransient<GlazeInventoryPage>();
+			builder.Services.AddTransient<GlazeDetailPage>();
+			builder.Services.AddTransient<GlazeDetailPage>();
+			builder.Services.AddTransient<WikiPage>();
+			builder.Services.AddTransient<WikiDetailPage>();
+			builder.Services.AddTransient<WikiSubmitPage>();
+			
 			// Register BackgroundSyncWorker as singleton
 			builder.Services.AddSingleton<BackgroundSyncWorker>();
 
@@ -100,9 +132,12 @@
 
 			var mauiApp = builder.Build();
 
-			// Start background sync worker
-			var syncWorker = mauiApp.Services.GetRequiredService<BackgroundSyncWorker>();
-			syncWorker.Start();
+			// Initialize global exception handler early
+			var globalExceptionHandler = mauiApp.Services.GetRequiredService<GlobalExceptionHandler>();
+			globalExceptionHandler.Initialize();
+
+			// Force creation of BackgroundSyncWorker to ensure it subscribes to auth state changes early
+			_ = mauiApp.Services.GetRequiredService<BackgroundSyncWorker>();
 
 			// Initialize auth state on startup
 			var authStateService = mauiApp.Services.GetRequiredService<IAuthStateService>();

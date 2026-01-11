@@ -12,15 +12,13 @@ namespace PottMaster.Tests.Services
 {
     /// <summary>
     /// Unit tests for SyncService.
-    /// Note: Tests involving Supabase client interactions are limited to the sealed nature
-    /// of Supabase.Client. For comprehensive testing of sync operations, consider:
-    /// 1. Integration tests with a test Supabase instance
-    /// 2. Refactoring to use an ISupabaseClient wrapper interface
+    /// Tests now use IApiEndpoint abstraction instead of direct Supabase client dependency.
     /// </summary>
     [TestFixture]
     public class SyncServiceTests
     {
         private Mock<IDbService> _dbServiceMock;
+        private Mock<IApiEndpoint> _apiEndpointMock;
         private Mock<ILogger<SyncService>> _loggerMock;
         private ISyncService _syncService;
 
@@ -28,8 +26,9 @@ namespace PottMaster.Tests.Services
         public void SetUp()
         {
             _dbServiceMock = new Mock<IDbService>();
+            _apiEndpointMock = new Mock<IApiEndpoint>();
             _loggerMock = new Mock<ILogger<SyncService>>();
-            _syncService = CreateSyncServiceWithMockDb();
+            _syncService = new SyncService(_dbServiceMock.Object, _apiEndpointMock.Object, _loggerMock.Object);
         }
 
         [Test]
@@ -131,17 +130,6 @@ namespace PottMaster.Tests.Services
 
             // Assert
             Assert.That(isOnline, Is.InstanceOf<bool>());
-        }
-
-        private ISyncService CreateSyncServiceWithMockDb()
-        {
-            // Create a minimal Supabase.Client instance
-            // This won't be used for actual network calls in these unit tests
-            var supabaseUrl = "http://localhost:54321";
-            var supabaseKey = "test-anon-key";
-            var supabaseClient = new Supabase.Client(supabaseUrl, supabaseKey);
-            
-            return new SyncService(_dbServiceMock.Object, supabaseClient, _loggerMock.Object);
         }
     }
 }

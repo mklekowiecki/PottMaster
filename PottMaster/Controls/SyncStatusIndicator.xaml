@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resx="clr-namespace:PottMaster.Resources"
+             x:Class="PottMaster.Controls.SyncStatusIndicator">
+    <Border BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceContainer}, Dark={StaticResource SurfaceContainerDark}}"
+            StrokeThickness="0"
+            HorizontalOptions="Center"
+            Padding="12,12"
+            IsVisible="{Binding IsAuthenticated}">
+
+
+        <HorizontalStackLayout Spacing="8" Padding="5">
+            <!-- Sync Status Icon -->
+            <Label Text="{Binding StatusIcon}"
+                   FontSize="16"
+                   VerticalOptions="Center" />
+
+            <!-- Pending Count (only show if > 0) -->
+            <Label Text="{Binding PendingCount}"
+                   Style="{StaticResource LabelMedium}"
+                   TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                   IsVisible="{Binding HasPendingItems}"
+                   VerticalOptions="Center"/>
+
+            <!-- Status Text -->
+            <Label Text="{Binding StatusText}"
+                   Style="{StaticResource LabelMedium}"
+                   TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                   VerticalOptions="Center"/>
+        </HorizontalStackLayout>
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding TriggerSyncCommand}"/>
+        </Border.GestureRecognizers>
+    </Border>
+</ContentView>

@@ -1,9 +1,10 @@
+using PottMasterLib.Logic;
 using SQLite;
 
 namespace PottMasterLib.Models;
 
 [Table("works")]
-public class LocalWork
+public class LocalWork : IWork
 {
     [PrimaryKey]
     public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -12,6 +13,7 @@ public class LocalWork
     public string UserId { get; set; } = string.Empty;
 
     [Unique]
+    [System.ComponentModel.DataAnnotations.StringLength(20)]
     public string Code { get; set; } = string.Empty;
 
     public int CategoryId { get; set; }
@@ -38,4 +40,24 @@ public class LocalWork
 
     [Ignore]
     public string StatusCode { get; set; } = string.Empty;
+
+    [Ignore]
+    public List<LocalPhoto> Photos { get; set; } = new();
+
+    [Ignore]
+    public TimeSpan? RemainingDryingTime
+    {
+        get
+        {
+            if (StatusId >= (int)WorkStatusCode.BoneDry) return TimeSpan.Zero;
+
+            var startTime = DryingStartedAt ?? CreatedAt;
+            var dryingDays = CommonLogic.CalculateDryingDays(WallThickness);
+
+            var targetDate = startTime.AddDays(dryingDays);
+            var remaining = targetDate - DateTime.UtcNow;
+
+            return remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero;
+        }
+    }
 }

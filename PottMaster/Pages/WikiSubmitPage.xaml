@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PottMaster.ViewModels"
+             xmlns:resx="clr-namespace:PottMaster.Resources"
+             xmlns:converters="clr-namespace:PottMaster.Converters"
+             x:Class="PottMaster.Pages.WikiSubmitPage"
+             x:DataType="vm:WikiSubmitViewModel"
+             Title="Prześlij nowy materiał">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Spacing="16" Padding="16">
+                <Label Text="Nazwa materiału" FontAttributes="Bold"/>
+                <Entry Text="{Binding Name}" Placeholder="Wprowadź nazwę"/>
+
+                <Label Text="Opis" FontAttributes="Bold"/>
+                <Editor Text="{Binding Description}" Placeholder="Opisz materiał..." HeightRequest="100"/>
+
+                <Label Text="Producent" FontAttributes="Bold"/>
+                <Entry Text="{Binding Manufacturer}" Placeholder="Wprowadź producenta"/>
+
+                <Label Text="Typ" FontAttributes="Bold"/>
+                <Picker Title="Wybierz typ"
+                        ItemsSource="{Binding MaterialTypes}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding SelectedType}"/>
+
+                <Label Text="Właściwości" FontAttributes="Bold"/>
+                <Editor Text="{Binding Properties}" Placeholder="Wprowadź właściwości..." HeightRequest="100"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" Padding="16" ColumnSpacing="8">
+            <Button Grid.Column="0"
+                    Text="Anuluj"
+                    Command="{Binding CancelCommand}"/>
+            <Button Grid.Column="1"
+                    Text="Prześlij"
+                    Command="{Binding SubmitMaterialCommand}"
+                    IsEnabled="{Binding IsSubmitting, Converter={StaticResource InvertedBoolConverter}}"/>
+        </Grid>
+    </Grid>
+
+</ContentPage>

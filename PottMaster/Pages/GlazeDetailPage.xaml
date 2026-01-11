@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PottMaster.ViewModels"
+             xmlns:converters="clr-namespace:PottMaster.Converters"
+             xmlns:resx="clr-namespace:PottMaster.Resources"
+             x:Class="PottMaster.Pages.GlazeDetailPage"
+             x:DataType="vm:GlazeDetailViewModel"
+             Title="{Binding IsEditMode, Converter={StaticResource BoolToTitleConverter}, ConverterParameter=New Glaze|Edit Glaze}">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StringEqualConverter x:Key="StringEqualConverter" />
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:TabActiveColorConverter x:Key="TabActiveColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Tab Bar -->
+        <ScrollView Grid.Row="0" Orientation="Horizontal" 
+                    HorizontalScrollBarVisibility="Never"
+                    Padding="8">
+            <HorizontalStackLayout Spacing="8">
+                <Button Text="{x:Static resx:AppResources.TabBasic}" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="basic"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=basic}"/>
+                <Button Text="{x:Static resx:AppResources.TabFiring}" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="firing"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=firing}"/>
+                <Button Text="{x:Static resx:AppResources.TabAppearance}" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="appearance"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=appearance}"/>
+                <Button Text="{x:Static resx:AppResources.TabBehavior}" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="behavior"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=behavior}"/>
+                <Button Text="{x:Static resx:AppResources.TabApplication}" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="application"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=application}"/>
+                <Button Text="{x:Static resx:AppResources.TabAdvanced}" 
+                        Command="{Binding SelectTabCommand}" 
+                        CommandParameter="advanced"
+                        BackgroundColor="{Binding CurrentTab, Converter={StaticResource TabActiveColorConverter}, ConverterParameter=advanced}"/>
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- Tab Content -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="16" Padding="16">
+                <!-- Basic Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=basic}"
+                                    Spacing="12">
+                    <Label Text="{x:Static resx:AppResources.RequiredInformation}" FontSize="18" FontAttributes="Bold"/>
+                    <Entry Placeholder="{x:Static resx:AppResources.GlazeName}" 
+                           Text="{Binding Name}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.OptionalDetails}" FontSize="18" FontAttributes="Bold" Margin="0,16,0,0"/>
+                    <Entry Placeholder="{x:Static resx:AppResources.Manufacturer}" 
+                           Text="{Binding Manufacturer}"/>
+                    <DatePicker Date="{Binding BatchDate}" 
+                               Format="D"/>
+                    <Picker Title="{x:Static resx:AppResources.GlazeType}"
+                            ItemsSource="{Binding GlazeTypes}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedType}"/>
+                    <Entry Placeholder="{x:Static resx:AppResources.Color}" 
+                           Text="{Binding Color}"/>
+                    <Entry Placeholder="{x:Static resx:AppResources.ConeRatingExample}" 
+                           Text="{Binding ConeRating}"/>
+                    <Entry Placeholder="{x:Static resx:AppResources.QuantityExample}" 
+                           Text="{Binding Quantity}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.FoodSafety}" FontAttributes="Bold" Margin="0,8,0,0"/>
+                    <Picker Title="{x:Static resx:AppResources.FoodSafety}"
+                            ItemsSource="{Binding FoodSafeOptions}"
+                            SelectedItem="{Binding FoodSafe}"/>
+                    
+                    <HorizontalStackLayout Spacing="8" Margin="0,8,0,0">
+                        <CheckBox IsChecked="{Binding IsFavorite}"/>
+                        <Label Text="{x:Static resx:AppResources.MarkAsFavorite}" VerticalOptions="Center"/>
+                    </HorizontalStackLayout>
+
+                    <Label Text="{x:Static resx:AppResources.Notes}" FontAttributes="Bold" Margin="0,8,0,0"/>
+                    <Editor Text="{Binding Notes}"
+                            Placeholder="{x:Static resx:AppResources.AdditionalNotes}"
+                            HeightRequest="100"/>
+                </VerticalStackLayout>
+
+                <!-- Firing Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=firing}"
+                                    Spacing="12">
+                    <Label Text="{x:Static resx:AppResources.FiringParameters}" FontSize="18" FontAttributes="Bold"/>
+                    <Label Text="{x:Static resx:AppResources.TemperatureRange}" FontAttributes="Bold"/>
+                    <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="8">
+                        <Entry Grid.Column="0" 
+                               Placeholder="{x:Static resx:AppResources.Min}" 
+                               Keyboard="Numeric"
+                               Text="{Binding TemperatureMin}"/>
+                        <Label Grid.Column="1" Text="-" VerticalOptions="Center"/>
+                        <Entry Grid.Column="2" 
+                               Placeholder="{x:Static resx:AppResources.Max}" 
+                               Keyboard="Numeric"
+                               Text="{Binding TemperatureMax}"/>
+                    </Grid>
+                    
+                    <Picker Title="{x:Static resx:AppResources.Unit}"
+                            ItemsSource="{Binding TemperatureUnits}"
+                            SelectedItem="{Binding TemperatureUnit}"/>
+                    
+                    <Picker Title="{x:Static resx:AppResources.Atmosphere}"
+                            ItemsSource="{Binding Atmospheres}"
+                            SelectedItem="{Binding Atmosphere}"/>
+                    
+                    <Picker Title="{x:Static resx:AppResources.CurveSensitivity}"
+                            ItemsSource="{Binding CurveSensitivities}"
+                            SelectedItem="{Binding CurveSensitivity}"/>
+                </VerticalStackLayout>
+
+                <!-- Appearance Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=appearance}"
+                                    Spacing="12">
+                    <Label Text="{x:Static resx:AppResources.AppearanceProperties}" FontSize="18" FontAttributes="Bold"/>
+                    <Picker Title="{x:Static resx:AppResources.Transparency}"
+                            ItemsSource="{Binding Transparencies}"
+                            SelectedItem="{Binding Transparency}"/>
+                    
+                    <Picker Title="{x:Static resx:AppResources.Finish}"
+                            ItemsSource="{Binding Finishes}"
+                            SelectedItem="{Binding Finish}"/>
+                </VerticalStackLayout>
+
+                <!-- Behavior Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=behavior}"
+                                    Spacing="12">
+                    <Label Text="{x:Static resx:AppResources.GlazeBehavior}" FontSize="18" FontAttributes="Bold"/>
+                    <Picker Title="{x:Static resx:AppResources.MeltFluidity}"
+                            ItemsSource="{Binding MeltFluidities}"
+                            SelectedItem="{Binding MeltFluidity}"/>
+                    
+                    <Picker Title="{x:Static resx:AppResources.ThicknessTolerance}"
+                            ItemsSource="{Binding ThicknessTolerances}"
+                            SelectedItem="{Binding ThicknessTolerance}"/>
+                    <Picker Title="Color Stability"
+                            ItemsSource="{Binding ColorStabilities}"
+                            SelectedItem="{Binding ColorStability}"/>
+                </VerticalStackLayout>
+
+                <!-- Application Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=application}"
+                                    Spacing="12">
+                    <Label Text="{x:Static resx:AppResources.ApplicationDetails}" FontSize="18" FontAttributes="Bold"/>
+                    <Picker Title="{x:Static resx:AppResources.Form}"
+                            ItemsSource="{Binding Forms}"
+                            SelectedItem="{Binding Form}"/>
+                    
+                    <Entry Placeholder="{x:Static resx:AppResources.RecommendedThicknessExample}" 
+                           Text="{Binding RecommendedThickness}"/>
+
+                    <Label Text="{x:Static resx:AppResources.ApplicationNotes}" FontAttributes="Bold"/>
+                    <Editor Text="{Binding ApplicationNotes}"
+                            Placeholder="{x:Static resx:AppResources.SpecialInstructions}"
+                            HeightRequest="100"/>
+                </VerticalStackLayout>
+
+                <!-- Advanced Tab -->
+                <VerticalStackLayout IsVisible="{Binding CurrentTab, Converter={StaticResource StringEqualConverter}, ConverterParameter=advanced}"
+                                    Spacing="12">
+                    <Label Text="{x:Static resx:AppResources.AdvancedProperties}" FontSize="18" FontAttributes="Bold"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.ClayInteraction}" FontAttributes="Bold"/>
+                    <Picker Title="{x:Static resx:AppResources.SelectInteractionType}"
+                            ItemsSource="{Binding ClayInteractions}"
+                            SelectedItem="{Binding ClayInteraction}"/>
+                    
+
+                    <Label Text="{x:Static resx:AppResources.WorkType}" FontAttributes="Bold" Margin="0,12,0,0"/>
+                    <Picker Title="{x:Static resx:AppResources.SelectWorkType}"
+                            ItemsSource="{Binding WorkTypes}"
+                            SelectedItem="{Binding WorkType}"/>
+                    
+
+                    <Label Text="{x:Static resx:AppResources.Durability}" FontAttributes="Bold" Margin="0,12,0,0"/>
+                    <Picker Title="{x:Static resx:AppResources.SelectDurability}"
+                            ItemsSource="{Binding Durabilities}"
+                            SelectedItem="{Binding Durability}"/>
+
+                    <Label Text="{x:Static resx:AppResources.MitigationNotes}" FontAttributes="Bold" Margin="0,12,0,0"/>
+                    <Editor Text="{Binding MitigationNotes}"
+                            Placeholder="{x:Static resx:AppResources.KnownIssues}"
+                            HeightRequest="100"/>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Action Buttons -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,*" Padding="16" ColumnSpacing="8">
+            <Button Grid.Column="0" 
+                    Text="{x:Static resx:AppResources.Cancel}" 
+                    Command="{Binding CancelCommand}"/>
+            <Button Grid.Column="1" 
+                    Text="{x:Static resx:AppResources.Save}" 
+                    Command="{Binding SaveCommand}"
+                    IsEnabled="{Binding IsSaving, Converter={StaticResource InverseBoolConverter}}"/>
+        </Grid>
+    </Grid>
+</ContentPage>

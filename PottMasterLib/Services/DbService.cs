@@ -30,6 +30,9 @@ public class DbService : IDbService
             await _database.CreateTableAsync<LocalUserProfile>();
             await _database.CreateTableAsync<LocalWorkCategory>();
             await _database.CreateTableAsync<LocalWorkStatus>();
+            await _database.CreateTableAsync<LocalPhoto>();
+            await _database.CreateTableAsync<LocalGlaze>();
+            await _database.CreateTableAsync<LocalGlazeType>();
         }
         catch (Exception ex)
         {
@@ -142,6 +145,56 @@ public class DbService : IDbService
         foreach (var entity in entities)
         {
             rowsAffected += await _database!.InsertOrReplaceAsync(entity);
+        }
+
+        return rowsAffected;
+    }
+
+    public async Task<List<LocalPhoto>> GetPhotosByWorkIdAsync(string workId)
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        return await _database!.Table<LocalPhoto>()
+            .Where(photo => photo.WorkId == workId)
+            .OrderBy(photo => photo.Order)
+            .ToListAsync();
+    }
+
+    public async Task<int> InsertPhotoAsync(LocalPhoto photo)
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        return await _database!.InsertAsync(photo);
+    }
+
+    public async Task<int> UpdatePhotoAsync(LocalPhoto photo)
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        return await _database!.UpdateAsync(photo);
+    }
+
+    public async Task<int> DeletePhotoAsync(LocalPhoto photo)
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        return await _database!.DeleteAsync(photo);
+    }
+
+    public async Task<int> DeletePhotosByWorkIdAsync(string workId)
+    {
+        if (_database == null)
+            await InitializeAsync();
+
+        var photos = await GetPhotosByWorkIdAsync(workId);
+        var rowsAffected = 0;
+        foreach (var photo in photos)
+        {
+            rowsAffected += await _database!.DeleteAsync(photo);
         }
 
         return rowsAffected;

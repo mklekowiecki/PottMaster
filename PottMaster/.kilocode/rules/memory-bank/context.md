@@ -63,18 +63,43 @@ PottMaster addresses these challenges through:
   - AppResources.en.resx (English)
   - Full localization for NewWorkPage and WorkDetailPage
 - Memory bank initialized and updated for .NET MAUI
-- CI/CD pipeline configured with MAUI workload installation for GitHub Actions
+- CI/CD pipeline configured with MAUI workload installation for GitHub Actions, updated with path filters to trigger only on code changes and branch changed to 'main'
 - **Full SQLite/SQLite-net-pcl integration and offline support via DbService** ✅
 - **Complete work registration implementation (US-002) with photo compression and local storage** ✅
 - **Unique identification code generation (US-003)** ✅
 - **Manual status correction (US-005)** ✅
 - **Supabase data sync implementation (US-008)** ✅
 - **Process timer management (US-004)** ✅ - Automatic status advancement and notifications when drying completes
+- **SupabaseApi service implemented** - Direct Supabase client wrapper for API operations
+- **Multiple photos per work implemented** - New Photo entity, database table, UI for adding/viewing multiple photos, sync support
+- **Glaze Catalogue Migration**: Created migration script `20260106120000_populate_glaze_catalogue.sql` that inserts 12 professional glaze entries with complete technical specifications
+- **System User**: Added system user profile for seeded data management
+- **Glaze Properties**: Implemented detailed JSONB properties for each glaze including firing requirements, appearance, behavior, and application methods
+- **Glaze Inventory Management**: Implementation with search, filtering, favorites, CRUD operations, and detailed glaze properties editing via tabbed interface (work-glaze linking pending)
+  - GlazeInventoryPage with search bar, favorites filter, swipe-to-delete, and FAB for adding new glazes
+  - GlazeDetailPage with comprehensive tabbed interface (Basic, Firing, Appearance, Behavior, Application, Advanced)
+  - GlazeInventoryViewModel with full CRUD operations, search/filtering, and favorites management
+  - GlazeDetailViewModel (NewGlazeViewModel.cs) with complete property management and validation
+  - GlazeService and IGlazeService for data operations
+  - GlazeRepository for local data access
+  - Full integration with Supabase for cloud synchronization
+  - Database schema supports work-glaze relationships (work_glazes junction table) but UI functionality not yet implemented
 
 ### Upcoming
 - Image handling and upload to Supabase Storage
 - Glaze inventory features (US-006)
 - Wiki browsing and submission (US-009)
+
+## Current Focus
+- Glaze inventory management system fully implemented and tested
+- Wiki browsing and submission features in development
+- Analytics and reporting features planned for post-MVP
+
+## Next Steps
+- Implement work-glaze linking functionality (US-006 completion)
+- Implement Wiki browsing functionality (US-009)
+- Add expert verification system for Wiki entries (US-010)
+- Develop Pottery Wrapped analytics feature (US-011)
 
 ## Project Boundaries
 
@@ -82,16 +107,20 @@ PottMaster addresses these challenges through:
 - Full offline support (SQLite)
 - Integration with Supabase (Auth, Database, Storage)
 - Coding system and timers
-- Basic Wiki version
 - Work lifecycle management
-- Glaze inventory
+- Glaze inventory management (completed)
 - Automatic synchronization
+- Basic Wiki browsing (in progress)
 
 ### Outside MVP Scope ❌
-- Proprietary .NET server infrastructure
 - Advanced AI algorithms for image analysis
 - Social modules and marketplace
 - Advanced analytics beyond basic Yield Rate
+- Expert verification system for Wiki entries
+- Pottery Wrapped analytics feature
+- Creating social elements- creating groups, adding friends, sharing works within groups
+- Adding logs to separate database table, sending logs during sync
+- Adding photos to already existing works
 
 ## Success Metrics
 
@@ -141,6 +170,6 @@ PottMaster addresses these challenges through:
 
 ---
 
-**Last Updated**: 2026-01-01
+**Last Updated**: 2026-01-11
 **Document Owner**: Development Team
 **Review Cycle**: Weekly during MVP phase

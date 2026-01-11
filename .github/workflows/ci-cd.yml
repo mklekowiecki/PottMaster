@@ -2,9 +2,29 @@ name: CI/CD Pipeline
 
 on:
   push:
+    branches:
+      - main
+    paths:
+      - '**/*.cs'
+      - '**/*.xaml'
+      - '**/*.csproj'
+      - '**/*.sln'
+      - '**/*.resx'
+      - 'PottMasterLib/**'
+      - 'PottMaster/**'
+      - '.github/workflows/ci-cd.yml'
   pull_request:
     branches:
       - main
+    paths:
+      - '**/*.cs'
+      - '**/*.xaml'
+      - '**/*.csproj'
+      - '**/*.sln'
+      - '**/*.resx'
+      - 'PottMasterLib/**'
+      - 'PottMaster/**'
+      - '.github/workflows/ci-cd.yml'
   workflow_dispatch:
 
 jobs:

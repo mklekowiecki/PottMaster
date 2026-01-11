@@ -8,6 +8,7 @@
     <IsPackable>false</IsPackable>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
 	<UseMaui>false</UseMaui>
+	<Configurations>Debug;Release;Debug-Remote</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

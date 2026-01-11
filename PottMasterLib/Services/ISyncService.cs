@@ -9,4 +9,5 @@ public interface ISyncService
     Task<bool> SyncWorkAsync(LocalWork work);
     Task<bool> SyncUserProfileAsync(LocalUserProfile profile);
     Task<int> GetPendingSyncCountAsync();
+    Task SyncWorksFromServerAsync(string userId);
 }

@@ -13,7 +13,7 @@ This plan outlines the step-by-step approach for implementing the PottMaster MVP
 - **Accessibility**: Ensure color contrast, font scaling, and screen reader support.
 - **Responsive Layout**: Use MAUI layouts for adaptive design (mobile/tablet/desktop).
 - **Offline-First**: UI must not block on network; show sync status.
-
+- Icons from https://www.svgrepo.com/collection/responsive-flat-icons/
 ---
 
 ## 3. Page-by-Page Implementation (Status)

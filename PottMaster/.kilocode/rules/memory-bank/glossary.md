@@ -315,6 +315,6 @@ Local Change → Mark PENDING → Queue for Sync → Network Available → Uploa
 
 ---
 
-**Last Updated**: 2025-12-30
+**Last Updated**: 2026-01-11
 **Document Owner**: Development Team
 **Review Cycle**: Monthly or when new terms introduced

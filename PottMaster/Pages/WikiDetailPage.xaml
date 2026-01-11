@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PottMaster.ViewModels"
+             xmlns:converters="clr-namespace:PottMaster.Converters"
+             xmlns:resx="clr-namespace:PottMaster.Resources"
+             x:Class="PottMaster.Pages.WikiDetailPage"
+             x:DataType="vm:WikiDetailViewModel"
+             xmlns:models="clr-namespace:PottMasterLib.Models;assembly=PottMasterLib"
+             Title="{Binding Material.Name}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TrustBadgeStyle" TargetType="Border">
+                <Setter Property="Padding" Value="8,4"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+            </Style>
+            <converters:TrustLevelToColorConverter x:Key="TrustLevelToColorConverter" />
+            <converters:StringEqualConverter x:Key="StringEqualConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Header -->
+        <Grid Grid.Row="0" Padding="16" RowDefinitions="Auto,Auto">
+            <Button Grid.Row="0"
+                    Text="←"
+                    Command="{Binding GoBackCommand}"
+                    HorizontalOptions="Start"
+                    BackgroundColor="Transparent"
+                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+            <Border Grid.Row="1"
+                    Style="{StaticResource TrustBadgeStyle}"
+                    BackgroundColor="{Binding Material.TrustLevel, Converter={StaticResource TrustLevelToColorConverter}}">
+                <Label Text="{Binding Material.TrustLevel}"
+                       FontSize="12"
+                       TextColor="White"
+                       FontAttributes="Bold"/>
+            </Border>
+        </Grid>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1" Padding="16">
+            <VerticalStackLayout Spacing="16">
+                <!-- Name -->
+                <Label Text="{Binding Material.Name}"
+                       FontSize="24"
+                       FontAttributes="Bold"/>
+
+                <!-- Type -->
+                <HorizontalStackLayout Spacing="8">
+                    <Label Text="Typ:"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Material.MaterialType.Name}"/>
+                </HorizontalStackLayout>
+
+                <!-- Manufacturer -->
+                <HorizontalStackLayout Spacing="8">
+                    <Label Text="Producent:"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Material.Manufacturer}"/>
+                </HorizontalStackLayout>
+
+                <!-- Description -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Opis"
+                           FontSize="18"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Material.Description}"
+                           FontSize="16"
+                           LineHeight="1.5"/>
+                </VerticalStackLayout>
+
+                <!-- Properties -->
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Właściwości"
+                           FontSize="18"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Material.Properties}"
+                           FontSize="16"/>
+                </VerticalStackLayout>
+
+                <!-- Submitted By -->
+                <HorizontalStackLayout Spacing="8">
+                    <Label Text="Przesłane przez:"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Material.SubmittedBy}"/>
+                </HorizontalStackLayout>
+
+                <!-- Dates -->
+                <HorizontalStackLayout Spacing="8">
+                    <Label Text="Utworzone:"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Material.CreatedAt, StringFormat='{0:d}'}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="8">
+                    <Label Text="Zaktualizowane:"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding Material.UpdatedAt, StringFormat='{0:d}'}"/>
+                </HorizontalStackLayout>
+                
+                <Button Text="Zweryfikuj"
+                        Command="{Binding VerifyCommand}"
+                        IsVisible="{Binding Material.TrustLevel, Converter={StaticResource StringEqualConverter}, ConverterParameter=unverified}"
+                        BackgroundColor="Green"
+                        TextColor="White"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>

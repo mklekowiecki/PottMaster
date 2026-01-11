@@ -1,11 +1,13 @@
+using PottMaster.Resources;
 using System.Threading.Tasks;
 
 namespace PottMaster.Services;
 
 public class AlertService : IAlertService
 {
-    public async Task ShowAlertAsync(string title, string message, string ok = "OK")
+    public async Task ShowAlertAsync(string title, string message, string ok = null)
     {
+        ok ??= AppResources.Ok ?? "OK";
         if (Shell.Current != null)
         {
             await Shell.Current.DisplayAlert(title, message, ok);
@@ -16,8 +18,10 @@ public class AlertService : IAlertService
         }
     }
 
-    public async Task<bool> ShowConfirmationAsync(string title, string message, string accept = "OK", string cancel = "Cancel")
+    public async Task<bool> ShowConfirmationAsync(string title, string message, string accept = null, string cancel = null)
     {
+        accept ??= AppResources.Ok ?? "OK";
+        cancel ??= AppResources.Cancel ?? "Cancel";
         if (Shell.Current != null)
         {
             return await Shell.Current.DisplayAlert(title, message, accept, cancel);

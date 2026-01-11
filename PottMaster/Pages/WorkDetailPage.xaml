@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
-             xmlns:models="clr-namespace:PottMaster.Models"
              xmlns:resx="clr-namespace:PottMaster.Resources"
              xmlns:converters="clr-namespace:PottMaster.Converters"
+             xmlns:models="clr-namespace:PottMasterLib.Models;assembly=PottMasterLib"
              x:Class="PottMaster.Pages.WorkDetailPage"
-             Title="{x:Static resx:AppResources.WorkDetails}">
+             Title="{x:Static resx:AppResources.WorkDetails}"
+             x:DataType="vm:WorkDetailViewModel">
 
     <ContentPage.Resources>
         <converters:SyncStatusCodeToLocalizedConverter x:Key="SyncStatusCodeToLocalizedConverter" />
@@ -15,242 +16,213 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{x:Static resx:AppResources.Delete}"
                      Command="{Binding DeleteWorkCommand}"
-                     IconImageSource="delete.png"/>
+                     IconImageSource="trashcan_svgrepo_com.png"/>
     </ContentPage.ToolbarItems>
 
     <Grid>
         <ActivityIndicator IsRunning="{Binding IsLoading}"
                          IsVisible="{Binding IsLoading}"
-                         Color="{StaticResource Primary}"
                          HeightRequest="50"
                          VerticalOptions="Center"
                          HorizontalOptions="Center"/>
 
         <ScrollView IsVisible="{Binding IsLoading, Converter={StaticResource InvertedBoolConverter}}">
-            <VerticalStackLayout Padding="16" Spacing="24">
+            <VerticalStackLayout Padding="16" Spacing="16">
 
-                <Border Padding="0"
-                        BackgroundColor="{StaticResource Gray200}"
-                        IsVisible="{Binding CurrentWork.PhotoPath, Converter={StaticResource IsNotNullConverter}}">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="12"/>
-                    </Border.StrokeShape>
-                    <Image Source="{Binding CurrentWork.PhotoPath}"
-                           Aspect="AspectFill"
-                           HeightRequest="300"/>
-                </Border>
+                <!-- Photo Gallery -->
+                <CollectionView ItemsSource="{Binding Photos}"
+                               HeightRequest="250"
+                               IsVisible="{Binding HasPhotos}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="8"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:LocalPhoto">
+                            <Border Style="{StaticResource CardStyle}"
+                                   Padding="0"
+                                   HeightRequest="250"
+                                   WidthRequest="250">
+                                <Image Source="{Binding Path, Converter={StaticResource StringToImageSourceConverter}}"
+                                       Aspect="AspectFill"/>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-                <Border Padding="32"
-                       BackgroundColor="{StaticResource Gray100}"
-                       HeightRequest="300"
-                       IsVisible="{Binding CurrentWork.PhotoPath, Converter={StaticResource IsNullConverter}}">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="12"/>
-                    </Border.StrokeShape>
+                <!-- Photo Placeholder -->
+                <Border Style="{StaticResource CardStyle}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource SurfaceVariant}, Dark={StaticResource SurfaceVariantDark}}"
+                       HeightRequest="250"
+                       IsVisible="{Binding HasPhotos, Converter={StaticResource InvertedBoolConverter}}">
                     <VerticalStackLayout VerticalOptions="Center"
-                                       HorizontalOptions="Center"
-                                       Spacing="8">
-                        <Label Text="?"
-                               FontSize="48"
+                                        HorizontalOptions="Center"
+                                        Spacing="8">
+                        <Label Text="📷"
+                               FontSize="64"
                                HorizontalTextAlignment="Center"/>
                         <Label Text="{x:Static resx:AppResources.NoPhoto}"
-                               FontSize="16"
-                               TextColor="{StaticResource Gray600}"
+                               Style="{StaticResource BodyLarge}"
+                               TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
                                HorizontalTextAlignment="Center"/>
                     </VerticalStackLayout>
                 </Border>
 
-                <Border Padding="16"
-                       BackgroundColor="{StaticResource Primary}">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="8"/>
-                    </Border.StrokeShape>
+                <!-- Work Code Card (Elevated) -->
+                <Border Style="{StaticResource ElevatedCardStyle}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}">
                     <VerticalStackLayout Spacing="4">
                         <Label Text="{x:Static resx:AppResources.WorkCode}"
-                               FontSize="12"
-                               TextColor="{StaticResource White}"
+                               Style="{StaticResource LabelMedium}"
+                               TextColor="{AppThemeBinding Light={StaticResource OnPrimary}, Dark={StaticResource OnPrimaryDark}}"
                                Opacity="0.8"/>
                         <Label Text="{Binding CurrentWork.Code}"
-                               FontSize="24"
-                               FontAttributes="Bold"
-                               TextColor="{StaticResource White}"/>
+                               Style="{StaticResource HeadlineMedium}"
+                               TextColor="{AppThemeBinding Light={StaticResource OnPrimary}, Dark={StaticResource OnPrimaryDark}}"/>
                     </VerticalStackLayout>
                 </Border>
 
-                <Grid RowDefinitions="Auto,Auto,Auto,Auto" 
+                <!-- Info Grid -->
+                <Grid RowDefinitions="Auto,Auto,Auto" 
                       ColumnDefinitions="*,*"
-                      RowSpacing="16"
+                      RowSpacing="12"
                       ColumnSpacing="12">
 
+                    <!-- Category Card -->
                     <Border Grid.Row="0" Grid.Column="0"
-                           Padding="12"
-                           BackgroundColor="{StaticResource Gray100}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="8"/>
-                        </Border.StrokeShape>
+                           Style="{StaticResource CardStyle}">
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{x:Static resx:AppResources.Category}"
-                                   FontSize="12"
-                                   TextColor="{StaticResource Gray600}"/>
+                                   Style="{StaticResource LabelMedium}"/>
                             <Label Text="{Binding CurrentWork.CategoryCode, Converter={StaticResource WorkCategoryCodeToLocalizedConverter}}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"/>
+                                   Style="{StaticResource TitleMedium}"/>
                         </VerticalStackLayout>
                     </Border>
 
+                    <!-- Status Card -->
                     <Border Grid.Row="0" Grid.Column="1"
-                           Padding="12"
-                           BackgroundColor="{StaticResource Gray100}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="8"/>
-                        </Border.StrokeShape>
+                           Style="{StaticResource CardStyle}">
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{x:Static resx:AppResources.Status}"
-                                   FontSize="12"
-                                   TextColor="{StaticResource Gray600}"/>
+                                   Style="{StaticResource LabelMedium}"/>
                             <Label Text="{Binding CurrentWork.StatusCode, Converter={StaticResource WorkStatusCodeToLocalizedConverter}}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource Primary}"/>
+                                   Style="{StaticResource TitleMedium}"
+                                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
                         </VerticalStackLayout>
                     </Border>
 
+                    <!-- Wall Thickness Card -->
                     <Border Grid.Row="1" Grid.Column="0"
-                           Padding="12"
-                           BackgroundColor="{StaticResource Gray100}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="8"/>
-                        </Border.StrokeShape>
+                           Style="{StaticResource CardStyle}">
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{x:Static resx:AppResources.WallThickness}"
-                                   FontSize="12"
-                                   TextColor="{StaticResource Gray600}"/>
+                                   Style="{StaticResource LabelMedium}"/>
                             <Label Text="{Binding CurrentWork.WallThickness, StringFormat='{0} mm'}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"/>
+                                   Style="{StaticResource TitleMedium}"/>
                         </VerticalStackLayout>
                     </Border>
 
+                    <!-- Sync Status Card -->
                     <Border Grid.Row="1" Grid.Column="1"
-                           Padding="12"
-                           BackgroundColor="{StaticResource Gray100}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="8"/>
-                        </Border.StrokeShape>
+                           Style="{StaticResource CardStyle}">
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{x:Static resx:AppResources.SyncStatus}"
-                                   FontSize="12"
-                                   TextColor="{StaticResource Gray600}"/>
+                                   Style="{StaticResource LabelMedium}"/>
                             <Label Text="{Binding CurrentWork.SyncStatus, Converter={StaticResource SyncStatusCodeToLocalizedConverter}}"
-                                   FontSize="16"
-                                   FontAttributes="Bold"/>
+                                   Style="{StaticResource TitleMedium}"/>
                         </VerticalStackLayout>
                     </Border>
 
+                    <!-- Created Date Card -->
                     <Border Grid.Row="2" Grid.Column="0"
-                           Padding="12"
-                           BackgroundColor="{StaticResource Gray100}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="8"/>
-                        </Border.StrokeShape>
+                           Style="{StaticResource CardStyle}">
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{x:Static resx:AppResources.CreatedAt}"
-                                   FontSize="12"
-                                   TextColor="{StaticResource Gray600}"/>
+                                   Style="{StaticResource LabelMedium}"/>
                             <Label Text="{Binding CurrentWork.CreatedAt, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
-                                   FontSize="14"
-                                   FontAttributes="Bold"/>
+                                   Style="{StaticResource BodyMedium}"/>
                         </VerticalStackLayout>
                     </Border>
 
+                    <!-- Updated Date Card -->
                     <Border Grid.Row="2" Grid.Column="1"
-                           Padding="12"
-                           BackgroundColor="{StaticResource Gray100}">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="8"/>
-                        </Border.StrokeShape>
+                           Style="{StaticResource CardStyle}">
                         <VerticalStackLayout Spacing="4">
                             <Label Text="{x:Static resx:AppResources.UpdatedAt}"
-                                   FontSize="12"
-                                   TextColor="{StaticResource Gray600}"/>
+                                   Style="{StaticResource LabelMedium}"/>
                             <Label Text="{Binding CurrentWork.UpdatedAt, StringFormat='{0:dd.MM.yyyy HH:mm}'}"
-                                   FontSize="14"
-                                   FontAttributes="Bold"/>
+                                   Style="{StaticResource BodyMedium}"/>
                         </VerticalStackLayout>
                     </Border>
                 </Grid>
 
-                <Border Padding="16"
-                       BackgroundColor="{StaticResource Secondary}"
+                <!-- Drying Timer Card (In Progress) -->
+                <Border Style="{StaticResource InfoCardStyle}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource SecondaryContainer}, Dark={StaticResource SecondaryContainerDark}}"
                        IsVisible="{Binding CurrentWork.RemainingDryingTime, Converter={StaticResource IsNotNullConverter}}">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="12"/>
-                    </Border.StrokeShape>
                     <VerticalStackLayout Spacing="8">
-                        <HorizontalStackLayout Spacing="8">
-                            <Label Text="{x:Static resx:AppResources.DryingTime}"
-                                   FontSize="18"
-                                   FontAttributes="Bold"
-                                   TextColor="{StaticResource White}"
-                                   VerticalOptions="Center"/>
-                        </HorizontalStackLayout>
-
+                        <Label Text="{x:Static resx:AppResources.DryingTime}"
+                               Style="{StaticResource TitleMedium}"
+                               TextColor="{AppThemeBinding Light={StaticResource OnSecondaryContainer}, Dark={StaticResource OnSecondaryContainerDark}}"/>
+                        
                         <Label Text="{Binding CurrentWork.RemainingDryingTime, StringFormat={x:Static resx:AppResources.TimeLeft}}"
-                               FontSize="20"
-                               FontAttributes="Bold"
-                               TextColor="{StaticResource White}"/>
+                               Style="{StaticResource HeadlineMedium}"
+                               TextColor="{AppThemeBinding Light={StaticResource OnSecondaryContainer}, Dark={StaticResource OnSecondaryContainerDark}}"/>
 
                         <Label Text="{Binding CurrentWork.DryingStartedAt, StringFormat={x:Static resx:AppResources.DryingStartedFormat}}"
-                               FontSize="12"
-                               TextColor="{StaticResource White}"
-                               Opacity="0.8"
+                               Style="{StaticResource Caption}"
+                               TextColor="{AppThemeBinding Light={StaticResource OnSecondaryContainer}, Dark={StaticResource OnSecondaryContainerDark}}"
                                IsVisible="{Binding CurrentWork.DryingStartedAt, Converter={StaticResource IsNotNullConverter}}"/>
                     </VerticalStackLayout>
                 </Border>
 
-                <Border Padding="16"
-                       BackgroundColor="#4CAF50"
+                <!-- Drying Completed Card -->
+                <Border Style="{StaticResource InfoCardStyle}"
+                       BackgroundColor="{AppThemeBinding Light={StaticResource Success}, Dark={StaticResource SuccessDark}}"
                        IsVisible="{Binding CurrentWork.DryingCompletedAt, Converter={StaticResource IsNotNullConverter}}">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="12"/>
-                    </Border.StrokeShape>
                     <VerticalStackLayout Spacing="8">
                         <HorizontalStackLayout Spacing="8">
-                            <Label Text="[Check]"
+                            <Label Text="✅"
                                    FontSize="24"
-                                   TextColor="{StaticResource White}"
                                    VerticalOptions="Center"/>
                             <Label Text="{x:Static resx:AppResources.DryingCompleted}"
-                                   FontSize="18"
-                                   FontAttributes="Bold"
+                                   Style="{StaticResource TitleMedium}"
                                    TextColor="{StaticResource White}"
                                    VerticalOptions="Center"/>
                         </HorizontalStackLayout>
 
                         <Label Text="{Binding CurrentWork.DryingCompletedAt, StringFormat={x:Static resx:AppResources.DryingCompletedAtFormat}}"
-                               FontSize="14"
+                               Style="{StaticResource BodyMedium}"
                                TextColor="{StaticResource White}"
                                Opacity="0.9"/>
                     </VerticalStackLayout>
                 </Border>
 
-                <VerticalStackLayout Spacing="12">
-                    <Button Text="{x:Static resx:AppResources.ChangeStatus}"
-                            Command="{Binding ChangeStatusCommand}"
-                            BackgroundColor="{StaticResource Primary}"
-                            TextColor="{StaticResource White}"
-                            HeightRequest="50"
-                            CornerRadius="25"
-                            FontSize="16"
-                            FontAttributes="Bold"/>
+                <!-- Action Buttons -->
+                <VerticalStackLayout Spacing="12" Margin="0,8,0,0">
+                    <!-- Status Change Section -->
+                    <VerticalStackLayout Spacing="8" 
+                                       IsVisible="{Binding CanChangeStatus}">
+                        <Label Text="{x:Static resx:AppResources.ChangeStatus}"
+                               Style="{StaticResource TitleMedium}"/>
+
+                        <Picker ItemsSource="{Binding Statuses}"
+                               SelectedItem="{Binding SelectedStatus}"
+                               Style="{StaticResource PrimaryPicker}"
+                               Title="{x:Static resx:AppResources.SelectStatus}">
+                            <Picker.ItemDisplayBinding>
+                                <Binding Path="Code" Converter="{StaticResource WorkStatusCodeToLocalizedConverter}"/>
+                            </Picker.ItemDisplayBinding>
+                        </Picker>
+                        
+                        <Button Text="{x:Static resx:AppResources.ChangeStatus}"
+                                Command="{Binding ChangeStatusCommand}"
+                                Style="{StaticResource PrimaryButton}"
+                                IsEnabled="{Binding SelectedStatus, Converter={StaticResource IsNotNullConverter}}"/>
+                    </VerticalStackLayout>
 
                     <Button Text="{x:Static resx:AppResources.GoBack}"
                             Command="{Binding GoBackCommand}"
-                            BackgroundColor="{StaticResource Gray300}"
-                            TextColor="{StaticResource Gray900}"
-                            HeightRequest="50"
-                            CornerRadius="25"
-                            FontSize="16"/>
+                            Style="{StaticResource SecondaryButton}"/>
                 </VerticalStackLayout>
 
             </VerticalStackLayout>

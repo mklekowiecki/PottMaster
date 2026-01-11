@@ -2,17 +2,65 @@
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resx="clr-namespace:PottMaster.Resources"
-             Title="{x:Static resx:AppResources.Signup}">
+             xmlns:vm="clr-namespace:PottMaster.ViewModels"
+             Title="{x:Static resx:AppResources.Signup}"
+             x:DataType="vm:SignupViewModel">
     <ScrollView>
-        <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
-            <Label Text="{x:Static resx:AppResources.Welcome}" SemanticProperties.HeadingLevel="Level1" Style="{StaticResource HeadingLabel}" />
-            <Label Text="{x:Static resx:AppResources.CreateAccount}" SemanticProperties.HeadingLevel="Level2" Style="{StaticResource SubheadingLabel}" />
-            <Entry Placeholder="{x:Static resx:AppResources.Email}" Text="{Binding Email, Mode=TwoWay}" Style="{StaticResource ModernEntry}" />
-            <Entry Placeholder="{x:Static resx:AppResources.Password}" Text="{Binding Password, Mode=TwoWay}" IsPassword="true" Style="{StaticResource ModernEntry}" />
-            <Button Text="{x:Static resx:AppResources.Signup}" Command="{Binding SignupCommand}" IsEnabled="{Binding IsSignupEnabled}" SemanticProperties.Hint="{x:Static resx:AppResources.SignUpHint}" />
+        <VerticalStackLayout Spacing="0" Padding="24" VerticalOptions="Center">
+            
+            <!-- Logo/Brand Area -->
+            <Label Text="{x:Static resx:AppResources.Signup}" 
+                   SemanticProperties.HeadingLevel="Level1" 
+                   Style="{StaticResource DisplayMedium}"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                   Margin="0,48,0,0" />
+            
+            <!-- Subtitle -->
+            <Label Text="{x:Static resx:AppResources.CreateAccount}" 
+                   SemanticProperties.HeadingLevel="Level2" 
+                   Style="{StaticResource TitleLarge}"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                   Opacity="0.7"
+                   Margin="0,8,0,24" />
+            
+            <!-- Email Entry -->
+            <Entry Placeholder="{x:Static resx:AppResources.Email}" 
+                   Text="{Binding Email, Mode=TwoWay}" 
+                   Style="{StaticResource PrimaryEntry}"
+                   Keyboard="Email"
+                   Margin="0,0,0,12" />
+            
+            <!-- Password Entry -->
+            <Entry Placeholder="{x:Static resx:AppResources.Password}" 
+                   Text="{Binding Password, Mode=TwoWay}" 
+                   IsPassword="true" 
+                   Style="{StaticResource PrimaryEntry}"
+                   Margin="0,0,0,24" />
+            
+            <!-- Signup Button -->
+            <Button Text="{x:Static resx:AppResources.Signup}" 
+                    Command="{Binding SignupCommand}" 
+                    IsEnabled="{Binding IsSignupEnabled}"
+                    Style="{StaticResource PrimaryButton}"
+                    SemanticProperties.Hint="{x:Static resx:AppResources.SignUpHint}"
+                    Margin="0,0,0,32" />
+            
+            <!-- Already Have Account Text -->
             <Label Text="{x:Static resx:AppResources.AlreadyHaveAccount}" 
-                   HorizontalOptions="Center" Opacity="0.6" />
-            <Button Text="{x:Static resx:AppResources.Login}" Command="{Binding NavigateToLoginCommand}" SemanticProperties.Hint="{x:Static resx:AppResources.LoginHint}" />
+                   Style="{StaticResource BodyMedium}"
+                   HorizontalOptions="Center"
+                   TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                   Opacity="0.7"
+                   Margin="0,0,0,12" />
+            
+            <!-- Login Button -->
+            <Button Text="{x:Static resx:AppResources.Login}" 
+                    Command="{Binding NavigateToLoginCommand}"
+                    Style="{StaticResource SecondaryButton}"
+                    SemanticProperties.Hint="{x:Static resx:AppResources.LoginHint}" />
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

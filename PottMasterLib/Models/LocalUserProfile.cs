@@ -3,7 +3,7 @@ using SQLite;
 namespace PottMasterLib.Models;
 
 [Table("user_profiles")]
-public class LocalUserProfile
+public class LocalUserProfile : IUserProfile
 {
     [PrimaryKey]
     public string Id { get; set; } = string.Empty;

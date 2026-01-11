@@ -36,5 +36,7 @@ namespace PottMaster.Services
         Task<AuthResponse<LocalUserProfile>> GetUserProfileAsync();
         
         Task<Supabase.Gotrue.User?> GetCurrentUserAsync();
-    }
-}
+                
+                Task ClearSession();
+            }
+        }

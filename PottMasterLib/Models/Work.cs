@@ -4,7 +4,7 @@ using SQLite;
 namespace PottMasterLib.Models;
 
 [Table("works")]
-public class Work
+public class Work : IWork
 {
     [PrimaryKey]
     public string Id { get; set; } = Guid.NewGuid().ToString();
@@ -13,6 +13,7 @@ public class Work
     public string UserId { get; set; } = string.Empty;
 
     [Unique]
+    [System.ComponentModel.DataAnnotations.StringLength(20)]
     public string Code { get; set; } = string.Empty;
 
     public int CategoryId { get; set; }
@@ -33,26 +34,5 @@ public class Work
 
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-    [Ignore]
-    public string CategoryCode { get; set; } = string.Empty;
-
-    [Ignore]
-    public string StatusCode { get; set; } = string.Empty;
-
-    [Ignore]
-    public TimeSpan? RemainingDryingTime
-    {
-        get
-        {
-            if (StatusId >= (int)WorkStatusCode.BoneDry) return TimeSpan.Zero;
-
-            var startTime = DryingStartedAt ?? CreatedAt;
-            var dryingDays = CalculationLogic.CalculateDryingDays(WallThickness);
-
-            var targetDate = startTime.AddDays(dryingDays);
-            var remaining = targetDate - DateTime.UtcNow;
-
-            return remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero;
-        }
-    }
+  
 }

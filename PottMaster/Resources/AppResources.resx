@@ -132,7 +132,7 @@
     <comment>Displayed when signup succeeds</comment>
   </data>
   <data name="AccountCreatedPleaseLogin" xml:space="preserve">
-    <value>Konto utworzone, możesz się zalogować.</value>
+    <value>Konto utworzone,otwórz pocztę na tym urządzeniu i potwierdź klikając w link</value>
     <comment>Displayed after successful signup</comment>
   </data>
   <data name="LoginFailed" xml:space="preserve">
@@ -202,7 +202,7 @@
     <value>Anuluj</value>
   </data>
   <data name="PhotoTitle" xml:space="preserve">
-    <value>Zdjęcie</value>
+    <value>Zdjęcia</value>
   </data>
   <data name="NoPhotoSelected" xml:space="preserve">
     <value>Nie wybrano zdjęcia</value>
@@ -414,5 +414,449 @@
   </data>
   <data name="DryingCompleteMessage" xml:space="preserve">
     <value>Praca {0} wyschła i jest gotowa na następny etap</value>
+  </data>
+  <data name="EnterWorkCode" xml:space="preserve">
+    <value>Wprowadź kod pracy</value>
+  </data>
+  <data name="ConfirmDeletion" xml:space="preserve">
+    <value>Potwierdź usunięcie</value>
+  </data>
+  <data name="ConfirmDeletionMessage" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć?</value>
+  </data>
+  <data name="AppTitle" xml:space="preserve">
+    <value>PottMaster</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Logowanie</value>
+  </data>
+  <data name="SignupTitle" xml:space="preserve">
+    <value>Rejestracja</value>
+  </data>
+  <data name="TabWorksTitle" xml:space="preserve">
+    <value>Prace</value>
+  </data>
+  <data name="TabInventoryTitle" xml:space="preserve">
+    <value>Inwentarz</value>
+  </data>
+  <data name="TabWikiTitle" xml:space="preserve">
+    <value>Wikipedia</value>
+  </data>
+  <data name="TabAnalyticsTitle" xml:space="preserve">
+    <value>Analizy</value>
+  </data>
+  <data name="TabProfileTitle" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="ProfileTitle" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="AccountSettings" xml:space="preserve">
+    <value>Ustawienia konta</value>
+  </data>
+  <data name="Initials" xml:space="preserve">
+    <value>Inicjały</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>O aplikacji</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Wersja</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
+  <data name="LogoutConfirmationTitle" xml:space="preserve">
+    <value>Wylogowanie</value>
+  </data>
+  <data name="LogoutConfirmationMessage" xml:space="preserve">
+    <value>Czy na pewno chcesz się wylogować?</value>
+  </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>Wybierz status</value>
+  </data>
+  <data name="Syncing" xml:space="preserve">
+    <value>Wysyłam dane....</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Brak internetu</value>
+  </data>
+  <data name="SyncError" xml:space="preserve">
+    <value>Błąd wysyłki danych</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Wysyłka danych do bazy...</value>
+  </data>
+  <data name="Synced" xml:space="preserve">
+    <value>Dane offline wysłane</value>
+  </data>
+  <data name="ConfirmingEmail" xml:space="preserve">
+    <value>Potwierdzanie adresu e-mail...</value>
+  </data>
+  <data name="NoConfirmationLinkReceived" xml:space="preserve">
+    <value>Nie otrzymano linku potwierdzającego.</value>
+  </data>
+  <data name="InvalidConfirmationLink" xml:space="preserve">
+    <value>Nieprawidłowy link potwierdzający.</value>
+  </data>
+  <data name="EmailConfirmedSuccessfully" xml:space="preserve">
+    <value>Adres e-mail potwierdzony pomyślnie!</value>
+  </data>
+  <data name="FailedToConfirmEmail" xml:space="preserve">
+    <value>Nie udało się potwierdzić adresu e-mail.</value>
+  </data>
+  <data name="EmailConfirmationTitle" xml:space="preserve">
+    <value>Potwierdzenie adresu e-mail</value>
+  </data>
+  <data name="GoToLogin" xml:space="preserve">
+    <value>Przejdź do logowania</value>
+  </data>
+  <data name="FingerPrintLogin" xml:space="preserve">
+    <value>Logowanie odciskiem palca</value>
+  </data>
+  <data name="FingerPrintLoginMsg" xml:space="preserve">
+    <value>Użyj odcisku palca, aby się zalogować</value>
+  </data>
+  <data name="FingerPrintLoginFailed" xml:space="preserve">
+    <value>Uwierzytelnianie biometryczne nie powiodło się</value>
+  </data>
+  <data name="NoFingerPrintDataSaved" xml:space="preserve">
+    <value>Brak zapisanych danych logowania dla logowania odciskiem palca</value>
+  </data>
+  <data name="LoginWithFingerprint" xml:space="preserve">
+    <value>Zaloguj się odciskiem palca</value>
+  </data>
+  <data name="ZeroDays" xml:space="preserve">
+    <value>0 dni</value>
+  </data>
+  <data name="UnauthorizedAccess" xml:space="preserve">
+    <value>Brak dostępu. Zaloguj się ponownie.</value>
+  </data>
+  <data name="ResourceNotFound" xml:space="preserve">
+    <value>Zasób nie znaleziony.</value>
+  </data>
+  <data name="NetworkError" xml:space="preserve">
+    <value>Błąd sieci. Sprawdź połączenie.</value>
+  </data>
+  <data name="RequestTimeout" xml:space="preserve">
+    <value>Przekroczono limit czasu żądania. Spróbuj ponownie.</value>
+  </data>
+  <data name="InvalidOperation" xml:space="preserve">
+    <value>Nieprawidłowa operacja.</value>
+  </data>
+  <data name="GenericError" xml:space="preserve">
+    <value>Wystąpił błąd.</value>
+  </data>
+  <data name="DeleteGlaze" xml:space="preserve">
+    <value>Usuń glazurę</value>
+  </data>
+  <data name="ConfirmDeleteGlaze" xml:space="preserve">
+    <value>Czy na pewno chcesz usunąć {0}?</value>
+  </data>
+  <data name="GlazeNameRequired" xml:space="preserve">
+    <value>Nazwa glazury jest wymagana.</value>
+  </data>
+  <data name="WorkCodeValidation" xml:space="preserve">
+    <value>Nieprawidłowy kod pracy lub długość kodu.</value>
+  </data>
+  <data name="GlazeDetails" xml:space="preserve">
+    <value>Detale szkliwa</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edytuj</value>
+  </data>
+  <data name="FiringParametersComingSoon" xml:space="preserve">
+    <value>Parametry wypalania wkrótce</value>
+  </data>
+  <data name="AppearanceComingSoon" xml:space="preserve">
+    <value>Wygląd wkrótce</value>
+  </data>
+  <data name="BehaviorComingSoon" xml:space="preserve">
+    <value>Zachowanie wkrótce</value>
+  </data>
+  <data name="TypeLabel" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="ConeRatingLabel" xml:space="preserve">
+    <value>Ocena stożka</value>
+  </data>
+  <data name="ColorLabel" xml:space="preserve">
+    <value>Kolor</value>
+  </data>
+  <data name="QuantityLabel" xml:space="preserve">
+    <value>Ilość</value>
+  </data>
+  <data name="FoodSafeLabel" xml:space="preserve">
+    <value>Bezpieczne dla żywności</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notatki</value>
+  </data>
+  <data name="SearchGlazesPlaceholder" xml:space="preserve">
+    <value>Szukaj glazur...</value>
+  </data>
+  <data name="NoGlazesFound" xml:space="preserve">
+    <value>Nie znaleziono glazur. Dodaj swoją pierwszą glazurę!</value>
+  </data>
+  <data name="TabBasic" xml:space="preserve">
+    <value>Podstawowe</value>
+  </data>
+  <data name="TabFiring" xml:space="preserve">
+    <value>Wypalanie</value>
+  </data>
+  <data name="TabAppearance" xml:space="preserve">
+    <value>Wygląd</value>
+  </data>
+  <data name="TabBehavior" xml:space="preserve">
+    <value>Zachowanie</value>
+  </data>
+  <data name="TabApplication" xml:space="preserve">
+    <value>Aplikacja</value>
+  </data>
+  <data name="TabAdvanced" xml:space="preserve">
+    <value>Zaawansowane</value>
+  </data>
+  <data name="RequiredInformation" xml:space="preserve">
+    <value>Wymagane informacje</value>
+  </data>
+  <data name="OptionalDetails" xml:space="preserve">
+    <value>Opcjonalne szczegóły</value>
+  </data>
+  <data name="Manufacturer" xml:space="preserve">
+    <value>Producent</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Kolor</value>
+  </data>
+  <data name="ConeRatingExample" xml:space="preserve">
+    <value>Ocena stożka (np. Stożek 6)</value>
+  </data>
+  <data name="QuantityExample" xml:space="preserve">
+    <value>Ilość (np. 500g, pół słoika)</value>
+  </data>
+  <data name="FoodSafety" xml:space="preserve">
+    <value>Bezpieczeństwo żywności</value>
+  </data>
+  <data name="NotTested" xml:space="preserve">
+    <value>Nie testowane</value>
+  </data>
+  <data name="Safe" xml:space="preserve">
+    <value>Bezpieczne</value>
+  </data>
+  <data name="NotSafe" xml:space="preserve">
+    <value>Niebezpieczne</value>
+  </data>
+  <data name="MarkAsFavorite" xml:space="preserve">
+    <value>Oznacz jako ulubione</value>
+  </data>
+  <data name="FiringParameters" xml:space="preserve">
+    <value>Parametry wypalania</value>
+  </data>
+  <data name="TemperatureRange" xml:space="preserve">
+    <value>Zakres temperatury</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="Unit" xml:space="preserve">
+    <value>Jednostka</value>
+  </data>
+  <data name="Atmosphere" xml:space="preserve">
+    <value>Atmosfera</value>
+  </data>
+  <data name="CurveSensitivity" xml:space="preserve">
+    <value>Czułość krzywej</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>Niska</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Średnia</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>Wysoka</value>
+  </data>
+  <data name="AppearanceProperties" xml:space="preserve">
+    <value>Właściwości wyglądu</value>
+  </data>
+  <data name="Transparency" xml:space="preserve">
+    <value>Przejrzystość</value>
+  </data>
+  <data name="Transparent" xml:space="preserve">
+    <value>Przejrzyste</value>
+  </data>
+  <data name="SemiTransparent" xml:space="preserve">
+    <value>Półprzejrzyste</value>
+  </data>
+  <data name="Opaque" xml:space="preserve">
+    <value>Kryjące</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Wykończenie</value>
+  </data>
+  <data name="Gloss" xml:space="preserve">
+    <value>Błyszczące</value>
+  </data>
+  <data name="Satin" xml:space="preserve">
+    <value>Satynowe</value>
+  </data>
+  <data name="SemiMatte" xml:space="preserve">
+    <value>Półmatowe</value>
+  </data>
+  <data name="Matte" xml:space="preserve">
+    <value>Matowe</value>
+  </data>
+  <data name="GlazeBehavior" xml:space="preserve">
+    <value>Zachowanie glazury</value>
+  </data>
+  <data name="MeltFluidity" xml:space="preserve">
+    <value>Płynność topnienia</value>
+  </data>
+  <data name="ThicknessTolerance" xml:space="preserve">
+    <value>Tolerancja grubości</value>
+  </data>
+  <data name="ColorStability" xml:space="preserve">
+    <value>Stabilność koloru</value>
+  </data>
+  <data name="Repeatability" xml:space="preserve">
+    <value>Powtarzalność</value>
+  </data>
+  <data name="ApplicationDetails" xml:space="preserve">
+    <value>Szczegóły aplikacji</value>
+  </data>
+  <data name="Form" xml:space="preserve">
+    <value>Forma</value>
+  </data>
+  <data name="DryMix" xml:space="preserve">
+    <value>Mieszanka sucha</value>
+  </data>
+  <data name="Liquid" xml:space="preserve">
+    <value>Płynna</value>
+  </data>
+  <data name="Brushing" xml:space="preserve">
+    <value>Do malowania</value>
+  </data>
+  <data name="RecommendedThicknessExample" xml:space="preserve">
+    <value>Zalecana grubość (np. 2-3 mm)</value>
+  </data>
+  <data name="ApplicationNotes" xml:space="preserve">
+    <value>Notatki aplikacji</value>
+  </data>
+  <data name="SpecialInstructions" xml:space="preserve">
+    <value>Specjalne instrukcje...</value>
+  </data>
+  <data name="AdvancedProperties" xml:space="preserve">
+    <value>Zaawansowane właściwości</value>
+  </data>
+  <data name="ClayInteraction" xml:space="preserve">
+    <value>Interakcja z gliną</value>
+  </data>
+  <data name="SelectInteractionType" xml:space="preserve">
+    <value>Wybierz typ interakcji</value>
+  </data>
+  <data name="Neutral" xml:space="preserve">
+    <value>Neutralna</value>
+  </data>
+  <data name="Contrasting" xml:space="preserve">
+    <value>Kontrastowa</value>
+  </data>
+  <data name="HighlyReactive" xml:space="preserve">
+    <value>Wysoko reaktywna</value>
+  </data>
+  <data name="WorkType" xml:space="preserve">
+    <value>Typ pracy</value>
+  </data>
+  <data name="SelectWorkType" xml:space="preserve">
+    <value>Wybierz typ pracy</value>
+  </data>
+  <data name="Artistic" xml:space="preserve">
+    <value>Artystyczna</value>
+  </data>
+  <data name="Functional" xml:space="preserve">
+    <value>Funkcjonalna</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Obie</value>
+  </data>
+  <data name="Durability" xml:space="preserve">
+    <value>Wytrzymałość</value>
+  </data>
+  <data name="SelectDurability" xml:space="preserve">
+    <value>Wybierz wytrzymałość</value>
+  </data>
+  <data name="MitigationNotes" xml:space="preserve">
+    <value>Notatki łagodzące</value>
+  </data>
+  <data name="KnownIssues" xml:space="preserve">
+    <value>Znane problemy i jak je zapobiegać...</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="KnowledgeBase" xml:space="preserve">
+    <value>Baza wiedzy</value>
+  </data>
+  <data name="WikiDescription" xml:space="preserve">
+    <value>Przeglądaj informacje zweryfikowane przez społeczność na temat materiałów ceramicznych, narzędzi i technik.</value>
+  </data>
+  <data name="AnalyticsAndReports" xml:space="preserve">
+    <value>Analizy i raporty</value>
+  </data>
+  <data name="AnalyticsDescription" xml:space="preserve">
+    <value>Wyświetl swoje miesięczne raporty Pottery Wrapped, śledź swoje postępy i analizuj trendy prac ceramicznych.</value>
+  </data>
+  <data name="Oxidation" xml:space="preserve">
+    <value>Oksydacja</value>
+  </data>
+  <data name="Reduction" xml:space="preserve">
+    <value>Redukcja</value>
+  </data>
+  <data name="Stable" xml:space="preserve">
+    <value>Stabilna</value>
+  </data>
+  <data name="Variable" xml:space="preserve">
+    <value>Zmienna</value>
+  </data>
+  <data name="NotSpecified" xml:space="preserve">
+    <value>Brak informacji</value>
+  </data>
+  <data name="GlazeName" xml:space="preserve">
+    <value>Nazwa szkliwa</value>
+  </data>
+  <data name="GlazeType" xml:space="preserve">
+    <value>Typ szkliwa</value>
+  </data>
+  <data name="AdditionalNotes" xml:space="preserve">
+    <value>Dodatkowe informacje</value>
+  </data>
+  <data name="SearchWikiPlaceholder" xml:space="preserve">
+    <value>Szukaj materiałów...</value>
+  </data>
+  <data name="FilterByType" xml:space="preserve">
+    <value>Filtruj według typu</value>
+  </data>
+  <data name="NoMaterialsFound" xml:space="preserve">
+    <value>Nie znaleziono materiałów.</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Właściwości</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="SubmittedBy" xml:space="preserve">
+    <value>Przesłane przez</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Utworzone</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Zaktualizowane</value>
   </data>
 </root>
