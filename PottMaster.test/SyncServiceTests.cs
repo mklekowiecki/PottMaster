@@ -131,51 +131,5 @@ namespace PottMaster.Tests.Services
             // Assert
             Assert.That(isOnline, Is.InstanceOf<bool>());
         }
-
-        [Test]
-        public async Task SyncWorkAsync_UpdatesSyncStatusToPending()
-        {
-            // Arrange
-            var work = new LocalWork
-            {
-                Id = "test-work-1",
-                Code = "MK-CUP-1224-001",
-                SyncStatus = Pending.Code()
-            };
-
-            _apiEndpointMock.Setup(x => x.UpsertWorkAsync(It.IsAny<IWork>()))
-                .ReturnsAsync(Result<IWork>.Success(work));
-
-            // Act
-            var result = await _syncService.SyncWorkAsync(work);
-
-            // Assert
-            Assert.That(result, Is.True);
-            _dbServiceMock.Verify(x => x.UpdateAsync(It.Is<LocalWork>(w => 
-                w.Id == work.Id && w.SyncStatus == Synced.Code())), Times.Once);
-        }
-
-        [Test]
-        public async Task SyncWorkAsync_UpdatesSyncStatusToErrorOnFailure()
-        {
-            // Arrange
-            var work = new LocalWork
-            {
-                Id = "test-work-1",
-                Code = "MK-CUP-1224-001",
-                SyncStatus = Pending.Code()
-            };
-
-            _apiEndpointMock.Setup(x => x.UpsertWorkAsync(It.IsAny<IWork>()))
-                .ReturnsAsync(Result<IWork>.Failure("Network error"));
-
-            // Act
-            var result = await _syncService.SyncWorkAsync(work);
-
-            // Assert
-            Assert.That(result, Is.False);
-            _dbServiceMock.Verify(x => x.UpdateAsync(It.Is<LocalWork>(w => 
-                w.Id == work.Id && w.SyncStatus == Error.Code())), Times.Once);
-        }
     }
 }

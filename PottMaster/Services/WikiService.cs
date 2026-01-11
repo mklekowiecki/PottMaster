@@ -27,7 +27,12 @@ public class WikiService : IWikiService
         return await _repository.GetMaterialTypesAsync();
     }
 
-    public async Task<WikiMaterial?> GetMaterialByIdAsync(int id)
+    public async Task<List<WikiMaterial>> GetAllMaterialsAsync()
+    {
+        return await _repository.GetAllMaterialsAsync();
+    }
+
+    public async Task<WikiMaterial?> GetMaterialByIdAsync(Guid id)
     {
         return await _repository.GetMaterialByIdAsync(id);
     }
@@ -42,7 +47,7 @@ public class WikiService : IWikiService
         return await _repository.GetUnverifiedMaterialsAsync();
     }
 
-    public async Task VerifyMaterialAsync(int id)
+    public async Task VerifyMaterialAsync(Guid id)
     {
         await _repository.VerifyMaterialAsync(id);
     }

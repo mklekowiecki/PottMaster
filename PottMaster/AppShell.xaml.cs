@@ -20,6 +20,8 @@ namespace PottMaster
             Routing.RegisterRoute(nameof(EmailConfirmationPage), typeof(EmailConfirmationPage));
             Routing.RegisterRoute(nameof(GlazeDetailPage), typeof(GlazeDetailPage));
             Routing.RegisterRoute("GlazeDetailPage", typeof(GlazeDetailPage));
+            Routing.RegisterRoute("WikiDetailPage", typeof(WikiDetailPage));
+            Routing.RegisterRoute("WikiSubmitPage", typeof(WikiSubmitPage));
         }
         
         protected override void OnHandlerChanged()

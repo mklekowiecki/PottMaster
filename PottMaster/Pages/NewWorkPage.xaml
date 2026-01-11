@@ -142,7 +142,7 @@
                 </Grid>
 
                 <!-- Drying Time Estimate -->
-                <Border Style="{StaticResource InfoCardStyle}">
+                <Border Style="{StaticResource CardStyle}">
                     <HorizontalStackLayout Spacing="12">
                         <Label Text="⏱️"
                                FontSize="24"

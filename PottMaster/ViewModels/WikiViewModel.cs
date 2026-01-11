@@ -4,6 +4,7 @@ using PottMaster.Resources;
 using PottMaster.Services;
 using PottMasterLib.Models;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace PottMaster.ViewModels;
 
@@ -78,8 +79,7 @@ public partial class WikiViewModel : ObservableObject
             }
             else
             {
-                // Load all or featured materials
-                results = new List<WikiMaterial>(); // For now, empty
+                results = await _wikiService.GetAllMaterialsAsync();
             }
 
             Materials = new ObservableCollection<WikiMaterial>(results);
@@ -98,15 +98,21 @@ public partial class WikiViewModel : ObservableObject
     [RelayCommand]
     private async Task ViewMaterialDetailsAsync(WikiMaterial material)
     {
-        if (material?.Id != null)
+        if (material?.Id != Guid.Empty)
         {
             // Navigate to detail page
             var parameters = new Dictionary<string, object>
             {
-                { "materialId", material.Id }
+                { "materialId", material.Id.ToString() }
             };
             await Shell.Current.GoToAsync("WikiDetailPage", parameters);
         }
+    }
+
+    [RelayCommand]
+    private async Task AddNewMaterialAsync()
+    {
+        await Shell.Current.GoToAsync("WikiSubmitPage");
     }
 
     partial void OnSearchQueryChanged(string oldValue, string newValue)

@@ -23,11 +23,20 @@
     <Grid RowDefinitions="Auto,*,Auto">
         <!-- Search and Filter Bar -->
         <Grid Grid.Row="0" RowDefinitions="Auto,Auto" Padding="16" RowSpacing="8">
-            <SearchBar Grid.Row="0" 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <SearchBar Grid.Row="0" Grid.Column="0"
                        Placeholder="{x:Static resx:AppResources.SearchWikiPlaceholder}"
                        Text="{Binding SearchQuery}"
                        SearchCommand="{Binding SearchMaterialsCommand}"/>
-            <Picker Grid.Row="1" 
+            <Button Grid.Row="0" Grid.Column="1"
+                    Text="+"
+                    Command="{Binding AddNewMaterialCommand}"
+                    WidthRequest="40"
+                    HeightRequest="40"/>
+            <Picker Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                     Title="{x:Static resx:AppResources.FilterByType}"
                     ItemsSource="{Binding MaterialTypes}"
                     ItemDisplayBinding="{Binding Name}"
@@ -80,7 +89,7 @@
 
                                 <!-- Type and Properties -->
                                 <HorizontalStackLayout Grid.Row="2" Spacing="8">
-                                    <Label Text="{Binding Type.Name}"
+                                    <Label Text="{Binding MaterialType.Name}"
                                            FontSize="12"
                                            FontAttributes="Italic"
                                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>

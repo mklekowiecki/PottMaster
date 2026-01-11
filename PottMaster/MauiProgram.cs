@@ -89,6 +89,8 @@
 			builder.Services.AddTransient<GlazeDetailViewModel>();
 			builder.Services.AddTransient<GlazeDetailViewModel>();
 			builder.Services.AddTransient<WikiViewModel>();
+			builder.Services.AddTransient<WikiDetailViewModel>();
+			builder.Services.AddTransient<WikiSubmitViewModel>();
 			
 			// Pages (Transient - new instance per navigation)
 			builder.Services.AddTransient<MainPage>();
@@ -101,8 +103,8 @@
 			builder.Services.AddTransient<GlazeDetailPage>();
 			builder.Services.AddTransient<GlazeDetailPage>();
 			builder.Services.AddTransient<WikiPage>();
-			builder.Services.AddTransient<AnalyticsPage>();
-			builder.Services.AddTransient<EmailConfirmationPage>();
+			builder.Services.AddTransient<WikiDetailPage>();
+			builder.Services.AddTransient<WikiSubmitPage>();
 			
 			// Register BackgroundSyncWorker as singleton
 			builder.Services.AddSingleton<BackgroundSyncWorker>();

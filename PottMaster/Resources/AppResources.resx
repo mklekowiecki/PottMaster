@@ -841,4 +841,22 @@
   <data name="NoMaterialsFound" xml:space="preserve">
     <value>Nie znaleziono materiałów.</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Właściwości</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="SubmittedBy" xml:space="preserve">
+    <value>Przesłane przez</value>
+  </data>
+  <data name="Created" xml:space="preserve">
+    <value>Utworzone</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Zaktualizowane</value>
+  </data>
 </root>

@@ -7,25 +7,28 @@ namespace PottMasterLib.Models;
 public class WikiMaterial : BaseModel
 {
     [PrimaryKey("id")]
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Column("name")]
     public string Name { get; set; } = string.Empty;
 
-    [Column("description")]
+    [Column("user_notes")]
     public string? Description { get; set; }
 
     [Column("type_id")]
     public int TypeId { get; set; }
 
-    [Column("properties")]
-    public string? Properties { get; set; } // JSON string or something
+    [Column("manufacturer")]
+    public string? Manufacturer { get; set; }
 
-    [Column("trust_level")]
+    [Column("properties")]
+    public string? Properties { get; set; } // JSON string
+
+    [Column("verification_status")]
     public string TrustLevel { get; set; } = "unverified"; // verified, unverified, expert
 
     [Column("submitted_by")]
-    public string? SubmittedBy { get; set; }
+    public Guid? SubmittedBy { get; set; }
 
     [Column("created_at")]
     public DateTime CreatedAt { get; set; }
@@ -34,5 +37,6 @@ public class WikiMaterial : BaseModel
     public DateTime UpdatedAt { get; set; }
 
     // Navigation
-    public WikiMaterialType? Type { get; set; }
+    [Newtonsoft.Json.JsonIgnore]
+    public WikiMaterialType? MaterialType { get; set; }
 }
