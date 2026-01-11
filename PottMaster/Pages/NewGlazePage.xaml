@@ -6,7 +6,7 @@
              xmlns:resx="clr-namespace:PottMaster.Resources"
              x:Class="PottMaster.Pages.NewGlazePage"
              x:DataType="vm:NewGlazeViewModel"
-             Title="New Glaze">
+             Title="{Binding IsEditMode, Converter={StaticResource BoolToTitleConverter}, ConverterParameter=New Glaze|Edit Glaze}">
     
     <ContentPage.Resources>
         <ResourceDictionary>

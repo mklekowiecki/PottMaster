@@ -1,18 +1,20 @@
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 
 namespace PottMaster.Controls;
 
 public partial class CollapsibleSection : ContentView
 {
     public static readonly BindableProperty TitleProperty =
-        BindableProperty.Create(nameof(Title), typeof(string), typeof(CollapsibleSection), string.Empty);
+        BindableProperty.Create(nameof(Title), typeof(string), typeof(CollapsibleSection), string.Empty,
+            propertyChanged: OnTitleChanged);
 
     public static readonly BindableProperty IsExpandedProperty =
         BindableProperty.Create(nameof(IsExpanded), typeof(bool), typeof(CollapsibleSection), false,
-            propertyChanged: OnIsExpandedChanged);
+   propertyChanged: OnIsExpandedChanged);
 
     public static readonly BindableProperty ContentProperty =
-        BindableProperty.Create(nameof(Content), typeof(View), typeof(CollapsibleSection));
+        BindableProperty.Create(nameof(Content), typeof(View), typeof(CollapsibleSection),
+     propertyChanged: OnContentChanged);
 
     public string Title
     {
@@ -38,6 +40,11 @@ public partial class CollapsibleSection : ContentView
     {
         InitializeComponent();
         ToggleCommand = new RelayCommand(Toggle);
+
+        // Set initial values after InitializeComponent
+        UpdateTitle();
+        UpdateExpanded();
+        UpdateContent();
     }
 
     private void Toggle()
@@ -45,19 +52,66 @@ public partial class CollapsibleSection : ContentView
         IsExpanded = !IsExpanded;
     }
 
+    private static void OnTitleChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is CollapsibleSection section)
+        {
+            section.UpdateTitle();
+        }
+    }
+
     private static void OnIsExpandedChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        if (bindable is CollapsibleSection section && newValue is bool isExpanded)
+        if (bindable is CollapsibleSection section)
         {
+            section.UpdateExpanded();
+        }
+    }
+
+    private static void OnContentChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        if (bindable is CollapsibleSection section)
+        {
+            section.UpdateContent();
+        }
+    }
+
+    private void UpdateTitle()
+    {
+        if (TitleLabel != null)
+        {
+            TitleLabel.Text = Title;
+        }
+    }
+
+    private void UpdateExpanded()
+    {
+        if (ExpandIconLabel != null)
+        {
+            ExpandIconLabel.Text = IsExpanded ? "−" : "+";
+        }
+
+        if (ContentPresenter != null)
+        {
+            ContentPresenter.IsVisible = IsExpanded;
+
             // Optional: Add animation here
-            if (isExpanded)
+            if (IsExpanded)
             {
-                section.Content?.FadeTo(1, 200);
+                ContentPresenter.FadeTo(1, 200);
             }
             else
             {
-                section.Content?.FadeTo(0, 100);
+                ContentPresenter.FadeTo(0, 100);
             }
+        }
+    }
+
+    private void UpdateContent()
+    {
+        if (ContentPresenter != null && Content != null)
+        {
+            ContentPresenter.Content = Content;
         }
     }
 }

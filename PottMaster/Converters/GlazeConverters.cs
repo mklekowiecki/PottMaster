@@ -43,9 +43,9 @@ public class BoolToStarIconConverter : IValueConverter
     {
         if (value is bool isFavorite && isFavorite)
         {
-            return "star_filled.png"; // You'll need to add these icons
+            return ImageSource.FromFile("filled_star");
         }
-        return "star_outline.png";
+        return ImageSource.FromFile("empty_star");
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

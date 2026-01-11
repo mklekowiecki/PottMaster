@@ -456,9 +456,6 @@
   <data name="Version" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="DangerZone" xml:space="preserve">
-    <value>Danger Zone</value>
-  </data>
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>

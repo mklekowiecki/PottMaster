@@ -134,9 +134,33 @@ public partial class GlazeInventoryViewModel : ObservableObject
     {
         try
         {
-            glaze.IsFavorite = !glaze.IsFavorite;
-            await _glazeService.UpdateGlazeAsync(glaze);
-            ApplyFilters();
+            var index = FilteredGlazes.IndexOf(glaze);
+            if (index >= 0)
+            {
+                // Toggle the favorite status
+                glaze.IsFavorite = !glaze.IsFavorite;
+                await _glazeService.UpdateGlazeAsync(glaze);
+                
+                // Update the item in both collections
+                var glazeInMainList = Glazes.FirstOrDefault(g => g.Id == glaze.Id);
+                if (glazeInMainList != null)
+                {
+                    glazeInMainList.IsFavorite = glaze.IsFavorite;
+                }
+                
+                // If showing favorites only and item is now unfavorited, remove it
+                if (ShowFavoritesOnly && !glaze.IsFavorite)
+                {
+                    FilteredGlazes.RemoveAt(index);
+                    IsEmpty = FilteredGlazes.Count == 0;
+                }
+                else
+                {
+                    // Force UI refresh by removing and re-adding the item
+                    FilteredGlazes.RemoveAt(index);
+                    FilteredGlazes.Insert(index, glaze);
+                }
+            }
         }
         catch (Exception ex)
         {

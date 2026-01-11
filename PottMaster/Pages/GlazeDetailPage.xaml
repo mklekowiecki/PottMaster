@@ -58,21 +58,68 @@
             </Border>
 
             <!-- Collapsible Sections -->
-            <controls:CollapsibleSection Title="Firing Parameters" IsExpanded="True">
+            <controls:CollapsibleSection Title="{x:Static resx:AppResources.FiringParameters}" IsExpanded="True">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="{x:Static resx:AppResources.FiringParametersComingSoon}"/>
+                    <Label Text="{x:Static resx:AppResources.TemperatureRange}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Firing.TemperatureMin, StringFormat='{0} - {Binding Glaze.Properties.Firing.TemperatureMax} {Binding Glaze.Properties.Firing.TemperatureUnit}'}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.Atmosphere}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Firing.Atmosphere}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.CurveSensitivity}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Firing.CurveSensitivity}"/>
                 </VerticalStackLayout>
             </controls:CollapsibleSection>
 
-            <controls:CollapsibleSection Title="Appearance">
+            <controls:CollapsibleSection Title="{x:Static resx:AppResources.AppearanceProperties}">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="{x:Static resx:AppResources.AppearanceComingSoon}"/>
+                    <Label Text="{x:Static resx:AppResources.Transparency}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Appearance.Transparency}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.Finish}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Appearance.Finish}"/>
                 </VerticalStackLayout>
             </controls:CollapsibleSection>
 
-            <controls:CollapsibleSection Title="Behavior">
+            <controls:CollapsibleSection Title="{x:Static resx:AppResources.GlazeBehavior}">
                 <VerticalStackLayout Spacing="8">
-                    <Label Text="{x:Static resx:AppResources.BehaviorComingSoon}"/>
+                    <Label Text="{x:Static resx:AppResources.MeltFluidity}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Behavior.MeltFluidity}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.ThicknessTolerance}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Behavior.ThicknessTolerance}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.ColorStability}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Behavior.ColorStability}"/>
+                </VerticalStackLayout>
+            </controls:CollapsibleSection>
+
+            <controls:CollapsibleSection Title="{x:Static resx:AppResources.ApplicationDetails}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{x:Static resx:AppResources.Form}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Application.Form}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.RecommendedThicknessExample}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Application.RecommendedThickness}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.ApplicationNotes}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Application.ApplicationNotes}" LineBreakMode="WordWrap"/>
+                </VerticalStackLayout>
+            </controls:CollapsibleSection>
+
+            <controls:CollapsibleSection Title="{x:Static resx:AppResources.AdvancedProperties}">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{x:Static resx:AppResources.ClayInteraction}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Advanced.ClayInteraction}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.WorkType}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Advanced.WorkType}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.Durability}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Advanced.Durability}"/>
+                    
+                    <Label Text="{x:Static resx:AppResources.MitigationNotes}" FontAttributes="Bold"/>
+                    <Label Text="{Binding Glaze.Properties.Advanced.MitigationNotes}" LineBreakMode="WordWrap"/>
                 </VerticalStackLayout>
             </controls:CollapsibleSection>
 

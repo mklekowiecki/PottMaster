@@ -439,15 +439,6 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Strefa zagro?enia.
-        /// </summary>
-        internal static string DangerZone {
-            get {
-                return ResourceManager.GetString("DangerZone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Usuń.
         /// </summary>
         internal static string Delete {

@@ -10,24 +10,24 @@
                     Padding="16,12">
                 <Grid ColumnDefinitions="*,Auto">
                     <Label Grid.Column="0" 
-                           Text="{Binding Source={x:Reference this}, Path=Title}"
+                           x:Name="TitleLabel"
                            FontSize="16"
                            FontAttributes="Bold"
                            VerticalOptions="Center"/>
-                    <Image Grid.Column="1"
-                           Source="{Binding Source={x:Reference this}, Path=IsExpanded, Converter={StaticResource BoolToExpandIconConverter}}"
-                           WidthRequest="24"
-                           HeightRequest="24"
-                           VerticalOptions="Center"/>
+                    <Label Grid.Column="1"
+                           x:Name="ExpandIconLabel"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
                 </Grid>
                 <Border.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=ToggleCommand}"/>
+                    <TapGestureRecognizer Command="{Binding ToggleCommand}"/>
                 </Border.GestureRecognizers>
             </Border>
 
             <!-- Content -->
-            <ContentPresenter Content="{Binding Source={x:Reference this}, Path=Content}"
-                              IsVisible="{Binding Source={x:Reference this}, Path=IsExpanded}"
+            <ContentPresenter x:Name="ContentPresenter"
                               Padding="16"/>
         </VerticalStackLayout>
     </Border>

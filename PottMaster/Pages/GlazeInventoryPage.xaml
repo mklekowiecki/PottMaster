@@ -4,8 +4,10 @@
              xmlns:controls="clr-namespace:PottMaster.Controls"
              xmlns:vm="clr-namespace:PottMaster.ViewModels"
              xmlns:converters="clr-namespace:PottMaster.Converters"
+             xmlns:models="clr-namespace:PottMasterLib.Models;assembly=PottMasterLib"
              x:Class="PottMaster.Pages.GlazeInventoryPage"
              x:DataType="vm:GlazeInventoryViewModel"
+			 xmlns:resx="clr-namespace:PottMaster.Resources"
              Title="Inventory">
 
     <ContentPage.Resources>
@@ -20,7 +22,7 @@
         <!-- Search and Filter Bar -->
         <Grid Grid.Row="0" ColumnDefinitions="*,Auto" Padding="16" ColumnSpacing="8">
             <SearchBar Grid.Column="0" 
-                       Placeholder="Search glazes..."
+                       Placeholder="{x:Static resx:AppResources.SearchGlazesPlaceholder}"
                        Text="{Binding SearchText}"
                        SearchCommand="{Binding LoadGlazesCommand}"/>
             <CheckBox Grid.Column="1" 
@@ -30,20 +32,21 @@
 
         <!-- Glaze List -->
         <RefreshView Grid.Row="1" 
+                     Padding="10"
                      IsRefreshing="{Binding IsLoading}"
                      Command="{Binding LoadGlazesCommand}">
             <CollectionView ItemsSource="{Binding FilteredGlazes}"
                            SelectionMode="None"
-                           EmptyView="No glazes found. Add your first glaze!">
+                           EmptyView="{x:Static resx:AppResources.NoGlazesFound}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="8"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="models:LocalGlaze">
                         <SwipeView>
                             <SwipeView.RightItems>
                                 <SwipeItems>
-                                    <SwipeItem Text="Delete" 
+									<SwipeItem Text="{x:Static resx:AppResources.Delete}"
                                                BackgroundColor="Red"
                                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GlazeInventoryViewModel}}, Path=DeleteGlazeCommand}"
                                                CommandParameter="{Binding .}"/>
@@ -52,13 +55,12 @@
                             
                             <Border Padding="16" Margin="16,0"
                                     BackgroundColor="{AppThemeBinding Light={StaticResource Surface}, Dark={StaticResource SurfaceDark}}"
-                                    StrokeThickness="1"
-                                    Stroke="{AppThemeBinding Light={StaticResource Outline}, Dark={StaticResource OutlineDark}}">
+                                    StrokeThickness="1">
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="12"/>
                                 </Border.StrokeShape>
                                 <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,Auto" ColumnSpacing="12">
-                                    <!-- Favorite Star -->
+                                    <!-- Favorite Star --><!--
                                     <Image Grid.Column="0" Grid.RowSpan="3"
                                            Source="{Binding IsFavorite, Converter={StaticResource BoolToStarIconConverter}}"
                                            WidthRequest="24" HeightRequest="24"
@@ -67,7 +69,7 @@
                                             <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:GlazeInventoryViewModel}}, Path=ToggleFavoriteCommand}" 
                                                                  CommandParameter="{Binding .}"/>
                                         </Image.GestureRecognizers>
-                                    </Image>
+                                    </Image>-->
                                     
                                     <!-- Name & Manufacturer -->
                                     <Label Grid.Column="1" Grid.Row="0"

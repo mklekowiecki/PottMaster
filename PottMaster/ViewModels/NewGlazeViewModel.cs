@@ -8,12 +8,17 @@ using System.Collections.ObjectModel;
 
 namespace PottMaster.ViewModels;
 
+[QueryProperty(nameof(GlazeId), "glazeId")]
 public partial class NewGlazeViewModel : ObservableObject
 {
     private readonly IGlazeService _glazeService;
     private readonly IAuthStateService _authStateService;
     private readonly IErrorHandlingService _errorHandler;
     private readonly IAlertService _alertService;
+
+    [ObservableProperty]
+    private string? glazeId;
+
     [ObservableProperty]
     private LocalGlaze glaze = new();
 
@@ -25,6 +30,9 @@ public partial class NewGlazeViewModel : ObservableObject
 
     [ObservableProperty]
     private bool isSaving;
+
+    [ObservableProperty]
+    private bool isEditMode;
 
     // Basic tab
     [ObservableProperty]
@@ -185,6 +193,19 @@ public partial class NewGlazeViewModel : ObservableObject
         _alertService = alertService;
     }
 
+    partial void OnGlazeIdChanged(string? value)
+    {
+        if (!string.IsNullOrEmpty(value))
+        {
+            IsEditMode = true;
+            Task.Run(async () => await LoadGlazeForEditAsync());
+        }
+        else
+        {
+            IsEditMode = false;
+        }
+    }
+
     public async Task InitializeAsync()
     {
         await LoadGlazeTypesAsync();
@@ -200,6 +221,79 @@ public partial class NewGlazeViewModel : ObservableObject
         catch (Exception ex)
         {
             await _errorHandler.HandleErrorAsync(ex, nameof(LoadGlazeTypesAsync));
+        }
+    }
+
+    private async Task LoadGlazeForEditAsync()
+    {
+        if (string.IsNullOrEmpty(GlazeId))
+            return;
+
+        try
+        {
+            Glaze = await _glazeService.GetGlazeByIdAsync(GlazeId);
+            if (Glaze != null)
+            {
+                PopulateFieldsFromGlaze();
+            }
+        }
+        catch (Exception ex)
+        {
+            await _errorHandler.HandleErrorAsync(ex, nameof(LoadGlazeForEditAsync));
+        }
+    }
+
+    private void PopulateFieldsFromGlaze()
+    {
+        if (Glaze == null) return;
+
+        // Basic tab
+        Name = Glaze.Name;
+        Manufacturer = Glaze.Manufacturer;
+        BatchDate = Glaze.BatchDate;
+        SelectedType = GlazeTypes.FirstOrDefault(t => t.Id == Glaze.TypeId);
+        Color = Glaze.Color;
+        ConeRating = Glaze.ConeRating;
+        Quantity = Glaze.Quantity;
+        FoodSafe = Glaze.FoodSafe == true ? AppResources.Yes : Glaze.FoodSafe == false ? AppResources.No : AppResources.NotSpecified;
+        IsFavorite = Glaze.IsFavorite;
+        Notes = Glaze.Notes;
+
+        // Properties
+        if (Glaze.Properties != null)
+        {
+            // Firing tab
+            TemperatureMin = Glaze.Properties.Firing?.TemperatureMin;
+            TemperatureMax = Glaze.Properties.Firing?.TemperatureMax;
+            TemperatureUnit = Glaze.Properties.Firing?.TemperatureUnit ?? "C";
+            Atmosphere = Glaze.Properties.Firing?.Atmosphere;
+            CurveSensitivity = Glaze.Properties.Firing?.CurveSensitivity;
+
+            // Appearance tab
+            Transparency = Glaze.Properties.Appearance?.Transparency;
+            Finish = Glaze.Properties.Appearance?.Finish;
+            SelectedTextures = new ObservableCollection<string>(Glaze.Properties.Appearance?.Texture ?? new List<string>());
+            SelectedEffects = new ObservableCollection<string>(Glaze.Properties.Appearance?.SpecialEffects ?? new List<string>());
+
+            // Behavior tab
+            MeltFluidity = Glaze.Properties.Behavior?.MeltFluidity;
+            ThicknessTolerance = Glaze.Properties.Behavior?.ThicknessTolerance;
+            ColorStability = Glaze.Properties.Behavior?.ColorStability;
+            Repeatability = Glaze.Properties.Behavior?.Repeatability;
+
+            // Application tab
+            Form = Glaze.Properties.Application?.Form;
+            SelectedMethods = new ObservableCollection<string>(Glaze.Properties.Application?.Methods ?? new List<string>());
+            RecommendedThickness = Glaze.Properties.Application?.RecommendedThickness;
+            ApplicationNotes = Glaze.Properties.Application?.ApplicationNotes;
+
+            // Advanced tab
+            SelectedClayTypes = new ObservableCollection<string>(Glaze.Properties.ClayCompatibility?.BestSuited ?? new List<string>());
+            ClayInteraction = Glaze.Properties.ClayCompatibility?.Interaction;
+            KnownDefects = new ObservableCollection<string>(Glaze.Properties.Defects?.KnownIssues ?? new List<string>());
+            MitigationNotes = Glaze.Properties.Defects?.MitigationNotes;
+            WorkType = Glaze.Properties.Usage?.WorkType;
+            Durability = Glaze.Properties.Usage?.Durability;
         }
     }
 
@@ -230,6 +324,7 @@ public partial class NewGlazeViewModel : ObservableObject
             // Build the glaze object
             var glaze = new LocalGlaze
             {
+                Id = IsEditMode ? Glaze.Id : Guid.NewGuid().ToString(),
                 UserId = userId,
                 Name = Name,
                 Manufacturer = Manufacturer,
@@ -239,12 +334,20 @@ public partial class NewGlazeViewModel : ObservableObject
                 ConeRating = ConeRating,
                 Quantity = Quantity,
                 Notes = Notes,
-                FoodSafe = FoodSafe == "Yes" ? true : FoodSafe == "No" ? false : null,
+                FoodSafe = FoodSafe == AppResources.Yes ? true : FoodSafe == AppResources.No ? false : null,
                 IsFavorite = IsFavorite,
                 Properties = BuildProperties()
             };
 
-            await _glazeService.CreateGlazeAsync(glaze);
+            if (IsEditMode)
+            {
+                await _glazeService.UpdateGlazeAsync(glaze);
+            }
+            else
+            {
+                await _glazeService.CreateGlazeAsync(glaze);
+            }
+
             await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
