@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 namespace PottMaster.ViewModels;
 
 [QueryProperty(nameof(GlazeId), "glazeId")]
-public partial class NewGlazeViewModel : ObservableObject
+public partial class GlazeDetailViewModel : ObservableObject
 {
     private readonly IGlazeService _glazeService;
     private readonly IAuthStateService _authStateService;
@@ -181,7 +181,7 @@ public partial class NewGlazeViewModel : ObservableObject
     [ObservableProperty]
     private ObservableCollection<string> durabilities = new() { AppResources.Low, AppResources.Medium, AppResources.High };
 
-    public NewGlazeViewModel(
+    public GlazeDetailViewModel(
         IGlazeService glazeService,
         IAuthStateService authStateService,
         IErrorHandlingService errorHandler,
@@ -234,6 +234,11 @@ public partial class NewGlazeViewModel : ObservableObject
             Glaze = await _glazeService.GetGlazeByIdAsync(GlazeId);
             if (Glaze != null)
             {
+                // Ensure glaze types are loaded before populating fields
+                if (GlazeTypes.Count == 0)
+                {
+                    await LoadGlazeTypesAsync();
+                }
                 PopulateFieldsFromGlaze();
             }
         }

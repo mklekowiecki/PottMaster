@@ -110,6 +110,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\GlazeDetailPage.xaml.cs">
+	    <DependentUpon>GlazeDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\AppResources.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -128,22 +131,16 @@
 	  <MauiXaml Update="Controls\BottomNavigationBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\CollapsibleSection.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Controls\SyncStatusIndicator.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\AnalyticsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\GlazeDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Pages\GlazeInventoryPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\NewGlazePage.xaml">
+	  <MauiXaml Update="Pages\GlazeDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\NewWorkPage.xaml">

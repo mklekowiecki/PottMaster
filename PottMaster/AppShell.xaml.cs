@@ -18,7 +18,7 @@ namespace PottMaster
             Routing.RegisterRoute(nameof(NewWorkPage), typeof(NewWorkPage));
             Routing.RegisterRoute(nameof(WorkDetailPage), typeof(WorkDetailPage));
             Routing.RegisterRoute(nameof(EmailConfirmationPage), typeof(EmailConfirmationPage));
-            Routing.RegisterRoute(nameof(NewGlazePage), typeof(NewGlazePage));
+            Routing.RegisterRoute(nameof(GlazeDetailPage), typeof(GlazeDetailPage));
             Routing.RegisterRoute("GlazeDetailPage", typeof(GlazeDetailPage));
         }
         

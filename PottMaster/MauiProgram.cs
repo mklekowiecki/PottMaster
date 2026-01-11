@@ -84,7 +84,7 @@
 			builder.Services.AddTransient<EmailConfirmationViewModel>();
 			builder.Services.AddSingleton<SyncStatusViewModel>();
 			builder.Services.AddTransient<GlazeInventoryViewModel>();
-			builder.Services.AddTransient<NewGlazeViewModel>();
+			builder.Services.AddTransient<GlazeDetailViewModel>();
 			builder.Services.AddTransient<GlazeDetailViewModel>();
 			
 			// Pages (Transient - new instance per navigation)
@@ -95,7 +95,7 @@
 			builder.Services.AddTransient<WorkDetailPage>();
 			builder.Services.AddTransient<ProfilePage>();
 			builder.Services.AddTransient<GlazeInventoryPage>();
-			builder.Services.AddTransient<NewGlazePage>();
+			builder.Services.AddTransient<GlazeDetailPage>();
 			builder.Services.AddTransient<GlazeDetailPage>();
 			builder.Services.AddTransient<WikiPage>();
 			builder.Services.AddTransient<AnalyticsPage>();

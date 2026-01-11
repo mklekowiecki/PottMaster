@@ -113,7 +113,7 @@ public partial class GlazeInventoryViewModel : ObservableObject
     [RelayCommand]
     private async Task AddGlazeAsync()
     {
-        await Shell.Current.GoToAsync("NewGlazePage");
+        await Shell.Current.GoToAsync("GlazeDetailPage");
     }
 
     [RelayCommand]
