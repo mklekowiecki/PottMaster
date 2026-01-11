@@ -159,7 +159,7 @@ This document provides a quick reference for all user stories in the PottMaster 
 **Description**: As a user, I want to maintain a list of my glazes to know what I have in the workshop.
 
 **Acceptance Criteria**:
-1. [ ] Ability to add name, manufacturer, and quantity description
+1. ✅ Ability to add name, manufacturer, and quantity description
 2. [ ] Ability to link glaze to a specific registered work
 
 **Glaze Fields**:
@@ -457,6 +457,6 @@ US-011 (Pottery Wrapped)
 
 ---
 
-**Last Updated**: 2026-01-03
+**Last Updated**: 2026-01-11
 **Document Owner**: Product Team
 **Review Cycle**: Sprint planning (bi-weekly)

@@ -75,6 +75,15 @@ PottMaster addresses these challenges through:
 - **Glaze Catalogue Migration**: Created migration script `20260106120000_populate_glaze_catalogue.sql` that inserts 12 professional glaze entries with complete technical specifications
 - **System User**: Added system user profile for seeded data management
 - **Glaze Properties**: Implemented detailed JSONB properties for each glaze including firing requirements, appearance, behavior, and application methods
+- **Glaze Inventory Management**: Implementation with search, filtering, favorites, CRUD operations, and detailed glaze properties editing via tabbed interface (work-glaze linking pending)
+  - GlazeInventoryPage with search bar, favorites filter, swipe-to-delete, and FAB for adding new glazes
+  - GlazeDetailPage with comprehensive tabbed interface (Basic, Firing, Appearance, Behavior, Application, Advanced)
+  - GlazeInventoryViewModel with full CRUD operations, search/filtering, and favorites management
+  - GlazeDetailViewModel (NewGlazeViewModel.cs) with complete property management and validation
+  - GlazeService and IGlazeService for data operations
+  - GlazeRepository for local data access
+  - Full integration with Supabase for cloud synchronization
+  - Database schema supports work-glaze relationships (work_glazes junction table) but UI functionality not yet implemented
 
 ### Upcoming
 - Image handling and upload to Supabase Storage
@@ -82,14 +91,15 @@ PottMaster addresses these challenges through:
 - Wiki browsing and submission (US-009)
 
 ## Current Focus
-- Implementing glaze inventory management system
-- Created comprehensive glaze catalogue population migration
-- Added seeded glaze data for user reference (12 glazes across low-fire, mid-fire, and high-fire ranges)
+- Glaze inventory management system fully implemented and tested
+- Wiki browsing and submission features in development
+- Analytics and reporting features planned for post-MVP
 
 ## Next Steps
-- Test glaze catalogue integration in the app
-- Implement glaze search and filtering functionality
-- Add glaze-work linking features
+- Implement work-glaze linking functionality (US-006 completion)
+- Implement Wiki browsing functionality (US-009)
+- Add expert verification system for Wiki entries (US-010)
+- Develop Pottery Wrapped analytics feature (US-011)
 
 ## Project Boundaries
 
@@ -98,17 +108,19 @@ PottMaster addresses these challenges through:
 - Integration with Supabase (Auth, Database, Storage)
 - Coding system and timers
 - Work lifecycle management
-- Glaze inventory
+- Glaze inventory management (completed)
 - Automatic synchronization
+- Basic Wiki browsing (in progress)
 
 ### Outside MVP Scope ❌
 - Advanced AI algorithms for image analysis
 - Social modules and marketplace
 - Advanced analytics beyond basic Yield Rate
+- Expert verification system for Wiki entries
+- Pottery Wrapped analytics feature
 - Creating social elements- creating groups, adding friends, sharing works within groups
 - Adding logs to separate database table, sending logs during sync
-- Adding phptos to already existing works
-- Basic Wiki version
+- Adding photos to already existing works
 
 ## Success Metrics
 
@@ -158,6 +170,6 @@ PottMaster addresses these challenges through:
 
 ---
 
-**Last Updated**: 2026-01-03
+**Last Updated**: 2026-01-11
 **Document Owner**: Development Team
 **Review Cycle**: Weekly during MVP phase

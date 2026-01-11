@@ -69,10 +69,12 @@
             // Repository Pattern (Scoped - per operation context)
             builder.Services.AddScoped<IWorkRepository, LocalWorkRepository>();
 			builder.Services.AddScoped<IGlazeRepository, LocalGlazeRepository>();
+			builder.Services.AddScoped<IWikiRepository, WikiRepository>();
 			
 			// Business Logic Services (Scoped - user-specific operations)
 			builder.Services.AddScoped<IWorkService, WorkService>();
 			builder.Services.AddScoped<IGlazeService, GlazeService>();
+			builder.Services.AddScoped<IWikiService, WikiService>();
 			
 			// ViewModels (Transient - new instance per navigation)
 			builder.Services.AddTransient<LoginViewModel>();
@@ -86,6 +88,7 @@
 			builder.Services.AddTransient<GlazeInventoryViewModel>();
 			builder.Services.AddTransient<GlazeDetailViewModel>();
 			builder.Services.AddTransient<GlazeDetailViewModel>();
+			builder.Services.AddTransient<WikiViewModel>();
 			
 			// Pages (Transient - new instance per navigation)
 			builder.Services.AddTransient<MainPage>();

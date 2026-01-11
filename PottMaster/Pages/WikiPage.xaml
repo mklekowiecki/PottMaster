@@ -2,31 +2,107 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:PottMaster.Controls"
+             xmlns:vm="clr-namespace:PottMaster.ViewModels"
              x:Class="PottMaster.Pages.WikiPage"
-             Title="Wiki">
+             x:DataType="vm:WikiViewModel"
+             xmlns:resx="clr-namespace:PottMaster.Resources"
+             xmlns:converters="clr-namespace:PottMaster.Converters"
+             xmlns:models="clr-namespace:PottMasterLib.Models;assembly=PottMasterLib"
+             Title="{x:Static resx:AppResources.TabWikiTitle}">
 
-    <Grid RowDefinitions="*,Auto">
-        <VerticalStackLayout Grid.Row="0" Padding="24" 
-                           Spacing="16"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center">
-            <Label Text="Knowledge Base"
-                   Style="{StaticResource HeadlineLarge}"
-                   HorizontalOptions="Center"/>
-            <Label Text="Coming Soon"
-                   Style="{StaticResource BodyLarge}"
-                   HorizontalOptions="Center"
-                   TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"/>
-            <Label Text="Browse community-verified information about ceramic materials, tools, and techniques."
-                   Style="{StaticResource BodyMedium}"
-                   HorizontalOptions="Center"
-                   HorizontalTextAlignment="Center"
-                   Margin="0,16,0,0"
-                   TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"/>
-        </VerticalStackLayout>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TrustBadgeStyle" TargetType="Border">
+                <Setter Property="Padding" Value="6,2"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+            </Style>
+            <converters:TrustLevelToColorConverter x:Key="TrustLevelToColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Search and Filter Bar -->
+        <Grid Grid.Row="0" RowDefinitions="Auto,Auto" Padding="16" RowSpacing="8">
+            <SearchBar Grid.Row="0" 
+                       Placeholder="{x:Static resx:AppResources.SearchWikiPlaceholder}"
+                       Text="{Binding SearchQuery}"
+                       SearchCommand="{Binding SearchMaterialsCommand}"/>
+            <Picker Grid.Row="1" 
+                    Title="{x:Static resx:AppResources.FilterByType}"
+                    ItemsSource="{Binding MaterialTypes}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedType}"/>
+        </Grid>
+
+        <!-- Materials List -->
+        <RefreshView Grid.Row="1" 
+                     Padding="10"
+                     IsRefreshing="{Binding IsLoading}"
+                     Command="{Binding SearchMaterialsCommand}">
+            <CollectionView ItemsSource="{Binding Materials}"
+                           SelectionMode="None"
+                           EmptyView="{x:Static resx:AppResources.NoMaterialsFound}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="8"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:WikiMaterial">
+                        <Border Padding="16" Margin="16,0"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource Surface}, Dark={StaticResource SurfaceDark}}"
+                                StrokeThickness="1">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="12"/>
+                            </Border.StrokeShape>
+                            <Grid RowDefinitions="Auto,Auto,Auto" RowSpacing="8">
+                                <!-- Header with Name and Trust Badge -->
+                                <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                                    <Label Grid.Column="0"
+                                           Text="{Binding Name}"
+                                           FontSize="18"
+                                           FontAttributes="Bold"/>
+                                    <Border Grid.Column="1"
+                                            Style="{StaticResource TrustBadgeStyle}"
+                                            BackgroundColor="{Binding TrustLevel, Converter={StaticResource TrustLevelToColorConverter}}">
+                                        <Label Text="{Binding TrustLevel}"
+                                               FontSize="10"
+                                               TextColor="White"
+                                               FontAttributes="Bold"/>
+                                    </Border>
+                                </Grid>
+
+                                <!-- Description -->
+                                <Label Grid.Row="1"
+                                       Text="{Binding Description}"
+                                       FontSize="14"
+                                       TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"
+                                       MaxLines="2"
+                                       LineBreakMode="TailTruncation"/>
+
+                                <!-- Type and Properties -->
+                                <HorizontalStackLayout Grid.Row="2" Spacing="8">
+                                    <Label Text="{Binding Type.Name}"
+                                           FontSize="12"
+                                           FontAttributes="Italic"
+                                           TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+                                    <Label Text="•" FontSize="12"/>
+                                    <Label Text="{Binding Properties}"
+                                           FontSize="12"
+                                           TextColor="{AppThemeBinding Light={StaticResource OnSurfaceVariant}, Dark={StaticResource OnSurfaceVariantDark}}"/>
+                                </HorizontalStackLayout>
+                            </Grid>
+                            
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:WikiViewModel}}, Path=ViewMaterialDetailsCommand}"
+                                                     CommandParameter="{Binding .}"/>
+                            </Border.GestureRecognizers>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
 
         <!-- Bottom Navigation Bar -->
-        <controls:BottomNavigationBar Grid.Row="1" />
+        <controls:BottomNavigationBar Grid.Row="2" />
     </Grid>
 
 </ContentPage>

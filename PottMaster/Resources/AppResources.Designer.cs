@@ -19,7 +19,7 @@ namespace PottMaster.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class AppResources {
@@ -637,6 +637,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filtruj według typu.
+        /// </summary>
+        internal static string FilterByType {
+            get {
+                return ResourceManager.GetString("FilterByType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logowanie odciskiem palca.
         /// </summary>
         internal static string FingerPrintLogin {
@@ -1123,6 +1132,15 @@ namespace PottMaster.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nie znaleziono materiałów..
+        /// </summary>
+        internal static string NoMaterialsFound {
+            get {
+                return ResourceManager.GetString("NoMaterialsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brak zdjęcia.
         /// </summary>
         internal static string NoPhoto {
@@ -1380,6 +1398,15 @@ namespace PottMaster.Resources {
         internal static string SearchGlazesPlaceholder {
             get {
                 return ResourceManager.GetString("SearchGlazesPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Szukaj materiałów....
+        /// </summary>
+        internal static string SearchWikiPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchWikiPlaceholder", resourceCulture);
             }
         }
         

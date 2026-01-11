@@ -832,4 +832,13 @@
   <data name="AdditionalNotes" xml:space="preserve">
     <value>Dodatkowe informacje</value>
   </data>
+  <data name="SearchWikiPlaceholder" xml:space="preserve">
+    <value>Szukaj materiałów...</value>
+  </data>
+  <data name="FilterByType" xml:space="preserve">
+    <value>Filtruj według typu</value>
+  </data>
+  <data name="NoMaterialsFound" xml:space="preserve">
+    <value>Nie znaleziono materiałów.</value>
+  </data>
 </root>
