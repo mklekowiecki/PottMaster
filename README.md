@@ -6,7 +6,7 @@
 
 PottMaster is a cross-platform mobile application designed to support ceramic artists in managing their pottery production processes. Built with .NET MAUI, it provides offline-first functionality for tracking drying stages, cataloging ceramic works with unique identification codes, and maintaining glaze inventories.
 
-## ?? Problem Statement
+## 🎯 Problem Statement
 
 Ceramic artists face several critical challenges in their workflow:
 - **Drying Control**: Lack of precise control over drying time leads to cracking risk
@@ -14,7 +14,7 @@ Ceramic artists face several critical challenges in their workflow:
 - **Material Documentation**: Difficulty maintaining reliable records of materials used (glazes, clays)
 - **Efficiency Tracking**: No data on studio efficiency (Yield Rate)
 
-## ?? Solution
+## 🚀 Solution
 
 PottMaster addresses these challenges through:
 - **Offline-First Architecture**: Full functionality without internet connection
@@ -24,34 +24,34 @@ PottMaster addresses these challenges through:
 - **Knowledge Base**: Public Wiki with expert verification system
 - **Analytics**: Monthly performance reports ("Pottery Wrapped")
 
-## ? Key Features
+## ✨ Key Features
 
 ### Core Functionality
-- ? **Work Registration**: Add new ceramic works with photos, categories, and wall thickness
-- ? **Unique Identification**: Automatic code generation (e.g., MK-CUP-1224-001)
-- ? **Process Timer Management**: Real-time countdown based on drying requirements
-- ? **Manual Status Correction**: Advance work status manually when ready
-- ? **Offline Operation**: Full functionality without network connectivity
-- ? **Automatic Synchronization**: Background sync when network available
+- ✅ **Work Registration**: Add new ceramic works with photos, categories, and wall thickness
+- ✅ **Unique Identification**: Automatic code generation (e.g., MK-CUP-1224-001)
+- ✅ **Process Timer Management**: Real-time countdown based on drying requirements
+- ✅ **Manual Status Correction**: Advance work status manually when ready
+- ✅ **Offline Operation**: Full functionality without network connectivity
+- ✅ **Automatic Synchronization**: Background sync when network available
 
 ### Material Management
-- ? **Glaze Inventory**: Personal catalog with detailed properties
-- ? **Glaze Properties**: Comprehensive technical specifications (firing temp, color, behavior)
-- ? **Work-Glaze Linking**: Associate glazes with specific works
+- ✅ **Glaze Inventory**: Personal catalog with detailed properties
+- ✅ **Glaze Properties**: Comprehensive technical specifications (firing temp, color, behavior)
+- ✅ **Work-Glaze Linking**: Associate glazes with specific works
 
 ### Knowledge Base
-- ?? **Wiki Browsing**: Search public database of materials (in development)
-- ?? **Expert Verification**: Community and expert-approved entries (planned)
+- 🔄 **Wiki Browsing**: Search public database of materials (in development)
+- 🔄 **Expert Verification**: Community and expert-approved entries (planned)
 
 ### Analytics & Reporting
-- ?? **Pottery Wrapped**: Monthly yield rate and performance reports (planned)
+- 🔄 **Pottery Wrapped**: Monthly yield rate and performance reports (planned)
 
 ### User Experience
-- ? **Multi-Language Support**: Polish and English localization
-- ? **Secure Authentication**: Email/password and One-Tap sign-in (Google/Apple)
-- ? **Cross-Platform**: iOS, Android, Windows, macOS
+- ✅ **Multi-Language Support**: Polish and English localization
+- ✅ **Secure Authentication**: Email/password and One-Tap sign-in (Google/Apple)
+- ✅ **Cross-Platform**: iOS, Android, Windows, macOS
 
-## ??? Architecture
+## 🏗️ Architecture
 
 ### Technology Stack
 - **Frontend**: .NET MAUI 9.0 (C#)
@@ -67,11 +67,11 @@ PottMaster addresses these challenges through:
 - **Presentation Layer**: ViewModels and XAML views
 - **Infrastructure**: Cross-platform services (auth, sync, alerts)
 
-## ?? Screenshots
+## 📱 Screenshots
 
 *Screenshots will be added during development*
 
-## ??? Installation & Setup
+## 🛠️ Installation & Setup
 
 ### Prerequisites
 - .NET 9.0 SDK
@@ -106,7 +106,7 @@ dotnet build -t:Run -f net9.0-ios
 dotnet build -t:Run -f net9.0-windows10.0.19041.0
 ```
 
-## ?? Usage
+## 📖 Usage
 
 ### Getting Started
 1. **Sign Up/Login**: Create account with email or One-Tap sign-in
@@ -116,23 +116,23 @@ dotnet build -t:Run -f net9.0-windows10.0.19041.0
 5. **Sync Data**: Automatic background synchronization
 
 ### Work Lifecycle
-1. **Wet Clay** ? Initial registration
-2. **Leather Hard** ? Partially dried
-3. **Bone Dry** ? Fully dried, ready for bisque firing
-4. **Bisque Fired** ? First firing complete
-5. **Glazed** ? Glaze applied
-6. **Glaze Fired** ? Final firing complete
-7. **Completed** ? Finished piece
+1. **Wet Clay** → Initial registration
+2. **Leather Hard** → Partially dried
+3. **Bone Dry** → Fully dried, ready for bisque firing
+4. **Bisque Fired** → First firing complete
+5. **Glazed** → Glaze applied
+6. **Glaze Fired** → Final firing complete
+7. **Completed** → Finished piece
 
 ### Drying Time Algorithm
 | Wall Thickness | Drying Time |
 |----------------|-------------|
-| ? 5mm          | 4 days      |
+| ≤ 5mm          | 4 days      |
 | 6-10mm         | 7 days      |
 | 11-15mm        | 10 days     |
 | > 15mm         | 14 days     |
 
-## ?? Contributing
+## 🤝 Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
@@ -149,34 +149,34 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 - Maintain offline-first architecture
 - Update memory bank documentation for significant changes
 
-## ?? Project Status
+## 📊 Project Status
 
-### MVP Phase 1 (Completed ?)
+### MVP Phase 1 (Completed ✅)
 - Authentication & User Management
 - Work Lifecycle Management
 - Offline & Synchronization
 - Basic Material Management
 
-### MVP Phase 2 (In Progress ??)
+### MVP Phase 2 (In Progress 🔄)
 - Knowledge Base (Wiki)
 - Enhanced Analytics
 
-### Post-MVP (Planned ??)
+### Post-MVP (Planned 🔮)
 - Expert Verification System
 - Advanced Analytics ("Pottery Wrapped")
 - Social Features
 
-## ?? License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## ?? Acknowledgments
+## 🙏 Acknowledgments
 
 - Ceramic artists community for domain expertise
 - .NET MAUI team for the excellent framework
 - Supabase for the backend-as-a-service platform
 
-## ?? Support
+## 📞 Support
 
 For questions or support:
 - Create an issue on GitHub
@@ -185,4 +185,4 @@ For questions or support:
 
 ---
 
-**Built with ?? for ceramic artists worldwide**
+**Built with ❤️ for ceramic artists worldwide**
